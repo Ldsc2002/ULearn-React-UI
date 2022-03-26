@@ -149,6 +149,66 @@ export default class DataSheet_localizationSheet extends DataSheetBase {
     this.items.push(item);
     item['key'] = "pizarron2_text_523858";
     item['en'] = "Biblioteca";
+
+    item = {};
+    this.items.push(item);
+    item['key'] = "login_field_111402";
+    item['en'] = "alguien@ejemplo.com";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login_fieldcopy_220522";
+    item['en'] = "Contraseña";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login_checkbox_557734";
+    item['en'] = "Recordarme";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login_button_42863";
+    item['en'] = "Iniciar Sesión";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login_buttoncopy_713613";
+    item['en'] = "Crear Cuenta";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login2_field_36185";
+    item['en'] = "Usuario";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login2_fieldcopy_180669";
+    item['en'] = "Contraseña";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login2_checkbox_718581";
+    item['en'] = "Recordarme";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login2_button_863024";
+    item['en'] = "Iniciar Sesión";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "login2_buttoncopy_397582";
+    item['en'] = "Crear Cuenta";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "crearcuenta_fieldcopy2_67638";
+    item['en'] = "alguien@ejemplo.com";
+    
+    item = {};
+    this.items.push(item);
+    item['key'] = "crearcuenta_fieldcopy2_621361";
+    item['en'] = "alguien@ejemplo.com";
     
     let storedItems = localStorage.getItem(this.id);
     if (storedItems != null) {
