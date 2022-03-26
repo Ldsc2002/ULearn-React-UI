@@ -7,6 +7,8 @@ import * as util from 'util';
 import './App.css';
 import ScreenContext from './ScreenContext.js';
 import StartScreen from './StartScreen.js';
+import CrearCuentaScreen from './CrearCuentaScreen.js';
+import LogInScreen from './LogInScreen.js';
 import DataSheet_localizationSheet from './DataSheet_localizationSheet.js';
 import DataSheet_concerts from './DataSheet_concerts.js';
 
@@ -162,6 +164,12 @@ class App extends Component {
       };
       let screen;
       switch (screenId) {
+        case 'crearCuenta':
+          screen = <CrearCuentaScreen {...baseProps} />;
+          break;
+        case 'logIn':
+          screen = <LogInScreen {...baseProps} />;
+          break;
         case 'start':
           screen = <StartScreen {...baseProps} />;
           break;
@@ -177,6 +185,13 @@ class App extends Component {
       <div className="App">
         <Switch>
           <Route path="/" render={(props) => makeScreen('start', props.location.state, true, true)} exact />
+          <Route path="/" render={(props) => makeScreen('logIn', props.location.state, true, true)} exact />
+          <Route path="/crearCuenta" render={(props) => {
+            return makeScreen('crearCuenta', props.location.state, true, true);
+          }} />
+          <Route path="/logIn" render={(props) => {
+            return makeScreen('logIn', props.location.state, true, true);
+          }} />
           <Route path="/start" render={(props) => {
             return makeScreen('start', props.location.state, true, true);
           }} />
@@ -185,4 +200,5 @@ class App extends Component {
     );
   }
 }
+export default withRouter(App)
 export default withRouter(App)
