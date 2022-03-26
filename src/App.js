@@ -184,7 +184,6 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route path="/" render={(props) => makeScreen('start', props.location.state, true, true)} exact />
           <Route path="/" render={(props) => makeScreen('logIn', props.location.state, true, true)} exact />
           <Route path="/crearCuenta" render={(props) => {
             return makeScreen('crearCuenta', props.location.state, true, true);
@@ -200,5 +199,4 @@ class App extends Component {
     );
   }
 }
-export default withRouter(App)
 export default withRouter(App)
