@@ -1,0 +1,185 @@
+import React, { Component } from 'react';
+import './App2.css';
+import ScreenContext from './ScreenContext';
+import img_elCit from './images/CrearCuentaScreen_elCitCopy_837553.jpg';
+import img_elPerson from './images/CrearCuentaScreen_elPerson_405468.png';
+
+// UI framework component imports
+import Input from 'muicss/lib/react/input';
+import Checkbox from 'muicss/lib/react/checkbox';
+import Button from 'muicss/lib/react/button';
+
+export default class LogInScreen extends Component {
+
+  static contextType = ScreenContext;
+
+
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+    };
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+  }
+
+  textInputChanged_elField = (event) => {
+    this.setState({field: event.target.value});
+  }
+  
+  getValue_elField = () => {
+    return this.state.field || '';
+  }
+  
+  textInputChanged_elFieldCopy = (event) => {
+    this.setState({fieldCopy: event.target.value});
+  }
+  
+  getValue_elFieldCopy = () => {
+    return this.state.fieldCopy || '';
+  }
+  
+  
+  getValue_elCheckbox = () => {
+    return this.state.checkbox !== undefined ? this.state.checkbox : 'false';
+  }
+  
+  checkboxChanged_elCheckbox = (event) => {
+    this.setState({checkbox: (event.target.checked ? 'true' : 'false')});
+  }
+  
+  onClick_elButton = async () => {
+    // Go to screen 'LogIn'
+    this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' });
+  }
+  
+  
+  onClick_elButtonCopy = async () => {
+    // Go to screen 'CrearCuenta'
+    this.context.appActions.goToScreen('crearCuenta', this.context.baseScreenId, { transitionId: 'fadeIn' });
+  
+  }
+  
+  
+  render() {
+    let layoutFlowStyle = {};
+    let baseStyle = {};
+    if (this.context.transitionId && this.context.transitionId.length > 0 && this.context.atTopOfScreenStack && this.context.transitionForward) {
+      baseStyle.animation = '0.25s ease-in-out '+this.context.transitionId;
+    }
+    if ( !this.context.atTopOfScreenStack) {
+      layoutFlowStyle.height = '100vh';
+      layoutFlowStyle.overflow = 'hidden';
+    }
+    
+    const style_elCit = {
+      backgroundImage: 'url('+img_elCit+')',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: '50% 50%',
+      backgroundSize: 'cover',
+     };
+    const style_elCard_outer = {
+      boxSizing: 'border-box',
+      backgroundColor: 'white',
+      filter: 'drop-shadow(0.0px 2.3px 18px rgba(0, 0, 0, 0.1600))',
+      overflow: 'visible',
+     };
+    
+    const style_elField = {
+      display: 'block',
+      paddingTop: 0,
+      textAlign: 'left',
+      pointerEvents: 'auto',
+     };
+    
+    const style_elFieldCopy = {
+      display: 'block',
+      paddingTop: 0,
+      textAlign: 'left',
+      pointerEvents: 'auto',
+     };
+    
+    let checked_checkbox = this.getValue_elCheckbox();
+    
+    const style_elCheckbox = {
+      cursor: 'pointer',
+      pointerEvents: 'auto',
+     };
+    
+    const style_elButton = {
+      display: 'block',
+      color: '(null)',
+      backgroundColor: 'rgba(250, 54, 54, 1.000)',
+      textAlign: 'center',
+      cursor: 'pointer',
+      pointerEvents: 'auto',
+     };
+    
+    const style_elButtonCopy = {
+      display: 'block',
+      color: '#fff',
+      textAlign: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5000)',
+      cursor: 'pointer',
+      pointerEvents: 'auto',
+     };
+    const style_elPerson = {
+      backgroundImage: 'url('+img_elPerson+')',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: '50% 50%',
+      backgroundSize: 'cover',
+     };
+    
+    return (
+      <div className="AppScreen LogInScreen" style={baseStyle}>
+        <div className="background">
+          <div className="containerMinHeight elCit" style={style_elCit} />
+        </div>
+        
+        <div className="layoutFlow" style={layoutFlowStyle}>
+          <div className="elCard" style={style_elCard_outer}>
+            <div className="cardBg" />
+          </div>
+          
+          <div className="elField">
+            <Input className="baseFont" style={style_elField} type="email" placeholder={this.context.locStrings.login_field_111402} onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
+          </div>
+          
+          <div className="elFieldCopy">
+            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder={this.context.locStrings.login_fieldcopy_220522} onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
+          </div>
+          
+          <div className="elCheckbox">
+            <Checkbox className="baseFont" style={style_elCheckbox}  label={this.context.locStrings.login_checkbox_557734} checked={checked_checkbox === 'true' || checked_checkbox === true || ''+checked_checkbox === '1'}  onChange={this.checkboxChanged_elCheckbox} />
+          </div>
+          
+          <div className="elButton">
+            <Button className="actionFont" style={style_elButton}  color="accent" onClick={this.onClick_elButton} >
+              {this.context.locStrings.login_button_42863}
+            </Button>
+          </div>
+          
+          <div className="elButtonCopy">
+            <Button className="actionFont" style={style_elButtonCopy} onClick={this.onClick_elButtonCopy} >
+              {this.context.locStrings.login_buttoncopy_713613}
+            </Button>
+          </div>
+        </div>
+        
+        <div className="screenFgContainer">
+          <div className="foreground">
+            <div className="elPerson" style={style_elPerson} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
+}
