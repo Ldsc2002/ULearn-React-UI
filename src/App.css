@@ -816,7 +816,7 @@
   .Usuario > .layoutFlow > .elText {
     overflow: hidden !important;
     position: relative !important;
-    margin-top: 119px !important;
+    margin-top: 50px !important;
     margin-left: 0px !important;
     margin-right: 0px !important;
     width: calc(100.0% - 0px) !important;
@@ -825,6 +825,14 @@
     width: 100% !important;
   }
   
+  .Usuario > .layoutFlow > .elText > .baseFont > .name { 
+    font-size: 30px !important;
+    font-weight: 400;
+  }
+  
+  .Usuario > .layoutFlow > .elText > .baseFont > .info { 
+    font-size: 15px !important;
+  }
 
 /* This component has a fixed-size layout */
   .Biblioteca {
