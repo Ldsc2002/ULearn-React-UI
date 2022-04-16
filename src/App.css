@@ -834,6 +834,74 @@
     font-size: 15px !important;
   }
 
+  .Usuario .elButton button {
+    cursor: pointer;
+    border: 0.0px solid transparent;
+    border-radius: 2.3px;
+  }
+  
+  .Usuario .elButton button:focus {
+    outline: none;
+  }
+  
+  
+  
+  /* Narrowest size for this element's responsive layout */
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 229px;
+      margin-left: calc(50.0% - 115px);
+    }
+    .CrearCuentaScreen > .layoutFlow > .elButton > * { 
+    width: 229px;
+    height: 35px;
+    }
+    
+  @media (min-width: 568px) {
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 229px;
+      margin-left: calc(50.0% - 114px);
+    }
+    .Usuario > .layoutFlow > .elButton > * { 
+    width: 229px;
+    height: 35px;
+    }
+    
+  }
+  @media (min-width: 768px) {
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 228px;
+      margin-left: calc(50.0% - 114px);
+    }
+    .Usuario > .layoutFlow > .elButton > * { 
+    width: 228px;
+    height: 35px;
+    }
+    
+  }
+  @media (min-width: 1024px) {
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 228px;
+      margin-left: calc(50.0% - 114px);
+    }
+    .Usuario > .layoutFlow > .elButton > * { 
+    width: 228px;
+    height: 35px;
+    }
+    
+  }
+
 /* This component has a fixed-size layout */
   .Biblioteca {
     min-height: 639px !important;  /* Minimum height to ensure layout flow is visible */

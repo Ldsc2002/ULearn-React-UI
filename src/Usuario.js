@@ -61,7 +61,7 @@ export default class Usuario extends Component {
       display: 'block',
       color: '#fff',
       textAlign: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.5000)',
+      backgroundColor: 'rgba(250, 54, 54, 1.000)',
       cursor: 'pointer',
       pointerEvents: 'auto',
      };
@@ -80,9 +80,9 @@ export default class Usuario extends Component {
               <div className="info" style={style_info}>Ingenieria en Ciencias de la Computacion y Tecnologias de la Informacion</div>
               <div className="info" style={style_info}>3er año, primer semestre</div>
             </div>
-            <div className="logOut_Button">
-              <Button className="logOut_Button" style={style_info} onClick={this.onClick_LogOut} >LOG OUT</Button>
           </div>
+          <div className="elButton">
+            <Button className="elButton" style={style_elButton} onClick={this.onClick_LogOut} >LOG OUT</Button>
           </div>
         </div>
         
