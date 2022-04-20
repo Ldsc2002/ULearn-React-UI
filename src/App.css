@@ -311,7 +311,6 @@
 .App .layoutFlow {
   position: relative !important;
   width: 100% !important;
-  pointer-events: none !important;
 }
 .App .layoutFlow:before {  /* Prevent margin collapse */
   content: "" !important;
