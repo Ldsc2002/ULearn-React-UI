@@ -133,7 +133,7 @@ export default class DataSheet_localizationSheet extends DataSheetBase {
     item = {};
     this.items.push(item);
     item['key'] = "pizarron_text_376514";
-    item['en'] = "Pizarron";
+    item['en'] = "Hola";
     
     item = {};
     this.items.push(item);
