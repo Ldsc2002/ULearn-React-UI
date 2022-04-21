@@ -58,6 +58,18 @@ export default class Calendario extends Component {
             </div>
           </div>
         </div>
+        <Fragment>
+          <section className="hero is-primary">
+            <div className="hero-body">
+              <div className="container">
+                <h1 className="title has-text-centered">Calendar</h1>
+              </div>
+            </div>
+          </section>
+          <div className="container has-text-centered">
+            <Calendar />
+          </div>
+        </Fragment>        
         
         <div className="foreground">
           <Button className="actionFont elFab" style={style_elFab}  variant="fab" color="accent" >
