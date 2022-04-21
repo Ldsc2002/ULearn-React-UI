@@ -15,14 +15,11 @@ export default class extends Component {
 
     this.state = {
       notes: [],
-      showTape: false,
-      showOutput: false,
+      showTape: true,
       showTitle: true,
-      showFooter: true,
       output: '',
       colors: ['#FFFFFF'],
-      showCustomColors: false,
-      showMock: false
+
     };
     this.toggleValue = this.toggleValue.bind(this);
     this.onChange = this.onChange.bind(this);
