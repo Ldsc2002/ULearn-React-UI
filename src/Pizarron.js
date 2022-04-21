@@ -76,24 +76,6 @@ export default class extends Component {
           onChange={this.onChange}
           wrapperStyle={wrapperStyle}
         />
-        <div className="config">
-          <form>
-            <input type="radio" name="showCustomColors" value="show_custom_colors" checked={this.state.showCustomColors} onClick={this.toggleValue} />Custom Colors
-            <input type="radio" name="showTape" value="show_tape" checked={this.state.showTape} onClick={this.toggleValue} />Show Tape
-            <input type="radio" name="showOutput" value="show_output" checked={this.state.showOutput} onClick={this.toggleValue} />Show Output
-            <input type="radio" name="showTitle" value="show_title" checked={this.state.showTitle} onClick={this.toggleValue} />Show Title
-            <input type="radio" name="showFooter" value="show_footer" checked={this.state.showFooter} onClick={this.toggleValue} />Show Footer
-            <input type="radio" name="showMock" value="show_mock" checked={this.state.showMock} onClick={this.fetchMock} />Load Mock Data
-          </form>
-          <div className="output" style={{ display: this.state.showOutput ? 'block' : 'none' }}>
-            <label className="note-header">Output JSON</label>
-            <div>
-              <pre>
-                {this.state.output}
-              </pre>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
