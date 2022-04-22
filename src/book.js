@@ -1,20 +1,21 @@
 import React from "react";
-import "./book.scss";
+//import "./book.scss";
 import redBook from "./images/redbook.png";
 
 function BookCard(info) {
-  const { data } = props;
+  const style_book = {
+    backgroundImage: 'url('+redBook+')'
+  }
   return (
     <div className="card-item">
         <div className="card-inner">
-          <div className="card-top">
-            <img src="./images/redbook.png" alt="Libro" />
+          <div className="card-top" style={style_book}>
           </div>
         </div>
         <div className="card-bottom">
           <div className="card-info">
-            <h4>{data.Title}</h4>
-            <p>{data.Year}</p>
+            <h4>Libro</h4>
+            <p>20XX</p>
           </div>
         </div>
     </div>
