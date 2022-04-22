@@ -145,26 +145,26 @@ export default class CrearCuentaScreen extends Component {
           </div>
           
           <div className="elField">
-            <Input className="baseFont" style={style_elField} type="text" placeholder={this.context.locStrings.login2_field_36185} onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
+            <Input className="baseFont" style={style_elField} type="text" placeholder="Usuario" onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
           </div>
           
           <div className="elFieldCopy2">
-            <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder={this.context.locStrings.crearcuenta_fieldcopy2_621361} onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()}  />
+            <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()}  />
           </div>
           
           <div className="elFieldCopy">
-            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder={this.context.locStrings.login2_fieldcopy_180669} onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
+            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
           </div>
           
           <div className="elButtonCopy">
             <Button className="actionFont" style={style_elButtonCopy}  color="accent" onClick={this.onClick_elButtonCopy} >
-              {this.context.locStrings.login2_buttoncopy_397582}
+              Crear cuenta
             </Button>
           </div>
           
           <div className="elButton">
             <Button className="actionFont" style={style_elButton} onClick={this.onClick_elButton} >
-              {this.context.locStrings.login2_button_863024}
+              Iniciar sesión
             </Button>
           </div>
         </div>
