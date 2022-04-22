@@ -10,7 +10,6 @@ import StartScreen from './StartScreen.js';
 import CrearCuentaScreen from './CrearCuentaScreen.js';
 import LogInScreen from './LogInScreen.js';
 import DataSheet_localizationSheet from './DataSheet_localizationSheet.js';
-import DataSheet_concerts from './DataSheet_concerts.js';
 
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
 
     this.dataSheets = {};
     this.dataSheets['localizationSheet'] = new DataSheet_localizationSheet('localizationSheet', this.dataSheetDidUpdate);
-    this.dataSheets['concerts'] = new DataSheet_concerts('concerts', this.dataSheetDidUpdate);
     this.dataSheetLoaded = {};
 
     this.dataSlots = {};
