@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 // eslint-disable-next-line
-import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 // eslint-disable-next-line
-import * as util from 'util';
 import './App.css';
 import ScreenContext from './ScreenContext.js';
 import StartScreen from './StartScreen.js';
