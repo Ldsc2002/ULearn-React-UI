@@ -311,7 +311,6 @@
 .App .layoutFlow {
   position: relative !important;
   width: 100% !important;
-  pointer-events: none !important;
 }
 .App .layoutFlow:before {  /* Prevent margin collapse */
   content: "" !important;
@@ -816,7 +815,7 @@
   .Usuario > .layoutFlow > .elText {
     overflow: hidden !important;
     position: relative !important;
-    margin-top: 119px !important;
+    margin-top: 50px !important;
     margin-left: 0px !important;
     margin-right: 0px !important;
     width: calc(100.0% - 0px) !important;
@@ -825,6 +824,82 @@
     width: 100% !important;
   }
   
+  .Usuario > .layoutFlow > .elText > .baseFont > .name { 
+    font-size: 30px !important;
+    font-weight: 400;
+  }
+  
+  .Usuario > .layoutFlow > .elText > .baseFont > .info { 
+    font-size: 15px !important;
+  }
+
+  .Usuario .elButton button {
+    cursor: pointer;
+    border: 0.0px solid transparent;
+    border-radius: 2.3px;
+  }
+  
+  .Usuario .elButton button:focus {
+    outline: none;
+  }
+  
+  
+  
+  /* Narrowest size for this element's responsive layout */
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 229px;
+      margin-left: calc(50.0% - 115px);
+    }
+    .CrearCuentaScreen > .layoutFlow > .elButton > * { 
+    width: 229px;
+    height: 35px;
+    }
+    
+  @media (min-width: 568px) {
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 229px;
+      margin-left: calc(50.0% - 114px);
+    }
+    .Usuario > .layoutFlow > .elButton > * { 
+    width: 229px;
+    height: 35px;
+    }
+    
+  }
+  @media (min-width: 768px) {
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 228px;
+      margin-left: calc(50.0% - 114px);
+    }
+    .Usuario > .layoutFlow > .elButton > * { 
+    width: 228px;
+    height: 35px;
+    }
+    
+  }
+  @media (min-width: 1024px) {
+    .Usuario > .layoutFlow > .elButton {
+      line-height: 35px;
+      position: relative;
+      margin-top: 28px;
+      width: 228px;
+      margin-left: calc(50.0% - 114px);
+    }
+    .Usuario > .layoutFlow > .elButton > * { 
+    width: 228px;
+    height: 35px;
+    }
+    
+  }
 
 /* This component has a fixed-size layout */
   .Biblioteca {

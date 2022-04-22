@@ -98,8 +98,7 @@ export default class StartScreen extends Component {
       <div className="AppScreen StartScreen" style={baseStyle}>
         <div className="background">
           <div className="containerMinHeight elBackgroundShape" style={style_elBackgroundShape} />
-        </div>
-        
+        </div>       
         <div className="layoutFlow" style={layoutFlowStyle}>
           <div className="hasNestedComps elTabContent">
             <div>
