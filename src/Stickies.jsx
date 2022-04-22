@@ -57,7 +57,7 @@ export default class extends Component {
     this.state = {
       newCounter: 0,
       notes: props.notes ? tranformEditorState(props.notes) : [],
-      colors: props.colors || ['#FBE4BE', '#F7D1D1', '#E4FABC', '#CAE0FA'],
+      colors: props.colors || ['#D45728', '#40AC3B'],
       dateFormat: props.dateFormat || 'lll'
     };
     this.createBlankNote = this.createBlankNote.bind(this);
@@ -78,7 +78,7 @@ export default class extends Component {
       });
     }
     this.setState({
-      colors: nextProps.colors || ['#FBE4BE', '#F7D1D1', '#E4FABC', '#CAE0FA'],
+      colors: nextProps.colors || ['#D45728', '#40AC3B'],
       dateFormat: nextProps.dateFormat || 'lll'
     });
   }

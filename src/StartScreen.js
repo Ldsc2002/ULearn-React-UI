@@ -20,15 +20,6 @@ export default class StartScreen extends Component {
     };
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  }
-
   selectorSelectionChanged = (idx, ev) => {
     this.setState({selectedIndex_selector: idx});
     this.context.appActions.updateDataSlot('ds_SlotSelectedTab', idx.toString());
