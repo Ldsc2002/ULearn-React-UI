@@ -13,7 +13,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.dataSlots = {};
-    this.dataSlots['ds_activeLang'] = "en";
     this.dataSlots['ds_SlotSelectedTab'] = "0";
 
     this.state = {
@@ -70,10 +69,6 @@ class App extends Component {
       return;
 
     this.dataSlots[slotId] = value;
-
-    if (slotId === 'ds_activeLang') {
-      this.locStrings.setLanguage(value);
-    }
     this.setState({});
   }
 
@@ -96,8 +91,6 @@ class App extends Component {
         deviceInfo: {
           screenFormatId: this.state.screenFormatId
         },
-        'ds_activeLang': this.dataSlots['ds_activeLang'],
-        'ds_SlotSelectedTab': this.dataSlots['ds_SlotSelectedTab'],
       };
       let screen;
       switch (screenId) {
