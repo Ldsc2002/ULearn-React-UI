@@ -140,26 +140,26 @@ export default class LogInScreen extends Component {
           </div>
           
           <div className="elField">
-            <Input className="baseFont" style={style_elField} type="email" placeholder={this.context.locStrings.login_field_111402} onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
+            <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
           </div>
           
           <div className="elFieldCopy">
-            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder={this.context.locStrings.login_fieldcopy_220522} onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
+            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
           </div>
           
           <div className="elCheckbox">
-            <Checkbox className="baseFont" style={style_elCheckbox}  label={this.context.locStrings.login_checkbox_557734} checked={checked_checkbox === 'true' || checked_checkbox === true || ''+checked_checkbox === '1'}  onChange={this.checkboxChanged_elCheckbox} />
+            <Checkbox className="baseFont" style={style_elCheckbox}  label="Recordarme" checked={checked_checkbox === 'true' || checked_checkbox === true || ''+checked_checkbox === '1'}  onChange={this.checkboxChanged_elCheckbox} />
           </div>
           
           <div className="elButton">
             <Button className="actionFont" style={style_elButton}  color="accent" onClick={this.onClick_elButton} >
-              {this.context.locStrings.login_button_42863}
+              Iniciar sesión
             </Button>
           </div>
           
           <div className="elButtonCopy">
             <Button className="actionFont" style={style_elButtonCopy} onClick={this.onClick_elButtonCopy} >
-              {this.context.locStrings.login_buttoncopy_713613}
+              Crear cuenta
             </Button>
           </div>
         </div>
