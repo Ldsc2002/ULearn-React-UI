@@ -49,10 +49,6 @@ export default class Calendario extends Component {
     
     return (
       <div className="Calendario">
-        <div className="background">
-          <div className="containerMinHeight elBackgroundShape" style={style_elBackgroundShape} />
-        </div>
-        
         <Fragment>
           <div className="container has-text-centered">
             <CalendarioComp/>

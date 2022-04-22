@@ -11,7 +11,7 @@ const CalendarioComp = () => {
 
   return(
     <Fragment>
-        <p>Selected Month: {`${monthNames[selectedDate.getMonth()]} - ${selectedDate.getFullYear()}`}</p>
+        <p className='mountTitle'>Selected Month: {`${monthNames[selectedDate.getMonth()]} - ${selectedDate.getFullYear()}`}</p>
         <table className="table">
             <thead>
             <tr>
@@ -35,10 +35,13 @@ const CalendarioComp = () => {
                 })
             }
             </tbody>
+        </table>
 
+        <div className='megacontenedordebotones8000'>
             <button className="buttonControl" onClick={getPrevMonth}>Prev</button>
             <button className="buttonControl" onClick={getNextMonth}>Next</button>
-        </table>
+        </div>
+
     </Fragment>
   );
 }

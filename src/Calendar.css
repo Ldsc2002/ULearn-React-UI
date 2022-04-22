@@ -8,20 +8,33 @@
 }
 
 .in-prev-month{
+    text-align: center;
     opacity: 0.5;
     color: rgb(60, 60, 60);
 }
 
 .in-next-month{
+    text-align: center;
     opacity: 0.5;
     color: rgb(60, 60, 60);
 }
 
 .in-this-month{
+    text-align: center;
     opacity: 0.5;
     color: rgb(0, 0, 0);
 }
 
 .buttonControl{
-    background-color: #000000;
+    text-align: center;
+    background-color: #4f4f4f;
+    color:rgb(0, 0, 0)
+}
+
+.mountTitle{
+    margin: 0 auto 20px;
+}
+
+.megacontenedordebotones8000{
+    margin: 0 auto 20px;
 }
