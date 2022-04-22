@@ -12,10 +12,6 @@ import LogInScreen from './LogInScreen.js';
 class App extends Component {
   constructor(props) {
     super(props);
-
-    this.dataSheets = {};
-    this.dataSheetLoaded = {};
-
     this.dataSlots = {};
     this.dataSlots['ds_activeLang'] = "en";
     this.dataSlots['ds_SlotSelectedTab'] = "0";
@@ -68,40 +64,6 @@ class App extends Component {
     this.props.history.goBack();
   }
 
-  getDataSheet = (sheetId) => {
-    // This method is the default implementation and could be customized by a state management plugin.
-    return this.dataSheets[sheetId];
-  }
-
-  addToDataSheet = (sheetId, newRow, actionId) => {
-    // This method is the default implementation and could be customized by a state management plugin.
-    let sheet = this.dataSheets[sheetId];
-    if (sheet && newRow) {
-      let promise = sheet.addItem(newRow, this['serviceOptions_'+sheetId] || {});
-      this.setState({});
-      return promise;
-    }
-  }
-
-  updateInDataSheet = (sheetId, row, actionId) => {
-    // This method is the default implementation and could be customized by a state management plugin.
-    let sheet = this.dataSheets[sheetId];
-    if (sheet && row) {
-      let promise = sheet.replaceItemByKey(row.key, row, this['serviceOptions_'+sheetId] || {});
-      this.setState({});
-      return promise;
-    }
-  }
-
-  removeFromDataSheet = (sheetId, row) => {
-    let sheet = this.dataSheets[sheetId];
-    if (sheet && row) {
-      let promise = sheet.removeItem(row, this['serviceOptions_'+sheetId] || {});
-      this.setState({});
-      return promise;
-    }
-  }
-
   updateDataSlot = (slotId, value, actionId) => {
     // This method is the default implementation and could be customized by a state management plugin.
     if (value === this.dataSlots[slotId])
@@ -114,12 +76,6 @@ class App extends Component {
     }
     this.setState({});
   }
-
-  dataSheetDidUpdate = (dataSheet) => {
-    // This method is the default implementation and could be customized by a state management plugin.
-    this.setState({});
-  }
-
 
   createImageUrlFromProp = (prop) => {
     if (prop instanceof Object) {
@@ -137,8 +93,6 @@ class App extends Component {
         atTopOfScreenStack: atTop,
         transitionForward: forward,
         appActions: this,
-        dataSheets: this.dataSheets,
-        locStrings: this.locStrings,
         deviceInfo: {
           screenFormatId: this.state.screenFormatId
         },
