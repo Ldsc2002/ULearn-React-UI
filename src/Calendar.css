@@ -1,0 +1,30 @@
+.table {
+    margin: 0 auto 20px;
+}
+
+.today {
+    background-color: #ff0000;
+    color: rgb(0, 0, 0);
+}
+
+.in-prev-month{
+    opacity: 0.5;
+    color: rgb(0, 0, 0);
+}
+
+.in-next-month{
+    opacity: 0.5;
+    color: rgb(0, 0, 0);
+}
+
+.in-this-month{
+    opacity: 0.5;
+    color: rgb(0, 0, 0);
+}
+
+.buttonNP{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: black;
+}

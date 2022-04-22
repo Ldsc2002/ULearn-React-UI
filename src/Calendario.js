@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import './Calendar.css'
 import ScreenContext from './ScreenContext';
 import btn_icon_210788 from './images/btn_icon_210788.png';
+
+import CalendarioComp from './CalendarioComp.js';
 
 // UI framework component imports
 import Button from 'muicss/lib/react/button';
@@ -58,18 +60,12 @@ export default class Calendario extends Component {
             </div>
           </div>
         </div>
+        
         <Fragment>
-          <section className="hero is-primary">
-            <div className="hero-body">
-              <div className="container">
-                <h1 className="title has-text-centered">Calendar</h1>
-              </div>
-            </div>
-          </section>
           <div className="container has-text-centered">
-            <Calendar />
+            <CalendarioComp/>
           </div>
-        </Fragment>        
+        </Fragment>
         
         <div className="foreground">
           <Button className="actionFont elFab" style={style_elFab}  variant="fab" color="accent" >
@@ -79,5 +75,4 @@ export default class Calendario extends Component {
       </div>
     )
   }
-  
 }
