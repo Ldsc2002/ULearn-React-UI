@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LocalizedStrings from 'react-localization';
 // eslint-disable-next-line
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 // eslint-disable-next-line
