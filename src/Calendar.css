@@ -9,12 +9,12 @@
 
 .in-prev-month{
     opacity: 0.5;
-    color: rgb(0, 0, 0);
+    color: rgb(60, 60, 60);
 }
 
 .in-next-month{
     opacity: 0.5;
-    color: rgb(0, 0, 0);
+    color: rgb(60, 60, 60);
 }
 
 .in-this-month{
@@ -22,9 +22,6 @@
     color: rgb(0, 0, 0);
 }
 
-.buttonNP{
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: black;
+.buttonControl{
+    background-color: #000000;
 }

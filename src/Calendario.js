@@ -53,14 +53,6 @@ export default class Calendario extends Component {
           <div className="containerMinHeight elBackgroundShape" style={style_elBackgroundShape} />
         </div>
         
-        <div className="layoutFlow">
-          <div className="elText">
-            <div className="baseFont" style={style_elText}>
-              <div>{this.context.locStrings.calendario_text_722344}</div>
-            </div>
-          </div>
-        </div>
-        
         <Fragment>
           <div className="container has-text-centered">
             <CalendarioComp/>

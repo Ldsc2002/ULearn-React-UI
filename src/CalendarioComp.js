@@ -35,10 +35,10 @@ const CalendarioComp = () => {
                 })
             }
             </tbody>
-        </table>
 
-      <button className="buttonNP" onClick={getPrevMonth}>Prev</button>
-      <button className="buttonNP" onClick={getNextMonth}>Next</button>
+            <button className="buttonControl" onClick={getPrevMonth}>Prev</button>
+            <button className="buttonControl" onClick={getNextMonth}>Next</button>
+        </table>
     </Fragment>
   );
 }
