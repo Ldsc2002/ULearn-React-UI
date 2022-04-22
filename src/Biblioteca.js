@@ -53,7 +53,7 @@ export default class Biblioteca extends Component {
         <div className="layoutFlow">
           <div className="elText">
             <div className="baseFont" style={style_elText}>
-              <div>{this.context.locStrings.pizarron2_text_523858}</div>
+              <div>Biblioteca</div>
             </div>
           </div>
         </div>

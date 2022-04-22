@@ -9,7 +9,6 @@ import ScreenContext from './ScreenContext.js';
 import StartScreen from './StartScreen.js';
 import CrearCuentaScreen from './CrearCuentaScreen.js';
 import LogInScreen from './LogInScreen.js';
-import DataSheet_localizationSheet from './DataSheet_localizationSheet.js';
 
 
 class App extends Component {
@@ -17,14 +16,11 @@ class App extends Component {
     super(props);
 
     this.dataSheets = {};
-    this.dataSheets['localizationSheet'] = new DataSheet_localizationSheet('localizationSheet', this.dataSheetDidUpdate);
     this.dataSheetLoaded = {};
 
     this.dataSlots = {};
     this.dataSlots['ds_activeLang'] = "en";
     this.dataSlots['ds_SlotSelectedTab'] = "0";
-
-    this.updateLocalizationFromDataSheet(this.dataSheets['localizationSheet']);
 
     this.state = {
       screenTransitionForward: true,
@@ -126,15 +122,6 @@ class App extends Component {
     this.setState({});
   }
 
-  updateLocalizationFromDataSheet = (dataSheet) => {
-    const stringsObj = dataSheet.getStringsByLanguage();
-    if (stringsObj && Object.keys(stringsObj).length > 0) {
-      this.locStrings = new LocalizedStrings(stringsObj);
-    } else {
-      this.locStrings = new LocalizedStrings({en: {}});
-    }
-    this.locStrings.setLanguage(this.dataSlots['ds_activeLang']);
-  }
 
   createImageUrlFromProp = (prop) => {
     if (prop instanceof Object) {
