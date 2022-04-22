@@ -21,15 +21,6 @@ export default class Calendario extends Component {
     };
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  }
-
   render() {
     
     const style_elBackgroundShape = {

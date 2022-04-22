@@ -21,15 +21,6 @@ export default class LogInScreen extends Component {
     };
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  }
-
   textInputChanged_elField = (event) => {
     this.setState({field: event.target.value});
   }

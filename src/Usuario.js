@@ -18,15 +18,6 @@ export default class Usuario extends Component {
     };
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  }
-
   onClick_LogOut = async () => {
     // Go to screen 'LogIn'
     this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' });

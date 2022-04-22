@@ -16,17 +16,6 @@ export default class TabBarButton extends Component {
     };
   }
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-  }
-
-  // --- Functions for component state index 0 (1 of 2) --- 
-  
   renderState0() {
     const value_title = ((val) => {
       // make sure value is in string format
