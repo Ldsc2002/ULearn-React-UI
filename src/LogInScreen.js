@@ -4,6 +4,11 @@ import ScreenContext from './ScreenContext';
 import img_elCit from './images/CrearCuentaScreen_elCitCopy_837553.jpg';
 import img_elPerson from './images/CrearCuentaScreen_elPerson_405468.png';
 
+import {
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "./firebase";
+
 // UI framework component imports
 import Input from 'muicss/lib/react/input';
 import Checkbox from 'muicss/lib/react/checkbox';
@@ -18,11 +23,15 @@ export default class LogInScreen extends Component {
     super(props);
     
     this.state = {
+      loginEmail: "",
+      loginPassword: "",
+      user: ""
     };
   }
 
   textInputChanged_elField = (event) => {
-    this.setState({field: event.target.value});
+    this.setState({field: event.target.value});    
+    this.setState({loginEmail: event.target.value});
   }
   
   getValue_elField = () => {
@@ -31,6 +40,7 @@ export default class LogInScreen extends Component {
   
   textInputChanged_elFieldCopy = (event) => {
     this.setState({fieldCopy: event.target.value});
+    this.setState({loginPassword: event.target.value});
   }
   
   getValue_elFieldCopy = () => {
@@ -48,7 +58,18 @@ export default class LogInScreen extends Component {
   
   onClick_elButton = async () => {
     // Go to screen 'LogIn'
-    this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' });
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        this.state.loginEmail,
+        this.state.loginPassword
+      );
+      console.log(user);
+      this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' });
+  
+    } catch (error) {
+      console.log(error.message);
+    }
   }
   
   
@@ -140,26 +161,26 @@ export default class LogInScreen extends Component {
           </div>
           
           <div className="elField">
-            <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
+            <Input className="baseFont" style={style_elField} type="email" placeholder={this.context.locStrings.login_field_111402} onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
           </div>
           
           <div className="elFieldCopy">
-            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
+            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder={this.context.locStrings.login_fieldcopy_220522} onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
           </div>
           
           <div className="elCheckbox">
-            <Checkbox className="baseFont" style={style_elCheckbox}  label="Recordarme" checked={checked_checkbox === 'true' || checked_checkbox === true || ''+checked_checkbox === '1'}  onChange={this.checkboxChanged_elCheckbox} />
+            <Checkbox className="baseFont" style={style_elCheckbox}  label={this.context.locStrings.login_checkbox_557734} checked={checked_checkbox === 'true' || checked_checkbox === true || ''+checked_checkbox === '1'}  onChange={this.checkboxChanged_elCheckbox} />
           </div>
           
           <div className="elButton">
             <Button className="actionFont" style={style_elButton}  color="accent" onClick={this.onClick_elButton} >
-              Iniciar sesión
+              {this.context.locStrings.login_button_42863}
             </Button>
           </div>
           
           <div className="elButtonCopy">
             <Button className="actionFont" style={style_elButtonCopy} onClick={this.onClick_elButtonCopy} >
-              Crear cuenta
+              {this.context.locStrings.login_buttoncopy_713613}
             </Button>
           </div>
         </div>

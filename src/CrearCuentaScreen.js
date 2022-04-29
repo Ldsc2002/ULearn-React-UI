@@ -4,6 +4,11 @@ import ScreenContext from './ScreenContext';
 import img_elCitCopy from './images/CrearCuentaScreen_elCitCopy_837553.jpg';
 import img_elPerson from './images/CrearCuentaScreen_elPerson_405468.png';
 
+import {
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "./firebase";
+
 // UI framework component imports
 import Input from 'muicss/lib/react/input';
 import Button from 'muicss/lib/react/button';
@@ -17,11 +22,15 @@ export default class CrearCuentaScreen extends Component {
     super(props);
     
     this.state = {
+      registerEmail: "",
+      registerPassword: "",
+      user: ""
     };
   }
 
   textInputChanged_elField = (event) => {
     this.setState({field: event.target.value});
+    
   }
   
   getValue_elField = () => {
@@ -30,6 +39,7 @@ export default class CrearCuentaScreen extends Component {
   
   textInputChanged_elFieldCopy2 = (event) => {
     this.setState({fieldCopy2: event.target.value});
+    this.setState({registerEmail: event.target.value});
   }
   
   getValue_elFieldCopy2 = () => {
@@ -38,6 +48,7 @@ export default class CrearCuentaScreen extends Component {
   
   textInputChanged_elFieldCopy = (event) => {
     this.setState({fieldCopy: event.target.value});
+    this.setState({registerPassword: event.target.value});
   }
   
   getValue_elFieldCopy = () => {
@@ -46,8 +57,19 @@ export default class CrearCuentaScreen extends Component {
   
   onClick_elButtonCopy = async () => {
     // Go to screen 'CrearCuenta'
-    this.context.appActions.goToScreen('crearCuenta', this.context.baseScreenId, { transitionId: 'fadeIn' });
+    // Go to screen 'LogIn'
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        this.state.registerEmail,
+        this.state.registerPassword
+      );
+      console.log(user);
+      this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' });
   
+    } catch (error) {
+      console.log(error.message);
+    }
   }
   
   
@@ -75,12 +97,6 @@ export default class CrearCuentaScreen extends Component {
       backgroundPosition: '50% 50%',
       backgroundSize: 'cover',
      };
-
-     const style_createAcc = {
-      backgroundImage: 'url('+img_elCitCopy+')',
-      backgroundSize: 'cover',
-     };
-
     const style_elCard_outer = {
       boxSizing: 'border-box',
       backgroundColor: 'white',
@@ -145,26 +161,26 @@ export default class CrearCuentaScreen extends Component {
           </div>
           
           <div className="elField">
-            <Input className="baseFont" style={style_elField} type="text" placeholder="Usuario" onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
+            <Input className="baseFont" style={style_elField} type="text" placeholder={this.context.locStrings.login2_field_36185} onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
           </div>
           
           <div className="elFieldCopy2">
-            <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()}  />
+            <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder={this.context.locStrings.crearcuenta_fieldcopy2_621361} onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()}  />
           </div>
           
           <div className="elFieldCopy">
-            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
+            <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder={this.context.locStrings.login2_fieldcopy_180669} onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
           </div>
           
           <div className="elButtonCopy">
             <Button className="actionFont" style={style_elButtonCopy}  color="accent" onClick={this.onClick_elButtonCopy} >
-              Crear cuenta
+              {this.context.locStrings.login2_buttoncopy_397582}
             </Button>
           </div>
           
           <div className="elButton">
             <Button className="actionFont" style={style_elButton} onClick={this.onClick_elButton} >
-              Iniciar sesión
+              {this.context.locStrings.login2_button_863024}
             </Button>
           </div>
         </div>
