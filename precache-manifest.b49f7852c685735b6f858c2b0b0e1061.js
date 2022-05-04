@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "64560a0f2e0a27eab67a",
+    "revision": "2a2cc0d4158512dc2749",
     "url": "/ULearn/static/css/main.eed9bb7f.chunk.css"
   },
   {
-    "revision": "64560a0f2e0a27eab67a",
-    "url": "/ULearn/static/js/main.ffa3dc78.chunk.js"
+    "revision": "2a2cc0d4158512dc2749",
+    "url": "/ULearn/static/js/main.6c290cd7.chunk.js"
   },
   {
     "revision": "ecbd617494a075366b69",
     "url": "/ULearn/static/js/runtime~main.d4b9f38a.js"
   },
   {
-    "revision": "4684a054f79ec2a7af6e",
-    "url": "/ULearn/static/js/2.4dd184a7.chunk.js"
+    "revision": "93ad30bc1f22b360bd54",
+    "url": "/ULearn/static/js/2.003c333d.chunk.js"
   },
   {
     "revision": "3812709cdb14f4035d35f3cf528d5dd7",
@@ -28,7 +28,7 @@ self.__precacheManifest = [
     "url": "/ULearn/static/media/studentUlearn.79adfa95.jpeg"
   },
   {
-    "revision": "5e91c1e8b2957161fa681b9148099117",
+    "revision": "b4a02a0428ad90a2b0c69a69d78c8bd5",
     "url": "/ULearn/index.html"
   }
 ];
