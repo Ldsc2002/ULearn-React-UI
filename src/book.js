@@ -1,25 +1,28 @@
 import React from "react";
-//import "./book.scss";
 import redBook from "./images/redbook.png";
 
-function BookCard(info) {
-  const style_book = {
-    backgroundImage: 'url('+redBook+')'
-  }
-  return (
-    <div className="card-item">
-        <div className="card-inner">
-          <div className="card-top" style={style_book}>
-          </div>
+const WidthProvider = require('react-grid-layout').WidthProvider;
+let ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
+
+ResponsiveReactGridLayout = WidthProvider(ResponsiveReactGridLayout);
+
+function BookCard(props) {
+    const style_book = {
+        backgroundImage: 'url('+redBook+')'
+    }
+
+    const content = props.books.map((post) =>    
+        <div key={post.id}  style={style_book}>      
+            <h2>{post.title}</h2>
+            <p>{post.content}</p>
         </div>
-        <div className="card-bottom">
-          <div className="card-info">
-            <h4>Libro</h4>
-            <p>20XX</p>
-          </div>
-        </div>
-    </div>
-  );
+    );
+  
+    return (
+        <ResponsiveReactGridLayout cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}>
+            {content}
+        </ResponsiveReactGridLayout>  
+    );
 }
 
 export default BookCard;

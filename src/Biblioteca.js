@@ -3,7 +3,7 @@ import './App.css';
 import ScreenContext from './ScreenContext';
 import btn_icon_24447 from './images/btn_icon_24447.png';
 import btn_icon_121752 from './images/btn_icon_121752.png';
-import BookCard from './book';
+import Bookshelf from './bookshelf';
 
 // UI framework component imports
 import Button from 'muicss/lib/react/button';
@@ -54,8 +54,7 @@ export default class Biblioteca extends Component {
         <div className="layoutFlow">
           <div className="elText">
             <div className="baseFont" style={style_elText}>
-              <div>Biblioteca</div>
-              <BookCard/>
+              <Bookshelf />
             </div>
           </div>
         </div>
