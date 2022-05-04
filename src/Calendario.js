@@ -22,15 +22,6 @@ export default class Calendario extends Component {
   }
 
   render() {
-    
-    const style_elBackgroundShape = {
-      background: 'rgba(255, 255, 255, 1.000)',
-     };
-    const style_elText = {
-      color: 'black',
-      textAlign: 'center',
-     };
-    
     const style_elFab = {
       display: 'block',
       textTransform: 'none',

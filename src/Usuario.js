@@ -66,7 +66,7 @@ export default class Usuario extends Component {
         <div className="layoutFlow">
           <div className="elText">
             <div className="baseFont" style={style_elText}>
-              <img src={img_fakeUser} style={style_userPic}/>
+              <img src={img_fakeUser} style={style_userPic} alt="Imagen de usuario"/>
               <div className="name" style={style_name}>John Doe</div>
               <div className="info" style={style_info}>Ingenieria en Ciencias de la Computacion y Tecnologias de la Informacion</div>
               <div className="info" style={style_info}>3er año, primer semestre</div>
