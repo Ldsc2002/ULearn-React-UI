@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/ULearn/precache-manifest.b49f7852c685735b6f858c2b0b0e1061.js"
+  "/ULearn-React-UI/precache-manifest.ef95322189742da8ce1d345669e3674e.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/ULearn/index.html", {
+workbox.routing.registerNavigationRoute("/ULearn-React-UI/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
