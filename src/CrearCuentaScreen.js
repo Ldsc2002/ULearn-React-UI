@@ -76,11 +76,6 @@ export default class CrearCuentaScreen extends Component {
       backgroundSize: 'cover',
      };
 
-     const style_createAcc = {
-      backgroundImage: 'url('+img_elCitCopy+')',
-      backgroundSize: 'cover',
-     };
-
     const style_elCard_outer = {
       boxSizing: 'border-box',
       backgroundColor: 'white',
