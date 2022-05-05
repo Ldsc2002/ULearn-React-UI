@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect,useState } from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
 import './styles.css';
+
+import { getDatabase, ref, onValue} from "firebase/database";
+import { db } from './firebase';
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const WidthProvider = require('react-grid-layout').WidthProvider;
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
@@ -65,10 +69,36 @@ export default class extends Component {
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
   }
+
+  fetch(){
+  
+    let titles =[]
+    let contents =[]
+    let dates =[]
+  
+    db.collection('notitas')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          titles.push(doc.get("title"))
+          contents.push(doc.get("content"))
+          dates.push(doc.get("date"))
+          
+        });
+  
+        for(let i=0; i< titles.length; i++){
+          this.createBlankNote(titles[i])
+        }
+  
+      });
+  }
+  
+
   componentDidMount() {
     if (this.props.notes && !this.props.notes.length) {
-      this.createBlankNote();
+      this.fetch()
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -140,7 +170,8 @@ export default class extends Component {
       }
     });
   }
-  createBlankNote() {
+  createBlankNote(titulo='Title') {
+    console.log("holi, gracias por ayudarme jiji")
     const dateFormat = this.state.dateFormat;
     const grid = this.props.grid || {};
     const uid = guid();
@@ -154,7 +185,7 @@ export default class extends Component {
       },
       id: uid,
       editorState: EditorState.createEmpty(),
-      title: 'Title',
+      title: titulo,
       color: this.generateRandomColors(),
       degree: this.generateRandomDegree(-2, 2),
       timeStamp: moment().format(dateFormat),
@@ -196,7 +227,9 @@ export default class extends Component {
       cols
     });
   }
+
   renderNote(note) {
+
     const closeStyle = Object.assign({}, {
       display: (this.state.notes.length === 1) ? 'none' : 'block'
     }, this.props.closeStyle || {});
