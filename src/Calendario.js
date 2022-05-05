@@ -60,6 +60,10 @@ export default class Calendario extends Component {
             <img src={btn_icon_210788} alt="" style={{width: '50.000%', marginTop: '25.000%'}} />
           </Button>
         </div>
+
+        <div className='events'>
+          <h1>TODAY EVENT'S</h1>
+        </div>
       </div>
     )
   }
