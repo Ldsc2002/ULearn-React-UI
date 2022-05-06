@@ -1,12 +1,11 @@
 import React, { Component,useEffect,useState } from 'react';
-import { Editor, EditorState, ContentState } from 'draft-js';
+import { Editor, EditorState, ContentState, convertFromRaw } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
 import './styles.css';
 
-import { getDatabase, ref, onValue} from "firebase/database";
-import { db } from './firebase';
-import { collection, doc, setDoc } from "firebase/firestore";
+import { getDatabase, ref, set} from "firebase/database";
+import { db} from './firebase';
 
 const WidthProvider = require('react-grid-layout').WidthProvider;
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
@@ -61,7 +60,7 @@ export default class extends Component {
     this.state = {
       newCounter: 0,
       notes: props.notes ? tranformEditorState(props.notes) : [],
-      colors: props.colors || ['#D45728', '#40AC3B'],
+      colors: props.colors || ['#86E3CE', '#CCABD8'],
       dateFormat: props.dateFormat || 'lll'
     };
     this.createBlankNote = this.createBlankNote.bind(this);
@@ -87,12 +86,12 @@ export default class extends Component {
         });
   
         for(let i=0; i< titles.length; i++){
-          this.createBlankNote(titles[i])
+          this.createNote(titles[i], contents[i])
         }
   
       });
   }
-  
+
 
   componentDidMount() {
     if (this.props.notes && !this.props.notes.length) {
@@ -108,7 +107,7 @@ export default class extends Component {
       });
     }
     this.setState({
-      colors: nextProps.colors || ['#D45728', '#40AC3B'],
+      colors: nextProps.colors || ['#86E3CE', '#CCABD8', '#FFDD94', '#FA897B', '#CCABD8'],
       dateFormat: nextProps.dateFormat || 'lll'
     });
   }
@@ -122,7 +121,8 @@ export default class extends Component {
     return `${Math.floor(Math.random() * (max - min + 1)) + min}deg`;
   }
 
-  handleTitleChange(html, currentNote) {
+  handleTitleChange(html, currentNote) { 
+  
     const notes = this.state.notes;
     notes.forEach((note) => {
       if (currentNote.id === note.id) {
@@ -136,7 +136,9 @@ export default class extends Component {
         this.props.onTitleChange(html, currentNote);
       }
     });
+
   }
+
 
   onChange(editorState, currentNote) {
     const notes = this.state.notes;
@@ -150,7 +152,27 @@ export default class extends Component {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(transformContentState(this.state.notes), 'update');
     }
+
+    this.noteFirebase(currentNote)
   }
+
+    //return
+    noteFirebase(note){
+      const title = note.title
+      const text = note.text
+      const date = note.timeStamp
+
+      document.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+
+        db.collection('notitas').add({
+          content:text, 
+          date: date,
+          title: title, 
+        })
+      }
+      });
+    }
 
   deleteNote(currentNote) {
     const notes = this.state.notes;
@@ -170,8 +192,7 @@ export default class extends Component {
       }
     });
   }
-  createBlankNote(titulo='Title') {
-    console.log("holi, gracias por ayudarme jiji")
+  createBlankNote() {
     const dateFormat = this.state.dateFormat;
     const grid = this.props.grid || {};
     const uid = guid();
@@ -185,11 +206,43 @@ export default class extends Component {
       },
       id: uid,
       editorState: EditorState.createEmpty(),
-      title: titulo,
+      title: 'Title',
       color: this.generateRandomColors(),
       degree: this.generateRandomDegree(-2, 2),
       timeStamp: moment().format(dateFormat),
       contentEditable: true
+    };
+    this.setState({
+      // Add a new item. It must have a unique key!
+      notes: this.state.notes.concat(note),
+      // Increment the counter to ensure key is always unique.
+      newCounter: this.state.newCounter + 1
+    });
+    if (typeof this.props.onAdd === 'function') {
+      this.props.onAdd(note);
+    }
+  }
+
+  createNote(titulo, content ) {
+    const dateFormat = this.state.dateFormat;
+    const grid = this.props.grid || {};
+    const uid = guid();
+    const note = {
+      grid: {
+        i: `${uid}`,
+        x: this.state.notes.length * 2 % (this.state.cols || 12),
+        y: Infinity, // puts it at the bottom
+        w: grid.w || 2,
+        h: grid.h || 2
+      },
+
+      id: uid,
+      editorState: EditorState.createWithContent(ContentState.createFromText(content)),
+      title: titulo,
+      color: this.generateRandomColors(),
+      degree: this.generateRandomDegree(-2, 2),
+      timeStamp: moment().format(dateFormat),
+      contentEditable: false
     };
     this.setState({
       // Add a new item. It must have a unique key!
@@ -255,7 +308,7 @@ export default class extends Component {
     grid.y = grid.y || Infinity;
     return (
       <div key={i} data-grid={grid}>
-        <aside
+        <aside 
           className={`note-wrap note ${this.props.tape ? 'tape' : ''}`}
           style={noteStyle}
         >
@@ -280,8 +333,8 @@ export default class extends Component {
             >
               {closeIcon}
             </div>
-          </div>
-          <div className="note-body" style={noteBodyStyle}>
+          </div  >
+          <div className="note-body" id= "myInput" style={noteBodyStyle}>
             <Editor
               editorState={note.editorState}
               onChange={editorState => this.onChange(editorState, note)}
