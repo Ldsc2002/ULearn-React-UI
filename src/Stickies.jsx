@@ -331,6 +331,7 @@ export default class extends Component {
               {closeIcon}
             </div>
           </div  >
+          <input  className="note-footerB" style={noteFooterStyle}type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)}></input>
           <div className="note-body" id= "myInput" style={noteBodyStyle}>
             <Editor
               editorState={note.editorState}
@@ -346,7 +347,7 @@ export default class extends Component {
           >
             {note.timeStamp}
           </div>
-          <input type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)}></input>
+         
         </aside>
       </div>
     );

@@ -171,6 +171,26 @@
     padding-right: 10px;
     font-size: 9px;
   }
+
+
+  .note-footerB {
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    position: absolute;
+    font-size: 9px;
+    left: 8px;
+    text-align: right;
+    padding-right: 10px;
+    bottom: 6px;
+    z-index: 1;
+    background-color:bisque;
+    border-color: bisque;
+    border-radius: 5px;
+  }
+  
   
   .react-stickies-wrapper [contenteditable]:focus {
       outline: 0px solid transparent;
