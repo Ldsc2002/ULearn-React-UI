@@ -86,7 +86,7 @@ export default class extends Component {
         });
   
         for(let i=0; i< titles.length; i++){
-          this.createNote(titles[i], contents[i])
+          this.createNote(titles[i], contents[i], dates[i])
         }
   
       });
@@ -153,26 +153,23 @@ export default class extends Component {
       this.props.onChange(transformContentState(this.state.notes), 'update');
     }
 
-    this.noteFirebase(currentNote)
   }
 
-    //return
-    noteFirebase(note){
-      const title = note.title
-      const text = note.text
-      const date = note.timeStamp
+  //return
+  noteFirebase(note){
+    console.log(note)
+    const title = note.title
+    const text = note.text
+    const date = note.timeStamp
+    console.log(title, text,date)
 
-      document.addEventListener("keypress", function(event) {
-      if (event.key === "Enter") {
+    db.collection('notitas').add({
+      content:text, 
+      date: date,
+      title: title, 
+    })
 
-        db.collection('notitas').add({
-          content:text, 
-          date: date,
-          title: title, 
-        })
-      }
-      });
-    }
+  }
 
   deleteNote(currentNote) {
     const notes = this.state.notes;
@@ -223,7 +220,7 @@ export default class extends Component {
     }
   }
 
-  createNote(titulo, content ) {
+  createNote(titulo, content, date ) {
     const dateFormat = this.state.dateFormat;
     const grid = this.props.grid || {};
     const uid = guid();
@@ -241,7 +238,7 @@ export default class extends Component {
       title: titulo,
       color: this.generateRandomColors(),
       degree: this.generateRandomDegree(-2, 2),
-      timeStamp: moment().format(dateFormat),
+      timeStamp: date,
       contentEditable: false
     };
     this.setState({
@@ -320,7 +317,7 @@ export default class extends Component {
             >
               {addIcon}
             </div>
-            <div className="title" style={noteTitleStyle}>
+            <div className="title" stycle={noteTitleStyle}>
               <ContentEditable
                 html={note.title}
                 onChange={html => this.handleTitleChange(html, note)}
@@ -340,13 +337,16 @@ export default class extends Component {
               onChange={editorState => this.onChange(editorState, note)}
               placeholder="Add your notes..."
             />
+
           </div>
           <div
             className="note-footer"
             style={noteFooterStyle}
+            
           >
             {note.timeStamp}
           </div>
+          <input type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)}></input>
         </aside>
       </div>
     );
