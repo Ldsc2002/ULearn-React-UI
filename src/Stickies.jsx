@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import { Editor, EditorState, ContentState } from 'draft-js';
+import React, { Component,useEffect,useState } from 'react';
+import { Editor, EditorState, ContentState, convertFromRaw } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
 import './styles.css';
+
+import { getDatabase, ref, set} from "firebase/database";
+import { db} from './firebase';
 
 const WidthProvider = require('react-grid-layout').WidthProvider;
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
@@ -57,7 +60,7 @@ export default class extends Component {
     this.state = {
       newCounter: 0,
       notes: props.notes ? tranformEditorState(props.notes) : [],
-      colors: props.colors || ['#D45728', '#40AC3B'],
+      colors: props.colors || ['#86E3CE', '#CCABD8'],
       dateFormat: props.dateFormat || 'lll'
     };
     this.createBlankNote = this.createBlankNote.bind(this);
@@ -65,10 +68,36 @@ export default class extends Component {
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
   }
+
+  fetch(){
+  
+    let titles =[]
+    let contents =[]
+    let dates =[]
+  
+    db.collection('notitas')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          titles.push(doc.get("title"))
+          contents.push(doc.get("content"))
+          dates.push(doc.get("date"))
+          
+        });
+  
+        for(let i=0; i< titles.length; i++){
+          this.createNote(titles[i], contents[i], dates[i])
+        }
+  
+      });
+  }
+
+
   componentDidMount() {
     if (this.props.notes && !this.props.notes.length) {
-      this.createBlankNote();
+      this.fetch()
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,7 +107,7 @@ export default class extends Component {
       });
     }
     this.setState({
-      colors: nextProps.colors || ['#D45728', '#40AC3B'],
+      colors: nextProps.colors || ['#86E3CE', '#CCABD8', '#FFDD94', '#FA897B', '#CCABD8'],
       dateFormat: nextProps.dateFormat || 'lll'
     });
   }
@@ -92,7 +121,8 @@ export default class extends Component {
     return `${Math.floor(Math.random() * (max - min + 1)) + min}deg`;
   }
 
-  handleTitleChange(html, currentNote) {
+  handleTitleChange(html, currentNote) { 
+  
     const notes = this.state.notes;
     notes.forEach((note) => {
       if (currentNote.id === note.id) {
@@ -106,7 +136,9 @@ export default class extends Component {
         this.props.onTitleChange(html, currentNote);
       }
     });
+
   }
+
 
   onChange(editorState, currentNote) {
     const notes = this.state.notes;
@@ -120,6 +152,23 @@ export default class extends Component {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(transformContentState(this.state.notes), 'update');
     }
+
+  }
+
+  //return
+  noteFirebase(note){
+    console.log(note)
+    const title = note.title
+    const text = note.text
+    const date = note.timeStamp
+    console.log(title, text,date)
+
+    db.collection('notitas').add({
+      content:text, 
+      date: date,
+      title: title, 
+    })
+
   }
 
   deleteNote(currentNote) {
@@ -170,6 +219,38 @@ export default class extends Component {
       this.props.onAdd(note);
     }
   }
+
+  createNote(titulo, content, date ) {
+    const dateFormat = this.state.dateFormat;
+    const grid = this.props.grid || {};
+    const uid = guid();
+    const note = {
+      grid: {
+        i: `${uid}`,
+        x: this.state.notes.length * 2 % (this.state.cols || 12),
+        y: Infinity, // puts it at the bottom
+        w: grid.w || 2,
+        h: grid.h || 2
+      },
+
+      id: uid,
+      editorState: EditorState.createWithContent(ContentState.createFromText(content)),
+      title: titulo,
+      color: this.generateRandomColors(),
+      degree: this.generateRandomDegree(-2, 2),
+      timeStamp: date,
+      contentEditable: false
+    };
+    this.setState({
+      // Add a new item. It must have a unique key!
+      notes: this.state.notes.concat(note),
+      // Increment the counter to ensure key is always unique.
+      newCounter: this.state.newCounter + 1
+    });
+    if (typeof this.props.onAdd === 'function') {
+      this.props.onAdd(note);
+    }
+  }
   onLayoutChange(layout) {
     const notes = this.state.notes;
     notes.forEach((note) => {
@@ -196,7 +277,9 @@ export default class extends Component {
       cols
     });
   }
+
   renderNote(note) {
+
     const closeStyle = Object.assign({}, {
       display: (this.state.notes.length === 1) ? 'none' : 'block'
     }, this.props.closeStyle || {});
@@ -222,7 +305,7 @@ export default class extends Component {
     grid.y = grid.y || Infinity;
     return (
       <div key={i} data-grid={grid}>
-        <aside
+        <aside 
           className={`note-wrap note ${this.props.tape ? 'tape' : ''}`}
           style={noteStyle}
         >
@@ -234,7 +317,7 @@ export default class extends Component {
             >
               {addIcon}
             </div>
-            <div className="title" style={noteTitleStyle}>
+            <div className="title" stycle={noteTitleStyle}>
               <ContentEditable
                 html={note.title}
                 onChange={html => this.handleTitleChange(html, note)}
@@ -247,20 +330,24 @@ export default class extends Component {
             >
               {closeIcon}
             </div>
-          </div>
-          <div className="note-body" style={noteBodyStyle}>
+          </div  >
+          <input  className="note-footerB" style={noteFooterStyle}type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)}></input>
+          <div className="note-body" id= "myInput" style={noteBodyStyle}>
             <Editor
               editorState={note.editorState}
               onChange={editorState => this.onChange(editorState, note)}
               placeholder="Add your notes..."
             />
+
           </div>
           <div
             className="note-footer"
             style={noteFooterStyle}
+            
           >
             {note.timeStamp}
           </div>
+         
         </aside>
       </div>
     );

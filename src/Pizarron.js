@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,useState} from 'react';
 import {
   Stickies
 } from './indexPizarron.js';
 
-const mock = require('./mock');
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 
 export default class extends Component {
 
@@ -23,8 +24,9 @@ export default class extends Component {
     };
     this.toggleValue = this.toggleValue.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.fetchMock = this.fetchMock.bind(this);
   }
+
+  
 
   toggleValue(e) {
     this.setState({
@@ -39,17 +41,8 @@ export default class extends Component {
     });
   }
 
-  fetchMock() {
-    this.setState({
-      showMock: true
-    }, () => {
-      this.setState({
-        notes: mock.default
-      });
-    });
-  }
-
   render() {
+
     let wrapperStyle = {};
     if (this.state.showBound) {
       wrapperStyle = {
@@ -72,6 +65,7 @@ export default class extends Component {
           footer={this.state.showFooter}
           onChange={this.onChange}
           wrapperStyle={wrapperStyle}
+
         />
       </div>
     );
