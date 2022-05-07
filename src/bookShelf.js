@@ -3,7 +3,7 @@ import BookCard from "./book";
 import { useState } from "react";
 import PopUp from "./PopUp";
 
-function Bookshelf() {
+function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false);
     const books = [
         {id: 1, title: 'Libro 1', content: 'Hello World'},
