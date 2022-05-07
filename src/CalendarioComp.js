@@ -8,6 +8,8 @@ import { db } from './firebase';
 const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();
 
+  const [event, setEvent] = useState({contenido: "", fecha: "", titulo: ""});  
+
   const dateClickHandler = date => {
     console.log(date)
   
@@ -25,41 +27,16 @@ const CalendarioComp = () => {
         });
   
         for(let i=0; i< titulo.length; i++){
-            console.log("ENTRO AL FETCH")
-            let temp = [titulo[i], fecha[i], titulo[i]]
-            setEvent(temp)
+            console.log("ENTRO AL FETCH", contenido[i], fecha[i], titulo[i])
+            let temp = {contenido: contenido[i], fecha: fecha[i], titulo: titulo[i]}
+
+            if(fecha[i] == date){
+                console.log("ENTRO A LA FECHA")
+                setEvent(temp)
+            }
         }
       });
   }
-
-  const [event, setEvent] = useState([]);
-
-  const fetch = () => {
-
-    console.log("entro")
-  
-    let contenido = []
-    let fecha = []
-    let titulo = []
-  
-    db.collection('eventos')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-            contenido.push(doc.get("contenido"))
-            fecha.push(doc.get("fecha"))
-            titulo.push(doc.get("titulo"))
-        });
-  
-        for(let i=0; i< titulo.length; i++){
-            console.log("ENTRO AL FETCH")
-            let temp = [titulo[i], fecha[i], titulo[i]]
-            setEvent(temp)
-        }
-      });
-  }
-
-  
 
   return(
     <Fragment>
@@ -103,9 +80,7 @@ const CalendarioComp = () => {
             <h1>TODAY EVENT'S</h1>
             <div>
                 {
-                    event.map(evento =>(
-                        <h2 key={evento}></h2>
-                    ))
+                    event.titulo
                 }
             </div>
         </div>
