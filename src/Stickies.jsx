@@ -1,10 +1,8 @@
-import React, { Component,useEffect,useState } from 'react';
-import { Editor, EditorState, ContentState, convertFromRaw } from 'draft-js';
+import React, { Component } from 'react';
+import { Editor, EditorState, ContentState } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
 import './styles.css';
-
-import { getDatabase, ref, set} from "firebase/database";
 import { db} from './firebase';
 
 const WidthProvider = require('react-grid-layout').WidthProvider;
@@ -221,7 +219,6 @@ export default class extends Component {
   }
 
   createNote(titulo, content, date ) {
-    const dateFormat = this.state.dateFormat;
     const grid = this.props.grid || {};
     const uid = guid();
     const note = {
