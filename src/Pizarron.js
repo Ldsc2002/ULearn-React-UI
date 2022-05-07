@@ -1,9 +1,8 @@
-import React, { Component,useState} from 'react';
+import React, { Component } from 'react';
 import {
   Stickies
 } from './indexPizarron.js';
 
-import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 
 export default class extends Component {
