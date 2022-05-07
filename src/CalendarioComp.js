@@ -9,12 +9,7 @@ const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();
 
   const dateClickHandler = date => {
-    console.log(date);
-  }
-
-  const [event, setEvent] = useState([]);
-
-  const fetch = () => {
+    console.log(date)
   
     let contenido = []
     let fecha = []
@@ -30,6 +25,34 @@ const CalendarioComp = () => {
         });
   
         for(let i=0; i< titulo.length; i++){
+            console.log("ENTRO AL FETCH")
+            let temp = [titulo[i], fecha[i], titulo[i]]
+            setEvent(temp)
+        }
+      });
+  }
+
+  const [event, setEvent] = useState([]);
+
+  const fetch = () => {
+
+    console.log("entro")
+  
+    let contenido = []
+    let fecha = []
+    let titulo = []
+  
+    db.collection('eventos')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            contenido.push(doc.get("contenido"))
+            fecha.push(doc.get("fecha"))
+            titulo.push(doc.get("titulo"))
+        });
+  
+        for(let i=0; i< titulo.length; i++){
+            console.log("ENTRO AL FETCH")
             let temp = [titulo[i], fecha[i], titulo[i]]
             setEvent(temp)
         }
@@ -51,17 +74,18 @@ const CalendarioComp = () => {
                     }
                 </tr>
             </thead>
+            {/* <button className="btnFetch" onClick={fetch}>FETCH</button> */}
             <tbody>
                 {
                     Object.values(calendarRows).map(cols => {
                     return <tr key={cols[0].date}>
                                 {
                                     cols.map(col => (
-                                    col.date === todayFormatted
-                                        ? <td key={col.date} className={`${col.classes} today`} onClick={() => dateClickHandler(col.date)}>
-                                            {col.value}
-                                        </td>
-                                        : <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                        col.date === todayFormatted
+                                            ? <td key={col.date} className={`${col.classes} today`} onClick={() => dateClickHandler(col.date)}>
+                                                {col.value}
+                                            </td>
+                                            : <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
@@ -77,16 +101,13 @@ const CalendarioComp = () => {
 
         <div>
             <h1>TODAY EVENT'S</h1>
-            <h2>
+            <div>
                 {
                     event.map(evento =>(
                         <h2 key={evento}></h2>
                     ))
                 }
-                event.map(day => (
-                    <th key={day}>{day}</th>
-                ))
-            </h2>
+            </div>
         </div>
 
     </Fragment>
