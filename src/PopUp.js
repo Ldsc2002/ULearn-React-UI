@@ -4,9 +4,10 @@ import './PopUp.css'
 function PopUp(props) {
   return (props.trigger) ? (
     <div className='popup'>
-        <div className='popup-inner'></div>
+        <div className='popup-inner'>
+            {props.children}
             <button className='close-btn' onClick={() => props.setTrigger(false)}>Cerrar</button>
-            {props.children }
+        </div>
     </div>
   ) 
   : "";
