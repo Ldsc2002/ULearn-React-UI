@@ -1,7 +1,7 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-import 'dotenv/config' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import 'dotenv/config'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
