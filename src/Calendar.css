@@ -76,3 +76,53 @@
     justify-content: center;
    
 }
+
+.eventDiv{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+}
+
+.botonAgregar{
+    background-color:#841d1d;
+    color: rgb(0, 0, 0);
+    border-radius: 50%;
+    height: 45px;
+    width: 40px;
+    cursor: pointer;
+    align-items: center;
+    display: flex;
+    text-align: left;
+}
+
+.botonAgregarDiv{
+    position: fixed;
+    top: 70%;
+    right: 0%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.fechaInador{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fechaInador2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.preguntaInador{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
