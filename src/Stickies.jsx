@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useState } from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
@@ -53,19 +53,23 @@ function transformContentState(notes) {
 }
 
 export default class extends Component {
+
+  
   constructor(props) {
+    
     super(props);
     this.state = {
       newCounter: 0,
       notes: props.notes ? tranformEditorState(props.notes) : [],
       colors: props.colors || ['#86E3CE', '#CCABD8'],
-      dateFormat: props.dateFormat || 'lll'
+      dateFormat: props.dateFormat || 'lll',
     };
     this.createBlankNote = this.createBlankNote.bind(this);
     this.renderNote = this.renderNote.bind(this);
     this.onLayoutChange = this.onLayoutChange.bind(this);
     this.onBreakpointChange = this.onBreakpointChange.bind(this);
   }
+  
 
   fetch(){
   
@@ -128,6 +132,8 @@ export default class extends Component {
   }
 
   handleTitleChange(html, currentNote) { 
+
+    currentNote.disable = false
   
     const notes = this.state.notes;
     notes.forEach((note) => {
@@ -143,10 +149,14 @@ export default class extends Component {
       }
     });
 
+    
   }
 
 
   onChange(editorState, currentNote) {
+
+    currentNote.disable = false    
+
     const notes = this.state.notes;
     const dateFormat = this.state.dateFormat;
     notes.forEach((note) => {
@@ -159,6 +169,8 @@ export default class extends Component {
       this.props.onChange(transformContentState(this.state.notes), 'update');
     }
 
+    
+
   }
 
   //return
@@ -167,7 +179,7 @@ export default class extends Component {
     const text = note.text
     const date = note.timeStamp
     const id= note.id
-    console.log(note.id)
+    console.log(note)
 
     db.collection('notitas').doc(id).set({
       content:text, 
@@ -223,7 +235,8 @@ export default class extends Component {
       color: this.generateRandomColors(),
       degree: this.generateRandomDegree(-2, 2),
       timeStamp: moment().format(dateFormat),
-      contentEditable: true
+      contentEditable: true,
+      disable: true
     };
     this.setState({
       // Add a new item. It must have a unique key!
@@ -254,7 +267,8 @@ export default class extends Component {
       color: this.generateRandomColors(),
       degree: this.generateRandomDegree(-2, 2),
       timeStamp: date,
-      contentEditable: false
+      contentEditable: false, 
+      disable: true
     };
     this.setState({
       // Add a new item. It must have a unique key!
@@ -294,6 +308,7 @@ export default class extends Component {
   }
 
   renderNote(note) {
+
 
     const closeStyle = Object.assign({}, {
       display: (this.state.notes.length === 1) ? 'none' : 'block'
@@ -335,7 +350,7 @@ export default class extends Component {
             <div className="title" stycle={noteTitleStyle}>
               <ContentEditable
                 html={note.title}
-                onChange={html => this.handleTitleChange(html, note)}
+                onChange={html => this.handleTitleChange(html, note)} //esta
               />
             </div>
             <div
@@ -346,11 +361,11 @@ export default class extends Component {
               {closeIcon}
             </div>
           </div  >
-          <input  className="note-footerB" style={noteFooterStyle}type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)}></input>
+          <input disabled={note.disable} className="note-footerB" style={noteFooterStyle} type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)}></input>
           <div className="note-body" id= "myInput" style={noteBodyStyle}>
             <Editor
               editorState={note.editorState}
-              onChange={editorState => this.onChange(editorState, note)}
+              onChange={editorState => this.onChange(editorState, note)} //eesta
               placeholder="Add your notes..."
             />
 
