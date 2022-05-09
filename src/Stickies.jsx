@@ -72,6 +72,9 @@ export default class extends Component {
     let titles =[]
     let contents =[]
     let dates =[]
+    let id =[]
+
+    const uid= guid();
   
     db.collection('notitas')
       .get()
@@ -80,11 +83,16 @@ export default class extends Component {
           titles.push(doc.get("title"))
           contents.push(doc.get("content"))
           dates.push(doc.get("date"))
+          id.push(doc.id)
           
         });
   
         for(let i=0; i< titles.length; i++){
-          this.createNote(titles[i], contents[i], dates[i])
+          this.createNote(titles[i], contents[i], dates[i], id[i])
+        }
+
+        if(titles.length==0){
+          this.createNote("Welcome", "This is an example","May 1, 2022 3:17 PM" , uid)
         }
   
       });
@@ -155,13 +163,13 @@ export default class extends Component {
 
   //return
   noteFirebase(note){
-    console.log(note)
     const title = note.title
     const text = note.text
     const date = note.timeStamp
-    console.log(title, text,date)
+    const id= note.id
+    console.log(note.id)
 
-    db.collection('notitas').add({
+    db.collection('notitas').doc(id).set({
       content:text, 
       date: date,
       title: title, 
@@ -171,6 +179,13 @@ export default class extends Component {
 
   deleteNote(currentNote) {
     const notes = this.state.notes;
+    const id = currentNote.id;
+    console.log(id)
+
+    //delete firebase
+  
+    db.collection('notitas').doc(id).delete();
+
     notes.forEach((note, index) => {
       if (currentNote.id === note.id) {
         notes.splice(index, 1);
@@ -186,6 +201,9 @@ export default class extends Component {
         }
       }
     });
+
+
+
   }
   createBlankNote() {
     const dateFormat = this.state.dateFormat;
@@ -218,7 +236,7 @@ export default class extends Component {
     }
   }
 
-  createNote(titulo, content, date ) {
+  createNote(titulo, content, date,id ) {
     const grid = this.props.grid || {};
     const uid = guid();
     const note = {
@@ -230,7 +248,7 @@ export default class extends Component {
         h: grid.h || 2
       },
 
-      id: uid,
+      id: id,
       editorState: EditorState.createWithContent(ContentState.createFromText(content)),
       title: titulo,
       color: this.generateRandomColors(),
