@@ -4,8 +4,8 @@ function PopUp(props) {
   return (props.trigger) ? (
     <div className='popup'>
         <div className='popup-inner'>
+            <button className='close-btn' onClick={() => props.setTrigger(false)}>x</button>
             {props.children}
-            <button className='close-btn' onClick={() => props.setTrigger(false)}>Cerrar</button>
         </div>
     </div>
   ) 
