@@ -9,8 +9,8 @@
     background-color:#fa3636;
     color: rgb(0, 0, 0);
     border-radius: 50%;
-    height: 10px;
-    width: 10px;
+    height: 20px;
+    width: 20px;
 }
 .today:hover {
     background-color:#841d1d;
@@ -25,24 +25,20 @@
     text-align: center;
     opacity: 0.5;
     color: rgb(60, 60, 60);
-    height: 60px;
-    width: 60px;
 }
 
 .in-next-month{
     text-align: center;
     opacity: 0.5;
     color: rgb(60, 60, 60);
-    height: 60px;
-    width: 60px;
 }
 
 .in-this-month{
     text-align: center;
     color: rgb(0, 0, 0);
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
+    height: 20px;
+    width: 20px;
 }
 .in-this-month:hover{
     background-color:#747474;
@@ -72,6 +68,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 
 .megacontenedordebotones8000{
