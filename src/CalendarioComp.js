@@ -10,6 +10,15 @@ const CalendarioComp = () => {
 
   const [event, setEvent] = useState({contenido: "", fecha: "", titulo: ""});  
 
+  const [pregunta, setPregunta] = useState(false);
+
+  const [tituloS, setTitulo] = useState("");
+  const [diaS, setDia] = useState("");
+  const [mesS, setMes] = useState("");
+  const [anoS, setAno] = useState("");
+  const [contenidoS, setContenido] = useState("");
+
+
   const dateClickHandler = date => {
     console.log(date)
   
