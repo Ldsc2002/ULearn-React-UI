@@ -174,7 +174,7 @@ export default class LogInScreen extends Component {
 
           <div className="elButton">
             <Button className="actionFont" style={style_elButton}  color="accent" onClick={this.onClick_elButton} >
-              Iniciar sesión
+              Iniciar SEsión
             </Button>
           </div>
           
