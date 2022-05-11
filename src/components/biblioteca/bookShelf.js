@@ -1,7 +1,7 @@
 import React from "react";
 import BookCard from "./book";
 import { useState } from "react";
-import PopUp from "../../PopUp";
+import PopUp from "../popup/PopUp";
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false);

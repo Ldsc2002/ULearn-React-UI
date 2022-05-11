@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import CalendarioFuncionalidad from './CalendarioFuncionalidad';
-import { db } from '../../firebase';
+import { db } from '../firebase/firebase';
 
-import PopUp from "../../PopUp";
+import PopUp from "../popup/PopUp";
 
 const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();

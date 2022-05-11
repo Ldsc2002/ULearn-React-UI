@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
-import './styles.css';
-import { db} from './firebase';
+import { db } from '../firebase/firebase';
 
 const WidthProvider = require('react-grid-layout').WidthProvider;
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive;

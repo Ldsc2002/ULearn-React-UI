@@ -12,6 +12,7 @@ import './style/login.css'
 import './style/mui.min.css'
 import './style/palette.css'
 import './style/popUp.css'
+import './style/styles.css'
 
 
 ReactDOM.render(<HashRouter><App /></HashRouter>, document.getElementById('root'));

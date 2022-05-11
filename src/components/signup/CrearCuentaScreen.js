@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import ScreenContext from './ScreenContext';
-import img_elCitCopy from './images/CrearCuentaScreen_elCitCopy_837553.jpg';
-import img_elPerson from './images/CrearCuentaScreen_elPerson_405468.png';
+import ScreenContext from '../../ScreenContext';
+import img_elCitCopy from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg';
+import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png';
 
 import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth } from "../firebase/firebase";
 
 // UI framework component imports
 import Input from 'muicss/lib/react/input';
