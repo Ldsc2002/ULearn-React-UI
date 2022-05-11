@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScreenContext from '../../ScreenContext';
+import ScreenContext from '../app/ScreenContext';
 import img_elCit from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg';
 import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png';
 

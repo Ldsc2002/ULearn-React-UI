@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScreenContext from '../../ScreenContext';
+import ScreenContext from '../app/ScreenContext';
 import Pizarron from '../pizarron/Pizarron';
 import Biblioteca from '../biblioteca/Biblioteca';
 import Calendario from '../calendario/Calendario';

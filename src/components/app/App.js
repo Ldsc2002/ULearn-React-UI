@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import ScreenContext from '../../ScreenContext.js';
+import ScreenContext from './ScreenContext.js';
 import StartScreen from '../start/StartScreen.js';
 import CrearCuentaScreen from '../signup/CrearCuentaScreen.js';
 import LogInScreen from '../login/LogInScreen.js';

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScreenContext from '../../ScreenContext';
+import ScreenContext from '../app/ScreenContext';
 import Button from 'muicss/lib/react/button';
 
 import img_fakeUser from '../../images/studentUlearn.jpeg';

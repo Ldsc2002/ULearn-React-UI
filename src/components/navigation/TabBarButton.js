@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScreenContext from '../../ScreenContext';
+import ScreenContext from '../app/ScreenContext';
 
 export default class TabBarButton extends Component {
 
