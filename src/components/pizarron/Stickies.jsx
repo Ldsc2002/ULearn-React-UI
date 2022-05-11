@@ -1,4 +1,4 @@
-import React, { Component,useState } from 'react';
+import React, { Component } from 'react';
 import { Editor, EditorState, ContentState } from 'draft-js';
 import moment from 'moment';
 import ContentEditable from './ContentEditable';
@@ -95,7 +95,7 @@ export default class extends Component {
           this.createNote(titles[i], contents[i], dates[i], id[i])
         }
 
-        if(titles.length==0){
+        if(titles.length===0){
           this.createNote("Welcome", "This is an example","May 1, 2022 3:17 PM" , uid)
         }
   

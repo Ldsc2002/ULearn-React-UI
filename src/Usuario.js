@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import ScreenContext from './ScreenContext';
 import Button from 'muicss/lib/react/button';
 

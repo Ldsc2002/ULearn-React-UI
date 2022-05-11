@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import ScreenContext from './ScreenContext';
 import Pizarron from './Pizarron';
-import Biblioteca from './Biblioteca';
-import Calendario from './Calendario';
+import Biblioteca from './components/biblioteca/Biblioteca';
+import Calendario from './components/calendario/Calendario';
 import Usuario from './Usuario';
 import TabBarButton from './TabBarButton';
 

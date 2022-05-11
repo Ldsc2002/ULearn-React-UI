@@ -1,11 +1,8 @@
 import React, { Fragment, useState } from 'react';
-
 import CalendarioFuncionalidad from './CalendarioFuncionalidad';
+import { db } from '../../firebase';
 
-import { getDatabase, ref, set} from "firebase/database";
-import { db } from './firebase';
-
-import PopUp from "./PopUp";
+import PopUp from "../../PopUp";
 
 const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();
@@ -74,20 +71,13 @@ const CalendarioComp = () => {
             console.log("ENTRO AL FETCH", contenido[i], fecha[i], titulo[i])
             let temp = {contenido: contenido[i], fecha: fecha[i], titulo: titulo[i]}
 
-            if(fecha[i] == date){
+            if(fecha[i] === date){
                 console.log("ENTRO A LA FECHA")
                 setEvent(temp)
             }
         }
       });
   }
-
-  const style_elFab = {
-    display: 'block',
-    textTransform: 'none',
-    color: '(null)',
-    textAlign: 'center',
-   };
 
   return(
     <Fragment>

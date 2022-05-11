@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import './Calendar.css'
-import ScreenContext from './ScreenContext';
+import ScreenContext from '../../ScreenContext';
 
 import CalendarioComp from './CalendarioComp.js';
 
