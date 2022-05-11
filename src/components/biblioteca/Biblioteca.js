@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-import ScreenContext from './ScreenContext';
+import ScreenContext from '../app/ScreenContext';
 import Bookshelf from './bookShelf';
 
 export default class Biblioteca extends Component {

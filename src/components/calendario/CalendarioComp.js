@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from 'react';
-
 import CalendarioFuncionalidad from './CalendarioFuncionalidad';
+import { db } from '../firebase/firebase';
 
-import { getDatabase, ref, set} from "firebase/database";
-import { db } from './firebase';
+import PopUp from "../popup/PopUp";
 
 import PopUp from "./PopUp";
 
@@ -54,7 +53,6 @@ const CalendarioComp = () => {
 
   }
 
-
   const dateClickHandler = date => {
     console.log(date)
   
@@ -98,7 +96,6 @@ const CalendarioComp = () => {
                     }
                 </tr>
             </thead>
-            {/* <button className="btnFetch" onClick={fetch}>FETCH</button> */}
             <tbody>
                 {
                     Object.values(calendarRows).map(cols => {
@@ -160,7 +157,9 @@ const CalendarioComp = () => {
         <div className='botonAgregarDiv'>
             <button className='botonAgregar' onClick={() => setPregunta(true)}>+</button>
         </div>
-
+        <div className='botonAgregarDiv'>
+            <button className='botonAgregar' onClick={() => setPregunta(true)}>+</button>
+        </div>
     </Fragment>
   );
 }

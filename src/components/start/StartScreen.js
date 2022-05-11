@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
-import ScreenContext from './ScreenContext';
-import Pizarron from './Pizarron';
-import Biblioteca from './Biblioteca';
-import Calendario from './Calendario';
-import Usuario from './Usuario';
-import TabBarButton from './TabBarButton';
+import ScreenContext from '../app/ScreenContext';
+import Pizarron from '../pizarron/Pizarron';
+import Biblioteca from '../biblioteca/Biblioteca';
+import Calendario from '../calendario/Calendario';
+import Usuario from '../user/Usuario';
+import TabBarButton from '../navigation/TabBarButton';
 
 export default class StartScreen extends Component {
 

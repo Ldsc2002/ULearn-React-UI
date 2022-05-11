@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-// eslint-disable-next-line
 import { Route, Switch, withRouter } from 'react-router-dom';
-// eslint-disable-next-line
-import './App.css';
 import ScreenContext from './ScreenContext.js';
-import StartScreen from './StartScreen.js';
-import CrearCuentaScreen from './CrearCuentaScreen.js';
-import LogInScreen from './LogInScreen.js';
+import StartScreen from '../start/StartScreen.js';
+import CrearCuentaScreen from '../signup/CrearCuentaScreen.js';
+import LogInScreen from '../login/LogInScreen.js';
 
 
 class App extends Component {
