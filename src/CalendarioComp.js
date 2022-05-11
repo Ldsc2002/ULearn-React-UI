@@ -61,6 +61,8 @@ const CalendarioComp = () => {
     let contenido = []
     let fecha = []
     let titulo = []
+
+    console.log(date)
   
     db.collection('eventos')
       .get()
@@ -72,11 +74,11 @@ const CalendarioComp = () => {
         });
   
         for(let i=0; i< titulo.length; i++){
-            console.log("ENTRO AL FETCH", contenido[i], fecha[i], titulo[i])
+            console.log("ENTRO AL FETCH")
             let temp = {contenido: contenido[i], fecha: fecha[i], titulo: titulo[i]}
 
             if(fecha[i] == date){
-                console.log("ENTRO A LA FECHA")
+                console.log("Seteo la fecha")
                 setEvent(temp)
             }
         }
