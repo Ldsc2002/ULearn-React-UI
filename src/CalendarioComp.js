@@ -20,6 +20,40 @@ const CalendarioComp = () => {
   const [anoS, setAno] = useState("");
   const [contenidoS, setContenido] = useState("");
 
+  const newDateInador = () =>{
+
+    const fecha = diaS + "-" + mesS + "-" + anoS;
+
+    console.log(tituloS, " ", fecha, " ", contenidoS)
+
+    db.collection('eventos').add({
+      contenido: contenidoS,
+      fecha: fecha,
+      titulo: tituloS
+    })
+
+  }
+
+  const readInador = (e) => {
+
+    if(e.target.name === 'titulo'){
+        setTitulo(e.target.value)
+    } else if(e.target.name === 'dia'){
+        setDia(e.target.value)
+    } else if(e.target.name === 'mes'){
+        setMes(e.target.value)
+    } else if(e.target.name === 'ano'){
+        setAno(e.target.value)
+    } else if(e.target.name === 'contenido'){
+        setContenido(e.target.value)
+    }
+
+    let fecha = diaS + "-" + mesS + "-" + anoS;
+
+    console.log(tituloS, " ", fecha, " ", contenidoS)
+
+  }
+
 
   const dateClickHandler = date => {
     console.log(date)
