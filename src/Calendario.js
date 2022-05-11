@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import './Calendar.css'
 import ScreenContext from './ScreenContext';
-import btn_icon_210788 from './images/btn_icon_210788.png';
 
 import CalendarioComp from './CalendarioComp.js';
 
 // UI framework component imports
-import Button from 'muicss/lib/react/button';
 
 export default class Calendario extends Component {
 
@@ -22,12 +20,6 @@ export default class Calendario extends Component {
   }
 
   render() {
-    const style_elFab = {
-      display: 'block',
-      textTransform: 'none',
-      color: '(null)',
-      textAlign: 'center',
-     };
     
     return (
       <div className="Calendario">
@@ -36,12 +28,6 @@ export default class Calendario extends Component {
             <CalendarioComp/>
           </div>
         </Fragment>
-        
-        <div className="foreground">
-          <Button className="actionFont elFab" style={style_elFab}  variant="fab" color="accent" >
-            <img src={btn_icon_210788} alt="" style={{width: '50.000%', marginTop: '25.000%'}} />
-          </Button>
-        </div>
       </div>
     )
   }
