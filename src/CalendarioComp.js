@@ -5,6 +5,8 @@ import CalendarioFuncionalidad from './CalendarioFuncionalidad';
 import { getDatabase, ref, set} from "firebase/database";
 import { db } from './firebase';
 
+import PopUp from "./PopUp";
+
 const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();
 
@@ -85,12 +87,11 @@ const CalendarioComp = () => {
             <button className="buttonControl" onClick={getNextMonth}>Next</button>
         </div>
 
-        <div>
-            <h1>TODAY EVENT'S</h1>
+        <div className='eventDiv'>
+            <h1>{event.fecha} EVENT'S</h1>
             <div>
-                {
-                    event.titulo
-                }
+                <h2>{event.titulo}</h2>
+                <h2>{event.contenido}</h2>
             </div>
         </div>
 
