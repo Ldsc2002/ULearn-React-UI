@@ -1,10 +1,6 @@
 .book-item {
-    background-color: #a10e18;
+    background-color: #D45728;
     color: white;
-    display:grid ;
-    justify-content: center;
-    align-items: center;
-    
 }
 
 .title {
@@ -13,16 +9,4 @@
 
 .desc {
     margin: 10px
-}
-
-button{
-    border: none;
-    color: rgb(113, 0, 0);
-    padding: 12px 24px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 10px;
-    margin: 4px 2px;
-    cursor: pointer;
 }
