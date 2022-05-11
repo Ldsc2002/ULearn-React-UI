@@ -87,6 +87,32 @@ const CalendarioComp = () => {
             <button className="buttonControl" onClick={getNextMonth}>Next</button>
         </div>
 
+        <PopUp trigger={pregunta} setTrigger={setPregunta}>
+
+            <div className='preguntaInador'>
+                <h3>TITULO</h3>
+                <input type="text" name='titulo' onChange={readInador}/>
+
+                <div className='fechaInador'>
+                    <h3>DIA</h3>
+                    <h3>MES</h3>
+                    <h3>AÑO</h3>
+                </div>
+
+                <div className='fechaInador2'>
+                    <input name='dia' type="text" onChange={readInador}/>
+                    <input name='mes' type="text" onChange={readInador}/>
+                    <input name='ano' type="text" onChange={readInador}/>
+                </div>
+
+                <h3>CONTENIDO</h3>
+                <input name='contenido' type="text" onChange={readInador}/>
+
+                <button onClick={newDateInador}>Continuar</button>
+            </div>
+
+        </PopUp>
+
         <div className='eventDiv'>
             <h1>{event.fecha} EVENT'S</h1>
             <div>
