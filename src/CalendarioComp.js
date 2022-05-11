@@ -126,6 +126,8 @@ const CalendarioComp = () => {
             <button className="buttonControl" onClick={getNextMonth}>Next</button>
         </div>
 
+        <button onClick={() => setPregunta(true)}>Add event</button>
+
         <PopUp trigger={pregunta} setTrigger={setPregunta}>
 
             <div className='preguntaInador'>
@@ -134,13 +136,10 @@ const CalendarioComp = () => {
 
                 <div className='fechaInador'>
                     <h3>DIA</h3>
-                    <h3>MES</h3>
-                    <h3>AÑO</h3>
-                </div>
-
-                <div className='fechaInador2'>
                     <input name='dia' type="text" onChange={readInador}/>
+                    <h3>MES</h3>
                     <input name='mes' type="text" onChange={readInador}/>
+                    <h3>AÑO</h3>
                     <input name='ano' type="text" onChange={readInador}/>
                 </div>
 
@@ -152,16 +151,16 @@ const CalendarioComp = () => {
 
         </PopUp>
 
-        <div className='eventDiv'>
-            <h1>{event.fecha} EVENT'S</h1>
+        <div>
+            <h1>TODAY EVENT'S</h1>
             <div>
-                <h2>{event.titulo}</h2>
-                <h2>{event.contenido}</h2>
+                {
+                    event.titulo
+                }
             </div>
         </div>
-        <div className='botonAgregarDiv'>
-            <button className='botonAgregar' onClick={() => setPregunta(true)}>+</button>
-        </div>
+
+        
     </Fragment>
   );
 }
