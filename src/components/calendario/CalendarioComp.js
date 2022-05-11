@@ -4,8 +4,6 @@ import { db } from '../firebase/firebase';
 
 import PopUp from "../popup/PopUp";
 
-import PopUp from "./PopUp";
-
 const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();
 
