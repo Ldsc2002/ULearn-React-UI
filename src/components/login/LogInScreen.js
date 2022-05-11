@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import './App2.css';
-import ScreenContext from './ScreenContext';
-import img_elCitCopy from './images/CrearCuentaScreen_elCitCopy_837553.jpg';
-import img_elPerson from './images/CrearCuentaScreen_elPerson_405468.png';
+import ScreenContext from '../app/ScreenContext';
+import img_elCit from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg';
+import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png';
 
 import {
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth } from "../firebase/firebase";
 
 // UI framework component imports
 import Input from 'muicss/lib/react/input';
+import Checkbox from 'muicss/lib/react/checkbox';
 import Button from 'muicss/lib/react/button';
 
-export default class CrearCuentaScreen extends Component {
+export default class LogInScreen extends Component {
 
   static contextType = ScreenContext;
 
@@ -22,47 +22,46 @@ export default class CrearCuentaScreen extends Component {
     super(props);
     
     this.state = {
-      registerEmail: "",
-      registerPassword: "",
+      loginEmail: "",
+      loginPassword: "",
       user: ""
     };
   }
 
   textInputChanged_elField = (event) => {
-    this.setState({field: event.target.value});
-    
+    this.setState({field: event.target.value});    
+    this.setState({loginEmail: event.target.value});
   }
   
   getValue_elField = () => {
     return this.state.field || '';
   }
   
-  textInputChanged_elFieldCopy2 = (event) => {
-    this.setState({fieldCopy2: event.target.value});
-    this.setState({registerEmail: event.target.value});
-  }
-  
-  getValue_elFieldCopy2 = () => {
-    return this.state.fieldCopy2 || '';
-  }
-  
   textInputChanged_elFieldCopy = (event) => {
     this.setState({fieldCopy: event.target.value});
-    this.setState({registerPassword: event.target.value});
+    this.setState({loginPassword: event.target.value});
   }
   
   getValue_elFieldCopy = () => {
     return this.state.fieldCopy || '';
   }
   
-  onClick_elButtonCopy = async () => {
-    // Go to screen 'CrearCuenta'
+  
+  getValue_elCheckbox = () => {
+    return this.state.checkbox !== undefined ? this.state.checkbox : 'false';
+  }
+  
+  checkboxChanged_elCheckbox = (event) => {
+    this.setState({checkbox: (event.target.checked ? 'true' : 'false')});
+  }
+  
+  onClick_elButton = async () => {
     // Go to screen 'LogIn'
     try {
-      const user = await createUserWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
-        this.state.registerEmail,
-        this.state.registerPassword
+        this.state.loginEmail,
+        this.state.loginPassword
       );
       console.log(user);
       this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' });
@@ -73,9 +72,9 @@ export default class CrearCuentaScreen extends Component {
   }
   
   
-  onClick_elButton = async () => {
-    // Go to screen 'LogIn'
-    this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' });
+  onClick_elButtonCopy = async () => {
+    // Go to screen 'CrearCuenta'
+    this.context.appActions.goToScreen('crearCuenta', this.context.baseScreenId, { transitionId: 'fadeIn' });
   
   }
   
@@ -91,8 +90,8 @@ export default class CrearCuentaScreen extends Component {
       layoutFlowStyle.overflow = 'hidden';
     }
     
-    const style_elCitCopy = {
-      backgroundImage: 'url('+img_elCitCopy+')',
+    const style_elCit = {
+      backgroundImage: 'url('+img_elCit+')',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: '50% 50%',
       backgroundSize: 'cover',
@@ -111,13 +110,6 @@ export default class CrearCuentaScreen extends Component {
       pointerEvents: 'auto',
      };
     
-    const style_elFieldCopy2 = {
-      display: 'block',
-      paddingTop: 0,
-      textAlign: 'left',
-      pointerEvents: 'auto',
-     };
-    
     const style_elFieldCopy = {
       display: 'block',
       paddingTop: 0,
@@ -125,16 +117,23 @@ export default class CrearCuentaScreen extends Component {
       pointerEvents: 'auto',
      };
     
-    const style_elButtonCopy = {
-      display: 'block',
-      color: '(null)',
-      textAlign: 'center',
-      backgroundColor: 'rgba(250, 54, 54, 1.000)',
+    let checked_checkbox = this.getValue_elCheckbox();
+    
+    const style_elCheckbox = {
       cursor: 'pointer',
       pointerEvents: 'auto',
      };
     
     const style_elButton = {
+      display: 'block',
+      color: '(null)',
+      backgroundColor: 'rgba(250, 54, 54, 1.000)',
+      textAlign: 'center',
+      cursor: 'pointer',
+      pointerEvents: 'auto',
+     };
+    
+    const style_elButtonCopy = {
       display: 'block',
       color: '#fff',
       textAlign: 'center',
@@ -150,9 +149,9 @@ export default class CrearCuentaScreen extends Component {
      };
     
     return (
-      <div className="AppScreen CrearCuentaScreen" style={baseStyle}>
+      <div className="AppScreen LogInScreen" style={baseStyle}>
         <div className="background">
-          <div className="containerMinHeight elCitCopy" style={style_elCitCopy} />
+          <div className="containerMinHeight elCit" style={style_elCit} />
         </div>
         
         <div className="layoutFlow" style={layoutFlowStyle}>
@@ -161,26 +160,26 @@ export default class CrearCuentaScreen extends Component {
           </div>
           
           <div className="elField">
-            <Input className="baseFont" style={style_elField} type="text" placeholder="Usuario" onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
-          </div>
-          
-          <div className="elFieldCopy2">
-            <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()}  />
+            <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elField} value={this.getValue_elField()}  />
           </div>
           
           <div className="elFieldCopy">
             <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()}  />
           </div>
           
-          <div className="elButtonCopy">
-            <Button className="actionFont" style={style_elButtonCopy}  color="accent" onClick={this.onClick_elButtonCopy} >
-              Crear cuenta
+          <div className="elCheckbox">
+            <Checkbox className="baseFont" style={style_elCheckbox}  label="Recordarme" checked={checked_checkbox === 'true' || checked_checkbox === true || ''+checked_checkbox === '1'}  onChange={this.checkboxChanged_elCheckbox} />
+          </div>
+
+          <div className="elButton">
+            <Button className="actionFont" style={style_elButton}  color="accent" onClick={this.onClick_elButton} >
+              Iniciar sesión
             </Button>
           </div>
           
-          <div className="elButton">
-            <Button className="actionFont" style={style_elButton} onClick={this.onClick_elButton} >
-              Iniciar sesión
+          <div className="elButtonCopy">
+            <Button className="actionFont" style={style_elButtonCopy} onClick={this.onClick_elButtonCopy} >
+              Crear cuenta
             </Button>
           </div>
         </div>

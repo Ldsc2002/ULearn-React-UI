@@ -1,5 +1,4 @@
 import React from "react";
-import "./book.css";
 
 const WidthProvider = require('react-grid-layout').WidthProvider;
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
