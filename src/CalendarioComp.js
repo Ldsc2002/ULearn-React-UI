@@ -155,6 +155,10 @@ const CalendarioComp = () => {
             </div>
         </div>
 
+        <div className='botonAgregarDiv'>
+            <button className='botonAgregar' onClick={() => setPregunta(true)}>+</button>
+        </div>
+
     </Fragment>
   );
 }
