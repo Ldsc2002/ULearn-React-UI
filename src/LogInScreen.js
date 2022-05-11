@@ -174,13 +174,13 @@ export default class LogInScreen extends Component {
 
           <div className="elButton">
             <Button className="actionFont" style={style_elButton}  color="accent" onClick={this.onClick_elButton} >
-              Iniciar sesión
+              Iniciar Sesión
             </Button>
           </div>
           
           <div className="elButtonCopy">
             <Button className="actionFont" style={style_elButtonCopy} onClick={this.onClick_elButtonCopy} >
-              Crear cuenta
+              Crear Cuenta
             </Button>
           </div>
         </div>
