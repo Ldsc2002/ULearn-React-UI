@@ -12,7 +12,7 @@ function BookCard(props) {
         <div key={post.id} className="book-item">     
             <h2 className="title">{post.title}</h2>
             <p className="desc">{post.content}</p>
-            <button onClick={() => props.setButton(true)}>Abrir</button> 
+            <button onClick={() => props.setButton(true, post)}>Abrir</button> 
         </div>
     );
   
