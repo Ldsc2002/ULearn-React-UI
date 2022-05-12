@@ -4,15 +4,11 @@ import { useState } from "react";
 import PopUp from "../popup/PopUp";
 import { db } from '../firebase/firebase';
 
+let books = fetch()
+
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false);
     const [showAdd, setShowAdd] = useState(false)
-    let books = fetch()
-
-    //const books = [
-        //{id: 1, title: 'Libro 1', content: 'Hello World'},
-        //{id: 2, title: 'Libro 2', content: 'Test'}
-    //];
 
     return (
         <div>
@@ -44,8 +40,6 @@ function Bookshelf(props) {
 }
 
 function fetch (){
-     
-
     let libros = []
 
     db.collection('archivos')
@@ -60,13 +54,9 @@ function fetch (){
           const book= {id:id, title:title, content:content, file:file};
 
           libros.push(book)
-
         });
-
     });
-
     return libros
-
 }
 
 export default Bookshelf;
