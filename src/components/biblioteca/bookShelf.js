@@ -3,6 +3,7 @@ import BookCard from "./book";
 import { useState } from "react";
 import PopUp from "../popup/PopUp";
 import { db } from '../firebase/firebase';
+import { ref } from '@firebase/storage'
 
 let books = fetch()
 
@@ -13,6 +14,14 @@ function Bookshelf(props) {
     const [titulo, setTitulo] = useState("");
     const [file, setFile] = useState("");
     const [descripcion, setDescripcion] = useState("");
+
+    const uploadInador = (archivo) = >{
+        if( !archivo ){
+            return
+        } else{
+
+        }
+    };
     
     const tipo = (e) => {
 
