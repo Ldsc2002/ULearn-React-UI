@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import BookCard from "./book";
 import { useState } from "react";
 import PopUp from "../popup/PopUp";
-import { db } from '../firebase/firebase';
-import { ref } from '@firebase/storage'
+import { db, storage } from '../firebase/firebase';
+import { ref, uploadBytesResumable } from '@firebase/storage'
 
 let books = fetch()
 
@@ -15,11 +15,21 @@ function Bookshelf(props) {
     const [file, setFile] = useState("");
     const [descripcion, setDescripcion] = useState("");
 
-    const uploadInador = (archivo) = >{
-        if( !archivo ){
-            return
-        } else{
+    const uploadInador = (archivo) =>{
+        if(!archivo){ 
+            return;
+        }else{
+            const storageAr = ref(storage, "/file/${archivo.name}");
+            const upload = uploadBytesResumable(storageAr, archivo)
 
+            // upload.on("state_changed", {snapshot} =>{
+            //     const porcentaje = Math.round{
+            //         (snapshot.bytes)
+            //     }
+            // })
+            upload.on("state_changed", (variable) =>{
+                const porcentaje = Math.round((variable.bytesTransferred / variable.totalBytes)*100)
+            })
         }
     };
     
