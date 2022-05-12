@@ -2,24 +2,59 @@ import React, { Component } from 'react';
 import BookCard from "./book";
 import { useState } from "react";
 import PopUp from "../popup/PopUp";
-import { db } from '../firebase/firebase';
+import { db, storage } from '../firebase/firebase';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 let books = fetch()
-
+ 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
 
     const [titulo, setTitulo] = useState("");
-    const [file, setFile] = useState("");
+    const [fileDownload, setFileDownload] = useState("");
     const [descripcion, setDescripcion] = useState("");
-    
+
+    const [file, setFile] = useState("");
+
+    const [porcentaje, setPorcentaje] = useState(0);
+
+    const uploadFileB = () => {
+        console.log("fileB")
+        if(!file){ 
+            return;
+        }else{
+            const reference = ref(storage, file.name);
+            uploadBytes(reference, file).then(() =>{
+                getDownloadURL(reference).then((url) =>{
+                    console.log("DOWNLOAD",url)
+                    setFileDownload(url)
+                })
+                alert("Upload file");
+            })
+        }
+        
+        
+    }
+
+    const onSubmitFile = (e) =>{
+
+        const newFile = e.target.files[0]
+
+        console.log("ENTRO CABRON")
+        if(!newFile){ 
+            return;
+        }else{
+            console.log("set")
+            setFile(newFile)
+        }
+
+    }
+
     const tipo = (e) => {
 
         if(e.target.name === 'titulo'){
             setTitulo(e.target.value)
-        } else if(e.target.name === 'file'){
-            setFile(e.target.value)
         } else if(e.target.name === 'descripcion'){
             setDescripcion(e.target.value)
         }
@@ -46,9 +81,10 @@ function Bookshelf(props) {
                 <div className="addPopUp">
                     <input type="text" placeholder="Título" name= "titulo" onChange={tipo}></input>
                     <input type="text" placeholder="Descripción" name= "descripcion" onChange={tipo}></input>
-                    <input type="file" name ="file" onChange={tipo}></input> 
+                    <input type="file" name ="file" onChange={onSubmitFile}></input>
+                    <button onClick={uploadFileB}>UPLOAD</button>
 
-                    <button className="popUp-btn"  onClick={()=> noteFirebase(titulo,descripcion,file)}>Subir archivo</button>
+                    <button className="popUp-btn"  onClick={()=> noteFirebase(titulo,descripcion,fileDownload)}>Terminar</button>
                 </div>
             </PopUp>
         </div>

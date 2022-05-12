@@ -1,7 +1,8 @@
-import firebase from 'firebase/compat/app'
+import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-import 'dotenv/config'
+import 'dotenv/config';
+import { getStorage } from 'firebase/storage'; 
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -25,7 +26,7 @@ if (!firebase.apps.length) {
 
 const auth = firebase.auth(app);
 const db = firebase.firestore();
+const storage = getStorage();
 
-export {auth,db}
-
+export {auth, db, storage}
 
