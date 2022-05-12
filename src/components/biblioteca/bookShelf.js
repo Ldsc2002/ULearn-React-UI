@@ -17,7 +17,7 @@ function Bookshelf(props) {
 
     const [file, setFile] = useState("");
 
-    const [porcentaje, setPorcentaje] = useState(0);
+    const [book, setBook] = useState({})
 
     const uploadFileB = () => {
         console.log("fileB")
@@ -32,13 +32,10 @@ function Bookshelf(props) {
                 })
                 alert("Upload file");
             })
-        }
-        
-        
+        }  
     }
 
     const onSubmitFile = (e) =>{
-
         const newFile = e.target.files[0]
 
         console.log("ENTRO CABRON")
@@ -52,7 +49,6 @@ function Bookshelf(props) {
     }
 
     const tipo = (e) => {
-
         if(e.target.name === 'titulo'){
             setTitulo(e.target.value)
         } else if(e.target.name === 'descripcion'){
@@ -60,16 +56,20 @@ function Bookshelf(props) {
         }
     }
 
+    const selectedBookHandler = (set, data) => {
+        setBook(data)
+        setButton(set)
+    }
+
     return (
         <div>
-            <BookCard books={books} setButton={setButton}/>
+            <BookCard books={books} setButton={selectedBookHandler}/>
 
             <PopUp trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)} >
                 <div>
-                    <h1>title</h1>
-                    <p>This is a description</p>
+                    <h1>{book.title}</h1>
+                    <p>{book.content}</p>
                     <button className="popUp-btn" >Descargar</button>
-                    
                 </div>
             </PopUp>
 
@@ -99,8 +99,8 @@ function fetch (){
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           const title = doc.get("titulo")
-          const content =doc.get("descripcion")
-          const file = doc.get("documento")
+          const content =doc.get("content")
+          const file = doc.get("file")
           const id = doc.id
 
           const book= {id:id, title:title, content:content, file:file};
@@ -112,6 +112,7 @@ function fetch (){
 }
 
 function noteFirebase(t,d,f){
+    console.log(d)
     const title = t
     const text = d
     const archivo = f
