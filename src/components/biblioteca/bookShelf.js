@@ -83,7 +83,6 @@ function Bookshelf(props) {
                     <input type="text" placeholder="Descripción" name= "descripcion" onChange={tipo}></input>
                     <input type="file" name ="file" onChange={onSubmitFile}></input>
                     <button onClick={uploadFileB}>UPLOAD</button>
-                    <h3>Upload {porcentaje} %</h3>
 
                     <button className="popUp-btn"  onClick={()=> noteFirebase(titulo,descripcion,fileDownload)}>Terminar</button>
                 </div>
