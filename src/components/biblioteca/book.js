@@ -7,9 +7,7 @@ ResponsiveReactGridLayout = WidthProvider(ResponsiveReactGridLayout);
 
 function BookCard(props) {
 
-    console.log(props.books)
     const content = props.books.map((post) =>  
-          
       
         <div key={post.id} className="book-item">     
             <h2 className="title">{post.title}</h2>
