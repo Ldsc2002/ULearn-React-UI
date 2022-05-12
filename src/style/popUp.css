@@ -26,5 +26,25 @@
 }
 
 .close-btn{
+    background: none;
+    font-size: 26px;
+    padding: 0px 0px 0px 10px;
+}
+
+.addPopUp {
+    display: grid;
+}
+
+.addPopUp > * {
+    margin: 10px;
+}
+
+.popUp-btn{
     top: 16px;
+    left: auto;
+    right: auto;
+}
+
+h1 {
+    margin-top: 0px;
 }

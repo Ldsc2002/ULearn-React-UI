@@ -88,26 +88,24 @@
 }
 
 .botonAgregar{
-    background-color:#841d1d;
-    color: rgb(0, 0, 0);
+    background-color:#a10e18;
+    color: white;
     border-radius: 50%;
-    height: 45px;
-    width: 40px;
+    height: 55px;
+    width: 55px;
     cursor: pointer;
     align-items: center;
     display: flex;
-    text-align: left;
+    text-align: center;
 }
 
 .botonAgregarDiv{
     position: fixed;
-    top: 70%;
-    right: 0%;
+    top: 90%;
+    right: 1%;
     width: 80px;
     height: 80px;
     display: flex;
-    justify-content: right;
-    align-items: center;
 }
 
 .fechaInador{
