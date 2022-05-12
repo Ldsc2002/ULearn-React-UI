@@ -3,42 +3,58 @@ import BookCard from "./book";
 import { useState } from "react";
 import PopUp from "../popup/PopUp";
 import { db, storage } from '../firebase/firebase';
-import { ref, uploadBytesResumable } from '@firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 let books = fetch()
-
+ 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
 
     const [titulo, setTitulo] = useState("");
-    const [file, setFile] = useState("");
+    const [fileDownload, setFileDownload] = useState("");
     const [descripcion, setDescripcion] = useState("");
 
-    const uploadInador = (archivo) =>{
-        if(!archivo){ 
+    const [file, setFile] = useState("");
+
+    const [porcentaje, setPorcentaje] = useState(0);
+
+    const uploadFileB = () => {
+        console.log("fileB")
+        if(!file){ 
             return;
         }else{
-            const storageAr = ref(storage, "/file/${archivo.name}");
-            const upload = uploadBytesResumable(storageAr, archivo)
-
-            // upload.on("state_changed", {snapshot} =>{
-            //     const porcentaje = Math.round{
-            //         (snapshot.bytes)
-            //     }
-            // })
-            upload.on("state_changed", (variable) =>{
-                const porcentaje = Math.round((variable.bytesTransferred / variable.totalBytes)*100)
+            const reference = ref(storage, file.name);
+            uploadBytes(reference, file).then(() =>{
+                getDownloadURL(reference).then((url) =>{
+                    console.log("DOWNLOAD",url)
+                    setFileDownload(url)
+                })
+                alert("Upload file");
             })
         }
-    };
-    
+        
+        
+    }
+
+    const onSubmitFile = (e) =>{
+
+        const newFile = e.target.files[0]
+
+        console.log("ENTRO CABRON")
+        if(!newFile){ 
+            return;
+        }else{
+            console.log("set")
+            setFile(newFile)
+        }
+
+    }
+
     const tipo = (e) => {
 
         if(e.target.name === 'titulo'){
             setTitulo(e.target.value)
-        } else if(e.target.name === 'file'){
-            setFile(e.target.value)
         } else if(e.target.name === 'descripcion'){
             setDescripcion(e.target.value)
         }
@@ -65,9 +81,11 @@ function Bookshelf(props) {
                 <div className="addPopUp">
                     <input type="text" placeholder="Título" name= "titulo" onChange={tipo}></input>
                     <input type="text" placeholder="Descripción" name= "descripcion" onChange={tipo}></input>
-                    <input type="file" name ="file" onChange={tipo}></input> 
+                    <input type="file" name ="file" onChange={onSubmitFile}></input>
+                    <button onClick={uploadFileB}>UPLOAD</button>
+                    <h3>Upload {porcentaje} %</h3>
 
-                    <button className="popUp-btn"  onClick={()=> noteFirebase(titulo,descripcion,file)}>Subir archivo</button>
+                    <button className="popUp-btn"  onClick={()=> noteFirebase(titulo,descripcion,fileDownload)}>Terminar</button>
                 </div>
             </PopUp>
         </div>
