@@ -1,15 +1,18 @@
-import React from "react";
+import React, { Component } from 'react';
 import BookCard from "./book";
 import { useState } from "react";
 import PopUp from "../popup/PopUp";
+import { db } from '../firebase/firebase';
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false);
     const [showAdd, setShowAdd] = useState(false)
-    const books = [
-        {id: 1, title: 'Libro 1', content: 'Hello World'},
-        {id: 2, title: 'Libro 2', content: 'Test'}
-    ];
+    let books = fetch()
+
+    //const books = [
+        //{id: 1, title: 'Libro 1', content: 'Hello World'},
+        //{id: 2, title: 'Libro 2', content: 'Test'}
+    //];
 
     return (
         <div>
@@ -38,6 +41,32 @@ function Bookshelf(props) {
             </PopUp>
         </div>
     );
+}
+
+function fetch (){
+     
+
+    let libros = []
+
+    db.collection('archivos')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const title = doc.get("titulo")
+          const content =doc.get("descripcion")
+          const file = doc.get("documento")
+          const id = doc.id
+
+          const book= {id:id, title:title, content:content, file:file};
+
+          libros.push(book)
+
+        });
+
+    });
+
+    return libros
+
 }
 
 export default Bookshelf;
