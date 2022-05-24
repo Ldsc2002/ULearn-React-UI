@@ -46,7 +46,7 @@ const CalendarioComp = () => {
 
   const borraInador = () =>{
 
-    const id = event
+    const id = event.id
 
     db.collection('eventos').doc(id).delete();
 
