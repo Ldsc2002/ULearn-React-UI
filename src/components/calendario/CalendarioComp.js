@@ -17,13 +17,42 @@ const CalendarioComp = () => {
   const [anoS, setAno] = useState("");
   const [contenidoS, setContenido] = useState("");
 
+  function guid() {
+  
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+
   const newDateInador = () =>{
 
     const fecha = diaS + "-" + mesS + "-" + anoS;
 
     console.log(tituloS, " ", fecha, " ", contenidoS)
 
-    db.collection('eventos').add({
+    const id = guid()
+
+    db.collection('eventos').doc(id).set({
+      contenido: contenidoS,
+      fecha: fecha,
+      titulo: tituloS
+    })
+
+  }
+
+  const borraInador = () =>{
+
+    const fecha = diaS + "-" + mesS + "-" + anoS;
+
+    console.log(tituloS, " ", fecha, " ", contenidoS)
+
+    const id = guid()
+
+    db.collection('eventos').doc(id).set({
       contenido: contenidoS,
       fecha: fecha,
       titulo: tituloS
@@ -150,6 +179,7 @@ const CalendarioComp = () => {
                 <h2>{event.titulo}</h2>
                 <h2>{event.contenido}</h2>
             </div>
+            <button className='buttonControl' onClick={getNextMonth}>BORRAR EVENTO</button>
         </div>
 
         <div className='botonAgregarDiv'>
