@@ -180,7 +180,7 @@ const CalendarioComp = () => {
                 <h2>{event.titulo}</h2>
                 <h2>{event.contenido}</h2>
             </div>
-            <button className='buttonControl' onClick={borraInador}>BORRAR EVENTO</button>
+            <button className='buttonControl' onClick={borraInador}>BORRAR</button>
         </div>
 
         <div className='botonAgregarDiv'>
