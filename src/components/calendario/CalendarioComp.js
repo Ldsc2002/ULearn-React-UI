@@ -50,6 +50,12 @@ const CalendarioComp = () => {
 
     db.collection('eventos').doc(id).delete();
 
+    let temp = {contenido: "", fecha: "", titulo: "", id: ""}
+
+    setEvent(temp)
+
+    console.log("----------------------borrar id", id)
+
 
   }
 
