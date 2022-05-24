@@ -46,17 +46,7 @@ const CalendarioComp = () => {
 
   const borraInador = () =>{
 
-    const fecha = diaS + "-" + mesS + "-" + anoS;
 
-    console.log(tituloS, " ", fecha, " ", contenidoS)
-
-    const id = guid()
-
-    db.collection('eventos').doc(id).set({
-      contenido: contenidoS,
-      fecha: fecha,
-      titulo: tituloS
-    })
 
   }
 
@@ -179,7 +169,7 @@ const CalendarioComp = () => {
                 <h2>{event.titulo}</h2>
                 <h2>{event.contenido}</h2>
             </div>
-            <button className='buttonControl' onClick={getNextMonth}>BORRAR EVENTO</button>
+            <button className='buttonControl' onClick={borraInador}>BORRAR EVENTO</button>
         </div>
 
         <div className='botonAgregarDiv'>
