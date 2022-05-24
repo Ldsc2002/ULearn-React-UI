@@ -7,7 +7,7 @@ import PopUp from "../popup/PopUp";
 const CalendarioComp = () => {
   const { calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth } = CalendarioFuncionalidad();
 
-  const [event, setEvent] = useState({contenido: "", fecha: "", titulo: ""});  
+  const [event, setEvent] = useState({contenido: "", fecha: "", titulo: "", id: ""});  
 
   const [pregunta, setPregunta] = useState(false);
 
@@ -46,6 +46,9 @@ const CalendarioComp = () => {
 
   const borraInador = () =>{
 
+    const id = event
+
+    db.collection('eventos').doc(id).delete();
 
 
   }
@@ -76,6 +79,7 @@ const CalendarioComp = () => {
     let contenido = []
     let fecha = []
     let titulo = []
+    let id = []
 
     console.log(date)
   
@@ -83,6 +87,7 @@ const CalendarioComp = () => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
+            id.push(doc.id)
             contenido.push(doc.get("contenido"))
             fecha.push(doc.get("fecha"))
             titulo.push(doc.get("titulo"))
@@ -90,7 +95,7 @@ const CalendarioComp = () => {
   
         for(let i=0; i< titulo.length; i++){
             console.log("ENTRO AL FETCH")
-            let temp = {contenido: contenido[i], fecha: fecha[i], titulo: titulo[i]}
+            let temp = {contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i]}
 
             if(fecha[i] == date){
                 console.log("Seteo la fecha")
