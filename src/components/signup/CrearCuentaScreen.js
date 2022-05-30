@@ -55,7 +55,7 @@ export default class CrearCuentaScreen extends Component {
           )
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
-          alert(error)
+          alert('Los datos ingresados no son válido, por favor intente nuevamente.')
       }
   }
 
