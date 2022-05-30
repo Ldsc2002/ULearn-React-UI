@@ -135,11 +135,11 @@ export default class CrearCuentaScreen extends Component {
                   </div>
 
                   <div className="elFieldCopy2">
-                      <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
+                      <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
                   </div>
 
                   <div className="elFieldCopy">
-                      <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
+                      <Input className="baseFont" style={style_elField} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
                   </div>
 
                   <div className="elButtonCopy">
