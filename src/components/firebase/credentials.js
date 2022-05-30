@@ -44,3 +44,5 @@ const login = async () => {
 const logout = async () => {
     await signOut(auth)
 }
+
+export { login, register, logout }
