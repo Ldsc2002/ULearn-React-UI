@@ -8,7 +8,7 @@ import ScreenContext from '../app/ScreenContext'
 import img_elCitCopy from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg'
 import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png'
 
-import { auth } from '../firebase/firebase'
+import { auth, db } from '../firebase/firebase'
 
 // UI framework component imports
 
@@ -21,14 +21,24 @@ export default class CrearCuentaScreen extends Component {
         this.state = {
             registerEmail: '',
             registerPassword: '',
+            registerName: '',
+            registerMajor: '',
         }
     }
 
   textInputChanged_elField = (event) => {
       this.setState({ field: event.target.value })
+      this.setState({ registerName: event.target.value })
   }
 
   getValue_elField = () => this.state.field || ''
+
+  textInputChanged_elField2 = (event) => {
+      this.setState({ field2: event.target.value })
+      this.setState({ registerMajor: event.target.value })
+  }
+
+    getValue_elField2 = () => this.state.field2 || ''
 
   textInputChanged_elFieldCopy2 = (event) => {
       this.setState({ fieldCopy2: event.target.value })
@@ -53,6 +63,12 @@ export default class CrearCuentaScreen extends Component {
               this.state.registerEmail,
               this.state.registerPassword,
           )
+          db.collection('usuarios').add({
+              usuario: this.state.registerEmail,
+              nombre: this.state.registerName,
+              carrera: this.state.registerMajor,
+          })
+
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
           alert('Los datos ingresados no son válido, por favor intente nuevamente.')
@@ -145,15 +161,19 @@ export default class CrearCuentaScreen extends Component {
                   </div>
 
                   <div className="elField">
-                      <Input className="baseFont" style={style_elField} type="text" placeholder="Usuario" onChange={this.textInputChanged_elField} value={this.getValue_elField()} />
-                  </div>
-
-                  <div className="elFieldCopy2">
-                      <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
+                      <Input className="baseFont" style={style_elField} type="text" placeholder="Nombre completo" onChange={this.textInputChanged_elField} value={this.getValue_elField()} />
                   </div>
 
                   <div className="elFieldCopy">
-                      <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
+                      <Input className="baseFont" style={style_elField} type="text" placeholder="Carrera" onChange={this.textInputChanged_elField2} value={this.getValue_elField2()} />
+                  </div>
+
+                  <div className="elFieldCopy2">
+                      <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
+                  </div>
+
+                  <div className="elFieldCopy">
+                      <Input className="baseFont" style={style_elField} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
                   </div>
 
                   <div className="elButtonCopy">
