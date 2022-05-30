@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+
 import {
     createUserWithEmailAndPassword,
 } from 'firebase/auth'
+
 import Input from 'muicss/lib/react/input'
 import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
@@ -105,20 +107,6 @@ export default class CrearCuentaScreen extends Component {
       }
 
       const style_elField = {
-          display: 'block',
-          paddingTop: 0,
-          textAlign: 'left',
-          pointerEvents: 'auto',
-      }
-
-      const style_elFieldCopy2 = {
-          display: 'block',
-          paddingTop: 0,
-          textAlign: 'left',
-          pointerEvents: 'auto',
-      }
-
-      const style_elFieldCopy = {
           display: 'block',
           paddingTop: 0,
           textAlign: 'left',
