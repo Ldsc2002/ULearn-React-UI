@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 
-import {
-    getAuth,
-} from 'firebase/auth'
-
 import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
 import img_fakeUser from '../../images/studentUlearn.jpeg'
+
+import { auth, db } from '../firebase/firebase'
 
 export default class Usuario extends Component {
     // This component doesn't use any properties
@@ -16,7 +14,14 @@ export default class Usuario extends Component {
         super(props)
 
         this.state = {
+            s_email: '',
         }
+    }
+
+    getEmail = () => this.state.s_email || ''
+
+    componentDidMount() {
+        this.setState({ s_email: (auth.currentUser).email })
     }
 
   onClick_LogOut = async () => {
@@ -67,7 +72,7 @@ export default class Usuario extends Component {
                           <img src={img_fakeUser} style={style_userPic} alt="Imagen de usuario" />
                           <div className="name" style={style_name}>John Doe</div>
                           <div className="info" style={style_info}>Ingenieria en Ciencias de la Computacion y Tecnologias de la Informacion</div>
-                          <div className="info" style={style_info}>3er año, primer semestre</div>
+                          <div className="info" style={style_info}>{this.state.s_email}</div>
                       </div>
                   </div>
                   <div className="elButton">
