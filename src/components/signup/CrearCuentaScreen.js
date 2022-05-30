@@ -95,20 +95,6 @@ export default class CrearCuentaScreen extends Component {
           pointerEvents: 'auto',
       }
 
-      const style_elFieldCopy2 = {
-          display: 'block',
-          paddingTop: 0,
-          textAlign: 'left',
-          pointerEvents: 'auto',
-      }
-
-      const style_elFieldCopy = {
-          display: 'block',
-          paddingTop: 0,
-          textAlign: 'left',
-          pointerEvents: 'auto',
-      }
-
       const style_elButtonCopy = {
           display: 'block',
           color: '(null)',
