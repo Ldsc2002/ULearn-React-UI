@@ -15,16 +15,25 @@ export default class Usuario extends Component {
 
         this.state = {
             s_email: '',
+            s_name: '',
+            s_major: '',
         }
     }
 
-    getEmail = () => this.state.s_email || ''
-
     componentDidMount() {
-        this.setState({ s_email: (auth.currentUser).email })
+        try {
+            this.setState({ s_email: (auth.currentUser).email })
+            this.setState({ s_name: (auth.currentUser).displayName })
+            this.setState({ s_major: (auth.currentUser).photoURL })
+        } catch {
+            this.setState({ s_email: 'ERROR' })
+            this.setState({ s_name: 'ERROR' })
+            this.setState({ s_major: 'ERROR' })
+        }
     }
 
   onClick_LogOut = async () => {
+      auth.signOut()
       this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
   }
 
@@ -70,8 +79,8 @@ export default class Usuario extends Component {
                   <div className="elText">
                       <div className="baseFont" style={style_elText}>
                           <img src={img_fakeUser} style={style_userPic} alt="Imagen de usuario" />
-                          <div className="name" style={style_name}>John Doe</div>
-                          <div className="info" style={style_info}>Ingenieria en Ciencias de la Computacion y Tecnologias de la Informacion</div>
+                          <div className="name" style={style_name}>{this.state.s_name}</div>
+                          <div className="info" style={style_info}>{this.state.s_major}</div>
                           <div className="info" style={style_info}>{this.state.s_email}</div>
                       </div>
                   </div>

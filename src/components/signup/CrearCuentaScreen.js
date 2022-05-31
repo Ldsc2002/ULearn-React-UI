@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import {
-    createUserWithEmailAndPassword,
+    createUserWithEmailAndPassword, updateProfile,
 } from 'firebase/auth'
 
 import Input from 'muicss/lib/react/input'
@@ -65,6 +65,12 @@ export default class CrearCuentaScreen extends Component {
               this.state.registerEmail,
               this.state.registerPassword,
           )
+
+          updateProfile(auth.currentUser, {
+              displayName: this.state.registerName,
+              photoURL: this.state.registerMajor,
+          })
+
           db.collection('usuarios').add({
               usuario: this.state.registerEmail,
               nombre: this.state.registerName,
