@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+
 import {
     createUserWithEmailAndPassword,
 } from 'firebase/auth'
+
 import Input from 'muicss/lib/react/input'
 import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
@@ -95,20 +97,6 @@ export default class CrearCuentaScreen extends Component {
           pointerEvents: 'auto',
       }
 
-      const style_elFieldCopy2 = {
-          display: 'block',
-          paddingTop: 0,
-          textAlign: 'left',
-          pointerEvents: 'auto',
-      }
-
-      const style_elFieldCopy = {
-          display: 'block',
-          paddingTop: 0,
-          textAlign: 'left',
-          pointerEvents: 'auto',
-      }
-
       const style_elButtonCopy = {
           display: 'block',
           color: '(null)',
@@ -149,11 +137,11 @@ export default class CrearCuentaScreen extends Component {
                   </div>
 
                   <div className="elFieldCopy2">
-                      <Input className="baseFont" style={style_elFieldCopy2} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
+                      <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
                   </div>
 
                   <div className="elFieldCopy">
-                      <Input className="baseFont" style={style_elFieldCopy} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
+                      <Input className="baseFont" style={style_elField} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
                   </div>
 
                   <div className="elButtonCopy">

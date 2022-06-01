@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+
+import {
+    getAuth,
+} from 'firebase/auth'
+
 import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
 import img_fakeUser from '../../images/studentUlearn.jpeg'
@@ -15,7 +20,6 @@ export default class Usuario extends Component {
     }
 
   onClick_LogOut = async () => {
-      // Go to screen 'LogIn'
       this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
   }
 
