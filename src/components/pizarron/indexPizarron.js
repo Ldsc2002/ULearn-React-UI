@@ -1,7 +1,7 @@
-import { default as Stickies } from './Stickies';
+import Stickies from './Stickies'
 
 export {
-  Stickies
-};
+    Stickies,
+}
 
-export default Stickies;
+export default Stickies

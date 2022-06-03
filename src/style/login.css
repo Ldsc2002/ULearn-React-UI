@@ -469,7 +469,7 @@
   }
   .CrearCuentaScreen > .layoutFlow > .elCard > * { 
   width: 378px;
-  height: 509px;
+  height: 609px;
   }
   
 @media (min-width: 568px) {
@@ -481,7 +481,7 @@
   }
   .CrearCuentaScreen > .layoutFlow > .elCard > * { 
   width: 378px;
-  height: 509px;
+  height: 609px;
   }
   
 }
@@ -494,7 +494,7 @@
   }
   .CrearCuentaScreen > .layoutFlow > .elCard > * { 
   width: 376px;
-  height: 506px;
+  height: 606px;
   }
   
 }
@@ -507,7 +507,7 @@
   }
   .CrearCuentaScreen > .layoutFlow > .elCard > * { 
   width: 376px;
-  height: 506px;
+  height: 606px;
   }
   
 }
@@ -516,7 +516,7 @@
 /* Narrowest size for this element's responsive layout */
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -339px;
+    margin-top: -407px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
   }
@@ -527,7 +527,7 @@
 @media (min-width: 568px) {
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -339px;
+    margin-top: -407px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
   }
@@ -539,7 +539,7 @@
 @media (min-width: 768px) {
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -337px;
+    margin-top: -407px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
   }
@@ -551,7 +551,7 @@
 @media (min-width: 1024px) {
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -337px;
+    margin-top: -407px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
   }
@@ -1236,4 +1236,3 @@
     height: 112px;
   }
 }
-
