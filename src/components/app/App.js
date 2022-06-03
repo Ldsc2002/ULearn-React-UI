@@ -5,8 +5,6 @@ import StartScreen from '../start/StartScreen'
 import CrearCuentaScreen from '../signup/CrearCuentaScreen'
 import LogInScreen from '../login/LogInScreen'
 
-import { auth } from '../firebase/firebase'
-
 class App extends Component {
     constructor(props) {
         super(props)
@@ -78,11 +76,7 @@ class App extends Component {
               screen = <LogInScreen {...baseProps} />
               break
           case 'start':
-              if (auth.currentUser === null) {
-                  screen = <LogInScreen {...baseProps} />
-              } else {
-                  screen = <StartScreen {...baseProps} />
-              }
+              screen = <StartScreen {...baseProps} />
               break
           default:
               screen = null
