@@ -1,8 +1,8 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/firestore'
-import 'firebase/compat/auth'
-import 'dotenv/config'
-import { getStorage } from 'firebase/storage'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
+import 'dotenv/config';
+import { getStorage } from 'firebase/storage'; 
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -12,20 +12,21 @@ const firebaseConfig = {
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
     appId: process.env.REACT_APP_APP_ID,
-}
+};
 
-let app = ''
+let app = ""
 
 if (!firebase.apps.length) {
-    app = firebase.initializeApp(firebaseConfig)
+  app =firebase.initializeApp(firebaseConfig);
 } else {
-    app = firebase.app()
+  app =firebase.app(); 
 }
 
-// const app = firebase.initializeApp(firebaseConfig);
+//const app = firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth(app)
-const db = firebase.firestore()
-const storage = getStorage()
+const auth = firebase.auth(app);
+const db = firebase.firestore();
+const storage = getStorage();
 
-export { auth, db, storage }
+export {auth, db, storage}
+
