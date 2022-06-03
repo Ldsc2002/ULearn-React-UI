@@ -1,22 +1,24 @@
-import React, { Component } from 'react'
-import Bookshelf from './bookShelf'
-import ScreenContext from '../app/ScreenContext'
+import React, { Component } from 'react';
+import ScreenContext from '../app/ScreenContext';
+import Bookshelf from './bookShelf';
 
 export default class Biblioteca extends Component {
-    static contextType = ScreenContext;
 
-    constructor(props) {
-        super(props)
+  static contextType = ScreenContext;
 
-        this.state = {
-        }
-    }
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+    };
+  }
 
-    render() {
-        return (
-            <div>
-                <Bookshelf />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+          <Bookshelf/>
+      </div>
+    )
+  }
+  
 }

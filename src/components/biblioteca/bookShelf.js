@@ -1,82 +1,57 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react';
+import BookCard from "./book";
+import { useState } from "react";
+import PopUp from "../popup/PopUp";
+import { db, storage } from '../firebase/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import BookCard from './book'
-import PopUp from '../popup/PopUp'
-import { db, storage } from '../firebase/firebase'
 
-function fetch() {
-    const libros = []
-
-    db.collection('archivos')
-        .get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const title = doc.get('titulo')
-                const content = doc.get('content')
-                const file = doc.get('file')
-                const { id } = doc
-
-                const book = {
-                    id, title, content, file,
-                }
-
-                libros.push(book)
-            })
-        })
-    return libros
-}
-
-function noteFirebase(t, d, f) {
-    const title = t
-    const text = d
-    const archivo = f
-
-    db.collection('archivos').add({
-        titulo: title,
-        content: text,
-        file: archivo,
-
-    })
-}
-
-const books = fetch()
-
+let books = fetch()
+ 
 function Bookshelf(props) {
-    const [buttonPopUp, setButton] = useState(false)
-    const [showAdd, setShowAdd] = useState(false)
+    const [buttonPopUp, setButton] = useState(false);
+    const [showAdd, setShowAdd] = useState(false);
 
-    const [titulo, setTitulo] = useState('')
-    const [fileDownload, setFileDownload] = useState('')
-    const [descripcion, setDescripcion] = useState('')
+    const [titulo, setTitulo] = useState("");
+    const [fileDownload, setFileDownload] = useState("");
+    const [descripcion, setDescripcion] = useState("");
 
-    const [file, setFile] = useState('')
+    const [file, setFile] = useState("");
 
     const [book, setBook] = useState({})
 
     const uploadFileB = () => {
-        if (file) {
-            const reference = ref(storage, file.name)
-            uploadBytes(reference, file).then(() => {
-                getDownloadURL(reference).then((url) => {
+        console.log("fileB")
+        if(!file){ 
+            return;
+        }else{
+            const reference = ref(storage, file.name);
+            uploadBytes(reference, file).then(() =>{
+                getDownloadURL(reference).then((url) =>{
+                    console.log("DOWNLOAD",url)
                     setFileDownload(url)
                 })
-                alert('Upload file')
+                alert("Upload file");
             })
-        }
+        }  
     }
 
-    const onSubmitFile = (e) => {
+    const onSubmitFile = (e) =>{
         const newFile = e.target.files[0]
 
-        if (newFile) {
+        console.log("ENTRO CABRON")
+        if(!newFile){ 
+            return;
+        }else{
+            console.log("set")
             setFile(newFile)
         }
+
     }
 
     const tipo = (e) => {
-        if (e.target.name === 'titulo') {
+        if(e.target.name === 'titulo'){
             setTitulo(e.target.value)
-        } else if (e.target.name === 'descripcion') {
+        } else if(e.target.name === 'descripcion'){
             setDescripcion(e.target.value)
         }
     }
@@ -88,32 +63,67 @@ function Bookshelf(props) {
 
     return (
         <div>
-            <BookCard books={books} setButton={selectedBookHandler} />
+            <BookCard books={books} setButton={selectedBookHandler}/>
 
-            <PopUp trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
+            <PopUp trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)} >
                 <div>
                     <h1>{book.title}</h1>
                     <p>{book.content}</p>
-                    <button type="button" className="popUp-btn">Descargar</button>
+                    <button className="popUp-btn" >Descargar</button>
                 </div>
             </PopUp>
 
-            <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setShowAdd(true)}>+</button>
+            <div className='botonAgregarDiv'>
+                <button className='botonAgregar' onClick={() => setShowAdd(true)}>+</button>
             </div>
 
-            <PopUp trigger={showAdd} setTrigger={setShowAdd} onClick={() => props.setShowAdd(false)}>
+            <PopUp trigger={showAdd} setTrigger={setShowAdd} onClick={() => props.setShowAdd(false)} >
                 <div className="addPopUp">
-                    <input type="text" placeholder="Título" name="titulo" onChange={tipo} />
-                    <input type="text" placeholder="Descripción" name="descripcion" onChange={tipo} />
-                    <input type="file" name="file" onChange={onSubmitFile} />
-                    <button type="button" onClick={uploadFileB}>UPLOAD</button>
+                    <input type="text" placeholder="Título" name= "titulo" onChange={tipo}></input>
+                    <input type="text" placeholder="Descripción" name= "descripcion" onChange={tipo}></input>
+                    <input type="file" name ="file" onChange={onSubmitFile}></input>
+                    <button onClick={uploadFileB}>UPLOAD</button>
 
-                    <button type="button" className="popUp-btn" onClick={() => noteFirebase(titulo, descripcion, fileDownload)}>Terminar</button>
+                    <button className="popUp-btn"  onClick={()=> noteFirebase(titulo,descripcion,fileDownload)}>Terminar</button>
                 </div>
             </PopUp>
         </div>
-    )
+    );
 }
 
-export default Bookshelf
+function fetch (){
+    let libros = []
+
+    db.collection('archivos')
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const title = doc.get("titulo")
+          const content =doc.get("content")
+          const file = doc.get("file")
+          const id = doc.id
+
+          const book= {id:id, title:title, content:content, file:file};
+
+          libros.push(book)
+        });
+    });
+    return libros
+}
+
+function noteFirebase(t,d,f){
+    console.log(d)
+    const title = t
+    const text = d
+    const archivo = f
+
+    db.collection('archivos').add({
+        titulo:title,
+        content: text,
+        file:archivo,
+
+    })
+
+  }
+
+export default Bookshelf;
