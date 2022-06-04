@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-    signInWithEmailAndPassword,
+    setPersistence, signInWithEmailAndPassword, browserLocalPersistence,
 } from 'firebase/auth'
 import Input from 'muicss/lib/react/input'
 import Checkbox from 'muicss/lib/react/checkbox'
@@ -53,6 +53,12 @@ export default class LogInScreen extends Component {
               this.state.loginEmail,
               this.state.loginPassword,
           )
+
+          setPersistence(auth, browserLocalPersistence).then(() =>
+          {
+              return user
+          })
+          
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
           alert('El correo o la contraseña ingresados no son válidos.')
