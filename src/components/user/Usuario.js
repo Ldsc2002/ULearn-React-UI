@@ -4,7 +4,7 @@ import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
 import img_fakeUser from '../../images/studentUlearn.jpeg'
 
-import { auth, db } from '../firebase/firebase'
+import { auth } from '../firebase/firebase'
 
 export default class Usuario extends Component {
     // This component doesn't use any properties

@@ -6,13 +6,35 @@ import Usuario from '../user/Usuario'
 import TabBarButton from '../navigation/TabBarButton'
 import ScreenContext from '../app/ScreenContext'
 
+import { getAuth, onAuthStateChanged, reload } from "firebase/auth";
+
 export default class StartScreen extends Component {
     static contextType = ScreenContext;
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+        }
+    }
 
   selectorSelectionChanged = (idx, ev) => {
       this.setState({ selectedIndex_selector: idx })
       this.context.appActions.updateDataSlot('ds_SlotSelectedTab', idx.toString())
   }
+
+  componentDidMount() {
+    this.setState({loged: true})
+    console.log(this.state.loged)
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+          this.setState({loged: false})
+          this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
+      }
+    });
+}
 
   render() {
       const layoutFlowStyle = {}
