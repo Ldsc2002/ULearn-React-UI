@@ -78,7 +78,7 @@ export default class extends Component {
             })
         }
         this.setState({
-            colors: nextProps.colors || ['#86E3CE', '#CCABD8', '#FFDD94', '#FA897B', '#CCABD8'],
+            colors: nextProps.colors || ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1','#E84A64'],
             dateFormat: nextProps.dateFormat || 'lll',
         })
     }
@@ -307,6 +307,14 @@ export default class extends Component {
                     className={`note-wrap note ${this.props.tape ? 'tape' : ''}`}
                     style={noteStyle}
                 >
+
+                    <div class="pushpin tilted">
+                        <div class="pinhead"></div>
+                        <div class="pinbase"></div>
+                        <div class="pinshaft"></div>
+                        <div class="pinpoint"></div>
+                    </div>
+                    
                     <div className="note-header" style={noteHeaderStyle}>
                         <div
                             className={`${addIcon ? '' : 'add'}`}
