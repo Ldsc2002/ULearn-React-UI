@@ -1,16 +1,23 @@
 {
-  "main.css": "/ULearn-React-UI/static/css/main.845b8bec.chunk.css",
-  "main.js": "/ULearn-React-UI/static/js/main.e8491229.chunk.js",
-  "main.js.map": "/ULearn-React-UI/static/js/main.e8491229.chunk.js.map",
-  "runtime~main.js": "/ULearn-React-UI/static/js/runtime~main.94079890.js",
-  "runtime~main.js.map": "/ULearn-React-UI/static/js/runtime~main.94079890.js.map",
-  "static/js/2.70a86b94.chunk.js": "/ULearn-React-UI/static/js/2.70a86b94.chunk.js",
-  "static/js/2.70a86b94.chunk.js.map": "/ULearn-React-UI/static/js/2.70a86b94.chunk.js.map",
-  "index.html": "/ULearn-React-UI/index.html",
-  "precache-manifest.0753d373cb4c5b9d7ab4145cea402d7b.js": "/ULearn-React-UI/precache-manifest.0753d373cb4c5b9d7ab4145cea402d7b.js",
-  "service-worker.js": "/ULearn-React-UI/service-worker.js",
-  "static/css/main.845b8bec.chunk.css.map": "/ULearn-React-UI/static/css/main.845b8bec.chunk.css.map",
-  "static/media/CrearCuentaScreen_elCitCopy_837553.jpg": "/ULearn-React-UI/static/media/CrearCuentaScreen_elCitCopy_837553.3812709c.jpg",
-  "static/media/CrearCuentaScreen_elPerson_405468.png": "/ULearn-React-UI/static/media/CrearCuentaScreen_elPerson_405468.9789115d.png",
-  "static/media/studentUlearn.jpeg": "/ULearn-React-UI/static/media/studentUlearn.79adfa95.jpeg"
+  "files": {
+    "main.css": "/ULearn-React-UI/static/css/main.3fed8a29.chunk.css",
+    "main.js": "/ULearn-React-UI/static/js/main.ceb79da6.chunk.js",
+    "main.js.map": "/ULearn-React-UI/static/js/main.ceb79da6.chunk.js.map",
+    "runtime-main.js": "/ULearn-React-UI/static/js/runtime-main.800386f3.js",
+    "runtime-main.js.map": "/ULearn-React-UI/static/js/runtime-main.800386f3.js.map",
+    "static/js/2.6ebef8d6.chunk.js": "/ULearn-React-UI/static/js/2.6ebef8d6.chunk.js",
+    "static/js/2.6ebef8d6.chunk.js.map": "/ULearn-React-UI/static/js/2.6ebef8d6.chunk.js.map",
+    "index.html": "/ULearn-React-UI/index.html",
+    "static/css/main.3fed8a29.chunk.css.map": "/ULearn-React-UI/static/css/main.3fed8a29.chunk.css.map",
+    "static/js/2.6ebef8d6.chunk.js.LICENSE.txt": "/ULearn-React-UI/static/js/2.6ebef8d6.chunk.js.LICENSE.txt",
+    "static/media/CrearCuentaScreen_elCitCopy_837553.7abb956c.jpg": "/ULearn-React-UI/static/media/CrearCuentaScreen_elCitCopy_837553.7abb956c.jpg",
+    "static/media/CrearCuentaScreen_elPerson_405468.15d43b3f.png": "/ULearn-React-UI/static/media/CrearCuentaScreen_elPerson_405468.15d43b3f.png",
+    "static/media/studentUlearn.5b2099a2.jpeg": "/ULearn-React-UI/static/media/studentUlearn.5b2099a2.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.800386f3.js",
+    "static/js/2.6ebef8d6.chunk.js",
+    "static/css/main.3fed8a29.chunk.css",
+    "static/js/main.ceb79da6.chunk.js"
+  ]
 }
