@@ -9,7 +9,7 @@ function CalendarioComp() {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
 
-    const [event, setEvent] = useState({ contenido: '', fecha: '', titulo: '' })
+    const [event, setEvent] = useState({contenido: '', fecha: '', titulo: '', id: '',})
 
     const [pregunta, setPregunta] = useState(false)
 
@@ -19,10 +19,24 @@ function CalendarioComp() {
     const [anoS, setAno] = useState('')
     const [contenidoS, setContenido] = useState('')
 
+    function guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1)
+        }
+        return `${s4() + s4()}-${s4()}-${s4()}-${
+            s4()}-${s4()}${s4()}${s4()}`
+    }
+
     const newDateInador = () => {
         const fecha = `${diaS}-${mesS}-${anoS}`
 
-        db.collection('eventos').add({
+        console.log(tituloS, ' ', fecha, ' ', contenidoS)
+
+        const id = guid()
+
+        db.collection('eventos').doc(id).set({
             contenido: contenidoS,
             fecha,
             titulo: tituloS,
@@ -43,23 +57,44 @@ function CalendarioComp() {
         }
     }
 
+    const borraInador = () => {
+        const { id } = event
+
+        db.collection('eventos').doc(id).delete()
+
+        const temp = {
+            contenido: '', fecha: '', titulo: '', id: '',
+        }
+
+        setEvent(temp)
+
+        console.log('----------------------borrar id', id)
+    }
+
+
     const dateClickHandler = (date) => {
+        console.log(date)
+
         const contenido = []
         const fecha = []
         const titulo = []
+        const id = []
+
+        console.log(date)
 
         db.collection('eventos')
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+                    id.push(doc.id)
                     contenido.push(doc.get('contenido'))
                     fecha.push(doc.get('fecha'))
                     titulo.push(doc.get('titulo'))
                 })
-
-                for (let i = 0; i < titulo.length; i += 1) {
-                    const temp = { contenido: contenido[i], fecha: fecha[i], titulo: titulo[i] }
-
+                for (let i = 0; i < titulo.length; i++) {
+                    const temp = {
+                        contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
+                    }
                     if (fecha[i] === date) {
                         setEvent(temp)
                     }
@@ -145,6 +180,7 @@ function CalendarioComp() {
                     <h2>{event.titulo}</h2>
                     <h2>{event.contenido}</h2>
                 </div>
+                <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
             </div>
 
             <div className="botonAgregarDiv">
