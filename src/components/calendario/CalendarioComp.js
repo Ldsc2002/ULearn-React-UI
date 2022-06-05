@@ -27,6 +27,7 @@ function CalendarioComp() {
             fecha,
             titulo: tituloS,
         })
+        setPregunta(false)
     }
 
     const readInador = (e) => {
