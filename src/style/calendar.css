@@ -122,6 +122,18 @@
     justify-content: space-between;
 }
 
+.ingresador{
+    align-items: left;
+    align-self: left;
+}
+.ingresador>h3{
+    background-color: #841d1d;
+    color: white;
+}
+.ingresador>input{
+    border
+}
+
 .preguntaInador{
     display: flex;
     flex-direction: column;

@@ -116,13 +116,17 @@ function CalendarioComp() {
                     <input type="text" name="titulo" onChange={readInador} />
 
                     <div className="fechaInador">
-                        <h3>DIA</h3>
+                        
                         <h3>MES</h3>
                         <h3>AÑO</h3>
                     </div>
 
                     <div className="fechaInador2">
-                        <input name="dia" type="text" onChange={readInador} />
+                        <div className='ingresador'>
+                            <h3>DIA</h3>
+                            <input name="dia" type="text" onChange={readInador} />
+                        </div>
+                        
                         <input name="mes" type="text" onChange={readInador} />
                         <input name="ano" type="text" onChange={readInador} />
                     </div>
