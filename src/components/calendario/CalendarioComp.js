@@ -19,14 +19,29 @@ function CalendarioComp() {
     const [anoS, setAno] = useState('')
     const [contenidoS, setContenido] = useState('')
 
+    function guid() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1)
+        }
+        return `${s4() + s4()}-${s4()}-${s4()}-${
+            s4()}-${s4()}${s4()}${s4()}`
+    }
+
     const newDateInador = () => {
         const fecha = `${diaS}-${mesS}-${anoS}`
 
-        db.collection('eventos').add({
+        console.log(tituloS, ' ', fecha, ' ', contenidoS)
+
+        const id = guid()
+
+        db.collection('eventos').doc(id).set({
             contenido: contenidoS,
             fecha,
             titulo: tituloS,
         })
+        setPregunta(false)
     }
 
     const readInador = (e) => {
@@ -43,24 +58,43 @@ function CalendarioComp() {
         }
     }
 
+    const borraInador = () => {
+        const { id } = event
+
+        db.collection('eventos').doc(id).delete()
+
+        const temp = {
+            contenido: '', fecha: '', titulo: '', id: '',
+        }
+
+        setEvent(temp)
+
+        console.log('----------------------borrar id', id)
+    }
+
+
     const dateClickHandler = (date) => {
         console.log("entro")
         const contenido = []
         const fecha = []
         const titulo = []
+        const id = []
+
+        console.log(date)
 
         db.collection('eventos')
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+                    id.push(doc.id)
                     contenido.push(doc.get('contenido'))
                     fecha.push(doc.get('fecha'))
                     titulo.push(doc.get('titulo'))
                 })
-
-                for (let i = 0; i < titulo.length; i += 1) {
-                    const temp = { contenido: contenido[i], fecha: fecha[i], titulo: titulo[i] }
-
+                for (let i = 0; i < titulo.length; i++) {
+                    const temp = {
+                        contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
+                    }
                     if (fecha[i] === date) {
                         console.log("llego")
                         setEvent(temp)
@@ -114,25 +148,36 @@ function CalendarioComp() {
             <PopUp trigger={pregunta} setTrigger={setPregunta}>
 
                 <div className="preguntaInador">
-                    <h3>TITULO</h3>
-                    <input type="text" name="titulo" onChange={readInador} />
-
-                    <div className="fechaInador">
-                        <h3>DIA</h3>
-                        <h3>MES</h3>
-                        <h3>AÑO</h3>
+                    <div className="fechaInador1">
+                        <div className='ingresador'>
+                            <h3>TITULO</h3>
+                            <input type="text" name="titulo" onChange={readInador} />
+                        </div>
                     </div>
-
+                    
                     <div className="fechaInador2">
-                        <input name="dia" type="text" onChange={readInador} />
-                        <input name="mes" type="text" onChange={readInador} />
-                        <input name="ano" type="text" onChange={readInador} />
+                        <div className='ingresador'>
+                            <h3>DIA</h3>
+                            <input name="dia" type="text" onChange={readInador} />
+                        </div>
+                        <div className='ingresador'>
+                            <h3>MES</h3>
+                            <input name="mes" type="text" onChange={readInador} />
+                        </div>
+                        <div className='ingresador'>
+                            <h3>AÑO</h3>
+                            <input name="ano" type="text" onChange={readInador} />
+                        </div>
                     </div>
 
-                    <h3>CONTENIDO</h3>
-                    <input name="contenido" type="text" onChange={readInador} />
+                    <div className="fechaInador3">
+                        <div className='ingresador'>
+                            <h3>CONTENIDO</h3>
+                            <input name="contenido" type="text" onChange={readInador} />
+                        </div>
+                    </div>
+                    <button className='continuaBotoncito' type="button" onClick={newDateInador}>Continuar</button>
 
-                    <button type="button" onClick={newDateInador}>Continuar</button>
                 </div>
 
             </PopUp>
@@ -152,6 +197,7 @@ function CalendarioComp() {
                     <h2>TITULO: {event.titulo}</h2>
                     <h2>CONTENIDO: {event.contenido}</h2>
                 </div>
+                <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
             </div>
 
             <div className="botonAgregarDiv">

@@ -376,7 +376,6 @@ export default class extends Component {
             <div className="react-stickies-wrapper clearfix" style={wrapperStyle}>
                 <ResponsiveReactGridLayout
                     onLayoutChange={this.onLayoutChange}
-                    onBreakpointChange={this.onBreakpointChange}
                     {...grid}
                 >
                     {this.state.notes.map(this.renderNote)}
