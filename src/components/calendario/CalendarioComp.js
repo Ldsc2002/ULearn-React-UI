@@ -9,7 +9,7 @@ function CalendarioComp() {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
 
-    const [event, setEvent] = useState({ contenido: '', fecha: '', titulo: '' })
+    const [event, setEvent] = useState({contenido: '', fecha: '', titulo: '', id: '',})
 
     const [pregunta, setPregunta] = useState(false)
 
@@ -18,6 +18,7 @@ function CalendarioComp() {
     const [mesS, setMes] = useState('')
     const [anoS, setAno] = useState('')
     const [contenidoS, setContenido] = useState('')
+
     function guid() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
