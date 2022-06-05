@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/ULearn-React-UI/static/css/main.3fed8a29.chunk.css",
-    "main.js": "/ULearn-React-UI/static/js/main.8f141157.chunk.js",
-    "main.js.map": "/ULearn-React-UI/static/js/main.8f141157.chunk.js.map",
+    "main.css": "/ULearn-React-UI/static/css/main.340ac3a3.chunk.css",
+    "main.js": "/ULearn-React-UI/static/js/main.39da8ab5.chunk.js",
+    "main.js.map": "/ULearn-React-UI/static/js/main.39da8ab5.chunk.js.map",
     "runtime-main.js": "/ULearn-React-UI/static/js/runtime-main.800386f3.js",
     "runtime-main.js.map": "/ULearn-React-UI/static/js/runtime-main.800386f3.js.map",
     "static/js/2.6ebef8d6.chunk.js": "/ULearn-React-UI/static/js/2.6ebef8d6.chunk.js",
     "static/js/2.6ebef8d6.chunk.js.map": "/ULearn-React-UI/static/js/2.6ebef8d6.chunk.js.map",
     "index.html": "/ULearn-React-UI/index.html",
-    "static/css/main.3fed8a29.chunk.css.map": "/ULearn-React-UI/static/css/main.3fed8a29.chunk.css.map",
+    "static/css/main.340ac3a3.chunk.css.map": "/ULearn-React-UI/static/css/main.340ac3a3.chunk.css.map",
     "static/js/2.6ebef8d6.chunk.js.LICENSE.txt": "/ULearn-React-UI/static/js/2.6ebef8d6.chunk.js.LICENSE.txt",
     "static/media/CrearCuentaScreen_elCitCopy_837553.7abb956c.jpg": "/ULearn-React-UI/static/media/CrearCuentaScreen_elCitCopy_837553.7abb956c.jpg",
     "static/media/CrearCuentaScreen_elPerson_405468.15d43b3f.png": "/ULearn-React-UI/static/media/CrearCuentaScreen_elPerson_405468.15d43b3f.png",
@@ -17,7 +17,7 @@
   "entrypoints": [
     "static/js/runtime-main.800386f3.js",
     "static/js/2.6ebef8d6.chunk.js",
-    "static/css/main.3fed8a29.chunk.css",
-    "static/js/main.8f141157.chunk.js"
+    "static/css/main.340ac3a3.chunk.css",
+    "static/js/main.39da8ab5.chunk.js"
   ]
 }
