@@ -140,7 +140,8 @@ function CalendarioComp() {
                             <input name="contenido" type="text" onChange={readInador} />
                         </div>
                     </div>
-                    <button type="button" onClick={newDateInador}>Continuar</button>
+                    <button className='continuaBotoncito' type="button" onClick={newDateInador}>Continuar</button>
+
                 </div>
 
             </PopUp>
