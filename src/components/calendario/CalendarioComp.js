@@ -43,6 +43,21 @@ function CalendarioComp() {
         }
     }
 
+    const borraInador = () => {
+        const { id } = event
+
+        db.collection('eventos').doc(id).delete()
+
+        const temp = {
+            contenido: '', fecha: '', titulo: '', id: '',
+        }
+
+        setEvent(temp)
+
+        console.log('----------------------borrar id', id)
+    }
+
+
     const dateClickHandler = (date) => {
         const contenido = []
         const fecha = []
