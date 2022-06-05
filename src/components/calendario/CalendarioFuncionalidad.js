@@ -41,7 +41,6 @@ const CalendarioFuncionalidad = (daysShort = daysShortArr, monthNames = monthNam
                     }]
                     prevMonthStartingPoint++
                 } else {
-                    console.log(currentMonthCounter,"-",selectedDate.getMonth() + 1,"-",selectedDate.getFullYear())
                     calendarRows[i] = [...calendarRows[i], {
                         classes: 'in-this-month',
                         date: `${currentMonthCounter}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`,
@@ -50,7 +49,6 @@ const CalendarioFuncionalidad = (daysShort = daysShortArr, monthNames = monthNam
                     currentMonthCounter++
                 }
             } else if (i > 1 && currentMonthCounter < daysInMonth + 1) {
-                console.log(currentMonthCounter,"-",selectedDate.getMonth() + 1,"-",selectedDate.getFullYear())
                 calendarRows[i] = [...calendarRows[i], {
                     classes: 'in-this-month',
                     date: `${currentMonthCounter}-${selectedDate.getMonth() + 1}-${selectedDate.getFullYear()}`,
