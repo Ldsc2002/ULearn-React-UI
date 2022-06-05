@@ -112,28 +112,34 @@ function CalendarioComp() {
             <PopUp trigger={pregunta} setTrigger={setPregunta}>
 
                 <div className="preguntaInador">
-                    <h3>TITULO</h3>
-                    <input type="text" name="titulo" onChange={readInador} />
-
-                    <div className="fechaInador">
-                        
-                        <h3>MES</h3>
-                        <h3>AÑO</h3>
+                    <div className="fechaInador1">
+                        <div className='ingresador'>
+                            <h3>TITULO</h3>
+                            <input type="text" name="titulo" onChange={readInador} />
+                        </div>
                     </div>
-
+                    
                     <div className="fechaInador2">
                         <div className='ingresador'>
                             <h3>DIA</h3>
                             <input name="dia" type="text" onChange={readInador} />
                         </div>
-                        
-                        <input name="mes" type="text" onChange={readInador} />
-                        <input name="ano" type="text" onChange={readInador} />
+                        <div className='ingresador'>
+                            <h3>MES</h3>
+                            <input name="mes" type="text" onChange={readInador} />
+                        </div>
+                        <div className='ingresador'>
+                            <h3>AÑO</h3>
+                            <input name="ano" type="text" onChange={readInador} />
+                        </div>
                     </div>
 
-                    <h3>CONTENIDO</h3>
-                    <input name="contenido" type="text" onChange={readInador} />
-
+                    <div className="fechaInador3">
+                        <div className='ingresador'>
+                            <h3>CONTENIDO</h3>
+                            <input name="contenido" type="text" onChange={readInador} />
+                        </div>
+                    </div>
                     <button type="button" onClick={newDateInador}>Continuar</button>
                 </div>
 
