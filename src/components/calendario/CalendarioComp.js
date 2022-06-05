@@ -9,7 +9,7 @@ function CalendarioComp() {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
 
-    const [event, setEvent] = useState({contenido: '', fecha: '', titulo: '', id: '',})
+    const [event, setEvent] = useState({ contenido: '-', fecha: 'dd-mm-yyyy', titulo: '-' })
 
     const [pregunta, setPregunta] = useState(false)
 
@@ -74,8 +74,7 @@ function CalendarioComp() {
 
 
     const dateClickHandler = (date) => {
-        console.log(date)
-
+        console.log("entro")
         const contenido = []
         const fecha = []
         const titulo = []
@@ -97,6 +96,7 @@ function CalendarioComp() {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
                     if (fecha[i] === date) {
+                        console.log("llego")
                         setEvent(temp)
                     }
                 }
@@ -106,8 +106,8 @@ function CalendarioComp() {
     return (
         <>
             <p className="mountTitle">
-                Selected Month:
-                {`${monthNames[selectedDate.getMonth()]} - ${selectedDate.getFullYear()}`}
+                Selected Month: 
+                { ` ${monthNames[selectedDate.getMonth()]} - ${selectedDate.getFullYear()}`}
             </p>
             <table className="table">
                 <thead>
@@ -183,14 +183,19 @@ function CalendarioComp() {
             </PopUp>
 
             <div className="eventDiv">
-                <h1>
-                    {event.fecha}
-                    {' '}
-                    EVENT'S
-                </h1>
-                <div>
-                    <h2>{event.titulo}</h2>
-                    <h2>{event.contenido}</h2>
+                <div className='eventDiv1'>
+                    <h1>
+                        {event.fecha}
+                        {' '}
+                    </h1>
+                    <h1>
+                        EVENT'S
+                    </h1>
+                </div>
+                
+                <div className='eventDiv2'>
+                    <h2>TITULO: {event.titulo}</h2>
+                    <h2>CONTENIDO: {event.contenido}</h2>
                 </div>
                 <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
             </div>
