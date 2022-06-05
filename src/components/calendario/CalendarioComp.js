@@ -73,22 +73,28 @@ function CalendarioComp() {
 
 
     const dateClickHandler = (date) => {
+        console.log(date)
+
         const contenido = []
         const fecha = []
         const titulo = []
+        const id = []
+
+        console.log(date)
 
         db.collection('eventos')
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+                    id.push(doc.id)
                     contenido.push(doc.get('contenido'))
                     fecha.push(doc.get('fecha'))
                     titulo.push(doc.get('titulo'))
                 })
-
-                for (let i = 0; i < titulo.length; i += 1) {
-                    const temp = { contenido: contenido[i], fecha: fecha[i], titulo: titulo[i] }
-
+                for (let i = 0; i < titulo.length; i++) {
+                    const temp = {
+                        contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
+                    }
                     if (fecha[i] === date) {
                         setEvent(temp)
                     }
