@@ -95,7 +95,8 @@ function CalendarioComp() {
                                                     {col.value}
                                                 </td>
                                             )
-                                            : <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                            : 
+                                            <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
