@@ -1,7 +1,7 @@
 import React from 'react'
 
 const { WidthProvider } = require('react-grid-layout')
-let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
+let ResponsiveReactGridLayout = require('react-grid-layout')
 
 ResponsiveReactGridLayout = WidthProvider(ResponsiveReactGridLayout)
 
@@ -10,14 +10,14 @@ function BookCard(props) {
         <div key={post.id} className="book-item">
             <h2 className="title">{post.title}</h2>
             <p className="desc">{post.content}</p>
-            <button type="button" onClick={() => props.setButton(true, post)}>Abrir</button>
+            <button className='open' type="button" onClick={() => props.setButton(true, post)}>Abrir</button>
         </div>
     ))
 
     return (
-        <ResponsiveReactGridLayout>
+        <div className='books_container'>
             {content}
-        </ResponsiveReactGridLayout>
+        </div>
     )
 }
 

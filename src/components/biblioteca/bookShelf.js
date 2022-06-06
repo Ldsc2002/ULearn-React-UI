@@ -16,7 +16,7 @@ function fetch() {
                 const file = doc.get('file')
                 const code = doc.id
                 const { id } = doc
-
+                //console.log(file)
                 const book = {
                     id, title, content, file, code,
                 }
@@ -49,22 +49,30 @@ function dropBook(i){
     //console.log("Encontré a ", id)
 }
 
-//async function downloadFile() {
-//    const options = {
-//      // The path to which the file should be downloaded, e.g. "./file.txt"
-//      destination: destFilename,
-//    };
-//
-//    // Downloads the file
-//    await storage.bucket(bucketName).file(srcFilename).download(options);
-//}
+function openFile(item){
+    const link = ref(storage, item)
+    
+    getDownloadURL(link).then((url) => {
+        const anchor = document.createElement('a')
+        anchor.href = url
+        anchor.target = '_blank'
+        anchor.download = 'Funciona'
+
+        document.body.appendChild(anchor)
+        anchor.click()
+        document.body.removeChild(anchor)
+      })
+      .catch((error) => {
+        console.log(error)
+    })
+}
+
 
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
     const [showAdd, setShowAdd] = useState(false)
 
-    const [id, setId] = useState('')
     const [titulo, setTitulo] = useState('')
     const [fileDownload, setFileDownload] = useState('')
     const [descripcion, setDescripcion] = useState('')
@@ -108,15 +116,15 @@ function Bookshelf(props) {
     }
 
     return (
-        <div>
+        <div className='biblioteca'>
             <BookCard books={books} setButton={selectedBookHandler} />
 
             <PopUp trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
                 <div>
                     <h1>{book.title}</h1>
                     <p>{book.content}</p>
-                    <button type="button" className="popUp-btn">Descargar</button>
-                    <button type='button' className='delete_btn' onClick={() =>{ dropBook(book.code); books = fetch()}}>Eliminar</button>
+                    <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
+                    <button type='button' className='delete_btn' onClick={() =>{ dropBook(book.code)}}>Eliminar</button>
                 </div>
             </PopUp>
 
@@ -131,7 +139,7 @@ function Bookshelf(props) {
                     <input type="file" name="file" onChange={onSubmitFile} />
                     <button type="button" onClick={uploadFileB}>UPLOAD</button>
 
-                    <button type="button" className="popUp-btn" onClick={() => noteFirebase(titulo, descripcion, fileDownload)}>Terminar</button>
+                    <button type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload); books = fetch()}}>Terminar</button>
                 </div>
             </PopUp>
         </div>
