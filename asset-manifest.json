@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ULearn-React-UI/static/css/main.6a707a69.chunk.css",
-    "main.js": "/ULearn-React-UI/static/js/main.977664ac.chunk.js",
-    "main.js.map": "/ULearn-React-UI/static/js/main.977664ac.chunk.js.map",
+    "main.js": "/ULearn-React-UI/static/js/main.27822234.chunk.js",
+    "main.js.map": "/ULearn-React-UI/static/js/main.27822234.chunk.js.map",
     "runtime-main.js": "/ULearn-React-UI/static/js/runtime-main.800386f3.js",
     "runtime-main.js.map": "/ULearn-React-UI/static/js/runtime-main.800386f3.js.map",
     "static/js/2.0c6d8a6c.chunk.js": "/ULearn-React-UI/static/js/2.0c6d8a6c.chunk.js",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.800386f3.js",
     "static/js/2.0c6d8a6c.chunk.js",
     "static/css/main.6a707a69.chunk.css",
-    "static/js/main.977664ac.chunk.js"
+    "static/js/main.27822234.chunk.js"
   ]
 }
