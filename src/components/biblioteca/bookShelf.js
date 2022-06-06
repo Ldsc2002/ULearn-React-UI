@@ -40,10 +40,12 @@ function noteFirebase(t, d, f) {
     })
 }
 
+var books = fetch()
 
 function dropBook(i){
     const id = i.toString()
     db.collection('archivos').doc(id).delete()
+    books = fetch()
     //console.log("Encontré a ", id)
 }
 
@@ -57,7 +59,6 @@ function dropBook(i){
 //    await storage.bucket(bucketName).file(srcFilename).download(options);
 //}
 
-const books = fetch()
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
@@ -115,7 +116,7 @@ function Bookshelf(props) {
                     <h1>{book.title}</h1>
                     <p>{book.content}</p>
                     <button type="button" className="popUp-btn">Descargar</button>
-                    <button type='button' className='delete_btn' onClick={() => dropBook(book.code)}>Eliminar</button>
+                    <button type='button' className='delete_btn' onClick={() =>{ dropBook(book.code); books = fetch()}}>Eliminar</button>
                 </div>
             </PopUp>
 
