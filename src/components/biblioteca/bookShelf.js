@@ -141,7 +141,7 @@ function Bookshelf(props) {
                 <div className="addPopUp">
                     <input type="text" placeholder="Título" name="titulo" onChange={tipo} />
                     <input type="text" placeholder="Descripción"  name="descripcion" onChange={tipo} />
-                    <input type="file" name="file"  onChange={() => {onSubmitFile; } } />
+                    <input type="file" name="file"  onChange={onSubmitFile} />
                     <button id='cargar_archivos' type="button" className="popUp-btn" onClick={uploadFileB}>UPLOAD</button>
 
                     <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload); books = fetch();}}>Terminar</button>
