@@ -14,10 +14,11 @@ function fetch() {
                 const title = doc.get('titulo')
                 const content = doc.get('content')
                 const file = doc.get('file')
+                const code = doc.id
                 const { id } = doc
 
                 const book = {
-                    id, title, content, file,
+                    id, title, content, file, code,
                 }
 
                 libros.push(book)
@@ -39,12 +40,30 @@ function noteFirebase(t, d, f) {
     })
 }
 
+
+function dropBook(i){
+    const id = i.toString()
+    db.collection('archivos').doc(id).delete()
+    //console.log("Encontré a ", id)
+}
+
+//async function downloadFile() {
+//    const options = {
+//      // The path to which the file should be downloaded, e.g. "./file.txt"
+//      destination: destFilename,
+//    };
+//
+//    // Downloads the file
+//    await storage.bucket(bucketName).file(srcFilename).download(options);
+//}
+
 const books = fetch()
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
     const [showAdd, setShowAdd] = useState(false)
 
+    const [id, setId] = useState('')
     const [titulo, setTitulo] = useState('')
     const [fileDownload, setFileDownload] = useState('')
     const [descripcion, setDescripcion] = useState('')
@@ -52,6 +71,7 @@ function Bookshelf(props) {
     const [file, setFile] = useState('')
 
     const [book, setBook] = useState({})
+
 
     const uploadFileB = () => {
         if (file) {
@@ -95,6 +115,7 @@ function Bookshelf(props) {
                     <h1>{book.title}</h1>
                     <p>{book.content}</p>
                     <button type="button" className="popUp-btn">Descargar</button>
+                    <button type='button' className='delete_btn' onClick={() => dropBook(book.code)}>Eliminar</button>
                 </div>
             </PopUp>
 
