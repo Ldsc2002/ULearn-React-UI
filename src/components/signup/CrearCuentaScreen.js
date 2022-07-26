@@ -75,7 +75,7 @@ export default class CrearCuentaScreen extends Component {
             usuario: this.state.registerEmail,
             nombre: this.state.registerName,
             carrera: this.state.registerMajor,
-            universidad: 'Universidad del Valle de Guatemala',
+            universidad: 'Universidad del Valle de Guatemala', //CHANFE FOR USER INPUT SPRINT 2
             tipo: false,
 
         })
