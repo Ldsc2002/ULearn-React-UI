@@ -71,11 +71,14 @@ export default class CrearCuentaScreen extends Component {
               photoURL: this.state.registerMajor,
           })
 
-          db.collection('usuarios').add({
-              usuario: this.state.registerEmail,
-              nombre: this.state.registerName,
-              carrera: this.state.registerMajor,
-          })
+          db.collection('usuarios').doc((auth.currentUser).uid).set({
+            usuario: this.state.registerEmail,
+            nombre: this.state.registerName,
+            carrera: this.state.registerMajor,
+            universidad: 'Universidad del Valle de Guatemala',
+            tipo: false,
+
+        })
 
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
