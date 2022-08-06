@@ -4,6 +4,7 @@ import moment from 'moment'
 import ContentEditable from './ContentEditable'
 import { db } from '../firebase/firebase'
 
+
 const { WidthProvider } = require('react-grid-layout')
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
 
@@ -130,7 +131,7 @@ export default class extends Component {
         const date = note.timeStamp
         const { id } = note
 
-        db.collection('notitas').doc(id).set({
+        db.collection('notitas').doc("uvg").collection("uvg").doc(id).set({
             content: text,
             date,
             title,
@@ -264,14 +265,16 @@ export default class extends Component {
 
         const uid = guid()
 
-        db.collection('notitas')
+        db.collection('notitas').doc("uvg").collection("uvg")
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+
                     titles.push(doc.get('title'))
                     contents.push(doc.get('content'))
                     dates.push(doc.get('date'))
                     id.push(doc.id)
+
                 })
 
                 for (let i = 0; i < titles.length; i++) {
