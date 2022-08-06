@@ -3,7 +3,7 @@ import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import ContentEditable from './ContentEditable'
 import { db } from '../firebase/firebase'
-
+import ScreenContext from '../app/ScreenContext'
 
 const { WidthProvider } = require('react-grid-layout')
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
@@ -52,6 +52,8 @@ function transformContentState(notes) {
 }
 
 export default class extends Component {
+    static contextType = ScreenContext;
+
     constructor(props) {
         super(props)
         this.state = {
@@ -131,7 +133,7 @@ export default class extends Component {
         const date = note.timeStamp
         const { id } = note
 
-        db.collection('notitas').doc("uvg").collection("uvg").doc(id).set({
+        db.collection('notitas').doc(this.context.university).collection(this.context.university).doc(id).set({
             content: text,
             date,
             title,
@@ -265,7 +267,7 @@ export default class extends Component {
 
         const uid = guid()
 
-        db.collection('notitas').doc("uvg").collection("uvg")
+        db.collection('notitas').doc(this.context.university).collection(this.context.university)
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
