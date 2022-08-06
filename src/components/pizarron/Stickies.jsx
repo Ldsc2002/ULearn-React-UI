@@ -2,7 +2,7 @@ import React, { Component, useReducer } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import ContentEditable from './ContentEditable'
-import { db } from '../firebase/firebase'
+import {auth,  db } from '../firebase/firebase'
 
 
 const { WidthProvider } = require('react-grid-layout')
@@ -52,6 +52,7 @@ function transformContentState(notes) {
 }
 
 export default class extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -64,7 +65,10 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
+        this.university = 'uvg' //todo: implementar con provider
+        this.type = true 
     }
+    
 
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
@@ -131,7 +135,7 @@ export default class extends Component {
         const date = note.timeStamp
         const { id } = note
 
-        db.collection('notitas').doc("uvg").collection("uvg").doc(id).set({
+        db.collection('notitas').doc(this.university).collection(this.university).doc(id).set({
             content: text,
             date,
             title,
@@ -146,7 +150,7 @@ export default class extends Component {
 
         // delete firebase
 
-        db.collection('notitas').doc("uvg").collection("uvg").doc(id).delete()
+        db.collection('notitas').doc(this.university).collection(this.university).doc(id).delete()
 
         notes.forEach((note, index) => {
             if (currentNote.id === note.id) {
@@ -267,7 +271,9 @@ export default class extends Component {
 
         const uid = guid()
 
-        db.collection('notitas').doc("uvg").collection("uvg")
+        console.log(this.university)
+
+        db.collection('notitas').doc(this.university).collection(this.university)
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
@@ -289,14 +295,12 @@ export default class extends Component {
             })
     }
 
-    isSuperUser(){
-        // if(user.type){
-        //     return false
-        // }else
-        //     return true
-        // }
-
-        return true //no es superuser
+    isSuperUser() {
+        if(this.type){
+            return false
+        }else{
+            return true
+        }
     }
 
     renderNote(note) {
