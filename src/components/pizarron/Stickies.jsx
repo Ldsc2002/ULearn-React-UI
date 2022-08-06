@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useReducer } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import ContentEditable from './ContentEditable'
@@ -142,9 +142,11 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
+        console.log(currentNote)
+
         // delete firebase
 
-        db.collection('notitas').doc(id).delete()
+        db.collection('notitas').doc("uvg").collection("uvg").doc(id).delete()
 
         notes.forEach((note, index) => {
             if (currentNote.id === note.id) {
@@ -287,10 +289,20 @@ export default class extends Component {
             })
     }
 
+    isSuperUser(){
+        // if(user.type){
+        //     return false
+        // }else
+        //     return true
+        // }
+
+        return true //no es superuser
+    }
+
     renderNote(note) {
         const closeStyle = { display: (this.state.notes.length === 1) ? 'none' : 'block', ...this.props.closeStyle || {} }
         const addStyle = this.props.addStyle || {}
-        const closeIcon = this.props.closeIcon || ''
+        const closeIcon = this.isSuperUser()
         const addIcon = this.props.addIcon || ''
         const noteStyle = {
             background: note.color,
@@ -333,6 +345,7 @@ export default class extends Component {
                             />
                         </div>
                         <div
+                           
                             className={`${closeIcon ? '' : 'close'}`}
                             style={closeStyle}
                             onClick={() => this.deleteNote(note)}
