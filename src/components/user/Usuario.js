@@ -17,8 +17,6 @@ export default class Usuario extends Component {
             s_email: '',
             s_name: '',
             s_major: '',
-            s_university: '',
-            s_type:''
         }
     }
 
@@ -27,15 +25,11 @@ export default class Usuario extends Component {
             db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => { 
                 this.setState({ s_email: (docRef.data().usuario)  }),
                 this.setState({ s_name: (docRef.data().nombre) }),
-                this.setState({ s_major: (docRef.data().carrera) }),
-                this.setState({ s_university: (docRef.data().universidad) })
-                this.setState({ s_type: (docRef.data().tipo) })
+                this.setState({ s_major: (docRef.data().carrera) })
             })
             //this.setState({ s_email: (auth.currentUser).email })
             //this.setState({ s_name: (auth.currentUser).displayName })
             //this.setState({ s_major: (auth.currentUser).photoURL })
-
-            this.context.university = this.s_university
         } catch {
             this.setState({ s_email: 'ERROR' })
             this.setState({ s_name: 'ERROR' })
