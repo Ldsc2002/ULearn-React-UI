@@ -18,6 +18,7 @@ function CalendarioComp() {
     const [mesS, setMes] = useState('')
     const [anoS, setAno] = useState('')
     const [contenidoS, setContenido] = useState('')
+    const [date, setDate] = useState(false)
 
     function guid() {
         function s4() {
@@ -74,7 +75,7 @@ function CalendarioComp() {
 
 
     const dateClickHandler = (date) => {
-        console.log("entro")
+        setDate(true)
         const contenido = []
         const fecha = []
         const titulo = []
@@ -106,7 +107,6 @@ function CalendarioComp() {
     return (
         <>
             <p className="mountTitle">
-                Selected Month: 
                 { ` ${monthNames[selectedDate.getMonth()]} - ${selectedDate.getFullYear()}`}
             </p>
             <table className="table">
@@ -179,32 +179,30 @@ function CalendarioComp() {
                     <button className='continuaBotoncito' type="button" onClick={newDateInador}>Continuar</button>
 
                 </div>
-
             </PopUp>
 
-            <div className="eventDiv">
-                <div className='eventDiv1'>
-                    <h1>
-                        {event.fecha}
-                        {' '}
-                    </h1>
-                    <h1>
-                        EVENT'S
-                    </h1>
+            <PopUp trigger={date} setTrigger={setDate}>
+                <div className="eventDiv">
+                    <div className='eventDiv1'>
+                        <h1>
+                            {event.fecha}
+                            {' '}
+                        </h1>
+                        <h1>
+                            EVENT'S
+                        </h1>
+                    </div>
+                    
+                    <div className='eventDiv2'>
+                        <h2>TITULO: {event.titulo}</h2>
+                        <h2>CONTENIDO: {event.contenido}</h2>
+                    </div>
+                    <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
                 </div>
-                
-                <div className='eventDiv2'>
-                    <h2>TITULO: {event.titulo}</h2>
-                    <h2>CONTENIDO: {event.contenido}</h2>
-                </div>
-                <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
-            </div>
+            </PopUp>
 
             <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setPregunta(true)}>+</button>
-            </div>
-            <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setPregunta(true)}>+</button>
+                    <button type="button" className="botonAgregar" onClick={() => setPregunta(true)}>+</button>
             </div>
         </>
     )
