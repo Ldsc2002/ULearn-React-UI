@@ -1,6 +1,5 @@
 import React from 'react'
-import ScreenContext from '../app/ScreenContext'
-import CalendarioComp from './CalendarioComp'
+import CalendarioComp from './CalendarioComp.jsx'
 
 function calendario() {
     return (

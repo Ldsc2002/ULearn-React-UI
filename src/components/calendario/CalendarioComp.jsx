@@ -173,20 +173,24 @@ function CalendarioComp() {
             </PopUp>
 
             <PopUp trigger={date} setTrigger={setDate}>
-                <div className="eventDiv">
-                    <div className='eventDiv1'>
-                        <h1>
-                            {event.fecha}
-                            {' '}
-                        </h1>
-                    </div>
-                    
-                    <div className='eventDiv2'>
-                        <h2>Título: {event.titulo}</h2>
-                        <h2>Información: {event.contenido}</h2>
-                    </div>
-                    <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
-                </div>
+                {event.fecha != 'dd-mm-yyyy' ? (
+                        <div className="eventDiv"> 
+                            <div className='eventDiv1'>
+                                <h1>{event.fecha}</h1>
+                            </div>
+                        
+                            <div className='eventDiv2'>
+                                <h2>Título: {event.titulo}</h2>
+                                <h2>Información: {event.contenido}</h2>
+                            </div>
+                            <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
+                        </div>
+                    ) : (
+                        <div className="eventDiv">
+                            <h1>No hay eventos en esta fecha</h1>
+                        </div>
+                    )  
+                }
             </PopUp>
 
             <div className="botonAgregarDiv">
