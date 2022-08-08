@@ -194,7 +194,7 @@ function CalendarioComp() {
             </PopUp>
 
             <div className="botonAgregarDiv">
-                    <button type="button" className="botonAgregar" onClick={() => setPregunta(true)}>+</button>
+                    <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
             </div>
         </>
     )
