@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, useReducer } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import ContentEditable from './ContentEditable'
-import { db } from '../firebase/firebase'
+import {auth,  db } from '../firebase/firebase'
+
 
 const { WidthProvider } = require('react-grid-layout')
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
@@ -51,6 +52,7 @@ function transformContentState(notes) {
 }
 
 export default class extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -63,7 +65,10 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
+        this.university = 'ufm' //todo: implementar con provider
+        this.type = true 
     }
+    
 
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
@@ -130,7 +135,7 @@ export default class extends Component {
         const date = note.timeStamp
         const { id } = note
 
-        db.collection('notitas').doc(id).set({
+        db.collection('notitas').doc(this.university).collection(this.university).doc(id).set({
             content: text,
             date,
             title,
@@ -141,9 +146,11 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
+        console.log(currentNote)
+
         // delete firebase
 
-        db.collection('notitas').doc(id).delete()
+        db.collection('notitas').doc(this.university).collection(this.university).doc(id).delete()
 
         notes.forEach((note, index) => {
             if (currentNote.id === note.id) {
@@ -264,14 +271,18 @@ export default class extends Component {
 
         const uid = guid()
 
-        db.collection('notitas')
+        console.log(this.university)
+
+        db.collection('notitas').doc(this.university).collection(this.university)
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+
                     titles.push(doc.get('title'))
                     contents.push(doc.get('content'))
                     dates.push(doc.get('date'))
                     id.push(doc.id)
+
                 })
 
                 for (let i = 0; i < titles.length; i++) {
@@ -284,10 +295,18 @@ export default class extends Component {
             })
     }
 
+    isSuperUser() {
+        if(this.type){
+            return false
+        }else{
+            return true
+        }
+    }
+
     renderNote(note) {
         const closeStyle = { display: (this.state.notes.length === 1) ? 'none' : 'block', ...this.props.closeStyle || {} }
         const addStyle = this.props.addStyle || {}
-        const closeIcon = this.props.closeIcon || ''
+        const closeIcon = this.isSuperUser()
         const addIcon = this.props.addIcon || ''
         const noteStyle = {
             background: note.color,
@@ -330,6 +349,7 @@ export default class extends Component {
                             />
                         </div>
                         <div
+                           
                             className={`${closeIcon ? '' : 'close'}`}
                             style={closeStyle}
                             onClick={() => this.deleteNote(note)}
