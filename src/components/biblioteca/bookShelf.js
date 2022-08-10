@@ -5,7 +5,7 @@ import PopUp from '../popup/PopUp'
 import { db, storage } from '../firebase/firebase'
 
 function fetch() {
-    const libros = []
+    const books = []
 
     db.collection('archivos')
         .get()
@@ -16,15 +16,14 @@ function fetch() {
                 const file = doc.get('file')
                 const code = doc.id
                 const { id } = doc
-                //console.log(file)
                 const book = {
                     id, title, content, file, code,
                 }
 
-                libros.push(book)
+                books.push(book)
             })
         })
-    return libros
+    return books
 }
 
 function noteFirebase(t, d, f) {
@@ -45,7 +44,6 @@ var books = fetch()
 function dropBook(i){
     const id = i.toString()
     db.collection('archivos').doc(id).delete()
-    //console.log("Encontré a ", id)
 }
 
 function openFile(item){
@@ -65,13 +63,6 @@ function openFile(item){
         console.log(error)
     })
 }
-
-
-//No funcional hasta nuevo aviso
-/*function closePopUp(){
-    const popup = document.getElementById('pop_up_btn_close')
-    popup.click()
-}*/
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
