@@ -66,7 +66,6 @@ function openFile(item){
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
-    const [showAdd, setShowAdd] = useState(false)
 
     const [titulo, setTitulo] = useState('')
     const [fileDownload, setFileDownload] = useState('')
@@ -74,7 +73,6 @@ function Bookshelf(props) {
 
     const [file, setFile] = useState('')
 
-    const [book, setBook] = useState({})
     const [popUpContent, setPopUpContent] = useState('')
 
 
@@ -106,8 +104,7 @@ function Bookshelf(props) {
         }
     }
 
-    const selectedBookHandler = (set, data) => {
-        setBook(data)
+    const selectedBookHandler = (set, book) => {
         setButton(set)
 
         setPopUpContent(
