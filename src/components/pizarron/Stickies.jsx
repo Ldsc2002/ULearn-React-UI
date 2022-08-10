@@ -327,11 +327,11 @@ export default class extends Component {
                     style={noteStyle}
                 >
 
-                    <div class="pushpin tilted">
-                        <div class="pinhead"></div>
-                        <div class="pinbase"></div>
-                        <div class="pinshaft"></div>
-                        <div class="pinpoint"></div>
+                    <div className="pushpin tilted">
+                        <div className="pinhead"></div>
+                        <div className="pinbase"></div>
+                        <div className="pinshaft"></div>
+                        <div className="pinpoint"></div>
                     </div>
                     
                     <div className="note-header" style={noteHeaderStyle}>
