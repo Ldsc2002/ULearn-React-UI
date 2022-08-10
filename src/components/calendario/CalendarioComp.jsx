@@ -11,13 +11,14 @@ function CalendarioComp() {
 
     const [event, setEvent] = useState({ contenido: '-', fecha: 'dd-mm-yyyy', titulo: '-' })
 
-    const [pregunta, setPregunta] = useState(false)
-
-    const [tituloS, setTitulo] = useState('')
-    const [diaS, setDia] = useState('')
-    const [mesS, setMes] = useState('')
-    const [anoS, setAno] = useState('')
-    const [contenidoS, setContenido] = useState('')
+    const [title, setTitle] = useState('')
+    const [day, setDay] = useState('')
+    const [month, setMonth] = useState('')
+    const [year, setYear] = useState('')
+    const [content, setContent] = useState('')
+    
+    const [date, setDate] = useState(false)
+    const [addDate, setAddDate] = useState(false)
 
     function guid() {
         function s4() {
@@ -30,31 +31,28 @@ function CalendarioComp() {
     }
 
     const newDateInador = () => {
-        const fecha = `${diaS}-${mesS}-${anoS}`
-
-        console.log(tituloS, ' ', fecha, ' ', contenidoS)
-
+        const fecha = `${day}-${month}-${year}`
         const id = guid()
 
         db.collection('eventos').doc(id).set({
-            contenido: contenidoS,
+            contenido: content,
             fecha,
-            titulo: tituloS,
+            titulo: title,
         })
         setPregunta(false)
     }
 
     const readInador = (e) => {
         if (e.target.name === 'titulo') {
-            setTitulo(e.target.value)
+            setTitle(e.target.value)
         } else if (e.target.name === 'dia') {
-            setDia(e.target.value)
+            setDay(e.target.value)
         } else if (e.target.name === 'mes') {
-            setMes(e.target.value)
+            setMonth(e.target.value)
         } else if (e.target.name === 'ano') {
-            setAno(e.target.value)
+            setYear(e.target.value)
         } else if (e.target.name === 'contenido') {
-            setContenido(e.target.value)
+            setContent(e.target.value)
         }
     }
 
@@ -66,21 +64,16 @@ function CalendarioComp() {
         const temp = {
             contenido: '', fecha: '', titulo: '', id: '',
         }
-
         setEvent(temp)
-
-        console.log('----------------------borrar id', id)
     }
 
 
     const dateClickHandler = (date) => {
-        console.log("entro")
+        setDate(true)
         const contenido = []
         const fecha = []
         const titulo = []
         const id = []
-
-        console.log(date)
 
         db.collection('eventos')
             .get()
@@ -96,7 +89,6 @@ function CalendarioComp() {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
                     if (fecha[i] === date) {
-                        console.log("llego")
                         setEvent(temp)
                     }
                 }
@@ -106,7 +98,6 @@ function CalendarioComp() {
     return (
         <>
             <p className="mountTitle">
-                Selected Month: 
                 { ` ${monthNames[selectedDate.getMonth()]} - ${selectedDate.getFullYear()}`}
             </p>
             <table className="table">
@@ -145,7 +136,7 @@ function CalendarioComp() {
                 <button type="button" className="buttonControl" onClick={getNextMonth}>Next</button>
             </div>
 
-            <PopUp trigger={pregunta} setTrigger={setPregunta}>
+            <PopUp trigger={addDate} setTrigger={setAddDate}>
 
                 <div className="preguntaInador">
                     <div className="fechaInador1">
@@ -179,32 +170,31 @@ function CalendarioComp() {
                     <button className='continuaBotoncito' type="button" onClick={newDateInador}>Continuar</button>
 
                 </div>
-
             </PopUp>
 
-            <div className="eventDiv">
-                <div className='eventDiv1'>
-                    <h1>
-                        {event.fecha}
-                        {' '}
-                    </h1>
-                    <h1>
-                        EVENT'S
-                    </h1>
-                </div>
-                
-                <div className='eventDiv2'>
-                    <h2>TITULO: {event.titulo}</h2>
-                    <h2>CONTENIDO: {event.contenido}</h2>
-                </div>
-                <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
-            </div>
+            <PopUp trigger={date} setTrigger={setDate}>
+                {event.fecha != 'dd-mm-yyyy' ? (
+                        <div className="eventDiv"> 
+                            <div className='eventDiv1'>
+                                <h1>{event.fecha}</h1>
+                            </div>
+                        
+                            <div className='eventDiv2'>
+                                <h2>Título: {event.titulo}</h2>
+                                <h2>Información: {event.contenido}</h2>
+                            </div>
+                            <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
+                        </div>
+                    ) : (
+                        <div className="eventDiv">
+                            <h1>No hay eventos en esta fecha</h1>
+                        </div>
+                    )  
+                }
+            </PopUp>
 
             <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setPregunta(true)}>+</button>
-            </div>
-            <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setPregunta(true)}>+</button>
+                    <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
             </div>
         </>
     )

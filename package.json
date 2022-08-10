@@ -4,6 +4,7 @@
   "homepage": "https://ldsc2002.github.io/ULearn-React-UI/",
   "private": true,
   "dependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "draft-js": "^0.11.7",
     "firebase": "^9.6.10",
