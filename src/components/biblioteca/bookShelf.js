@@ -75,6 +75,7 @@ function Bookshelf(props) {
     const [file, setFile] = useState('')
 
     const [book, setBook] = useState({})
+    const [popUpContent, setPopUpContent] = useState('')
 
 
     const uploadFileB = () => {
@@ -108,6 +109,30 @@ function Bookshelf(props) {
     const selectedBookHandler = (set, data) => {
         setBook(data)
         setButton(set)
+
+        setPopUpContent(
+            <div>
+                <h1 className='name' >{book.title}</h1>
+                <p className='details'>{book.content}</p>
+                <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
+                <button type='button' className='delete_btn' onClick={() =>{ dropBook(book.code); books = fetch()}}>Eliminar</button>
+            </div>
+        )
+    }
+
+    const addHandler = (set) => {
+        setButton(set)
+
+        setPopUpContent(
+            <div className="addPopUp">
+                <input type="text" placeholder="Título" name="titulo" onChange={tipo} />
+                <input type="text" placeholder="Descripción"  name="descripcion" onChange={tipo} />
+                <input type="file" name="file"  onChange={onSubmitFile} />
+                <button id='cargar_archivos' type="button" className="popUp-btn" onClick={uploadFileB}>UPLOAD</button>
+
+                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload); books = fetch();}}>Terminar</button>
+            </div>
+        )
     }
 
     return (
@@ -116,28 +141,12 @@ function Bookshelf(props) {
             
 
             <PopUp id='pop_up' trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
-                <div>
-                    <h1 className='name' >{book.title}</h1>
-                    <p className='details'>{book.content}</p>
-                    <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
-                    <button type='button' className='delete_btn' onClick={() =>{ dropBook(book.code); books = fetch()}}>Eliminar</button>
-                </div>
+                {popUpContent}
             </PopUp>
 
             <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setShowAdd(true)}>+</button>
+                <button type="button" className="botonAgregar" onClick={() => addHandler(true)}>+</button>
             </div>
-
-            <PopUp trigger={showAdd} setTrigger={setShowAdd} onClick={() => props.setShowAdd(false)}>
-                <div className="addPopUp">
-                    <input type="text" placeholder="Título" name="titulo" onChange={tipo} />
-                    <input type="text" placeholder="Descripción"  name="descripcion" onChange={tipo} />
-                    <input type="file" name="file"  onChange={onSubmitFile} />
-                    <button id='cargar_archivos' type="button" className="popUp-btn" onClick={uploadFileB}>UPLOAD</button>
-
-                    <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload); books = fetch();}}>Terminar</button>
-                </div>
-            </PopUp>
         </div>
     )
 }
