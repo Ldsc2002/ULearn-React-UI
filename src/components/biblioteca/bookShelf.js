@@ -60,7 +60,6 @@ function openFile(item){
         document.body.removeChild(anchor)
       })
       .catch((error) => {
-        console.log(error)
     })
 }
 

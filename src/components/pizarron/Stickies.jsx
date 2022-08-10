@@ -146,10 +146,6 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
-        console.log(currentNote)
-
-        // delete firebase
-
         db.collection('notitas').doc(this.university).collection(this.university).doc(id).delete()
 
         notes.forEach((note, index) => {
@@ -270,8 +266,6 @@ export default class extends Component {
         const id = []
 
         const uid = guid()
-
-        console.log(this.university)
 
         db.collection('notitas').doc(this.university).collection(this.university)
             .get()
