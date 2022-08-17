@@ -6,6 +6,7 @@ import { db, storage } from '../firebase/firebase'
 
 function fetch() {
     const libros = []
+    const librosApproved = []
 
     db.collection('archivos')
         .get()
@@ -14,29 +15,36 @@ function fetch() {
                 const title = doc.get('titulo')
                 const content = doc.get('content')
                 const file = doc.get('file')
+                const college = doc.get('universidad')
                 const code = doc.id
                 const { id } = doc
-                //console.log(file)
+                console.log(college)
                 const book = {
                     id, title, content, file, code,
                 }
-
-                libros.push(book)
+                //Este condicional hace que el arreglo interno solo contenga los libros aprobados por la universidad en turno
+                //Sólo se necesita el acceso a una variable global para que se pueda determinar de manera automática 
+                //la universidad y, por tanto, la serie de libros a los que se tiene acceso.
+                if (college === /*'usac'*/ 'uvg') {
+                    libros.push(book)
+                }
             })
         })
+    
     return libros
 }
 
-function noteFirebase(t, d, f) {
+function noteFirebase(t, d, f, u) {
     const title = t
     const text = d
     const archivo = f
+    const college = u
 
     db.collection('archivos').add({
         titulo: title,
         content: text,
         file: archivo,
-
+        universidad: college
     })
 }
 
@@ -118,7 +126,7 @@ function Bookshelf(props) {
         setBook(data)
         setButton(set)
     }
-
+    //En la línea 155 se debe introducir el valor de la ya mencionadfa variable globaque indique la universidad del usuario en cuestión.
     return (
         <div className='biblioteca'>
             <BookCard books={books} setButton={selectedBookHandler} />
@@ -143,8 +151,8 @@ function Bookshelf(props) {
                     <input type="text" placeholder="Descripción"  name="descripcion" onChange={tipo} />
                     <input type="file" name="file"  onChange={onSubmitFile} />
                     <button id='cargar_archivos' type="button" className="popUp-btn" onClick={uploadFileB}>UPLOAD</button>
-
-                    <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload); books = fetch();}}>Terminar</button>
+                    
+                    <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload, 'uvg'); books = fetch();}}>Terminar</button>
                 </div>
             </PopUp>
         </div>
