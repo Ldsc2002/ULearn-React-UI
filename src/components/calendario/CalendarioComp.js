@@ -36,10 +36,14 @@ function CalendarioComp() {
 
         const id = guid()
 
+        const userV = 'gon20335@uvg.edu.gt'
+
         db.collection('eventos').doc(id).set({
             contenido: contenidoS,
             fecha,
             titulo: tituloS,
+            user: userV,
+
         })
         setPregunta(false)
     }
@@ -68,8 +72,6 @@ function CalendarioComp() {
         }
 
         setEvent(temp)
-
-        console.log('----------------------borrar id', id)
     }
 
 
@@ -79,6 +81,7 @@ function CalendarioComp() {
         const fecha = []
         const titulo = []
         const id = []
+        const usuario = []
 
         console.log(date)
 
@@ -90,12 +93,13 @@ function CalendarioComp() {
                     contenido.push(doc.get('contenido'))
                     fecha.push(doc.get('fecha'))
                     titulo.push(doc.get('titulo'))
+                    usuario.push(doc.get('universidad'))
                 })
                 for (let i = 0; i < titulo.length; i++) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
-                    if (fecha[i] === date) {
+                    if (fecha[i] === date && usuario == 'gon20335@uvg.edu.gt') {
                         console.log("llego")
                         setEvent(temp)
                     }
