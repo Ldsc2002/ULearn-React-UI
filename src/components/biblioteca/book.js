@@ -22,9 +22,3 @@ function BookCard(props) {
 }
 
 export default BookCard
-
-/**
- * depricado - No se ve bien y no contribuye a la apariencia
- * <button className='open' type="button" onClick={() => props.setButton(true, post)}>Abrir</button>
- * <p className="desc">{post.content}</p>
- */
