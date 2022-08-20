@@ -65,8 +65,8 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
-        this.university = 'uvg' //todo: implementar con provider
-        this.type = false 
+        this.university = 'uvg' //todo: implementar con provider (uvg = Universidad del Valle, ufm, universidad francisco marroquin)
+        this.type = false  //todo: implmentar con provider (true= superusaurio qeu puede borrar, false= usario normal que no puede borrar)
     }
     
 
