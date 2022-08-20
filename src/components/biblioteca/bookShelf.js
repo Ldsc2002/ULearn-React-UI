@@ -6,7 +6,6 @@ import { db, storage } from '../firebase/firebase'
 
 function fetch() {
     const libros = []
-    const librosApproved = []
 
     db.collection('archivos')
         .get()
@@ -73,42 +72,43 @@ function openFile(item){
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
-
-    const [titulo, setTitulo] = useState('')
-    const [fileDownload, setFileDownload] = useState('')
-    const [descripcion, setDescripcion] = useState('')
-
-    const [file, setFile] = useState('')
-
     const [popUpContent, setPopUpContent] = useState('')
 
+    const [fileDownload, setFileDownload] = useState('')
 
-    const uploadFileB = () => {
+    const onSubmitFile = (e) => {
+        const file = e.target.files[0]
+
         if (file) {
             const reference = ref(storage, file.name)
             uploadBytes(reference, file).then(() => {
                 getDownloadURL(reference).then((url) => {
                     setFileDownload(url)
+                    alert('Upload file')
                 })
-                alert('Upload file')
             })
         }
     }
 
-    const onSubmitFile = (e) => {
-        const newFile = e.target.files[0]
+    const finishUpload = () => {
+        titulo = document.getElementById('titulo').value
+        descripcion = document.getElementById('descripcion').value
+        noteFirebase(titulo, descripcion, fileDownload, 'uvg')
+        
+        books = fetch()
 
-        if (newFile) {
-            setFile(newFile)
-        }
+        setTimeout(() => {
+            setButton(false)
+        }, 1000);
     }
 
-    const tipo = (e) => {
-        if (e.target.name === 'titulo') {
-            setTitulo(e.target.value)
-        } else if (e.target.name === 'descripcion') {
-            setDescripcion(e.target.value)
-        }
+    const deleteBook = (book) => {
+        dropBook(book.code)
+        books = fetch()
+
+        setTimeout(() => {
+            setButton(false)
+        }, 1000);
     }
 
     const selectedBookHandler = (set, book) => {
@@ -119,7 +119,7 @@ function Bookshelf(props) {
                 <h1 className='name' >{book.title}</h1>
                 <p className='details'>{book.content}</p>
                 <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
-                <button type='button' className='delete_btn' onClick={() =>{ dropBook(book.code); books = fetch()}}>Eliminar</button>
+                <button type='button' className='delete_btn' onClick={() => deleteBook(book)}>Eliminar</button>
             </div>
         )
     }
@@ -129,21 +129,19 @@ function Bookshelf(props) {
 
         setPopUpContent(
             <div className="addPopUp">
-                <input type="text" placeholder="Título" name="titulo" onChange={tipo} />
-                <input type="text" placeholder="Descripción"  name="descripcion" onChange={tipo} />
-                <input type="file" name="file"  onChange={onSubmitFile} />
-                <button id='cargar_archivos' type="button" className="popUp-btn" onClick={uploadFileB}>UPLOAD</button>
+                <input type="text" placeholder="Título" id="titulo"/>
+                <input type="text" placeholder="Descripción"  id="descripcion"/>
+                <input type="file" name="file" onChange={onSubmitFile} />
 
-                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => {noteFirebase(titulo, descripcion, fileDownload); books = fetch();}}>Terminar</button>
+                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => finishUpload()}>Terminar</button>
             </div>
         )
     }
-    //En la línea 155 se debe introducir el valor de la ya mencionadfa variable globaque indique la universidad del usuario en cuestión.
+
     return (
         <div className='biblioteca'>
             <BookCard books={books} setButton={selectedBookHandler} />
             
-
             <PopUp id='pop_up' trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
                 {popUpContent}
             </PopUp>
