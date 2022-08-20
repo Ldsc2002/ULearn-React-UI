@@ -65,8 +65,8 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
-        this.university = 'ufm' //todo: implementar con provider
-        this.type = true 
+        this.university = 'uvg' //todo: implementar con provider
+        this.type = false 
     }
     
 
