@@ -516,7 +516,7 @@
 /* Narrowest size for this element's responsive layout */
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -407px;
+    margin-top: -457px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
   }
@@ -527,7 +527,7 @@
 @media (min-width: 568px) {
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -407px;
+    margin-top: -457px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
   }
@@ -539,7 +539,7 @@
 @media (min-width: 768px) {
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -407px;
+    margin-top: -457px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
   }
@@ -551,7 +551,7 @@
 @media (min-width: 1024px) {
   .CrearCuentaScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -407px;
+    margin-top: -457px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
   }
@@ -617,6 +617,9 @@
     margin-top: 33px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
+
+    border: none;
+    font-size: small;
   }
   .CrearCuentaScreen > .layoutFlow > .elFieldCopy > * { 
   width: 263px;
@@ -628,6 +631,9 @@
     margin-top: 33px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
+    
+    border: none;
+    font-size: small;
   }
   .CrearCuentaScreen > .layoutFlow > .elFieldCopy > * { 
   width: 263px;
@@ -640,6 +646,9 @@
     margin-top: 33px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
+
+    border: none;
+    font-size: small;
   }
   .CrearCuentaScreen > .layoutFlow > .elFieldCopy > * { 
   width: 261px;
@@ -652,11 +661,34 @@
     margin-top: 33px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
+
+    border: none;
+    font-size: small;
   }
   .CrearCuentaScreen > .layoutFlow > .elFieldCopy > * { 
   width: 261px;
   }
   
+}
+
+.CrearCuentaScreen > .layoutFlow > .elFieldCopy > select {
+  border: 0px;
+  outline: 0px;
+  
+  box-sizing: border-box;
+  display: block;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.26) !important;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,26%);
+  padding-bottom: 7px !important;
+  outline: 0;
+  width: 100%;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", sans-serif !important;
+  font-size: 13.0px !important;
 }
 
 .CrearCuentaScreen .elButtonCopy button {
@@ -799,33 +831,33 @@
 /* Narrowest size for this element's responsive layout */
   .CrearCuentaScreen > .screenFgContainer > .foreground > .elPerson {
     position: absolute;
-    left: calc(50.0% + 0px - 72px);
-    top: 67px;
-    width: 143px;
-    height: 113px;
+    left: calc(50.0% + 0px - 52px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 @media (min-width: 568px) {
   .CrearCuentaScreen > .screenFgContainer > .foreground > .elPerson {
-    left: calc(50.0% + 0px - 72px);
-    top: 67px;
-    width: 143px;
-    height: 113px;
+    left: calc(50.0% + 0px - 52px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 }
 @media (min-width: 768px) {
   .CrearCuentaScreen > .screenFgContainer > .foreground > .elPerson {
-    left: calc(50.0% + 0px - 71px);
-    top: 67px;
-    width: 142px;
-    height: 112px;
+    left: calc(50.0% + 0px - 51px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 }
 @media (min-width: 1024px) {
   .CrearCuentaScreen > .screenFgContainer > .foreground > .elPerson {
-    left: calc(50.0% + 0px - 71px);
-    top: 67px;
-    width: 142px;
-    height: 112px;
+    left: calc(50.0% + 0px - 51px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 }
 
@@ -924,7 +956,7 @@
 /* Narrowest size for this element's responsive layout */
   .LogInScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -322px;
+    margin-top: -332px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
   }
@@ -935,7 +967,7 @@
 @media (min-width: 568px) {
   .LogInScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -322px;
+    margin-top: -332px;
     width: 263px;
     margin-left: calc(50.0% - 132px);
   }
@@ -947,7 +979,7 @@
 @media (min-width: 768px) {
   .LogInScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -320px;
+    margin-top: -330px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
   }
@@ -959,7 +991,7 @@
 @media (min-width: 1024px) {
   .LogInScreen > .layoutFlow > .elField {
     position: relative;
-    margin-top: -320px;
+    margin-top: -330px;
     width: 261px;
     margin-left: calc(50.0% - 131px);
   }
@@ -1207,32 +1239,32 @@
 /* Narrowest size for this element's responsive layout */
   .LogInScreen > .screenFgContainer > .foreground > .elPerson {
     position: absolute;
-    left: calc(50.0% + 0px - 72px);
-    top: 67px;
-    width: 143px;
-    height: 113px;
+    left: calc(50.0% + 0px - 52px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 @media (min-width: 568px) {
   .LogInScreen > .screenFgContainer > .foreground > .elPerson {
-    left: calc(50.0% + 0px - 72px);
-    top: 67px;
-    width: 143px;
-    height: 113px;
+    left: calc(50.0% + 0px - 52px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 }
 @media (min-width: 768px) {
   .LogInScreen > .screenFgContainer > .foreground > .elPerson {
-    left: calc(50.0% + 0px - 71px);
-    top: 67px;
-    width: 142px;
-    height: 112px;
+    left: calc(50.0% + 0px - 51px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 }
 @media (min-width: 1024px) {
   .LogInScreen > .screenFgContainer > .foreground > .elPerson {
-    left: calc(50.0% + 0px - 71px);
-    top: 67px;
-    width: 142px;
-    height: 112px;
+    left: calc(50.0% + 0px - 51px);
+    top: 77px;
+    width: 103px;
+    height: 73px;
   }
 }

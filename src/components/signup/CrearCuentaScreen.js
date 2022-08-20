@@ -25,6 +25,7 @@ export default class CrearCuentaScreen extends Component {
             registerPassword: '',
             registerName: '',
             registerMajor: '',
+            registerCollege: '',
         }
     }
 
@@ -56,6 +57,14 @@ export default class CrearCuentaScreen extends Component {
 
   getValue_elFieldCopy = () => this.state.fieldCopy || ''
 
+  textInputChanged_Universidad = (event) => {
+    this.setState({ universidad: event.target.value })
+    this.setState({ registerCollege: event.target.value })
+  }
+
+  getValue_Universidad = () => this.state.universidad || ''
+
+
   onClick_elButtonCopy = async () => {
       // Go to screen 'CrearCuenta'
       // Go to screen 'LogIn'
@@ -75,7 +84,7 @@ export default class CrearCuentaScreen extends Component {
             usuario: this.state.registerEmail,
             nombre: this.state.registerName,
             carrera: this.state.registerMajor,
-            universidad: 'Universidad del Valle de Guatemala', //CHANFE FOR USER INPUT SPRINT 2
+            universidad: this.state.registerCollege,
             tipo: false,
 
         })
@@ -162,14 +171,51 @@ export default class CrearCuentaScreen extends Component {
                   </div>
 
                   <div className="elFieldCopy">
-                      <Input className="baseFont" style={style_elField} type="text" placeholder="Carrera" onChange={this.textInputChanged_elField2} value={this.getValue_elField2()} />
+                      <select className="baseFont" style={style_elField} placeholder="Universidad" onChange={this.textInputChanged_Universidad} value={this.getValue_Universidad()}>
+                        <option disabled={true} value="">
+                        Universidad
+                        </option>
+                        <option value="ufm">Universidad Francisco Marroquin</option>
+                        <option value="umg">Universidad Mariano Galvez</option>
+                        <option value="url">Universidad Rafael Landivar</option>
+                        <option value="usac">Universidad San Carlos de Guatemala</option>
+                        <option value="uvg">Universidad del Valle de Guatemala</option>
+                      </select>
+                  </div>
+
+                  <div className="elFieldCopy">
+                      <select className="baseFont" style={style_elField} placeholder="Carrera" onChange={this.textInputChanged_elField2} value={this.getValue_elField2()}>
+                        <option disabled={true} value="">
+                        Carrera
+                        </option>
+                        <option value="Ingeniería Biomédica">Ingeniería Biomédica</option>
+                        <option value="Ingeniería Biotecnología Industrial">Ingeniería Biotecnología Industrial</option>
+                        <option value="Ingeniería en Ciencias de Alimentos">Ingeniería en Ciencias de Alimentos</option>
+                        <option value="Ingeniería en Ciencias de Alimentos Industrial">Ingeniería en Ciencias de Alimentos Industrial</option>
+                        <option value="Ingeniería en Ciencias de la Administración">Ingeniería en Ciencias de la Administración</option>
+                        <option value="Ingeniería en Ciencia de los Datos">Ingeniería en Ciencia de los Datos</option>
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                        <option value="Ingeniería Civil Ambiental">Ingeniería Civil Ambiental</option>
+                        <option value="Ingeniería Civil Arquitectónica">Ingeniería Civil Arquitectónica</option>
+                        <option value="Ingeniería Civil Industrial">Ingeniería Civil Industrial</option>
+                        <option value="Ingeniería en Computación y Tecnologías de la Información">Ingeniería en Computación y Tecnologías de la Información</option>
+                        <option value="Ingeniería Electrónica">Ingeniería Electrónica</option>
+                        <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                        <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
+                        <option value="Ingeniería Mecánica Industrial">Ingeniería Mecánica Industrial</option>
+                        <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
+                        <option value="Ingeniería Química">Ingeniería Química</option>
+                        <option value="Ingeniería Química Industrial">Ingeniería Química Industrial</option>
+
+
+                      </select>
                   </div>
 
                   <div className="elFieldCopy2">
                       <Input className="baseFont" style={style_elField} type="email" placeholder="alguien@ejemplo.com" onChange={this.textInputChanged_elFieldCopy2} value={this.getValue_elFieldCopy2()} />
                   </div>
 
-                  <div className="elFieldCopy">
+                  <div className="elFieldCopy2">
                       <Input className="baseFont" style={style_elField} type="password" placeholder="Contraseña" onChange={this.textInputChanged_elFieldCopy} value={this.getValue_elFieldCopy()} />
                   </div>
 

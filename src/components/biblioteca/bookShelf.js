@@ -5,7 +5,8 @@ import PopUp from '../popup/PopUp'
 import { db, storage } from '../firebase/firebase'
 
 function fetch() {
-    const books = []
+    const libros = []
+    const librosApproved = []
 
     db.collection('archivos')
         .get()
@@ -14,28 +15,35 @@ function fetch() {
                 const title = doc.get('titulo')
                 const content = doc.get('content')
                 const file = doc.get('file')
+                const college = doc.get('universidad')
                 const code = doc.id
                 const { id } = doc
                 const book = {
                     id, title, content, file, code,
                 }
-
-                books.push(book)
+                //Este condicional hace que el arreglo interno solo contenga los libros aprobados por la universidad en turno
+                //Sólo se necesita el acceso a una variable global para que se pueda determinar de manera automática 
+                //la universidad y, por tanto, la serie de libros a los que se tiene acceso.
+                if (college === /*'usac'*/ 'uvg') {
+                    libros.push(book)
+                }
             })
         })
-    return books
+    
+    return libros
 }
 
-function noteFirebase(t, d, f) {
+function noteFirebase(t, d, f, u) {
     const title = t
     const text = d
     const archivo = f
+    const college = u
 
     db.collection('archivos').add({
         titulo: title,
         content: text,
         file: archivo,
-
+        universidad: college
     })
 }
 
@@ -130,7 +138,7 @@ function Bookshelf(props) {
             </div>
         )
     }
-
+    //En la línea 155 se debe introducir el valor de la ya mencionadfa variable globaque indique la universidad del usuario en cuestión.
     return (
         <div className='biblioteca'>
             <BookCard books={books} setButton={selectedBookHandler} />

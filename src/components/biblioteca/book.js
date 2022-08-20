@@ -1,5 +1,4 @@
 import React from 'react'
-import $ from 'jquery'
 
 const { WidthProvider } = require('react-grid-layout')
 let ResponsiveReactGridLayout = require('react-grid-layout')
