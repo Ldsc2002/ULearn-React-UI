@@ -2,73 +2,10 @@ import React, { useState } from 'react'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import BookCard from './book'
 import PopUp from '../popup/PopUp'
-import { db, storage } from '../firebase/firebase'
-
-function fetch() {
-    const libros = []
-
-    db.collection('archivos')
-        .get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const title = doc.get('titulo')
-                const content = doc.get('content')
-                const file = doc.get('file')
-                const college = doc.get('universidad')
-                const code = doc.id
-                const { id } = doc
-                const book = {
-                    id, title, content, file, code,
-                }
-                //Este condicional hace que el arreglo interno solo contenga los libros aprobados por la universidad en turno
-                //Sólo se necesita el acceso a una variable global para que se pueda determinar de manera automática 
-                //la universidad y, por tanto, la serie de libros a los que se tiene acceso.
-                if (college === /*'usac'*/ 'uvg') {
-                    libros.push(book)
-                }
-            })
-        })
-    
-    return libros
-}
-
-function noteFirebase(t, d, f, u) {
-    const title = t
-    const text = d
-    const archivo = f
-    const college = u
-
-    db.collection('archivos').add({
-        titulo: title,
-        content: text,
-        file: archivo,
-        universidad: college
-    })
-}
+import { storage } from '../firebase/firebase'
+import { fetch, noteFirebase, dropBook, openFile } from './bookShelfService'
 
 var books = fetch()
-
-function dropBook(i){
-    const id = i.toString()
-    db.collection('archivos').doc(id).delete()
-}
-
-function openFile(item){
-    const link = ref(storage, item)
-    
-    getDownloadURL(link).then((url) => {
-        const anchor = document.createElement('a')
-        anchor.href = url
-        anchor.target = '_blank'
-        anchor.download = 'Funciona'
-
-        document.body.appendChild(anchor)
-        anchor.click()
-        document.body.removeChild(anchor)
-      })
-      .catch((error) => {
-    })
-}
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
@@ -93,7 +30,7 @@ function Bookshelf(props) {
     const finishUpload = () => {
         titulo = document.getElementById('titulo').value
         descripcion = document.getElementById('descripcion').value
-        noteFirebase(titulo, descripcion, fileDownload, 'uvg')
+        noteFirebase(titulo, descripcion, fileDownload, 'uvg') // TODO college from global value
         
         books = fetch()
 
