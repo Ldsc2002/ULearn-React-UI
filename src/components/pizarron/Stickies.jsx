@@ -65,8 +65,8 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
-        this.university = 'ufm' //todo: implementar con provider
-        this.type = true 
+        this.university = 'uvg' //todo: implementar con provider (uvg = Universidad del Valle, ufm, universidad francisco marroquin)
+        this.type = false  //todo: implmentar con provider (true= superusaurio qeu puede borrar, false= usario normal que no puede borrar)
     }
     
 
@@ -145,10 +145,6 @@ export default class extends Component {
     deleteNote(currentNote) {
         const { notes } = this.state
         const { id } = currentNote
-
-        console.log(currentNote)
-
-        // delete firebase
 
         db.collection('notitas').doc(this.university).collection(this.university).doc(id).delete()
 
@@ -271,8 +267,6 @@ export default class extends Component {
 
         const uid = guid()
 
-        console.log(this.university)
-
         db.collection('notitas').doc(this.university).collection(this.university)
             .get()
             .then((querySnapshot) => {
@@ -327,11 +321,11 @@ export default class extends Component {
                     style={noteStyle}
                 >
 
-                    <div class="pushpin tilted">
-                        <div class="pinhead"></div>
-                        <div class="pinbase"></div>
-                        <div class="pinshaft"></div>
-                        <div class="pinpoint"></div>
+                    <div className="pushpin tilted">
+                        <div className="pinhead"></div>
+                        <div className="pinbase"></div>
+                        <div className="pinshaft"></div>
+                        <div className="pinpoint"></div>
                     </div>
                     
                     <div className="note-header" style={noteHeaderStyle}>
