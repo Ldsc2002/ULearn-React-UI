@@ -28,8 +28,8 @@ function Bookshelf(props) {
     }
 
     const finishUpload = () => {
-        titulo = document.getElementById('titulo').value
-        descripcion = document.getElementById('descripcion').value
+        let titulo = document.getElementById('titulo').value
+        let descripcion = document.getElementById('descripcion').value
         noteFirebase(titulo, descripcion, fileDownload, 'uvg') // TODO college from global value
         
         books = fetch()
