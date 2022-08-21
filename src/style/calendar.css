@@ -156,7 +156,7 @@
 }
 
 .ingresador>h3{
-    background-color: #841d1d;
+    background-color: #fa3636;
     color: white;
     width: 100%;
     margin: 0;
@@ -166,7 +166,7 @@
 .ingresador>input{
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    color: #841d1d;
+    color: #fa3636;
     border: 3px solid;
     top: 4%;
 }
