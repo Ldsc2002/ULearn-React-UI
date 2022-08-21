@@ -1,4 +1,5 @@
 import { db, storage } from '../firebase/firebase'
+import { ref, getDownloadURL } from 'firebase/storage'
 
 function fetch() {
     const libros = []
