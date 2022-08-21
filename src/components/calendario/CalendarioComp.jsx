@@ -31,13 +31,20 @@ function CalendarioComp() {
     }
 
     const newDateInador = () => {
-        const fecha = `${day}-${month}-${year}`
+        const fecha = `${diaS}-${mesS}-${anoS}`
+
+        console.log(tituloS, ' ', fecha, ' ', contenidoS)
+
         const id = guid()
 
+        const userV = 'jose@uvg.edu.gt'
+
         db.collection('eventos').doc(id).set({
-            contenido: content,
+            contenido: contenidoS,
             fecha,
-            titulo: title,
+            titulo: tituloS,
+            user: userV,
+
         })
         setPregunta(false)
     }
@@ -69,11 +76,14 @@ function CalendarioComp() {
 
 
     const dateClickHandler = (date) => {
-        setDate(true)
+        console.log("entro")
         const contenido = []
         const fecha = []
         const titulo = []
         const id = []
+        const user = []
+
+        console.log(date)
 
         db.collection('eventos')
             .get()
@@ -83,13 +93,19 @@ function CalendarioComp() {
                     contenido.push(doc.get('contenido'))
                     fecha.push(doc.get('fecha'))
                     titulo.push(doc.get('titulo'))
+                    user.push(doc.get('user'))
                 })
                 for (let i = 0; i < titulo.length; i++) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
+                    console.log('AQUI ESTA EL SUAURIO', user[i], fecha[i])
                     if (fecha[i] === date) {
-                        setEvent(temp)
+                        console.log('primer if');
+                        if(user[i] == 'jose@uvg.edu.gt'){
+                            console.log('segundo if');
+                            setEvent(temp)
+                        }
                     }
                 }
             })
