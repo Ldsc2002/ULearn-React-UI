@@ -6,12 +6,11 @@ import { storage } from '../firebase/firebase'
 import { fetch, noteFirebase, dropBook, openFile } from './bookShelfService'
 
 var books = fetch()
+var fileDownload = ''
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
-    const [popUpContent, setPopUpContent] = useState('')
-
-    const [fileDownload, setFileDownload] = useState('')
+    const [popUpContent, setPopUpContent] = useState()
 
     const onSubmitFile = (e) => {
         const file = e.target.files[0]
@@ -20,7 +19,7 @@ function Bookshelf(props) {
             const reference = ref(storage, file.name)
             uploadBytes(reference, file).then(() => {
                 getDownloadURL(reference).then((url) => {
-                    setFileDownload(url)
+                    fileDownload = url
                     alert('Upload file')
                 })
             })
@@ -30,6 +29,7 @@ function Bookshelf(props) {
     const finishUpload = () => {
         let titulo = document.getElementById('titulo').value
         let descripcion = document.getElementById('descripcion').value
+
         noteFirebase(titulo, descripcion, fileDownload, 'uvg') // TODO college from global value
         
         books = fetch()

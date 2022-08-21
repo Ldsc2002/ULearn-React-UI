@@ -49,6 +49,8 @@ function dropBook(i){
 function openFile(item){
     const link = ref(storage, item)
     
+    console.log(link)
+
     getDownloadURL(link).then((url) => {
         const anchor = document.createElement('a')
         anchor.href = url
