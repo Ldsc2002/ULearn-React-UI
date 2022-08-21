@@ -36,7 +36,7 @@ function CalendarioComp() {
 
         const id = guid()
 
-        const userV = 'gon20335@uvg.edu.gt'
+        const userV = 'jose@uvg.edu.gt'
 
         db.collection('eventos').doc(id).set({
             contenido: contenidoS,
@@ -81,7 +81,7 @@ function CalendarioComp() {
         const fecha = []
         const titulo = []
         const id = []
-        const usuario = []
+        const user = []
 
         console.log(date)
 
@@ -93,15 +93,20 @@ function CalendarioComp() {
                     contenido.push(doc.get('contenido'))
                     fecha.push(doc.get('fecha'))
                     titulo.push(doc.get('titulo'))
-                    usuario.push(doc.get('universidad'))
+                    user.push(doc.get('user'))
                 })
                 for (let i = 0; i < titulo.length; i++) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
-                    if (fecha[i] === date && usuario == 'gon20335@uvg.edu.gt') {
-                        console.log("llego")
-                        setEvent(temp)
+                    console.log('AQUI ESTA EL SUAURIO', user[i], fecha[i])
+                    if (fecha[i] === date) {
+                        console.log('primer if');
+                        if(user[i] == 'jose@uvg.edu.gt'){
+                            console.log('segundo if');
+                            console.log("llego")
+                            setEvent(temp)
+                        }
                     }
                 }
             })
