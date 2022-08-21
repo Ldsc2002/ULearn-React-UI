@@ -146,10 +146,6 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
-        console.log(currentNote)
-
-        // delete firebase
-
         db.collection('notitas').doc(this.university).collection(this.university).doc(id).delete()
 
         notes.forEach((note, index) => {
@@ -271,8 +267,6 @@ export default class extends Component {
 
         const uid = guid()
 
-        console.log(this.university)
-
         db.collection('notitas').doc(this.university).collection(this.university)
             .get()
             .then((querySnapshot) => {
@@ -327,11 +321,11 @@ export default class extends Component {
                     style={noteStyle}
                 >
 
-                    <div class="pushpin tilted">
-                        <div class="pinhead"></div>
-                        <div class="pinbase"></div>
-                        <div class="pinshaft"></div>
-                        <div class="pinpoint"></div>
+                    <div className="pushpin tilted">
+                        <div className="pinhead"></div>
+                        <div className="pinbase"></div>
+                        <div className="pinshaft"></div>
+                        <div className="pinpoint"></div>
                     </div>
                     
                     <div className="note-header" style={noteHeaderStyle}>
