@@ -31,22 +31,22 @@ function CalendarioComp() {
     }
 
     const newDateInador = () => {
-        const fecha = `${diaS}-${mesS}-${anoS}`
+        const fechas = `${day}-${month}-${year}`
 
-        console.log(tituloS, ' ', fecha, ' ', contenidoS)
+        console.log(title, ' ', fechas, ' ', content)
 
         const id = guid()
 
         const userV = 'jose@uvg.edu.gt'
 
         db.collection('eventos').doc(id).set({
-            contenido: contenidoS,
-            fecha,
-            titulo: tituloS,
+            contenido: content,
+            fecha: fechas,
+            titulo: title,
             user: userV,
 
         })
-        setPregunta(false)
+        setAddDate(false)
     }
 
     const readInador = (e) => {
