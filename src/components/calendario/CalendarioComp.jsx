@@ -77,6 +77,7 @@ function CalendarioComp() {
 
     const dateClickHandler = (date) => {
         console.log("entro")
+        setDate(true)
         const contenido = []
         const fecha = []
         const titulo = []
