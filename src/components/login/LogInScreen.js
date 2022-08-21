@@ -58,6 +58,8 @@ export default class LogInScreen extends Component {
           {
               return user
           })
+
+          
           
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
