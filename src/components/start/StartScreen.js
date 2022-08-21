@@ -25,7 +25,6 @@ export default class StartScreen extends Component {
 
   componentDidMount() {
     this.setState({loged: true})
-    console.log(this.state.loged)
 
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
