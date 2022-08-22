@@ -1,11 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import React from 'react';
-import App from '../App.jsx';
+import PopUp from '../src/components/popup/PopUp';
 
 describe('App tests', () => {
-    it('should contains the heading 1', () => {
-    render(<App />);
-        const heading = screen.getByText(/Hello world! I am using React/i);
-        expect(heading).toBeInTheDocument()
-    });
+    it('Carga UI', () => {
+        render(<PopUp />)
+    })
 });
