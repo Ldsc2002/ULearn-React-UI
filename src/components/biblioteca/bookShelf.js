@@ -3,15 +3,15 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import BookCard from './book'
 import PopUp from '../popup/PopUp'
 import { storage } from '../firebase/firebase'
-import { fetch, noteFirebase, dropBook, openFile } from './bookShelfService'
-
-var books = fetch()
+import { fetch, noteFirebase, dropBook, openFile} from './bookShelfService'
+var admin = false     // TODO get admin from global value
+var college = 'uvg'  // TODO college from global value
+var books = fetch(college)
 var fileDownload = ''
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
-
     const onSubmitFile = (e) => {
         const file = e.target.files[0]
 
@@ -26,13 +26,14 @@ function Bookshelf(props) {
         }
     }
 
+
     const finishUpload = () => {
         let titulo = document.getElementById('titulo').value
         let descripcion = document.getElementById('descripcion').value
 
-        noteFirebase(titulo, descripcion, fileDownload, 'uvg') // TODO college from global value
+        noteFirebase(titulo, descripcion, fileDownload, college) // TODO college from global value
         
-        books = fetch()
+        books = fetch(college)
 
         setTimeout(() => {
             setButton(false)
@@ -41,7 +42,7 @@ function Bookshelf(props) {
 
     const deleteBook = (book) => {
         dropBook(book.code)
-        books = fetch()
+        books = fetch(college)
 
         setTimeout(() => {
             setButton(false)
@@ -56,7 +57,7 @@ function Bookshelf(props) {
                 <h1 className='name' >{book.title}</h1>
                 <p className='details'>{book.content}</p>
                 <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
-                <button type='button' className='delete_btn' onClick={() => deleteBook(book)}>Eliminar</button>
+                <button type='button' className='delete_btn' disabled={!admin} onClick={() => deleteBook(book)}>Eliminar</button>
             </div>
         )
     }
