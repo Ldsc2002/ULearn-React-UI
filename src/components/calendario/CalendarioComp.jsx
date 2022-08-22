@@ -177,10 +177,10 @@ function CalendarioComp() {
                         <div className="eventDiv"> 
                             <div className='eventDiv1'>
                                 <h1>{event.fecha}</h1>
+                                <h2>Título: {event.titulo}</h2>
                             </div>
                         
                             <div className='eventDiv2'>
-                                <h2>Título: {event.titulo}</h2>
                                 <h2>Información: {event.contenido}</h2>
                             </div>
                             <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
