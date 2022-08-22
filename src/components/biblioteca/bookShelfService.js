@@ -1,7 +1,7 @@
-import { db, storage } from '../firebase/firebase'
+import { auth, db, storage } from '../firebase/firebase'
 import { ref, getDownloadURL } from 'firebase/storage'
 
-function fetch() {
+function fetch(u) {
     const libros = []
 
     db.collection('archivos')
@@ -18,7 +18,7 @@ function fetch() {
                     id, title, content, file, code,
                 }
                 // TODO check college with global value
-                if (college === /*'usac'*/ 'uvg') {
+                if (college === u) {
                     libros.push(book)
                 }
             })
@@ -65,4 +65,4 @@ function openFile(item){
     })
 }
 
-export { fetch, noteFirebase, dropBook, openFile }
+export { fetch, noteFirebase, dropBook, openFile}
