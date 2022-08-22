@@ -27,6 +27,16 @@ class App extends Component {
       }
   }
 
+  setUserData = (university,type) => {
+    this.setState({ university: university }),
+    this.setState({ type: type })
+  }
+
+  getUserData = () => {
+    return this.state
+  }
+
+
   componentDidMount() {
       this.windowDidResize()
       window.addEventListener('resize', this.windowDidResize)

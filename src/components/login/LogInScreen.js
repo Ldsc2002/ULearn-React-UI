@@ -8,8 +8,7 @@ import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
 import img_elCit from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg'
 import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png'
-
-import { auth } from '../firebase/firebase'
+import { auth,  db } from '../firebase/firebase'
 
 // UI framework component imports
 
@@ -58,11 +57,20 @@ export default class LogInScreen extends Component {
           {
               return user
           })
-          
-          this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
-      } catch (error) {
-          alert('El correo o la contraseña ingresados no son válidos.')
-      }
+
+            db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => { 
+                this.setState({ university: (docRef.data().universidad)  }),
+                this.setState({ type: (docRef.data().tipo) })
+                this.context.setUserData(this.state.university, this.state.type)
+            }).then(
+                this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' }) 
+            )
+
+            console.log(this.state.university, this.state.type)
+
+        } catch (error) {
+            alert('El correo o la contraseña ingresados no son válidos.')
+        }
   }
 
   onClick_elButtonCopy = async () => {
