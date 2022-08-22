@@ -339,7 +339,6 @@ export default class extends Component {
                             />
                         </div>
                         <div
-
                             className={`${closeIcon ? '' : 'close'}`}
                             style={closeStyle}
                             onClick={() => this.deleteNote(note)}

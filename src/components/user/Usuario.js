@@ -23,8 +23,8 @@ export default class Usuario extends Component {
     componentDidMount() {
         try {
             db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => {
-                this.setState({ s_email: (docRef.data().usuario) }),
-                this.setState({ s_name: (docRef.data().nombre) }),
+                this.setState({ s_email: (docRef.data().usuario) })
+                this.setState({ s_name: (docRef.data().nombre) })
                 this.setState({ s_major: (docRef.data().carrera) })
             })
             // this.setState({ s_email: (auth.currentUser).email })

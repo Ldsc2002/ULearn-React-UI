@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
 
@@ -74,7 +74,7 @@ function CalendarioComp() {
         setEvent(temp)
     }
 
-    const dateClickHandler = (date) => {
+    const dateClickHandler = (newDate) => {
         console.log('entro')
         setDate(true)
         const contenido = []
@@ -83,7 +83,7 @@ function CalendarioComp() {
         const id = []
         const user = []
 
-        console.log(date)
+        console.log(newDate)
 
         db.collection('eventos')
             .get()
@@ -100,9 +100,9 @@ function CalendarioComp() {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
                     console.log('AQUI ESTA EL SUAURIO', user[i], fecha[i])
-                    if (fecha[i] === date) {
+                    if (fecha[i] === newDate) {
                         console.log('primer if')
-                        if (user[i] == 'jose@uvg.edu.gt') {
+                        if (user[i] === 'jose@uvg.edu.gt') {
                             console.log('segundo if')
                             setEvent(temp)
                         }
@@ -120,8 +120,8 @@ function CalendarioComp() {
                 <thead>
                     <tr>
                         {
-                            daysShort.map((day) => (
-                                <th key={day}>{day}</th>
+                            daysShort.map((newDay) => (
+                                <th key={newDay}>{newDay}</th>
                             ))
                         }
                     </tr>
@@ -189,7 +189,7 @@ function CalendarioComp() {
             </PopUp>
 
             <PopUp trigger={date} setTrigger={setDate}>
-                {event.fecha != 'dd-mm-yyyy' ? (
+                {event.fecha !== 'dd-mm-yyyy' ? (
                     <div className="eventDiv">
                         <div className="eventDiv1">
                             <h1>{event.fecha}</h1>

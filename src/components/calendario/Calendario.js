@@ -1,5 +1,5 @@
 import React from 'react'
-import CalendarioComp from './CalendarioComp.jsx'
+import CalendarioComp from './CalendarioComp'
 
 function calendario() {
     return (

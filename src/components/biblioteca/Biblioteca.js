@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Bookshelf from './bookShelf'
 
-export default class Biblioteca extends Component {
-    render() {
-        return (
-            <div>
-                <Bookshelf />
-            </div>
-        )
-    }
+function Biblioteca() {
+    return (
+        <div>
+            <Bookshelf />
+        </div>
+    )
 }
+
+export default Biblioteca

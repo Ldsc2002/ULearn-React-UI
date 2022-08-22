@@ -10,25 +10,15 @@ import ScreenContext from '../app/ScreenContext'
 export default class StartScreen extends Component {
     static contextType = ScreenContext;
 
-    constructor(props) {
-        super(props)
-
-        this.state = {
-        }
-    }
-
   selectorSelectionChanged = (idx, ev) => {
       this.setState({ selectedIndex_selector: idx })
       this.context.appActions.updateDataSlot('ds_SlotSelectedTab', idx.toString())
   }
 
   componentDidMount() {
-      this.setState({ loged: true })
-
       const auth = getAuth()
       onAuthStateChanged(auth, (user) => {
           if (!user) {
-              this.setState({ loged: false })
               this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
           }
       })
