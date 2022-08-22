@@ -2,8 +2,7 @@ import React, { Component, useReducer } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import ContentEditable from './ContentEditable'
-import {auth,  db } from '../firebase/firebase'
-
+import { auth, db } from '../firebase/firebase'
 
 const { WidthProvider } = require('react-grid-layout')
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
@@ -52,7 +51,6 @@ function transformContentState(notes) {
 }
 
 export default class extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
@@ -65,10 +63,9 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
-        this.university = 'uvg' //todo: implementar con provider (uvg = Universidad del Valle, ufm, universidad francisco marroquin)
-        this.type = false  //todo: implmentar con provider (true= superusaurio qeu puede borrar, false= usario normal que no puede borrar)
+        this.university = 'uvg' // todo: implementar con provider (uvg = Universidad del Valle, ufm, universidad francisco marroquin)
+        this.type = false // todo: implmentar con provider (true= superusaurio qeu puede borrar, false= usario normal que no puede borrar)
     }
-    
 
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
@@ -83,7 +80,7 @@ export default class extends Component {
             })
         }
         this.setState({
-            colors: nextProps.colors || ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1','#E84A64'],
+            colors: nextProps.colors || ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1', '#E84A64'],
             dateFormat: nextProps.dateFormat || 'lll',
         })
     }
@@ -135,18 +132,20 @@ export default class extends Component {
         const date = note.timeStamp
         const { id } = note
 
-        db.collection('notitas').doc(this.university).collection(this.university).doc(id).set({
-            content: text,
-            date,
-            title,
-        })
+        db.collection('notitas').doc(this.university).collection(this.university).doc(id)
+            .set({
+                content: text,
+                date,
+                title,
+            })
     }
 
     deleteNote(currentNote) {
         const { notes } = this.state
         const { id } = currentNote
 
-        db.collection('notitas').doc(this.university).collection(this.university).doc(id).delete()
+        db.collection('notitas').doc(this.university).collection(this.university).doc(id)
+            .delete()
 
         notes.forEach((note, index) => {
             if (currentNote.id === note.id) {
@@ -271,12 +270,10 @@ export default class extends Component {
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-
                     titles.push(doc.get('title'))
                     contents.push(doc.get('content'))
                     dates.push(doc.get('date'))
                     id.push(doc.id)
-
                 })
 
                 for (let i = 0; i < titles.length; i++) {
@@ -290,11 +287,10 @@ export default class extends Component {
     }
 
     isSuperUser() {
-        if(this.type){
+        if (this.type) {
             return false
-        }else{
-            return true
         }
+        return true
     }
 
     renderNote(note) {
@@ -322,12 +318,12 @@ export default class extends Component {
                 >
 
                     <div className="pushpin tilted">
-                        <div className="pinhead"></div>
-                        <div className="pinbase"></div>
-                        <div className="pinshaft"></div>
-                        <div className="pinpoint"></div>
+                        <div className="pinhead" />
+                        <div className="pinbase" />
+                        <div className="pinshaft" />
+                        <div className="pinpoint" />
                     </div>
-                    
+
                     <div className="note-header" style={noteHeaderStyle}>
                         <div
                             className={`${addIcon ? '' : 'add'}`}
@@ -343,7 +339,7 @@ export default class extends Component {
                             />
                         </div>
                         <div
-                           
+
                             className={`${closeIcon ? '' : 'close'}`}
                             style={closeStyle}
                             onClick={() => this.deleteNote(note)}

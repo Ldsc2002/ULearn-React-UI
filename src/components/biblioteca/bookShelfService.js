@@ -1,5 +1,5 @@
-import { auth, db, storage } from '../firebase/firebase'
 import { ref, getDownloadURL } from 'firebase/storage'
+import { auth, db, storage } from '../firebase/firebase'
 
 function fetch(u) {
     const libros = []
@@ -23,7 +23,7 @@ function fetch(u) {
                 }
             })
         })
-    
+
     return libros
 }
 
@@ -37,18 +37,18 @@ function noteFirebase(t, d, f, u) {
         titulo: title,
         content: text,
         file: archivo,
-        universidad: college
+        universidad: college,
     })
 }
 
-function dropBook(i){
+function dropBook(i) {
     const id = i.toString()
     db.collection('archivos').doc(id).delete()
 }
 
-function openFile(item){
+function openFile(item) {
     const link = ref(storage, item)
-    
+
     console.log(link)
 
     getDownloadURL(link).then((url) => {
@@ -60,9 +60,11 @@ function openFile(item){
         document.body.appendChild(anchor)
         anchor.click()
         document.body.removeChild(anchor)
-      })
-      .catch((error) => {
     })
+        .catch((error) => {
+        })
 }
 
-export { fetch, noteFirebase, dropBook, openFile}
+export {
+    fetch, noteFirebase, dropBook, openFile,
+}

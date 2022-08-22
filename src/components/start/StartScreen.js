@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
+import { getAuth, onAuthStateChanged, reload } from 'firebase/auth'
 import Pizarron from '../pizarron/Pizarron'
 import Biblioteca from '../biblioteca/Biblioteca'
 import Calendario from '../calendario/Calendario'
 import Usuario from '../user/Usuario'
 import TabBarButton from '../navigation/TabBarButton'
 import ScreenContext from '../app/ScreenContext'
-
-import { getAuth, onAuthStateChanged, reload } from "firebase/auth";
 
 export default class StartScreen extends Component {
     static contextType = ScreenContext;
@@ -24,16 +23,16 @@ export default class StartScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState({loged: true})
+      this.setState({ loged: true })
 
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-          this.setState({loged: false})
-          this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
-      }
-    });
-}
+      const auth = getAuth()
+      onAuthStateChanged(auth, (user) => {
+          if (!user) {
+              this.setState({ loged: false })
+              this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
+          }
+      })
+  }
 
   render() {
       const layoutFlowStyle = {}

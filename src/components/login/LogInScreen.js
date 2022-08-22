@@ -54,11 +54,8 @@ export default class LogInScreen extends Component {
               this.state.loginPassword,
           )
 
-          setPersistence(auth, browserLocalPersistence).then(() =>
-          {
-              return user
-          })
-          
+          setPersistence(auth, browserLocalPersistence).then(() => user)
+
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
           alert('El correo o la contraseña ingresados no son válidos.')

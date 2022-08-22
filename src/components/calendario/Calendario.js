@@ -8,7 +8,7 @@ function calendario() {
                 <CalendarioComp />
             </div>
         </div>
-    )    
+    )
 }
 
 export default calendario
