@@ -25,7 +25,6 @@ export default class Usuario extends Component {
 
     componentDidMount() {
 
-
         this.setState({ s_email: this.context.userInfo.email })
         this.setState({ s_name: this.context.userInfo.name })
         this.setState({ s_major: this.context.userInfo.mayor })
