@@ -4,7 +4,7 @@ import BookCard from './book'
 import PopUp from '../popup/PopUp'
 import { storage } from '../firebase/firebase'
 import { fetch, noteFirebase, dropBook, openFile} from './bookShelfService'
-var admin = false     // TODO get admin from global value
+var admin = true     // TODO get admin from global value
 var college = 'uvg'  // TODO college from global value
 var books = fetch(college)
 var fileDownload = ''
@@ -12,6 +12,7 @@ var fileDownload = ''
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
+    const [uploadReady, setUploadReady] = useState(false)
     const onSubmitFile = (e) => {
         const file = e.target.files[0]
 
@@ -20,7 +21,8 @@ function Bookshelf(props) {
             uploadBytes(reference, file).then(() => {
                 getDownloadURL(reference).then((url) => {
                     fileDownload = url
-                    alert('Upload file')
+                    alert('Archivo subido')
+                    setUploadReady(true)
                 })
             })
         }
@@ -35,6 +37,8 @@ function Bookshelf(props) {
         
         books = fetch(college)
 
+        setUploadReady(false)
+
         setTimeout(() => {
             setButton(false)
         }, 1000);
@@ -48,7 +52,7 @@ function Bookshelf(props) {
             setButton(false)
         }, 1000);
     }
-
+    //Apertura y borrado de archivos
     const selectedBookHandler = (set, book) => {
         setButton(set)
 
@@ -61,21 +65,21 @@ function Bookshelf(props) {
             </div>
         )
     }
-
+    //Subida de archivos a la biblioteca
     const addHandler = (set) => {
         setButton(set)
 
         setPopUpContent(
             <div className="addPopUp">
-                <input type="text" placeholder="Título" id="titulo"/>
-                <input type="text" placeholder="Descripción"  id="descripcion"/>
-                <input type="file" name="file" onChange={onSubmitFile} />
+                <input type="text" placeholder="Título" id="titulo" required/>
+                <input type="text" placeholder="Descripción"  id="descripcion" required/>
+                <input type="file" name="file" onChange={onSubmitFile}  required/>
 
-                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => finishUpload()}>Terminar</button>
+                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => uploadReady? finishUpload(): alert('No puede subir un archvio vacío')}>Terminar</button>
             </div>
         )
     }
-
+    //Botón paara subir archivos a la biblioteca
     return (
         <div className='biblioteca'>
             <BookCard books={books} setButton={selectedBookHandler} />
