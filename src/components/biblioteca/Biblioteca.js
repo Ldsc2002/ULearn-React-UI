@@ -6,7 +6,6 @@ export default class Biblioteca extends Component {
     static contextType = ScreenContext;
 
     render() {
-        console.log(this.context.userInfo.university)
         return (
             <div>
                 <Bookshelf 

@@ -34,11 +34,8 @@ function CalendarioComp(props) {
     const newDateInador = () => {
         const fechas = `${day}-${month}-${year}`
 
-        console.log(title, ' ', fechas, ' ', content)
-
         const id = guid()
 
-        console.log(props.email)
         const userV = props.email
 
         db.collection('eventos').doc(id).set({
@@ -78,7 +75,6 @@ function CalendarioComp(props) {
 
 
     const dateClickHandler = (date) => {
-        console.log("entro")
         setDate(true)
         const contenido = []
         const fecha = []
@@ -86,7 +82,6 @@ function CalendarioComp(props) {
         const id = []
         const user = []
 
-        console.log(date)
 
         db.collection('eventos')
             .get()
@@ -102,11 +97,8 @@ function CalendarioComp(props) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
-                    console.log('AQUI ESTA EL SUAURIO', user[i], fecha[i])
                     if (fecha[i] === date) {
-                        console.log('primer if');
-                        if(user[i] == 'jose@uvg.edu.gt'){
-                            console.log('segundo if');
+                        if(user[i] == props.email){
                             setEvent(temp)
                         }
                     }

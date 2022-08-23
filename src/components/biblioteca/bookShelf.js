@@ -6,16 +6,19 @@ import { storage } from '../firebase/firebase'
 import {
     fetch, noteFirebase, dropBook, openFile,
 } from './bookShelfService'
-
-
-const college = 'uvg' // TODO college from global value
-let books = fetch(college)
 let fileDownload = ''
+
 
 function Bookshelf(props) {
 
     const admin = props.type
-    
+    const college = props.university
+
+    console.log(admin)
+    console.log(college)
+
+    let books  = fetch(college)
+
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
     const onSubmitFile = (e) => {
