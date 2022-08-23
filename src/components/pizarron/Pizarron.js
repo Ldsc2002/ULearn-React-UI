@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ScreenContext from '../app/ScreenContext'
 import {
     Stickies,
 } from './indexPizarron'
@@ -6,6 +7,8 @@ import {
 import 'firebase/firestore'
 
 export default class extends Component {
+    static contextType = ScreenContext;
+    
     constructor(props) {
         super(props)
 
@@ -19,6 +22,7 @@ export default class extends Component {
         }
         this.toggleValue = this.toggleValue.bind(this)
         this.onChange = this.onChange.bind(this)
+        
     }
 
     onChange(notes) {
@@ -57,7 +61,8 @@ export default class extends Component {
                     footer={this.state.showFooter}
                     onChange={this.onChange}
                     wrapperStyle={wrapperStyle}
-
+                    university= {this.context.userInfo.university}
+                    type={this.context.userInfo.type}
                 />
             </div>
         )

@@ -38,6 +38,7 @@ export default class Usuario extends Component {
     }
 
   onClick_LogOut = async () => {
+
       auth.signOut()
       this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
   }
