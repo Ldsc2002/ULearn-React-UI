@@ -64,6 +64,7 @@ export default class LogInScreen extends Component {
 
                 this.context.userInfo.university = (docRef.data().universidad) 
                 this.context.userInfo.type = (docRef.data().tipo)
+                this.context.userInfo.email = this.state.loginEmail
 
                 this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' }) 
             })

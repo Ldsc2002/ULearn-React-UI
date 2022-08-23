@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
-
+import ScreenContext from '../app/ScreenContext'
 import PopUp from '../popup/PopUp'
 
-function CalendarioComp() {
+function CalendarioComp(props) {
+
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
@@ -37,7 +38,8 @@ function CalendarioComp() {
 
         const id = guid()
 
-        const userV = 'jose@uvg.edu.gt'
+        console.log(props.email)
+        const userV = props.email
 
         db.collection('eventos').doc(id).set({
             contenido: content,

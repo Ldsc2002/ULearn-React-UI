@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
 import CalendarioComp from './CalendarioComp.jsx'
+import ScreenContext from '../app/ScreenContext'
 
-function calendario() {
-    return (
-        <div className="Calendario">
-            <div className="container has-text-centered">
-                <CalendarioComp />
+export default class calendario extends Component {
+    static contextType = ScreenContext;
+
+    render(){
+
+        return (
+
+            <div className="Calendario">
+                <div className="container has-text-centered">
+                    <CalendarioComp 
+                    email= {this.context.userInfo.email}
+                    />
+                </div>
             </div>
-        </div>
-    )    
-}
+        )   
 
-export default calendario
+    }
+    
+ 
+}
