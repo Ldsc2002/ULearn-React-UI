@@ -70,12 +70,6 @@ export default class LogInScreen extends Component {
 
                 this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' }) 
             })
-
-                console.log(this.context.userInfo.university )
-                console.log(this.context.userInfo.name )
-                console.log(this.context.userInfo.mayor )
-                console.log(this.context.userInfo.email )
-
             
         } catch (error) {
             alert('El correo o la contraseña ingresados no son válidos.')
