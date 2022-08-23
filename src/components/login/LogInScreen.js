@@ -21,6 +21,8 @@ export default class LogInScreen extends Component {
         this.state = {
             loginEmail: '',
             loginPassword: '',
+            university:'',
+            type:''
         }
     }
 
@@ -47,27 +49,27 @@ export default class LogInScreen extends Component {
   onClick_elButton = async () => {
       // Go to screen 'LogIn'
       try {
-          const user = await signInWithEmailAndPassword(
+            const user = await signInWithEmailAndPassword(
               auth,
               this.state.loginEmail,
               this.state.loginPassword,
-          )
-
-          setPersistence(auth, browserLocalPersistence).then(() =>
-          {
-              return user
-          })
-
-            db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => { 
-                this.setState({ university: (docRef.data().universidad)  }),
-                this.setState({ type: (docRef.data().tipo) })
-                this.context.setUserData(this.state.university, this.state.type)
-            }).then(
-                this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' }) 
             )
 
-            console.log(this.state.university, this.state.type)
+            setPersistence(auth, browserLocalPersistence).then(() =>
+           {
+              return user
+           })
 
+            db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => { 
+
+                this.context.userInfo.university = (docRef.data().universidad) 
+                this.context.userInfo.type = (docRef.data().tipo)
+
+                this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' }) 
+            })
+
+
+            
         } catch (error) {
             alert('El correo o la contraseña ingresados no son válidos.')
         }
