@@ -4,12 +4,13 @@ import BookCard from './book'
 import PopUp from '../popup/PopUp'
 import { storage } from '../firebase/firebase'
 import { fetch, noteFirebase, dropBook, openFile} from './bookShelfService'
-var admin = false     // TODO get admin from global value
-var college = 'uvg'  // TODO college from global value
-var books = fetch(college)
-var fileDownload = ''
+
 
 function Bookshelf(props) {
+    var admin = false     // TODO get admin from global value
+    var college = 'uvg'  // TODO college from global value
+    var books = fetch(college)
+    var fileDownload = ''
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
     const onSubmitFile = (e) => {
