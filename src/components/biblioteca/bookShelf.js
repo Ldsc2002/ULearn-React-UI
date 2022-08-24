@@ -3,11 +3,14 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import BookCard from './book'
 import PopUp from '../popup/PopUp'
 import { storage } from '../firebase/firebase'
-import { fetch, noteFirebase, dropBook, openFile} from './bookShelfService'
-var admin = false     // TODO get admin from global value
-var college = 'uvg'  // TODO college from global value
-var books = fetch(college)
-var fileDownload = ''
+import {
+    fetch, noteFirebase, dropBook, openFile,
+} from './bookShelfService'
+
+const admin = false // TODO get admin from global value
+const college = 'uvg' // TODO college from global value
+let books = fetch(college)
+let fileDownload = ''
 
 function Bookshelf(props) {
     const [buttonPopUp, setButton] = useState(false)
@@ -26,18 +29,17 @@ function Bookshelf(props) {
         }
     }
 
-
     const finishUpload = () => {
-        let titulo = document.getElementById('titulo').value
-        let descripcion = document.getElementById('descripcion').value
+        const titulo = document.getElementById('titulo').value
+        const descripcion = document.getElementById('descripcion').value
 
         noteFirebase(titulo, descripcion, fileDownload, college) // TODO college from global value
-        
+
         books = fetch(college)
 
         setTimeout(() => {
             setButton(false)
-        }, 1000);
+        }, 1000)
     }
 
     const deleteBook = (book) => {
@@ -46,7 +48,7 @@ function Bookshelf(props) {
 
         setTimeout(() => {
             setButton(false)
-        }, 1000);
+        }, 1000)
     }
 
     const selectedBookHandler = (set, book) => {
@@ -54,11 +56,11 @@ function Bookshelf(props) {
 
         setPopUpContent(
             <div>
-                <h1 className='name' >{book.title}</h1>
-                <p className='details'>{book.content}</p>
-                <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
-                <button type='button' className='delete_btn' disabled={!admin} onClick={() => deleteBook(book)}>Eliminar</button>
-            </div>
+                <h1 className="name">{book.title}</h1>
+                <p className="details">{book.content}</p>
+                <button type="button" className="popUp-btn" onClick={() => { openFile(book.file) }}>Abrir</button>
+                <button type="button" className="delete_btn" disabled={!admin} onClick={() => deleteBook(book)}>Eliminar</button>
+            </div>,
         )
     }
 
@@ -67,20 +69,20 @@ function Bookshelf(props) {
 
         setPopUpContent(
             <div className="addPopUp">
-                <input type="text" placeholder="Título" id="titulo"/>
-                <input type="text" placeholder="Descripción"  id="descripcion"/>
+                <input type="text" placeholder="Título" id="titulo" />
+                <input type="text" placeholder="Descripción" id="descripcion" />
                 <input type="file" name="file" onChange={onSubmitFile} />
 
-                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => finishUpload()}>Terminar</button>
-            </div>
+                <button id="subir_archivo" type="button" className="popUp-btn" onClick={() => finishUpload()}>Terminar</button>
+            </div>,
         )
     }
 
     return (
-        <div className='biblioteca'>
+        <div className="biblioteca">
             <BookCard books={books} setButton={selectedBookHandler} />
-            
-            <PopUp id='pop_up' trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
+
+            <PopUp id="pop_up" trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
                 {popUpContent}
             </PopUp>
 
