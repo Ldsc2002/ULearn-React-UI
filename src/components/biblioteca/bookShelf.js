@@ -7,17 +7,12 @@ import {
     fetch, noteFirebase, dropBook, openFile,
 } from './bookShelfService'
 let fileDownload = ''
+const admin = true
+const college = 'uvg'
+let books  = fetch(college)
 
 
 function Bookshelf(props) {
-
-    const admin = props.type
-    const college = props.university
-
-    console.log(admin)
-    console.log(college)
-
-    let books  = fetch(college)
 
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
