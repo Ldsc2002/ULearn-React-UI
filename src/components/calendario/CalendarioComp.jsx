@@ -31,7 +31,7 @@ function CalendarioComp(props) {
             s4()}-${s4()}${s4()}${s4()}`
     }
 
-    const newDateInador = () => {
+    const addEventHandler = () => {
         const fechas = `${day}-${month}-${year}`
 
         const id = guid()
@@ -48,7 +48,7 @@ function CalendarioComp(props) {
         setAddDate(false)
     }
 
-    const readInador = (e) => {
+    const inputDataHandler = (e) => {
         if (e.target.name === 'titulo') {
             setTitle(e.target.value)
         } else if (e.target.name === 'dia') {
@@ -62,7 +62,7 @@ function CalendarioComp(props) {
         }
     }
 
-    const borraInador = () => {
+    const eraseDataHandler = () => {
         const { id } = event
 
         db.collection('eventos').doc(id).delete()
@@ -71,11 +71,11 @@ function CalendarioComp(props) {
             contenido: '', fecha: '', titulo: '', id: '',
         }
         setEvent(temp)
+        setDate(false)
     }
 
 
     const dateClickHandler = (date) => {
-        setDate(true)
         const contenido = []
         const fecha = []
         const titulo = []
@@ -93,15 +93,37 @@ function CalendarioComp(props) {
                     titulo.push(doc.get('titulo'))
                     user.push(doc.get('user'))
                 })
+
+                let foundDate = false
                 for (let i = 0; i < titulo.length; i++) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
+                    
                     if (fecha[i] === date) {
                         if(user[i] == props.email){
+                            console.log('segundo if');
+                            foundDate = true
                             setEvent(temp)
-                        }
+                            setDate(true)
+                        } 
                     }
+                }
+
+                if (!foundDate) {
+                    setAddDate(true)  
+
+                    let day = date.split("-")[0]
+                    let month = date.split("-")[1]
+                    let year = date.split("-")[2]
+
+                    setDay(day)
+                    setMonth(month)
+                    setYear(year)
+
+                    document.getElementsByName('dia')[0].value = day
+                    document.getElementsByName('mes')[0].value = month
+                    document.getElementsByName('ano')[0].value = year
                 }
             })
     }
@@ -153,55 +175,48 @@ function CalendarioComp(props) {
                     <div className="fechaInador1">
                         <div className='ingresador'>
                             <h3>TITULO</h3>
-                            <input type="text" name="titulo" onChange={readInador} />
+                            <input type="text" name="titulo" onChange={inputDataHandler} />
                         </div>
                     </div>
                     
                     <div className="fechaInador2">
                         <div className='ingresador'>
                             <h3>DIA</h3>
-                            <input name="dia" type="text" onChange={readInador} />
+                            <input name="dia" type="text" onChange={inputDataHandler} />
                         </div>
                         <div className='ingresador'>
                             <h3>MES</h3>
-                            <input name="mes" type="text" onChange={readInador} />
+                            <input name="mes" type="text" onChange={inputDataHandler} />
                         </div>
                         <div className='ingresador'>
                             <h3>AÑO</h3>
-                            <input name="ano" type="text" onChange={readInador} />
+                            <input name="ano" type="text" onChange={inputDataHandler} />
                         </div>
                     </div>
 
                     <div className="fechaInador3">
                         <div className='ingresador'>
                             <h3>CONTENIDO</h3>
-                            <input name="contenido" type="text" onChange={readInador} />
+                            <input name="contenido" type="text" onChange={inputDataHandler} />
                         </div>
                     </div>
-                    <button className='continuaBotoncito' type="button" onClick={newDateInador}>Continuar</button>
+                    <button className='continuaBotoncito' type="button" onClick={addEventHandler}>Continuar</button>
 
                 </div>
             </PopUp>
 
             <PopUp trigger={date} setTrigger={setDate}>
-                {event.fecha != 'dd-mm-yyyy' ? (
-                        <div className="eventDiv"> 
-                            <div className='eventDiv1'>
-                                <h1>{event.fecha}</h1>
-                                <h2>Título: {event.titulo}</h2>
-                            </div>
-                        
-                            <div className='eventDiv2'>
-                                <h2>Información: {event.contenido}</h2>
-                            </div>
-                            <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
-                        </div>
-                    ) : (
-                        <div className="eventDiv">
-                            <h1>No hay eventos en esta fecha</h1>
-                        </div>
-                    )  
-                }
+                <div className="eventDiv"> 
+                    <div className='eventDiv1'>
+                        <h1>{event.fecha}</h1>
+                        <h2>Título: {event.titulo}</h2>
+                    </div>
+                
+                    <div className='eventDiv2'>
+                        <h2>Información: {event.contenido}</h2>
+                    </div>
+                    <button type="button" className="buttonControl" onClick={eraseDataHandler}>BORRAR</button> 
+                </div>
             </PopUp>
 
             <div className="botonAgregarDiv">
