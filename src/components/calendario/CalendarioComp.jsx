@@ -108,6 +108,7 @@ function CalendarioComp() {
                             console.log('segundo if');
                             foundDate = true
                             setEvent(temp)
+                            setDate(true)
                         } 
                     }
                 }
