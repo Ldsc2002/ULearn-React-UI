@@ -72,6 +72,7 @@ function CalendarioComp() {
             contenido: '', fecha: '', titulo: '', id: '',
         }
         setEvent(temp)
+        setDate(false)
     }
 
 
