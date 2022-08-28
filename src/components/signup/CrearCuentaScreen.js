@@ -86,8 +86,15 @@ export default class CrearCuentaScreen extends Component {
             carrera: this.state.registerMajor,
             universidad: this.state.registerCollege,
             tipo: false,
-
+            
         })
+
+            this.context.userInfo.university = this.state.registerCollege,
+            this.context.userInfo.type = false
+            this.context.userInfo.name = this.state.registerName,
+            this.context.userInfo.mayor = this.state.registerMajor,
+            this.context.userInfo.email = this.state.loginEmail
+            
 
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {

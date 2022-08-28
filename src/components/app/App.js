@@ -11,6 +11,9 @@ class App extends Component {
         this.dataSlots = {}
         this.dataSlots.ds_SlotSelectedTab = '0'
 
+        this.userInfo ={
+        }
+
         this.state = {
         }
     }
@@ -63,6 +66,7 @@ class App extends Component {
               atTopOfScreenStack: atTop,
               transitionForward: forward,
               appActions: this,
+              userInfo:this,
               deviceInfo: {
                   screenFormatId: this.state.screenFormatId,
               },

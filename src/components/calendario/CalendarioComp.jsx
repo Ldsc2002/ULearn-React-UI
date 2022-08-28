@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
-
+import ScreenContext from '../app/ScreenContext'
 import PopUp from '../popup/PopUp'
 
-function CalendarioComp() {
+function CalendarioComp(props) {
+
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
@@ -33,11 +34,9 @@ function CalendarioComp() {
     const addEventHandler = () => {
         const fechas = `${day}-${month}-${year}`
 
-        console.log(title, ' ', fechas, ' ', content)
-
         const id = guid()
 
-        const userV = 'jose@uvg.edu.gt'
+        const userV = props.email
 
         db.collection('eventos').doc(id).set({
             contenido: content,
@@ -77,14 +76,12 @@ function CalendarioComp() {
 
 
     const dateClickHandler = (date) => {
-        console.log("entro")
         const contenido = []
         const fecha = []
         const titulo = []
         const id = []
         const user = []
 
-        console.log(date)
 
         db.collection('eventos')
             .get()
@@ -102,10 +99,9 @@ function CalendarioComp() {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
-                    console.log('AQUI ESTA EL SUAURIO', user[i], fecha[i])
+                    
                     if (fecha[i] === date) {
-                        console.log('primer if');
-                        if(user[i] == 'jose@uvg.edu.gt'){
+                        if(user[i] == props.email){
                             console.log('segundo if');
                             foundDate = true
                             setEvent(temp)

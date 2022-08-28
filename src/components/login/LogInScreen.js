@@ -8,8 +8,7 @@ import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
 import img_elCit from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg'
 import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png'
-
-import { auth } from '../firebase/firebase'
+import { auth,  db } from '../firebase/firebase'
 
 // UI framework component imports
 
@@ -22,6 +21,8 @@ export default class LogInScreen extends Component {
         this.state = {
             loginEmail: '',
             loginPassword: '',
+            university:'',
+            type:''
         }
     }
 
@@ -48,21 +49,31 @@ export default class LogInScreen extends Component {
   onClick_elButton = async () => {
       // Go to screen 'LogIn'
       try {
-          const user = await signInWithEmailAndPassword(
+            const user = await signInWithEmailAndPassword(
               auth,
               this.state.loginEmail,
               this.state.loginPassword,
-          )
+            )
 
-          setPersistence(auth, browserLocalPersistence).then(() =>
-          {
+            setPersistence(auth, browserLocalPersistence).then(() =>
+           {
               return user
-          })
-          
-          this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
-      } catch (error) {
-          alert('El correo o la contraseña ingresados no son válidos.')
-      }
+           })
+
+            db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => { 
+
+                this.context.userInfo.university = (docRef.data().universidad) 
+                this.context.userInfo.type = (docRef.data().tipo)
+                this.context.userInfo.name = (docRef.data().nombre) 
+                this.context.userInfo.mayor = (docRef.data().carrera) 
+                this.context.userInfo.email = this.state.loginEmail
+
+                this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' }) 
+            })
+            
+        } catch (error) {
+            alert('El correo o la contraseña ingresados no son válidos.')
+        }
   }
 
   onClick_elButtonCopy = async () => {
