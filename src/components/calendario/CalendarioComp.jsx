@@ -10,6 +10,7 @@ function CalendarioComp() {
     } = CalendarioFuncionalidad()
 
     const [event, setEvent] = useState({ contenido: '-', fecha: 'dd-mm-yyyy', titulo: '-' })
+    const [dateEvent, setDateEvent] = useState([])
 
     const [title, setTitle] = useState('')
     const [day, setDay] = useState('')
@@ -28,6 +29,25 @@ function CalendarioComp() {
         }
         return `${s4() + s4()}-${s4()}-${s4()}-${
             s4()}-${s4()}${s4()}${s4()}`
+    }
+
+    function ArrayDate(){
+        console.log("entro")
+        setDate(true)
+        const fecha = []
+
+        db.collection('eventos')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    fecha.push(doc.get('fecha'))
+                })
+                for (let i = 0; i < titulo.length; i++) {
+                    if(user[i] == 'jose@uvg.edu.gt'){
+                        setDateEvent(fecha)
+                    }
+                }
+            })
     }
 
     const newDateInador = () => {
@@ -133,8 +153,7 @@ function CalendarioComp() {
                             <tr key={cols[0].date}>
                                 {
                                     cols.map((col) => (
-                                        col.date === todayFormatted
-                                            ? (
+                                        col.date === todayFormatted? (
                                                 <td key={col.date} className={`${col.classes} today`} onClick={() => dateClickHandler(col.date)}>
                                                     {col.value}
                                                 </td>
