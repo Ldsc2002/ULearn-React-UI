@@ -77,7 +77,6 @@ function CalendarioComp() {
 
     const dateClickHandler = (date) => {
         console.log("entro")
-        setDate(true)
         const contenido = []
         const fecha = []
         const titulo = []
@@ -96,6 +95,8 @@ function CalendarioComp() {
                     titulo.push(doc.get('titulo'))
                     user.push(doc.get('user'))
                 })
+
+                let foundDate = false
                 for (let i = 0; i < titulo.length; i++) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
@@ -105,9 +106,22 @@ function CalendarioComp() {
                         console.log('primer if');
                         if(user[i] == 'jose@uvg.edu.gt'){
                             console.log('segundo if');
+                            foundDate = true
                             setEvent(temp)
-                        }
+                        } 
                     }
+                }
+
+                if (!foundDate) {
+                    setAddDate(true)  
+
+                    let day = date.split("-")[0]
+                    let month = date.split("-")[1]
+                    let year = date.split("-")[2]
+
+                    document.getElementsByName('dia')[0].value = day
+                    document.getElementsByName('mes')[0].value = month
+                    document.getElementsByName('ano')[0].value = year
                 }
             })
     }
@@ -190,24 +204,17 @@ function CalendarioComp() {
             </PopUp>
 
             <PopUp trigger={date} setTrigger={setDate}>
-                {event.fecha != 'dd-mm-yyyy' ? (
-                        <div className="eventDiv"> 
-                            <div className='eventDiv1'>
-                                <h1>{event.fecha}</h1>
-                                <h2>Título: {event.titulo}</h2>
-                            </div>
-                        
-                            <div className='eventDiv2'>
-                                <h2>Información: {event.contenido}</h2>
-                            </div>
-                            <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
-                        </div>
-                    ) : (
-                        <div className="eventDiv">
-                            <h1>No hay eventos en esta fecha</h1>
-                        </div>
-                    )  
-                }
+                <div className="eventDiv"> 
+                    <div className='eventDiv1'>
+                        <h1>{event.fecha}</h1>
+                        <h2>Título: {event.titulo}</h2>
+                    </div>
+                
+                    <div className='eventDiv2'>
+                        <h2>Información: {event.contenido}</h2>
+                    </div>
+                    <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
+                </div>
             </PopUp>
 
             <div className="botonAgregarDiv">
