@@ -10,7 +10,7 @@ function CalendarioComp() {
     } = CalendarioFuncionalidad()
 
     const [event, setEvent] = useState({ contenido: '-', fecha: 'dd-mm-yyyy', titulo: '-' })
-    const [dateEvent, setDateEvent] = useState([])
+    const dateEvent = []
 
     const [title, setTitle] = useState('')
     const [day, setDay] = useState('')
@@ -32,21 +32,25 @@ function CalendarioComp() {
     }
 
     function ArrayDate(){
-        console.log("entro")
-        setDate(true)
         const fecha = []
+        const user = []
+        console.log("entra a la funcion")
 
         db.collection('eventos')
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     fecha.push(doc.get('fecha'))
+                    user.push(doc.get('user'))
                 })
-                for (let i = 0; i < titulo.length; i++) {
-                    if(user[i] == 'jose@uvg.edu.gt'){
-                        setDateEvent(fecha)
+                console.log("fetch");
+                for (let i = 0; i < fecha.length; i++) {
+                    
+                    if(user[i] === 'jose@uvg.edu.gt'){
+                        dateEvent.push(fecha[i]);
                     }
                 }
+                
             })
     }
 
@@ -132,6 +136,8 @@ function CalendarioComp() {
             })
     }
 
+    ArrayDate();
+
     return (
         <>
             <p className="mountTitle">
@@ -154,11 +160,31 @@ function CalendarioComp() {
                                 {
                                     cols.map((col) => (
                                         col.date === todayFormatted? (
-                                                <td key={col.date} className={`${col.classes} today`} onClick={() => dateClickHandler(col.date)}>
-                                                    {col.value}
-                                                </td>
-                                            )
-                                            : <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                            <tr key={dateEvent}>
+                                            {
+                                                dateEvent.map((dateE) => (
+                                                    dateE === todayFormatted? (
+                                                            <td key={col.date} className={`${col.classes} todayEvent`} onClick={() => dateClickHandler(col.date)}>
+                                                                {col.value}
+                                                            </td>
+                                                        )
+                                                        : <td key={col.date} className={`${col.classes} today`} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                                ))
+                                            }
+                                            </tr>
+                                        ) : 
+                                            <tr key={dateEvent}>
+                                            {
+                                                dateEvent.map((dateE) => (
+                                                    col.date === dateE? (
+                                                            <td key={col.date} className={`${col.classes} todayEvent`} onClick={() => dateClickHandler(col.date)}>
+                                                                {col.value}
+                                                            </td>
+                                                        )
+                                                        : <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                                ))
+                                            }
+                                            </tr>
                                     ))
                                 }
                             </tr>
