@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import BookCard from './book'
 import PopUp from '../popup/PopUp'
@@ -6,16 +6,32 @@ import { storage } from '../firebase/firebase'
 import {
     fetch, noteFirebase, dropBook, openFile,
 } from './bookShelfService'
-let fileDownload = ''
-const admin = true
-const college = 'uvg'
-let books  = fetch(college)
+import ScreenContext from '../app/ScreenContext'
 
+let fileDownload = ''
+let admin = false
+let college = ''
 
 function Bookshelf(props) {
+    const { userInfo } = useContext(ScreenContext)
+    college = userInfo.university
+    admin = userInfo.type
 
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
+    const [books, setBooks] = useState([])
+
+    useEffect(() => {
+        fetchBooksHandler()
+    }, [])
+
+    const fetchBooksHandler = () => {
+        fetch(college).then((res) => {
+            console.log(res)
+            setBooks(res)
+        })
+    }
+
     const onSubmitFile = (e) => {
         const file = e.target.files[0]
 
@@ -34,9 +50,9 @@ function Bookshelf(props) {
         const titulo = document.getElementById('titulo').value
         const descripcion = document.getElementById('descripcion').value
 
-        noteFirebase(titulo, descripcion, fileDownload, college) // TODO college from global value
+        noteFirebase(titulo, descripcion, fileDownload, college)
 
-        books = fetch(college)
+        fetchBooksHandler()
 
         setTimeout(() => {
             setButton(false)
@@ -45,7 +61,7 @@ function Bookshelf(props) {
 
     const deleteBook = (book) => {
         dropBook(book.code)
-        books = fetch(college)
+        fetchBooksHandler()
 
         setTimeout(() => {
             setButton(false)
