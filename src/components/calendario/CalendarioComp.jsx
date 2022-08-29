@@ -22,6 +22,8 @@ function CalendarioComp() {
     const [date, setDate] = useState(false)
     const [addDate, setAddDate] = useState(false)
 
+    const [claseToday, setClaseToday] = useState('today')
+
     function guid() {
         function s4() {
             return Math.floor((1 + Math.random()) * 0x10000)
@@ -39,12 +41,14 @@ function CalendarioComp() {
                 if(e === dateEvent[i]){
                     name = 'todayEvent';
                     console.log('name regresa en ',name)
-                    return name;
+                    setClaseToday(name);
+                    return '';
                 }
             }
             console.log('si llego al final')
-            return name;
+            setClaseToday(name);
         })
+        return '';
     }
 
     function ArrayDate(_callback){
@@ -166,7 +170,7 @@ function CalendarioComp() {
                                 {
                                     cols.map((col) => (
                                         col.date === todayFormatted? (
-                                            <tb key={col.date} className={`${col.classes} `+ nameClass(col.date)} onClick={() => dateClickHandler(col.date)}>{col.value}</tb>
+                                            <tb key={col.date} className={`${col.classes} `+ nameClass(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</tb>
                                         ) : 
                                             <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))

@@ -13,7 +13,7 @@
 }
 
 .todayEvent {
-    background-color: 4px solid #4a36fa;
+    border: 4px solid blue1;
 }
 
 .today:hover {
