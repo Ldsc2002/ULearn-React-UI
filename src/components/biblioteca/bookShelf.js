@@ -1,18 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import BookCard from './book'
 import PopUp from '../popup/PopUp'
 import { storage } from '../firebase/firebase'
-import { fetch, noteFirebase, dropBook, openFile} from './bookShelfService'
-var admin = true     // TODO get admin from global value
-var college = 'uvg'  // TODO college from global value
-var books = fetch(college)
-var fileDownload = ''
+import {
+    fetch, noteFirebase, dropBook, openFile,
+} from './bookShelfService'
+import ScreenContext from '../app/ScreenContext'
+
+let fileDownload = ''
+let admin = false
+let college = ''
+
 
 function Bookshelf(props) {
+    const { userInfo } = useContext(ScreenContext)
+    college = userInfo.university
+    admin = userInfo.type
+
     const [buttonPopUp, setButton] = useState(false)
     const [popUpContent, setPopUpContent] = useState()
-    const [uploadReady, setUploadReady] = useState(false)
+    const [books, setBooks] = useState([])
+
+    useEffect(() => {
+        fetchBooksHandler()
+    }, [])
+
+    const fetchBooksHandler = () => {
+        fetch(college).then((res) => {
+            console.log(res)
+            setBooks(res)
+        })
+    }
+
+
     const onSubmitFile = (e) => {
         const file = e.target.files[0]
 
@@ -28,29 +49,28 @@ function Bookshelf(props) {
         }
     }
 
-
     const finishUpload = () => {
-        let titulo = document.getElementById('titulo').value
-        let descripcion = document.getElementById('descripcion').value
+        const titulo = document.getElementById('titulo').value
+        const descripcion = document.getElementById('descripcion').value
 
-        noteFirebase(titulo, descripcion, fileDownload, college) // TODO college from global value
-        
-        books = fetch(college)
+        noteFirebase(titulo, descripcion, fileDownload, college)
+
+        fetchBooksHandler()
 
         setUploadReady(false)
 
         setTimeout(() => {
             setButton(false)
-        }, 1000);
+        }, 1000)
     }
 
     const deleteBook = (book) => {
         dropBook(book.code)
-        books = fetch(college)
+        fetchBooksHandler()
 
         setTimeout(() => {
             setButton(false)
-        }, 1000);
+        }, 1000)
     }
     //Apertura y borrado de archivos
     const selectedBookHandler = (set, book) => {
@@ -58,33 +78,34 @@ function Bookshelf(props) {
 
         setPopUpContent(
             <div>
-                <h1 className='name' >{book.title}</h1>
-                <p className='details'>{book.content}</p>
-                <button type="button" className="popUp-btn" onClick={() =>{openFile(book.file)}}>Abrir</button>
-                <button type='button' className='delete_btn' disabled={!admin} onClick={() => deleteBook(book)}>Eliminar</button>
-            </div>
+                <h1 className="name">{book.title}</h1>
+                <p className="details">{book.content}</p>
+                <button type="button" className="popUp-btn" onClick={() => { openFile(book.file) }}>Abrir</button>
+                <button type="button" className="delete_btn" disabled={!admin} onClick={() => deleteBook(book)}>Eliminar</button>
+            </div>,
         )
     }
-    //Subida de archivos a la biblioteca
+    //Subida de archivos a la biblioteca  -   <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => uploadReady? finishUpload(): alert('No puede subir un archvio vacío')}>Terminar</button>
     const addHandler = (set) => {
         setButton(set)
 
         setPopUpContent(
             <div className="addPopUp">
-                <input type="text" placeholder="Título" id="titulo" required/>
-                <input type="text" placeholder="Descripción"  id="descripcion" required/>
-                <input type="file" name="file" onChange={onSubmitFile}  required/>
 
-                <button id='subir_archivo' type="button" className="popUp-btn" onClick={() => uploadReady? finishUpload(): alert('No puede subir un archvio vacío')}>Terminar</button>
-            </div>
+                <input type="text" placeholder="Título" id="titulo" />
+                <input type="text" placeholder="Descripción" id="descripcion" />
+                <input type="file" name="file" onChange={onSubmitFile} />
+
+                <button id="subir_archivo" type="button" className="popUp-btn" onClick={() => finishUpload()}>Terminar</button>
+            </div>,
         )
     }
     //Botón paara subir archivos a la biblioteca
     return (
-        <div className='biblioteca'>
+        <div className="biblioteca">
             <BookCard books={books} setButton={selectedBookHandler} />
-            
-            <PopUp id='pop_up' trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
+
+            <PopUp id="pop_up" trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
                 {popUpContent}
             </PopUp>
 

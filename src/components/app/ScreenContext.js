@@ -4,5 +4,6 @@ import React from 'react'
 const ScreenContext = React.createContext({
     appActions: {},
     deviceInfo: {},
+    userInfo:{}
 })
 export default ScreenContext
