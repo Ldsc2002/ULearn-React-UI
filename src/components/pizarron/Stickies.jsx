@@ -3,7 +3,7 @@ import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import ContentEditable from './ContentEditable'
 import {auth,  db } from '../firebase/firebase'
-
+import ScreenContext from '../app/ScreenContext'
 
 const { WidthProvider } = require('react-grid-layout')
 let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
@@ -53,6 +53,8 @@ function transformContentState(notes) {
 
 export default class extends Component {
 
+    static contextType = ScreenContext;
+
     constructor(props) {
         super(props)
         this.state = {
@@ -65,11 +67,10 @@ export default class extends Component {
         this.renderNote = this.renderNote.bind(this)
         this.onLayoutChange = this.onLayoutChange.bind(this)
         this.onBreakpointChange = this.onBreakpointChange.bind(this)
-        this.university = 'uvg' //todo: implementar con provider (uvg = Universidad del Valle, ufm, universidad francisco marroquin)
-        this.type = false  //todo: implmentar con provider (true= superusaurio qeu puede borrar, false= usario normal que no puede borrar)
+        this.university = props.university//=this.context.userInfo.university
+        this.type = props.type //this.context.userInfo.type
     }
     
-
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
