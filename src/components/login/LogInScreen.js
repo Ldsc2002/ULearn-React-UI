@@ -6,7 +6,7 @@ import Input from 'muicss/lib/react/input'
 import Checkbox from 'muicss/lib/react/checkbox'
 import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
-import img_elCit from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg'
+import img_elCit from '../../images/books.jpg'
 import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png'
 import { auth,  db } from '../firebase/firebase'
 
