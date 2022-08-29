@@ -10,7 +10,8 @@ function CalendarioComp() {
     } = CalendarioFuncionalidad()
 
     const [event, setEvent] = useState({ contenido: '-', fecha: 'dd-mm-yyyy', titulo: '-' })
-    const dateEvent = []
+    const dateEvent = [];
+    var lenghtNum = 0;
 
     const [title, setTitle] = useState('')
     const [day, setDay] = useState('')
@@ -31,10 +32,24 @@ function CalendarioComp() {
             s4()}-${s4()}${s4()}${s4()}`
     }
 
-    function ArrayDate(){
+    function nameClass(e){
+        var name = 'today';
+        ArrayDate(() => {
+            for(let i = 0; i < dateEvent.length; i++) {
+                if(e === dateEvent[i]){
+                    name = 'todayEvent';
+                    console.log('name regresa en ',name)
+                    return name;
+                }
+            }
+            console.log('si llego al final')
+            return name;
+        })
+    }
+
+    function ArrayDate(_callback){
         const fecha = []
         const user = []
-        console.log("entra a la funcion")
 
         db.collection('eventos')
             .get()
@@ -43,14 +58,14 @@ function CalendarioComp() {
                     fecha.push(doc.get('fecha'))
                     user.push(doc.get('user'))
                 })
-                console.log("fetch");
                 for (let i = 0; i < fecha.length; i++) {
                     
                     if(user[i] === 'jose@uvg.edu.gt'){
+                        lenghtNum = lenghtNum + 1;
                         dateEvent.push(fecha[i]);
                     }
                 }
-                
+                _callback();
             })
     }
 
@@ -98,17 +113,13 @@ function CalendarioComp() {
         setEvent(temp)
     }
 
-
     const dateClickHandler = (date) => {
-        console.log("entro")
         setDate(true)
         const contenido = []
         const fecha = []
         const titulo = []
         const id = []
         const user = []
-
-        console.log(date)
 
         db.collection('eventos')
             .get()
@@ -124,19 +135,14 @@ function CalendarioComp() {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
-                    console.log('AQUI ESTA EL SUAURIO', user[i], fecha[i])
                     if (fecha[i] === date) {
-                        console.log('primer if');
                         if(user[i] == 'jose@uvg.edu.gt'){
-                            console.log('segundo if');
                             setEvent(temp)
                         }
                     }
                 }
             })
     }
-
-    ArrayDate();
 
     return (
         <>
@@ -160,31 +166,9 @@ function CalendarioComp() {
                                 {
                                     cols.map((col) => (
                                         col.date === todayFormatted? (
-                                            <tr key={dateEvent}>
-                                            {
-                                                dateEvent.map((dateE) => (
-                                                    dateE === todayFormatted? (
-                                                            <td key={col.date} className={`${col.classes} todayEvent`} onClick={() => dateClickHandler(col.date)}>
-                                                                {col.value}
-                                                            </td>
-                                                        )
-                                                        : <td key={col.date} className={`${col.classes} today`} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
-                                                ))
-                                            }
-                                            </tr>
+                                            <tb key={col.date} className={`${col.classes} `+ nameClass(col.date)} onClick={() => dateClickHandler(col.date)}>{col.value}</tb>
                                         ) : 
-                                            <tr key={dateEvent}>
-                                            {
-                                                dateEvent.map((dateE) => (
-                                                    col.date === dateE? (
-                                                            <td key={col.date} className={`${col.classes} todayEvent`} onClick={() => dateClickHandler(col.date)}>
-                                                                {col.value}
-                                                            </td>
-                                                        )
-                                                        : <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
-                                                ))
-                                            }
-                                            </tr>
+                                            <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
