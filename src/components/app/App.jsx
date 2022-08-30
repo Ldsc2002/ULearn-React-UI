@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import ScreenContext from './ScreenContext'
 import StartScreen from '../start/StartScreen'
-import CrearCuentaScreen from '../signup/CrearCuentaScreen'
+import CrearCuentaScreen from '../signup/CrearCuentaScreen.jsx'
 import LogInScreen from '../login/LogInScreen'
 
 class App extends Component {

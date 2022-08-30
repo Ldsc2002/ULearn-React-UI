@@ -4,11 +4,9 @@ import moment from 'moment'
 import ContentEditable from './ContentEditable'
 import {auth,  db } from '../firebase/firebase'
 import ScreenContext from '../app/ScreenContext'
+import { WidthProvider, Responsive } from 'react-grid-layout'
 
-const { WidthProvider } = require('react-grid-layout')
-let ResponsiveReactGridLayout = require('react-grid-layout').Responsive
-
-ResponsiveReactGridLayout = WidthProvider(ResponsiveReactGridLayout)
+let ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 /**
 * @method: guid
