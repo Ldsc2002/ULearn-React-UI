@@ -4,7 +4,7 @@ import ScreenContext from '../app/ScreenContext'
 export default class TabBarButton extends Component {
     // Properties used by this component:
     // title, visualStateIndex
-    static contextType = ScreenContext;
+    static contextType = ScreenContext
 
     constructor(props) {
         super(props)
