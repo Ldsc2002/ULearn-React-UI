@@ -1,10 +1,11 @@
-import { db, storage } from '../firebase/firebase'
+import { auth, db, storage } from '../firebase/firebase'
 import { ref, getDownloadURL } from 'firebase/storage'
 
-function fetch() {
+function fetch(u) {
     const libros = []
 
-    db.collection('archivos')
+    return new Promise((resolve) => {
+        db.collection('archivos')
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -17,14 +18,16 @@ function fetch() {
                 const book = {
                     id, title, content, file, code,
                 }
-                // TODO check college with global value
-                if (college === /*'usac'*/ 'uvg') {
+
+                if (college === u) {
                     libros.push(book)
                 }
             })
+            
+            resolve(libros)
         })
-    
-    return libros
+    })
+
 }
 
 function noteFirebase(t, d, f, u) {
@@ -49,8 +52,6 @@ function dropBook(i){
 function openFile(item){
     const link = ref(storage, item)
     
-    console.log(link)
-
     getDownloadURL(link).then((url) => {
         const anchor = document.createElement('a')
         anchor.href = url
@@ -65,4 +66,4 @@ function openFile(item){
     })
 }
 
-export { fetch, noteFirebase, dropBook, openFile }
+export { fetch, noteFirebase, dropBook, openFile}

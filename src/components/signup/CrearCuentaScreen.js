@@ -7,7 +7,7 @@ import {
 import Input from 'muicss/lib/react/input'
 import Button from 'muicss/lib/react/button'
 import ScreenContext from '../app/ScreenContext'
-import img_elCitCopy from '../../images/CrearCuentaScreen_elCitCopy_837553.jpg'
+import img_elCitCopy from '../../images/books.jpg'
 import img_elPerson from '../../images/CrearCuentaScreen_elPerson_405468.png'
 
 import { auth, db } from '../firebase/firebase'
@@ -86,8 +86,15 @@ export default class CrearCuentaScreen extends Component {
             carrera: this.state.registerMajor,
             universidad: this.state.registerCollege,
             tipo: false,
-
+            
         })
+
+            this.context.userInfo.university = this.state.registerCollege,
+            this.context.userInfo.type = false
+            this.context.userInfo.name = this.state.registerName,
+            this.context.userInfo.mayor = this.state.registerMajor,
+            this.context.userInfo.email = this.state.loginEmail
+            
 
           this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
       } catch (error) {
