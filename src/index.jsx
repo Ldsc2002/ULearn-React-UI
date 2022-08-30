@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
 import App from './components/app/App'
 
@@ -13,4 +13,5 @@ import './style/palette.css'
 import './style/popUp.css'
 import './style/styles.css'
 
-ReactDOM.render(<HashRouter><App /></HashRouter>, document.getElementById('root'))
+root = createRoot(document.getElementById('root'))
+root.render(<HashRouter><App /></HashRouter>)
