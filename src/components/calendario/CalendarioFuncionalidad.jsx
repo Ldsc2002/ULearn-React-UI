@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
 const daysShortArr = [
-    'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun',
+    'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo',
 ]
 
 const monthNamesArr = [
-    'January', 'February', 'March', 'April',
-    'May', 'June', 'July', 'August',
-    'September', 'October', 'November', 'December',
+    'Enero', 'Febrero', 'Marzo', 'Abril',
+    'Mayo', 'Junio', 'Julio', 'Agosto',
+    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
 ]
 
 const CalendarioFuncionalidad = (daysShort = daysShortArr, monthNames = monthNamesArr) => {

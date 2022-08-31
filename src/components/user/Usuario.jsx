@@ -79,7 +79,7 @@ export default class Usuario extends Component {
                         </div>
                     </div>
                     <div className="elButton">
-                        <Button className="elButton" style={style_elButton} onClick={this.onClick_LogOut}>LOG OUT</Button>
+                        <Button className="elButton" style={style_elButton} onClick={this.onClick_LogOut}>Cerrar Sesión</Button>
                     </div>
                 </div>
 
