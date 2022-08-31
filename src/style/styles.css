@@ -56,12 +56,7 @@
     border-radius: 6px/18px 0;
     position: absolute;
   }
-  .react-stickies-wrapper .note-wrap.tape:before {
-    background: rgba(227, 200, 114, 0.4);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    top: -13px;
-    left: 50px;
-  }
+
   .react-stickies-wrapper .note-wrap .title {
     color: white;
     text-decoration: none;
