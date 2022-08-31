@@ -5,7 +5,6 @@ import ScreenContext from '../app/ScreenContext'
 import PopUp from '../popup/PopUp'
 
 function CalendarioComp(props) {
-
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
@@ -17,7 +16,7 @@ function CalendarioComp(props) {
     const [month, setMonth] = useState('')
     const [year, setYear] = useState('')
     const [content, setContent] = useState('')
-    
+
     const [date, setDate] = useState(false)
     const [addDate, setAddDate] = useState(false)
 
@@ -74,14 +73,12 @@ function CalendarioComp(props) {
         setDate(false)
     }
 
-
     const dateClickHandler = (date) => {
         const contenido = []
         const fecha = []
         const titulo = []
         const id = []
         const user = []
-
 
         db.collection('eventos')
             .get()
@@ -99,23 +96,23 @@ function CalendarioComp(props) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
-                    
+
                     if (fecha[i] === date) {
-                        if(user[i] == props.email){
-                            console.log('segundo if');
+                        if (user[i] == props.email) {
+                            console.log('segundo if')
                             foundDate = true
                             setEvent(temp)
                             setDate(true)
-                        } 
+                        }
                     }
                 }
 
                 if (!foundDate) {
-                    setAddDate(true)  
+                    setAddDate(true)
 
-                    let day = date.split("-")[0]
-                    let month = date.split("-")[1]
-                    let year = date.split("-")[2]
+                    const day = date.split('-')[0]
+                    const month = date.split('-')[1]
+                    const year = date.split('-')[2]
 
                     setDay(day)
                     setMonth(month)
@@ -173,54 +170,60 @@ function CalendarioComp(props) {
 
                 <div className="preguntaInador">
                     <div className="fechaInador1">
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>TITULO</h3>
                             <input type="text" name="titulo" onChange={inputDataHandler} />
                         </div>
                     </div>
-                    
+
                     <div className="fechaInador2">
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>DIA</h3>
                             <input name="dia" type="text" onChange={inputDataHandler} />
                         </div>
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>MES</h3>
                             <input name="mes" type="text" onChange={inputDataHandler} />
                         </div>
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>AÑO</h3>
                             <input name="ano" type="text" onChange={inputDataHandler} />
                         </div>
                     </div>
 
                     <div className="fechaInador3">
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>CONTENIDO</h3>
                             <input name="contenido" type="text" onChange={inputDataHandler} />
                         </div>
                     </div>
-                    <button className='continuaBotoncito' type="button" onClick={addEventHandler}>Continuar</button>
+                    <button className="continuaBotoncito" type="button" onClick={addEventHandler}>Continuar</button>
 
                 </div>
             </PopUp>
 
             <PopUp trigger={date} setTrigger={setDate}>
-                <div className="eventDiv"> 
-                    <div className='eventDiv1'>
+                <div className="eventDiv">
+                    <div className="eventDiv1">
                         <h1>{event.fecha}</h1>
-                        <h2>Título: {event.titulo}</h2>
+                        <h2>
+                            Título:
+                            {event.titulo}
+                        </h2>
                     </div>
-                
-                    <div className='eventDiv2'>
-                        <h2>Información: {event.contenido}</h2>
+
+                    <div className="eventDiv2">
+                        <h2>
+                            Información:
+                            {event.contenido}
+                        </h2>
                     </div>
-                    <button type="button" className="buttonControl" onClick={eraseDataHandler}>BORRAR</button> 
+                    <button type="button" className="buttonControl" onClick={eraseDataHandler}>BORRAR</button>
                 </div>
             </PopUp>
 
             <div className="botonAgregarDiv">
-                    <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
+                <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
             </div>
         </>
     )
