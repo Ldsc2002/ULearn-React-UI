@@ -1,13 +1,11 @@
 import React from 'react'
+import { WidthProvider, Responsive } from 'react-grid-layout'
 
-const { WidthProvider } = require('react-grid-layout')
-let ResponsiveReactGridLayout = require('react-grid-layout')
+const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-ResponsiveReactGridLayout = WidthProvider(ResponsiveReactGridLayout)
-
-function truncate(str, n){
-    return (str.length > n) ? str.slice(0, n-1) + '...' : str;
-  };
+function truncate(str, n) {
+    return (str.length > n) ? `${str.slice(0, n - 1)}...` : str
+}
 
 function BookCard(props) {
     const content = props.books.map((post) => (
@@ -17,8 +15,8 @@ function BookCard(props) {
     ))
 
     return (
-        <div className='books_container'>
-            {content} 
+        <div className="books_container">
+            {content}
         </div>
     )
 }

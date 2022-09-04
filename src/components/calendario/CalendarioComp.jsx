@@ -4,7 +4,7 @@ import { db } from '../firebase/firebase'
 
 import PopUp from '../popup/PopUp'
 
-function CalendarioComp() {
+function CalendarioComp(props) {
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
@@ -18,7 +18,7 @@ function CalendarioComp() {
     const [month, setMonth] = useState('')
     const [year, setYear] = useState('')
     const [content, setContent] = useState('')
-    
+
     const [date, setDate] = useState(false)
     const [addDate, setAddDate] = useState(false)
 
@@ -139,11 +139,31 @@ function CalendarioComp() {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
                     }
+
                     if (fecha[i] === date) {
-                        if(user[i] == 'jose@uvg.edu.gt'){
+                        if (user[i] == props.email) {
+                            console.log('segundo if')
+                            foundDate = true
                             setEvent(temp)
+                            setDate(true)
                         }
                     }
+                }
+
+                if (!foundDate) {
+                    setAddDate(true)
+
+                    const day = date.split('-')[0]
+                    const month = date.split('-')[1]
+                    const year = date.split('-')[2]
+
+                    setDay(day)
+                    setMonth(month)
+                    setYear(year)
+
+                    document.getElementsByName('dia')[0].value = day
+                    document.getElementsByName('mes')[0].value = month
+                    document.getElementsByName('ano')[0].value = year
                 }
             })
     }
@@ -190,61 +210,60 @@ function CalendarioComp() {
 
                 <div className="preguntaInador">
                     <div className="fechaInador1">
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>TITULO</h3>
                             <input type="text" name="titulo" onChange={readInador} />
                         </div>
                     </div>
-                    
+
                     <div className="fechaInador2">
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>DIA</h3>
                             <input name="dia" type="text" onChange={readInador} />
                         </div>
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>MES</h3>
                             <input name="mes" type="text" onChange={readInador} />
                         </div>
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>AÑO</h3>
                             <input name="ano" type="text" onChange={readInador} />
                         </div>
                     </div>
 
                     <div className="fechaInador3">
-                        <div className='ingresador'>
+                        <div className="ingresador">
                             <h3>CONTENIDO</h3>
                             <input name="contenido" type="text" onChange={readInador} />
                         </div>
                     </div>
-                    <button className='continuaBotoncito' type="button" onClick={newDateInador}>Continuar</button>
+                    <button className="continuaBotoncito" type="button" onClick={addEventHandler}>Continuar</button>
 
                 </div>
             </PopUp>
 
             <PopUp trigger={date} setTrigger={setDate}>
-                {event.fecha != 'dd-mm-yyyy' ? (
-                        <div className="eventDiv"> 
-                            <div className='eventDiv1'>
-                                <h1>{event.fecha}</h1>
-                                <h2>Título: {event.titulo}</h2>
-                            </div>
-                        
-                            <div className='eventDiv2'>
-                                <h2>Información: {event.contenido}</h2>
-                            </div>
-                            <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button> 
-                        </div>
-                    ) : (
-                        <div className="eventDiv">
-                            <h1>No hay eventos en esta fecha</h1>
-                        </div>
-                    )  
-                }
+                <div className="eventDiv">
+                    <div className="eventDiv1">
+                        <h1>{event.fecha}</h1>
+                        <h2>
+                            Título:
+                            {event.titulo}
+                        </h2>
+                    </div>
+
+                    <div className="eventDiv2">
+                        <h2>
+                            Información:
+                            {event.contenido}
+                        </h2>
+                    </div>
+                    <button type="button" className="buttonControl" onClick={eraseDataHandler}>BORRAR</button>
+                </div>
             </PopUp>
 
             <div className="botonAgregarDiv">
-                    <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
+                <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
             </div>
         </>
     )
