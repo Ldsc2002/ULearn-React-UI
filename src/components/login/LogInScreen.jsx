@@ -67,7 +67,29 @@ export default class LogInScreen extends Component {
                 this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
             })
         } catch (error) {
-            alert('El correo o la contraseña ingresados no son válidos.')
+            if(error.code == 'auth/user-not-found') {
+                alert('Usario no existe.\nPor favor cree una cuenta.')
+            } else if(error.code == 'auth/wrong-password') {
+                alert('Contraseña incorrecta.\nIntente de nuevo.')
+            } else if( error.code == 'auth/email-already-in-use') {
+                alert("Por favor utilice otro correo.\nEste correo ya esta en uso.", [
+                    {
+                      text: "Ok",
+                      onPress: () => null,
+                      style: "cancel",
+                    },
+                    {
+                      text: "Contactar a servicio tecnico",
+                      onPress: () => Linking.openURL('mailto: ara20261@yvg.edu.gt'),
+                    },
+                  ]);
+            } else if(error.code == 'auth/network-request-failed') {
+                alert('Error de red.\nPor favor intente nuevamente o revise su conexión a internet.')
+            } else if(error.code == 'auth/invalid-email') {
+                alert('Correo invalido.\nPor favor revise que haya ingresado un correo valido.')
+            } else {
+                alert('Error desconocido.\nIntente más tarde.')
+            }  
         }
     }
 
