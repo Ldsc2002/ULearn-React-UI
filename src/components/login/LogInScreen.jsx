@@ -72,7 +72,7 @@ export default class LogInScreen extends Component {
             } else if(error.code == 'auth/wrong-password') {
                 alert('Contraseña incorrecta.\nIntente de nuevo.')
             } else if( error.code == 'auth/email-already-in-use') {
-                alert("Por favor utilice otro correo.\nEste correo ya esta en uso. Si error continua, contacte a servicio tecnico", [
+                alert("Por favor utilice otro correo.\nEste correo ya esta en uso.", [
                     {
                       text: "Ok",
                       onPress: () => null,
