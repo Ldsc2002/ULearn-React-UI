@@ -179,7 +179,7 @@ export default class extends Component {
             },
             id: uid,
             editorState: EditorState.createEmpty(),
-            title: 'Title',
+            title: 'Título',
             color: this.generateRandomColors(),
             degree: this.generateRandomDegree(-2, 2),
             timeStamp: moment().format(dateFormat),
@@ -282,7 +282,7 @@ export default class extends Component {
                 }
 
                 if (titles.length === 0) {
-                    this.createNote('Welcome', 'This is an example', 'May 1, 2022 3:17 PM', uid)
+                    this.createNote('Hola', 'Esto es un ejemplo', 'Mayo 1, 2022 3:17 PM', uid)
                 }
             })
     }
@@ -348,12 +348,12 @@ export default class extends Component {
                             {closeIcon}
                         </div>
                     </div>
-                    <input disabled={note.disable} className="note-footerB" style={noteFooterStyle} type="button" id="save" value="Save" onClick={() => this.noteFirebase(note)} />
+                    <input disabled={note.disable} className="note-footerB" style={noteFooterStyle} type="button" id="save" value="Guardar" onClick={() => this.noteFirebase(note)} />
                     <div className="note-body" id="myInput" style={noteBodyStyle}>
                         <Editor
                             editorState={note.editorState}
                             onChange={(editorState) => this.onChange(editorState, note)} // eesta
-                            placeholder="Add your notes..."
+                            placeholder="Comparte tus pensamientos..."
                         />
 
                     </div>

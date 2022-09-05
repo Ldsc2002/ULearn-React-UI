@@ -224,8 +224,8 @@ function CalendarioComp(props) {
             </table>
 
             <div className="megacontenedordebotones8000">
-                <button type="button" className="buttonControl" onClick={getPrevMonth}>Prev</button>
-                <button type="button" className="buttonControl" onClick={getNextMonth}>Next</button>
+                <button type="button" className="buttonControl" onClick={getPrevMonth}>Previo</button>
+                <button type="button" className="buttonControl" onClick={getNextMonth}>Siguiente</button>
             </div>
 
             <PopUp trigger={addDate} setTrigger={setAddDate}>
@@ -233,29 +233,29 @@ function CalendarioComp(props) {
                 <div className="preguntaInador">
                     <div className="fechaInador1">
                         <div className="ingresador">
-                            <h3>TITULO</h3>
+                            <h3>Título</h3>
                             <input type="text" name="titulo" onChange={readInador} />
                         </div>
                     </div>
 
                     <div className="fechaInador2">
                         <div className="ingresador">
-                            <h3>DIA</h3>
+                            <h3>Dia</h3>
                             <input name="dia" type="text" onChange={readInador} />
                         </div>
                         <div className="ingresador">
-                            <h3>MES</h3>
+                            <h3>Mes</h3>
                             <input name="mes" type="text" onChange={readInador} />
                         </div>
                         <div className="ingresador">
-                            <h3>AÑO</h3>
+                            <h3>Año</h3>
                             <input name="ano" type="text" onChange={readInador} />
                         </div>
                     </div>
 
                     <div className="fechaInador3">
                         <div className="ingresador">
-                            <h3>CONTENIDO</h3>
+                            <h3>Contenido</h3>
                             <input name="contenido" type="text" onChange={readInador} />
                         </div>
                     </div>
