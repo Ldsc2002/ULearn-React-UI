@@ -23,6 +23,7 @@ function CalendarioComp(props) {
     const [addDate, setAddDate] = useState(false)
 
     const [claseToday, setClaseToday] = useState('today')
+    const [claseOther, setClaseOther] = useState('')
 
     function guid() {
         function s4() {
@@ -40,7 +41,6 @@ function CalendarioComp(props) {
             for(let i = 0; i < dateEvent.length; i++) {
                 if(e === dateEvent[i]){
                     name = 'todayEvent';
-                    console.log('name regresa en ',name)
                     setClaseToday(name);
                     return '';
                 }
@@ -51,18 +51,17 @@ function CalendarioComp(props) {
         return '';
     }
     function nameClassOther(e){
-        var name = 'today';
+        var name = '';
         ArrayDate(() => {
             for(let i = 0; i < dateEvent.length; i++) {
                 if(e === dateEvent[i]){
-                    name = 'todayEvent';
-                    console.log('name regresa en ',name)
-                    setClaseToday(name);
+                    name = 'Event';
+                    setClaseOther(name);
                     return '';
                 }
             }
             console.log('si llego al final')
-            setClaseToday(name);
+            setClaseOther(name);
         })
         return '';
     }
@@ -214,7 +213,7 @@ function CalendarioComp(props) {
                                         col.date === todayFormatted? (
                                             <td key={col.date} className={`${col.classes} `+ nameClassToday(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                         ) : 
-                                            <td key={col.date} className={`${col.classes} `+ nameClassOther(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                            <td key={col.date} className={`${col.classes} `+ nameClassOther(col.date) + claseOther} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
