@@ -3,27 +3,53 @@ import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
 
 import PopUp from '../popup/PopUp'
+import { useEffect } from 'react'
+import { setBlockData } from 'draft-js/lib/DraftModifier'
+import { forEach } from 'draft-js/lib/DefaultDraftBlockRenderMap'
 
 function CalendarioComp(props) {
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
-
-    const [event, setEvent] = useState({ contenido: '-', fecha: 'dd-mm-yyyy', titulo: '-' })
-    const dateEvent = [];
-    var lenghtNum = 0;
-
-    const [title, setTitle] = useState('')
-    const [day, setDay] = useState('')
-    const [month, setMonth] = useState('')
-    const [year, setYear] = useState('')
-    const [content, setContent] = useState('')
+    const [dateEvent, setDataEvent] = useState([]);
 
     const [date, setDate] = useState(false)
     const [addDate, setAddDate] = useState(false)
+    const [event, setEvent] = useState([])
 
-    const [claseToday, setClaseToday] = useState('today')
-    const [claseOther, setClaseOther] = useState('')
+    useEffect(() => {
+        var contenido = ""
+        var fecha = ""
+        var titulo = ""
+        var id = ""
+        var user = ""
+
+        var dateEventTemp = [];
+
+        db.collection('eventos')
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    id = (doc.id)
+                    contenido = (doc.get('contenido'))
+                    fecha = (doc.get('fecha'))
+                    titulo = (doc.get('titulo'))
+                    user = (doc.get('user'))
+
+                    if (user == props.email) {
+                        dateEventTemp.push({
+                            id: id, 
+                            contenido:contenido, 
+                            fecha:fecha,
+                            titulo:titulo, 
+                            user:user
+                        })
+                        setDataEvent(dateEventTemp);
+                    }
+                })
+            })
+
+    },[])
 
     function guid() {
         function s4() {
@@ -31,61 +57,28 @@ function CalendarioComp(props) {
                 .toString(16)
                 .substring(1)
         }
-        return `${s4() + s4()}-${s4()}-${s4()}-${
-            s4()}-${s4()}${s4()}${s4()}`
+        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
     }
 
-    function nameClassToday(e){
-        var name = 'today';
-        ArrayDate(() => {
-            for(let i = 0; i < dateEvent.length; i++) {
-                if(e === dateEvent[i]){
-                    name = 'todayEvent';
-                    setClaseToday(name);
-                    return '';
-                }
+    function nameClass(e){
+
+        console.log(dateEvent);
+        let name = '';
+
+        if(e === todayFormatted){
+            name = "today"
+        }
+            
+        dateEvent.forEach(element => {
+            if(e === element.fecha){
+                name = name+'Event'
+                return(name)
             }
-            console.log('si llego al final')
-            setClaseToday(name);
-        })
-        return '';
-    }
-    function nameClassOther(e){
-        var name = '';
-        ArrayDate(() => {
-            for(let i = 0; i < dateEvent.length; i++) {
-                if(e === dateEvent[i]){
-                    name = 'Event';
-                    setClaseOther(name);
-                    return '';
-                }
-            }
-            console.log('si llego al final')
-            setClaseOther(name);
-        })
-        return '';
-    }
-
-    function ArrayDate(_callback){
-        const fecha = []
-        const user = []
-
-        db.collection('eventos')
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    fecha.push(doc.get('fecha'))
-                    user.push(doc.get('user'))
-                })
-                for (let i = 0; i < fecha.length; i++) {
-                    
-                    if(user[i] === props.email){
-                        lenghtNum = lenghtNum + 1;
-                        dateEvent.push(fecha[i]);
-                    }
-                }
-                _callback();
-            })
+            
+        });
+        console.log("NAMECLASSTODAY")
+        
+        return (name);
     }
 
     const newDateInador = () => {
@@ -150,43 +143,24 @@ function CalendarioComp(props) {
     }
 
     const dateClickHandler = (date) => {
-        setDate(true)
-        const contenido = []
-        const fecha = []
-        const titulo = []
-        const id = []
-        const user = []
+        
         let foundDate = false;
-        db.collection('eventos')
-            .get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    id.push(doc.id)
-                    contenido.push(doc.get('contenido'))
-                    fecha.push(doc.get('fecha'))
-                    titulo.push(doc.get('titulo'))
-                    user.push(doc.get('user'))
-                })
 
-                for (let i = 0; i < titulo.length; i++) {
-                    const temp = {
-                        contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
-                    }
+        dateEvent.forEach(element => {
+            if(date === element.fecha){
 
-                    if (fecha[i] === date) {
-                        if (user[i] == props.email) {
-                            foundDate = true
-                            setEvent(temp)
-                            setDate(true)
-                        }
-                    }
-                }
+                foundDate = true
+                setEvent({fecha: element.fecha, titulo: element.titulo, contenido: element.contenido})
+                setDate(true)
+            }
+            
+        });
 
-                if (!foundDate) {
-                    setDate(false);
-                    setAddDate(true);
-                }
-            })
+        if (!foundDate) {
+            setAddDate(true);
+        } else{
+            setDate(true)
+        }
     }
 
     return (
@@ -210,10 +184,7 @@ function CalendarioComp(props) {
                             <tr key={cols[0].date}>
                                 {
                                     cols.map((col) => (
-                                        col.date === todayFormatted? (
-                                            <td key={col.date} className={`${col.classes} `+ nameClassToday(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
-                                        ) : 
-                                            <td key={col.date} className={`${col.classes} `+ nameClassOther(col.date) + claseOther} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                        <td key={col.date} className={`${col.classes} `+ nameClass(col.date)} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
@@ -282,10 +253,6 @@ function CalendarioComp(props) {
                     <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
                 </div>
             </PopUp>
-
-            <div className="botonAgregarDiv">
-                <button type="button" className="botonAgregar" onClick={() => setAddDate(true)}>+</button>
-            </div>
         </>
     )
 }
