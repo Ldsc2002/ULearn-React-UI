@@ -6,6 +6,7 @@ export default class calendario extends Component {
     static contextType = ScreenContext
 
     render() {
+        console.log('HOLA WENA TARDE')
         return (
 
             <div className="Calendario">

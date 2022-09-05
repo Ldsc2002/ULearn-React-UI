@@ -34,7 +34,23 @@ function CalendarioComp(props) {
             s4()}-${s4()}${s4()}${s4()}`
     }
 
-    function nameClass(e){
+    function nameClassToday(e){
+        var name = 'today';
+        ArrayDate(() => {
+            for(let i = 0; i < dateEvent.length; i++) {
+                if(e === dateEvent[i]){
+                    name = 'todayEvent';
+                    console.log('name regresa en ',name)
+                    setClaseToday(name);
+                    return '';
+                }
+            }
+            console.log('si llego al final')
+            setClaseToday(name);
+        })
+        return '';
+    }
+    function nameClassOther(e){
         var name = 'today';
         ArrayDate(() => {
             for(let i = 0; i < dateEvent.length; i++) {
@@ -64,7 +80,7 @@ function CalendarioComp(props) {
                 })
                 for (let i = 0; i < fecha.length; i++) {
                     
-                    if(user[i] === 'jose@uvg.edu.gt'){
+                    if(user[i] === props.email){
                         lenghtNum = lenghtNum + 1;
                         dateEvent.push(fecha[i]);
                     }
@@ -74,13 +90,30 @@ function CalendarioComp(props) {
     }
 
     const newDateInador = () => {
-        const fechas = `${day}-${month}-${year}`
-
-        console.log(title, ' ', fechas, ' ', content)
+        let dayA = 0;
+        let mesA = 0;
+        let anoA = 0;
+        
+        if(day.charAt(0) === '0'){
+            dayA = day.substring(1);
+        } else{
+            dayA = day;
+        }
+        if(month.charAt(0) === '0'){
+            mesA = month.substring(1);
+        } else{
+            mesA = month;
+        }
+        if(year.length !== 4){
+            anoA = '2022';
+        } else{
+            anoA = year
+        }
+        const fechas = `${dayA}-${mesA}-${anoA}`
 
         const id = guid()
 
-        const userV = 'jose@uvg.edu.gt'
+        const userV = props.email;
 
         db.collection('eventos').doc(id).set({
             contenido: content,
@@ -124,7 +157,7 @@ function CalendarioComp(props) {
         const titulo = []
         const id = []
         const user = []
-
+        let foundDate = false;
         db.collection('eventos')
             .get()
             .then((querySnapshot) => {
@@ -135,6 +168,7 @@ function CalendarioComp(props) {
                     titulo.push(doc.get('titulo'))
                     user.push(doc.get('user'))
                 })
+
                 for (let i = 0; i < titulo.length; i++) {
                     const temp = {
                         contenido: contenido[i], fecha: fecha[i], titulo: titulo[i], id: id[i],
@@ -142,7 +176,6 @@ function CalendarioComp(props) {
 
                     if (fecha[i] === date) {
                         if (user[i] == props.email) {
-                            console.log('segundo if')
                             foundDate = true
                             setEvent(temp)
                             setDate(true)
@@ -151,19 +184,8 @@ function CalendarioComp(props) {
                 }
 
                 if (!foundDate) {
-                    setAddDate(true)
-
-                    const day = date.split('-')[0]
-                    const month = date.split('-')[1]
-                    const year = date.split('-')[2]
-
-                    setDay(day)
-                    setMonth(month)
-                    setYear(year)
-
-                    document.getElementsByName('dia')[0].value = day
-                    document.getElementsByName('mes')[0].value = month
-                    document.getElementsByName('ano')[0].value = year
+                    setDate(false);
+                    setAddDate(true);
                 }
             })
     }
@@ -190,7 +212,7 @@ function CalendarioComp(props) {
                                 {
                                     cols.map((col) => (
                                         col.date === todayFormatted? (
-                                            <tb key={col.date} className={`${col.classes} `+ nameClass(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</tb>
+                                            <td key={col.date} className={`${col.classes} `+ nameClassToday(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                         ) : 
                                             <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
@@ -237,7 +259,7 @@ function CalendarioComp(props) {
                             <input name="contenido" type="text" onChange={readInador} />
                         </div>
                     </div>
-                    <button className="continuaBotoncito" type="button" onClick={addEventHandler}>Continuar</button>
+                    <button className="continuaBotoncito" type="button" onClick={newDateInador}>Continuar</button>
 
                 </div>
             </PopUp>
@@ -258,7 +280,7 @@ function CalendarioComp(props) {
                             {event.contenido}
                         </h2>
                     </div>
-                    <button type="button" className="buttonControl" onClick={eraseDataHandler}>BORRAR</button>
+                    <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
                 </div>
             </PopUp>
 
