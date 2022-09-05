@@ -214,7 +214,7 @@ function CalendarioComp(props) {
                                         col.date === todayFormatted? (
                                             <td key={col.date} className={`${col.classes} `+ nameClassToday(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                         ) : 
-                                            <td key={col.date} className={col.classes} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                            <td key={col.date} className={`${col.classes} `+ nameClassOther(col.date) + claseToday} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
