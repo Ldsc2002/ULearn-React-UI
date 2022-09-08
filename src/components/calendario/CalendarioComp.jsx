@@ -17,6 +17,15 @@ function CalendarioComp(props) {
     const [addDate, setAddDate] = useState(false)
     const [event, setEvent] = useState([])
 
+    const [day, setDay] = useState('')
+    const [mount, setMonth] = useState('')
+    const [year, setYear] = useState('')
+
+    const [title, setTitle] = useState('')
+    const [content, setContent] = useState('')
+
+    const [hoyEs, setHoyEs] = useState('')
+
     useEffect(() => {
         var contenido = ""
         var fecha = ""
@@ -62,7 +71,6 @@ function CalendarioComp(props) {
 
     function nameClass(e){
 
-        console.log(dateEvent);
         let name = '';
 
         if(e === todayFormatted){
@@ -76,34 +84,14 @@ function CalendarioComp(props) {
             }
             
         });
-        console.log("NAMECLASSTODAY")
         
         return (name);
     }
 
     const newDateInador = () => {
-        let dayA = 0;
-        let mesA = 0;
-        let anoA = 0;
-        
-        if(day.charAt(0) === '0'){
-            dayA = day.substring(1);
-        } else{
-            dayA = day;
-        }
-        if(month.charAt(0) === '0'){
-            mesA = month.substring(1);
-        } else{
-            mesA = month;
-        }
-        if(year.length !== 4){
-            anoA = '2022';
-        } else{
-            anoA = year
-        }
-        const fechas = `${dayA}-${mesA}-${anoA}`
+        const fechas = hoyEs;
 
-        const id = guid()
+        const id = guid();
 
         const userV = props.email;
 
@@ -114,32 +102,25 @@ function CalendarioComp(props) {
             user: userV,
 
         })
-        setAddDate(false)
+        setAddDate(false);
     }
 
     const readInador = (e) => {
         if (e.target.name === 'titulo') {
             setTitle(e.target.value)
-        } else if (e.target.name === 'dia') {
-            setDay(e.target.value)
-        } else if (e.target.name === 'mes') {
-            setMonth(e.target.value)
-        } else if (e.target.name === 'ano') {
-            setYear(e.target.value)
         } else if (e.target.name === 'contenido') {
             setContent(e.target.value)
         }
+        const temp = {
+            contenido: '', fecha: '', titulo: '', id: '',
+        }
+        setEvent(temp)
     }
 
     const borraInador = () => {
         const { id } = event
 
         db.collection('eventos').doc(id).delete()
-
-        const temp = {
-            contenido: '', fecha: '', titulo: '', id: '',
-        }
-        setEvent(temp)
     }
 
     const dateClickHandler = (date) => {
@@ -157,6 +138,7 @@ function CalendarioComp(props) {
         });
 
         if (!foundDate) {
+            setHoyEs(date);
             setAddDate(true);
         } else{
             setDate(true)
@@ -201,25 +183,14 @@ function CalendarioComp(props) {
             <PopUp trigger={addDate} setTrigger={setAddDate}>
 
                 <div className="preguntaInador">
+                    <div className='cabeza'>
+                        <h3>{hoyEs}</h3>
+                    </div>
                     <div className="fechaInador1">
                         <div className="ingresador">
+                            
                             <h3>Título</h3>
                             <input type="text" name="titulo" onChange={readInador} />
-                        </div>
-                    </div>
-
-                    <div className="fechaInador2">
-                        <div className="ingresador">
-                            <h3>Dia</h3>
-                            <input name="dia" type="text" onChange={readInador} />
-                        </div>
-                        <div className="ingresador">
-                            <h3>Mes</h3>
-                            <input name="mes" type="text" onChange={readInador} />
-                        </div>
-                        <div className="ingresador">
-                            <h3>Año</h3>
-                            <input name="ano" type="text" onChange={readInador} />
                         </div>
                     </div>
 

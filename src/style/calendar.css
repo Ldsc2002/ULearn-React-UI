@@ -154,9 +154,23 @@
 
 .fechaInador3{
     margin-top: 5%;
+    margin-bottom: 5%;
     display: flex;
     align-self: center;
     justify-content: space-between;
+}
+
+.cabeza>h3{
+
+    color: black;
+    font-style: ;
+    margin-bottom: 10px !important;
+    width: 100%;
+    margin: 0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .ingresador>h3{
@@ -185,8 +199,11 @@
     background-color: #fa3636;
     color: white;
     margin-top: 3%;
+    margin-left: 34%;
     font-size: 20px;
     padding: 10px 0px;
+    width:200px ;
+
 }
 
 .table>thead>tr>th {
