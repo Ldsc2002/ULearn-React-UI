@@ -90,7 +90,7 @@ function Bookshelf(props) {
                 <input type="text" placeholder="Descripción" id="descripcion" />
                 <input type="file" name="file" onChange={onSubmitFile} />
 
-                <button id="subir_archivo" type="button" className="popUp-btn" onClick={() => finishUpload()}>Terminar</button>
+                <button id="subir_archivo" type="button" className="popUp-btn" onClick={() => finishUpload()}>Subir</button>
             </div>,
         )
     }
