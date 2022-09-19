@@ -40,6 +40,11 @@
     cursor: pointer;
 }
 
+.popUp-btn:hover{
+    background-color: rgb(113, 0, 0);
+    color: white;
+}
+
 .delete_btn{
     border: none;
     color: rgb(113, 0, 0);
@@ -50,6 +55,11 @@
     font-size: 1.5vw;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.delete_btn:hover{
+    background-color: rgb(113, 0, 0);
+    color: white;
 }
 
 .book-item:hover{
@@ -101,6 +111,12 @@
     animation-name: selected_book;
     animation-duration: 3s;
 }
+
+.botonAgregar:hover{
+    background-color: rgb(113, 0, 0);
+    color: white;
+}
+
 
 @keyframes selected_book {
     from{opacity: 0.2;}
