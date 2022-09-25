@@ -71,6 +71,7 @@ export default class extends Component {
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
+            console.log("entro aqui")
         }
     }
 
@@ -195,6 +196,7 @@ export default class extends Component {
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
+        
     }
 
     createNote(titulo, content, date, id) {
@@ -227,6 +229,10 @@ export default class extends Component {
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
+
+        this.state.notes.concat(note)
+        console.log(this.state.notes.length)
+
     }
 
     onLayoutChange(layout) {
