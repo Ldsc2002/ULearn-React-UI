@@ -62,6 +62,7 @@ function Bookshelf(props) {
             setTimeout(() => {
                 setButton(false)
             }, 1000)
+            fileDownload = ''
         }
     }
 
