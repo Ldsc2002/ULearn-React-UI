@@ -32,6 +32,10 @@
     border: none;
 }
 
+.close-btn:hover{
+    color:  rgb(113, 0, 0);
+}
+
 .addPopUp {
     display: grid;
 }

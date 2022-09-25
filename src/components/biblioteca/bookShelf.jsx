@@ -49,14 +49,20 @@ function Bookshelf(props) {
     const finishUpload = () => {
         const titulo = document.getElementById('titulo').value
         const descripcion = document.getElementById('descripcion').value
-
-        noteFirebase(titulo, descripcion, fileDownload, college)
-
-        fetchBooksHandler()
-
-        setTimeout(() => {
-            setButton(false)
-        }, 1000)
+        if (titulo === '' || descripcion === ''|| titulo.match(/^ *$/) !== null || descripcion.match(/^ *$/) !== null) {
+            alert('Faltan campos por llenar')
+        }
+        else if (fileDownload === '') {
+            alert('No puede subir archivos vacíos a la biblioteca')
+        }
+        else
+        {
+            noteFirebase(titulo, descripcion, fileDownload, college)
+            fetchBooksHandler()
+            setTimeout(() => {
+                setButton(false)
+            }, 1000)
+        }
     }
 
     const deleteBook = (book) => {
