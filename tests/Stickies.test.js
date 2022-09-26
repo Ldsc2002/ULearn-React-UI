@@ -16,7 +16,7 @@ test('renders Stickies', () => {
 });
 
 
-//
+//create Blank Sticky
 test('createBlankNote', () => {
 
     const props = {
@@ -24,8 +24,65 @@ test('createBlankNote', () => {
         type: true,
     }
 
-    const {stickies} = render(<Stickies {...props} />);
-    expect(stickies.fetch).toHaveBeenCalledTimes(1);
+    const stickies = new Stickies(props);
+    const note = stickies.createBlankNote();
+    expect(note).not.toBeNull();
+
 
     
 });   
+
+// // delete Sticky
+// test('deleteNote', () => {
+
+//     const props = {
+//         university: "uvg",
+//         type: true,
+//     }
+
+//     const stickies = new Stickies(props);
+//     const note = stickies.createBlankNote();
+//     stickies.deleteNote();
+// });
+
+
+//is superuser
+test('isSuperUser', () => {
+
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const superuser = stickies.isSuperUser();
+    expect(superuser).toBe(false);
+});
+
+//test render
+test('render', () => {
+
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const render = stickies.render();
+    expect(render).not.toBeNull();
+});
+
+
+//test componentDidMount
+test('componentDidMount', () => {
+
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const componentDidMount = stickies.componentDidMount();
+    expect(componentDidMount).not.toBeNull();
+});
+

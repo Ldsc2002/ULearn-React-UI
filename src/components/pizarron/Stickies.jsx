@@ -71,7 +71,6 @@ export default class extends Component {
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
-            console.log("entro aqui")
         }
     }
 
