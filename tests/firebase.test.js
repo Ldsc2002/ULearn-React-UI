@@ -41,8 +41,8 @@ jest.mock('firebase/compat/auth', () => {
     return jest.fn();
 });
 
-describe('App tests', () => {
-    it('Navigates to crearCuenta', () => {
+describe('Firebase tests', () => {
+    it('Gets data', () => {
         db.collection('notitas').doc('uvg').collection('uvg').get()
     })
 });
