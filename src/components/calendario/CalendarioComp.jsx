@@ -8,6 +8,7 @@ import { setBlockData } from 'draft-js/lib/DraftModifier'
 import { forEach } from 'draft-js/lib/DefaultDraftBlockRenderMap'
 
 function CalendarioComp(props) {
+
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
     } = CalendarioFuncionalidad()
@@ -133,6 +134,7 @@ function CalendarioComp(props) {
                 foundDate = true
                 setEvent({fecha: element.fecha, titulo: element.titulo, contenido: element.contenido})
                 setDate(true)
+                console.log();
             }
             
         });
