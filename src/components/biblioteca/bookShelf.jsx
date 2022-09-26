@@ -27,12 +27,10 @@ function Bookshelf(props) {
 
     const clearURL = () => { 
         fileDownload = ''
-        console.log('URL limpiada')
     }
 
     const fetchBooksHandler = () => {
         fetch(college).then((res) => {
-            console.log(res)
             setBooks(res)
         })
     }
