@@ -56,45 +56,45 @@ test('calendario_render_test', () => {
 
 });
 
-//test date click handler
-test('date_click_handler', () => {
+// //test date click handler
+// test('date_click_handler', () => {
  
-  const props = {
-    email: 'stefano@uvg.edu.gt'
-  }
-  const calendario = new Calendario(props);
+//   const props = {
+//     email: 'stefano@uvg.edu.gt'
+//   }
+//   const calendario = new Calendario(props);
 
-  date = '4-9-2022';
-  const dateClickHandler = calendario.dateClickHandler(date);
-  expect(dateClickHandler).not.toBeNull();
-});
+//   date = '4-9-2022';
+//   const dateClickHandler = calendario.dateClickHandler(date);
+//   expect(dateClickHandler).not.toBeNull();
+// });
 
-// //test readInador
-test('new_date_inador', () => {
-  const props = {
-    email: 'stefano@uvg.edu.gt'
-  }
-  const calendario = new Calendario(props);
+// // //test readInador
+// test('new_date_inador', () => {
+//   const props = {
+//     email: 'stefano@uvg.edu.gt'
+//   }
+//   const calendario = new Calendario(props);
 
-  const content = 'test';
-  const fecha = '1-9-2022';
-  const title = 'test';
-  const user = 'stefano@uvg.edu.gt';
-  const hoyEs = '1-9-2022';
+//   const content = 'test';
+//   const fecha = '1-9-2022';
+//   const title = 'test';
+//   const user = 'stefano@uvg.edu.gt';
+//   const hoyEs = '1-9-2022';
 
-  const newDateI = calendario.borrarInador(content, fecha, title, user, hoyEs);
-  expect(newDateI).not.toBeNull();
-});
+//   const newDateI = calendario.borrarInador(content, fecha, title, user, hoyEs);
+//   expect(newDateI).not.toBeNull();
+// });
 
-//test nameClass
-test('name_class', () => {
-  const props = {
-    email: 'stefano@uvg.edu.gt'
-  }
-  const calendario = new Calendario(props);
+// //test nameClass
+// test('name_class', () => {
+//   const props = {
+//     email: 'stefano@uvg.edu.gt'
+//   }
+//   const calendario = new Calendario(props);
 
-  const fecha = '1-9-2022';
+//   const fecha = '1-9-2022';
 
-  const nameC = calendario.nameClass(fecha);
-  expect(nameC).not.toBeNull();
-});
+//   const nameC = calendario.nameClass(fecha);
+//   expect(nameC).not.toBeNull();
+// });
