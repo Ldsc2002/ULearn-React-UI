@@ -1,7 +1,4 @@
 import React from 'react'
-import { WidthProvider, Responsive } from 'react-grid-layout'
-
-const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 function truncate(str, n) {
     return (str.length > n) ? `${str.slice(0, n - 1)}...` : str
