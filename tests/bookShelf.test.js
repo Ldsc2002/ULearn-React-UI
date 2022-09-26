@@ -1,4 +1,7 @@
-import {Bookshelf} from '../src/components/biblioteca/bookShelf';
+import {render} from '@testing-library/react';
+import React from 'react';
+import Bookshelf from '../src/components/biblioteca/bookShelf';
+//import {shallow} from 'enzyme';
 
 
 jest.mock('firebase/auth', () => {
@@ -33,7 +36,26 @@ jest.mock('firebase/storage', () => {
     };
 });
 
-test('Bookshelf', () => {
-    const bookshelf = true;
-    expect(bookshelf).not.toBeNull();
+
+//let container;
+//beforeEach(() => {
+//    container = document.createElement('div');
+//    document.body.appendChild(container);
+//});
+//
+//afterEach(() => {
+//    document.body.removeChild(container);
+//    container = null;
+//});
+//
+//
+////onSubmit 
+//test('onSubmit', () => {
+//    let bookShelf = new Bookshelf();
+//    bookShelf.onSubmitFile();
+//});
+
+//always happy
+test('always happy', () => {
+    expect(true).toBe(true);
 });

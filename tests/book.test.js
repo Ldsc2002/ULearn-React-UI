@@ -1,4 +1,4 @@
-import BookCard  from "../src/components/biblioteca/book";
+import BookCard, { truncate } from "../src/components/biblioteca/book";
 
 
 test('renderBookCard', () => {
@@ -25,4 +25,13 @@ test('renderBookCard', () => {
     expect(b).not.toBe(null);
 
 
+});
+
+
+//test truncate
+test('truncate', () => {
+    const str = 'Test';
+    const n = 2;
+    const result = truncate(str, n);
+    expect(result).toBe('Te...');
 });
