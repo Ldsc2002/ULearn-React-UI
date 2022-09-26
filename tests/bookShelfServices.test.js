@@ -1,5 +1,7 @@
 import {db, auth, storage} from '../src/components/firebase/firebase';
 import { fetch, openFile, noteFirebase, dropBook } from '../src/components/biblioteca/bookShelfService';
+import { getStorage } from 'firebase/storage';
+import React from 'react';
 
 jest.mock('firebase/auth', () => {
     return {
@@ -17,6 +19,7 @@ jest.mock('firebase/compat/app', () => {
         auth: jest.fn(),
         firestore: jest.fn(),
         db: jest.fn(),
+        storage: jest.fn(),
     };
 });
 
@@ -42,44 +45,61 @@ jest.mock('../src/components/firebase/firebase', () => {
     };
 });
 
+test('noteFirebase', () => {
+    const titulo = 'titulo';
+    const descripcion = 'descripcion';
+    const fd = 'fd';
+    const u = 'uvg';
 
-/*test('fetch', () => {
-    fetch('uvg').then((data) => {
-        expect(data).not.toBeNull();
+    db.collection = jest.fn().mockReturnValue({
+        add: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
     });
-});*/
+
+    const book = noteFirebase(titulo, descripcion, fd, u);
+    expect(book).not.toBeNull();
+});
 
 
+test('dropBook', () => {
+    const id = 'id';
 
-//test('openFile', () => {
-//    const book = []
+    db.collection = jest.fn().mockReturnValue({
+        doc: jest.fn().mockReturnValue({
+            delete: jest.fn().mockReturnValue({
+                then: jest.fn().mockReturnValue({
+                    catch: jest.fn(),
+                }),
+            }),
+        }),
+    });
+
+    const book = dropBook(id);
+    expect(book).not.toBeNull();
+});
+
+
+//test('OpenFile', () => {
+//    const book = {
+//        file: 'file',
+//    }
 //
-//    openFile('uvg').then((data) => {
-//        expect(data).not.toBeNull();
-//    });
-//});
-//
-//test('noteFirebase', () => {
-//    const titulo = 'titulo';
-//    const descripcion = 'descripcion';
-//    const fd = 'fd';
-//    const u = 'uvg';
-//
-//    db.collection = jest.fn().mockReturnValue({
-//        doc: jest.fn().mockReturnValue({
-//            collection: jest.fn().mockReturnValue({
-//                doc: jest.fn().mockReturnValue({
-//                    delete:jest.fn().mockResolvedValueOnce({})
-//                })
+//    storage.ref = jest.fn().mockReturnValue({
+//        getDownloadURL: jest.fn().mockReturnValue({
+//            then: jest.fn().mockReturnValue({
+//                catch: jest.fn(),
 //            }),
 //        }),
 //    });
 //
-//    const book = noteFirebase(titulo, descripcion, fd, u);
-//    expect(book).not.toBeNull();
+//    const file = openFile(book);
+//    expect(file).not.toBeNull();
 //});
 
-
+    
 
 
 

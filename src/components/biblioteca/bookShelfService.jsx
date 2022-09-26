@@ -49,6 +49,7 @@ function dropBook(i) {
 }
 
 function openFile(item) {
+    console.log(storage)
     const link = ref(storage, item)
 
     getDownloadURL(link).then((url) => {
