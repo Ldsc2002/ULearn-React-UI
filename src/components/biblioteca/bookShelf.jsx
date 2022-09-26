@@ -25,6 +25,11 @@ function Bookshelf(props) {
         fetchBooksHandler()
     }, [])
 
+    const clearURL = () => { 
+        fileDownload = ''
+        console.log('URL limpiada')
+    }
+
     const fetchBooksHandler = () => {
         fetch(college).then((res) => {
             console.log(res)
@@ -61,8 +66,8 @@ function Bookshelf(props) {
             fetchBooksHandler()
             setTimeout(() => {
                 setButton(false)
-            }, 1000)
-            fileDownload = ''
+            }, 500)
+            clearURL()
         }
     }
 
@@ -72,7 +77,7 @@ function Bookshelf(props) {
 
         setTimeout(() => {
             setButton(false)
-        }, 1000)
+        }, 500)
     }
 
     const selectedBookHandler = (set, book) => {
@@ -106,7 +111,7 @@ function Bookshelf(props) {
         <div className="biblioteca">
             <BookCard books={books} setButton={selectedBookHandler} />
 
-            <PopUp id="pop_up" trigger={buttonPopUp} setTrigger={setButton} onClick={() => props.setButton(false)}>
+            <PopUp id="pop_up" trigger={buttonPopUp} setTrigger={setButton} onClick={() => { clearURL(); props.setButton(false)}}>
                 {popUpContent}
             </PopUp>
 
