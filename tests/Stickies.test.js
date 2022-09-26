@@ -1,7 +1,9 @@
 import {render, screen} from '@testing-library/react'
 import { EditorState } from 'draft-js';
 import React from 'react';
+import { db } from '../src/components/firebase/firebase';
 import Stickies from '../src/components/pizarron/Stickies';
+
 
 //firebase testing
 jest.mock('../src/components/firebase/firebase', () => {
@@ -101,15 +103,110 @@ test('render', () => {
 
 //test componentDidMount
 test('componentDidMount', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+        notes: [
+            {
+                color: "#E84A64",
+                contentEditable: false,
+                degree:"-1deg",
+                grid: {i:1, x:0, y:Infinity, w:2, h:2},
+                id: "1",
+                timeStamp:"Aug 6, 2022 11:49 AM",
+                title: "Sticky 1",
+        }
+        ]
+    }
 
+    const stickies = new Stickies(props);
+    const componentDidMount = stickies.componentDidMount();
+    expect(componentDidMount).not.toBeDefined();
+});
+
+//test onLayoutChange
+test('onLayoutChange', () => {
     const props = {
         university: "uvg",
         type: true,
     }
 
     const stickies = new Stickies(props);
-    const componentDidMount = stickies.componentDidMount();
-    expect(componentDidMount).not.toBeNull();
+    const onLayoutChange = stickies.onLayoutChange();
+    expect(onLayoutChange).not.toBeNull();
 });
+
+//test onBreakpointChange
+test('onBreakpointChange', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const onBreakpointChange = stickies.onBreakpointChange();
+    expect(onBreakpointChange).not.toBeNull();
+});
+
+// test componentWillReceiveProps
+test('componentWillReceiveProps', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+        notes: [
+            {
+                color: "#E84A64",
+                contentEditable: false,
+                degree:"-1deg",
+                grid: {i:1, x:0, y:Infinity, w:2, h:2},
+                id: "1",
+                timeStamp:"Aug 6, 2022 11:49 AM",
+                title: "Sticky 1",
+        }
+        ]
+    }
+
+    const stickies = new Stickies(props);
+    const componentWillReceiveProps = stickies.componentWillReceiveProps(props);
+    expect(componentWillReceiveProps).not.toBeDefined();
+});
+
+
+//test deleteNote with firebase
+test('deleteNote', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const note= {
+        color: "#E84A64",
+        contentEditable: false,
+        degree:"-1deg", 
+        grid: {i:1, x:0, y:Infinity, w:2, h:2},
+        id: "1",
+        timeStamp:"Aug 6, 2022 11:49 AM", 
+        title: "Sticky 1",
+    }
+
+    db.collection = jest.fn().mockReturnValue({
+        doc: jest.fn().mockReturnValue({
+            collection: jest.fn().mockReturnValue({
+                doc: jest.fn().mockReturnValue({
+                    delete:jest.fn().mockResolvedValueOnce({})
+                })
+            }),
+        }),
+    });
+
+
+    const deleteNote = stickies.deleteNote(note);
+    expect(deleteNote).not.toBeNull();
+});
+
+
+
+
 
 

@@ -88,6 +88,7 @@ export default class extends Component {
     }
 
     handleTitleChange(html, currentNote) {
+        console.log(html, currentNote)
         currentNote.disable = false
 
         const { notes } = this.state
@@ -231,7 +232,6 @@ export default class extends Component {
         }
 
         this.state.notes.concat(note)
-        console.log(this.state.notes.length)
 
     }
 
@@ -301,7 +301,6 @@ export default class extends Component {
     }
 
     renderNote(note) {
-        console.log(note)
         const closeStyle = { display: (this.state.notes.length === 1) ? 'none' : 'block', ...this.props.closeStyle || {} }
         const addStyle = this.props.addStyle || {}
         const closeIcon = this.isSuperUser()
