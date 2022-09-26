@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from 'react'
 import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
-
 import PopUp from '../popup/PopUp'
 import { useEffect } from 'react'
 import { setBlockData } from 'draft-js/lib/DraftModifier'
 import { forEach } from 'draft-js/lib/DefaultDraftBlockRenderMap'
 
 function CalendarioComp(props) {
+
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
-    } = CalendarioFuncionalidad()
+    } = CalendarioFuncionalidad();
     const [dateEvent, setDataEvent] = useState([]);
 
     const [date, setDate] = useState(false)
@@ -88,18 +88,18 @@ function CalendarioComp(props) {
         return (name);
     }
 
-    const newDateInador = () => {
-        const fechas = hoyEs;
+    const newDateInador = (content1 = content, fechas1 = fechas, title1 = title, userV1 = userV, hoyEs1 = hoyEs) => {
+        const fechas = hoyEs1;
 
         const id = guid();
 
         const userV = props.email;
 
         db.collection('eventos').doc(id).set({
-            contenido: content,
-            fecha: fechas,
-            titulo: title,
-            user: userV,
+            contenido: content1,
+            fecha: fechas1,
+            titulo: title1,
+            user: userV1,
 
         })
         setAddDate(false);
@@ -133,6 +133,7 @@ function CalendarioComp(props) {
                 foundDate = true
                 setEvent({fecha: element.fecha, titulo: element.titulo, contenido: element.contenido})
                 setDate(true)
+                console.log();
             }
             
         });
