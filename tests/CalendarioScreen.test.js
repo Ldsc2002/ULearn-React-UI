@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import React from 'react';
+import { useState, React } from 'react'
 import Calendario from '../src/components/calendario/CalendarioComp';
 import { db } from '../src/components/firebase/firebase';
 
@@ -13,12 +13,8 @@ jest.mock('../src/components/firebase/firebase', () => {
 
 //test to check if the calendario component renders correctly
 test('calendario_render_test', () => {
+  render (<Calendario/>)
 
-  const props = {
-      email: 'stefano@uvg.edu.gt'
-  }
-  const calendario = new Calendario(props);
-  expect(calendario).not.toBeNull();
 });
 
 //test date click handler
@@ -34,7 +30,7 @@ test('date_click_handler', () => {
   expect(dateClickHandler).not.toBeNull();
 });
 
-// //test readInador with firebase
+// //test readInador
 test('new_date_inador', () => {
   const props = {
     email: 'stefano@uvg.edu.gt'
@@ -49,4 +45,17 @@ test('new_date_inador', () => {
 
   const newDateI = calendario.borrarInador(content, fecha, title, user, hoyEs);
   expect(newDateI).not.toBeNull();
+});
+
+//test nameClass
+test('name_class', () => {
+  const props = {
+    email: 'stefano@uvg.edu.gt'
+  }
+  const calendario = new Calendario(props);
+
+  const fecha = '1-9-2022';
+
+  const nameC = calendario.nameClass(fecha);
+  expect(nameC).not.toBeNull();
 });
