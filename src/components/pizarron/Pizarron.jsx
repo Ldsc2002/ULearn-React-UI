@@ -4,7 +4,6 @@ import {
     Stickies,
 } from './indexPizarron'
 
-import 'firebase/firestore'
 
 export default class extends Component {
     static contextType = ScreenContext
