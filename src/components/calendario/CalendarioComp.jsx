@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react'
 import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
-
 import PopUp from '../popup/PopUp'
 import { useEffect } from 'react'
 import { setBlockData } from 'draft-js/lib/DraftModifier'
@@ -11,7 +10,7 @@ function CalendarioComp(props) {
 
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
-    } = CalendarioFuncionalidad()
+    } = CalendarioFuncionalidad();
     const [dateEvent, setDataEvent] = useState([]);
 
     const [date, setDate] = useState(false)
