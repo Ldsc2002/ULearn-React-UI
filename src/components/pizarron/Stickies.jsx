@@ -71,6 +71,7 @@ export default class extends Component {
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
+
         }
     }
 
@@ -87,6 +88,7 @@ export default class extends Component {
     }
 
     handleTitleChange(html, currentNote) {
+        console.log(html, currentNote)
         currentNote.disable = false
 
         const { notes } = this.state
@@ -195,6 +197,7 @@ export default class extends Component {
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
+        
     }
 
     createNote(titulo, content, date, id) {
@@ -227,6 +230,9 @@ export default class extends Component {
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
+
+        this.state.notes.concat(note)
+
     }
 
     onLayoutChange(layout) {
