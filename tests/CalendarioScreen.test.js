@@ -34,31 +34,19 @@ test('date_click_handler', () => {
   expect(dateClickHandler).not.toBeNull();
 });
 
-// //test deleteNote with firebase
-test('deleteNote', () => {
+// //test readInador with firebase
+test('new_date_inador', () => {
   const props = {
     email: 'stefano@uvg.edu.gt'
   }
   const calendario = new Calendario(props);
-  const event= {
-    id: '1', 
-    contenido:'test', 
-    fecha:'1-9-2022',
-    titulo:'Test', 
-    user:'stefano@uvg.edu.gt',
-  }
 
-  db.collection = jest.fn().mockReturnValue({
-      doc: jest.fn().mockReturnValue({
-          collection: jest.fn().mockReturnValue({
-              doc: jest.fn().mockReturnValue({
-                  delete:jest.fn().mockResolvedValueOnce({})
-              })
-          }),
-      }),
-  });
+  const content = 'test';
+  const fecha = '1-9-2022';
+  const title = 'test';
+  const user = 'stefano@uvg.edu.gt';
+  const hoyEs = '1-9-2022';
 
-
-  const deleteNote = calendario.borrarInador()
-  expect(deleteNote).not.toBeNull();
+  const newDateI = calendario.borrarInador(content, fecha, title, user, hoyEs);
+  expect(newDateI).not.toBeNull();
 });

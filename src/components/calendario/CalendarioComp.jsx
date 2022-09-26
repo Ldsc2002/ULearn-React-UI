@@ -89,18 +89,18 @@ function CalendarioComp(props) {
         return (name);
     }
 
-    const newDateInador = () => {
-        const fechas = hoyEs;
+    const newDateInador = (content1 = content, fechas1 = fechas, title1 = title, userV1 = userV, hoyEs1 = hoyEs) => {
+        const fechas = hoyEs1;
 
         const id = guid();
 
         const userV = props.email;
 
         db.collection('eventos').doc(id).set({
-            contenido: content,
-            fecha: fechas,
-            titulo: title,
-            user: userV,
+            contenido: content1,
+            fecha: fechas1,
+            titulo: title1,
+            user: userV1,
 
         })
         setAddDate(false);
