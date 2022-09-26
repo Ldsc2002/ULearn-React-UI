@@ -78,7 +78,7 @@ jest.mock('../src/components/firebase/firebase', () => {
 //    const book = noteFirebase(titulo, descripcion, fd, u);
 //    expect(book).not.toBeNull();
 //});
-//
+
 
 
 

@@ -33,13 +33,7 @@ jest.mock('firebase/storage', () => {
     };
 });
 
-/*test('Bookshelf', () => {
-    const bookshelf = ;
+test('Bookshelf', () => {
+    const bookshelf = true;
     expect(bookshelf).not.toBeNull();
-});*/
-
-describe ('Bookshelf', () => {
-    it ('should be defined', () => {
-        expect(Bookshelf).toBeDefined();
-    });
 });
