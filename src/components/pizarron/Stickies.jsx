@@ -71,6 +71,7 @@ export default class extends Component {
     componentDidMount() {
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
+
         }
     }
 
@@ -300,6 +301,7 @@ export default class extends Component {
     }
 
     renderNote(note) {
+        console.log(note)
         const closeStyle = { display: (this.state.notes.length === 1) ? 'none' : 'block', ...this.props.closeStyle || {} }
         const addStyle = this.props.addStyle || {}
         const closeIcon = this.isSuperUser()

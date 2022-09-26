@@ -1,4 +1,5 @@
 import {render, screen} from '@testing-library/react'
+import { EditorState } from 'draft-js';
 import React from 'react';
 import Stickies from '../src/components/pizarron/Stickies';
 
@@ -32,18 +33,43 @@ test('createBlankNote', () => {
     
 });   
 
-// // delete Sticky
-// test('deleteNote', () => {
+//create Note
+test('createNote', () => {
 
-//     const props = {
-//         university: "uvg",
-//         type: true,
-//     }
+    const props = {
+        university: "uvg",
+        type: true,
+    }
 
-//     const stickies = new Stickies(props);
-//     const note = stickies.createBlankNote();
-//     stickies.deleteNote();
-// });
+    const stickies = new Stickies(props);
+    const note = stickies.createNote("titulo", "contenido", "hoy", 1);
+    expect(note).not.toBeNull();
+});
+
+
+//renderNote
+test('renderNote', () => {
+
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+
+    const note= {
+        color: "#E84A64",
+        contentEditable: false,
+        degree:"-1deg", 
+        grid: {i:1, x:0, y:Infinity, w:2, h:2},
+        id: "1",
+        timeStamp:"Aug 6, 2022 11:49 AM", 
+        title: "Sticky 1",
+    }
+
+    const renderedNote = stickies.renderNote(note);
+    expect(renderedNote).not.toBeNull();
+});
 
 
 //is superuser
@@ -85,4 +111,5 @@ test('componentDidMount', () => {
     const componentDidMount = stickies.componentDidMount();
     expect(componentDidMount).not.toBeNull();
 });
+
 
