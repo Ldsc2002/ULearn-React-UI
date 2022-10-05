@@ -101,6 +101,7 @@ export default class LogInScreen extends Component {
     render() {
         const layoutFlowStyle = {}
         const baseStyle = {}
+        /* istanbul ignore next */
         if (this.context.transitionId && this.context.transitionId.length > 0 && this.context.atTopOfScreenStack && this.context.transitionForward) {
             baseStyle.animation = `0.25s ease-in-out ${this.context.transitionId}`
         }
