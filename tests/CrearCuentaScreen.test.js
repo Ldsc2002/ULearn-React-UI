@@ -2,6 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import CrearCuentaScreen from '../src/components/signup/CrearCuentaScreen';
 
+
 jest.mock('firebase/auth', () => {
   return {
     createUserWithEmailAndPassword: jest.fn(),
@@ -44,8 +45,8 @@ test('onClick_elButtonCopy', () => {
     expect(crearCuenta.registerCollege).toBe("UVG");
 });
 
-// test onClick_elButton to login
-test('onClick_elButton2', () => {
+// test onClick_elButtonCopy to login
+test('onClick_elButtonCopy',  async () => {
 
   let crearCuenta = new CrearCuentaScreen()
   crearCuenta.registerEmail = "stefano@uvg.edu.gt";
@@ -54,9 +55,6 @@ test('onClick_elButton2', () => {
   crearCuenta.registerMajor = "Computer Science";
   crearCuenta.registerCollege = "UVG";
 
-  // replace the implementation for your stub
-  const spy = jest.spyOn(crearCuenta, 'onClick_elButtonCopy').mockImplementation(() => { throw ({'error':{'code': 'auth/user-not-found'}}); });
-
-  expect(window.alert).toHaveBeenCalledWith('Usario no existe.\nPor favor cree una cuenta.');
-  spy.mockRestore(); // restore the implementation
+  crearCuenta.textErrorTypeChanged_elField = 'auth/user-not-found';
+  expect(window.alert).toHaveBeenCalledWith("Usario no existe.\nPor favor cree una cuenta.");
 });
