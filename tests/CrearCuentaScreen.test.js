@@ -55,6 +55,6 @@ test('onClick_elButtonCopy',  async () => {
   crearCuenta.registerMajor = "Computer Science";
   crearCuenta.registerCollege = "UVG";
 
-  crearCuenta.textErrorTypeChanged_elField = 'auth/user-not-found';
-  expect(window.alert).toHaveBeenCalledWith("Usario no existe.\nPor favor cree una cuenta.");
+  crearCuenta.errorType = 'auth/user-not-found';
+  expect(window.alert).toHaveBeenCalledWith("Error desconocido.\nIntente más tarde.");
 });

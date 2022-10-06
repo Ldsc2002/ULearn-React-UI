@@ -83,8 +83,6 @@ export default class LogInScreen extends Component {
                       onPress: () => Linking.openURL('mailto: ara20261@yvg.edu.gt'),
                     },
                   ]);
-            } else if(error.code == 'auth/network-request-failed') {
-                alert('Error de red.\nPor favor intente nuevamente o revise su conexión a internet.')
             } else if(error.code == 'auth/invalid-email') {
                 alert('Correo invalido.\nPor favor revise que haya ingresado un correo valido.')
             } else {
