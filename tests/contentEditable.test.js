@@ -53,6 +53,25 @@ test('componentDidUpdate', () => {
     expect(contentEditable.editable.innerHTML).toBe("hola");
 });
 
+//test componentDidUpdate
+test('componentDidUpdate', () => {
+    const props = {
+        html: "hola",
+        disabled: false,
+        onChange: jest.fn(),
+    }
+
+    
+    const contentEditable = new ContentEditable(props);
+    contentEditable.editable = {
+        innerHTML: "adios",
+    }
+
+    contentEditable.componentDidUpdate(props);
+    expect(contentEditable.editable.innerHTML).toBe("hola");
+});
+
+
 //test emitChange to call props.onChange
 test('emitChange', () => {
     const props = {
@@ -70,3 +89,4 @@ test('emitChange', () => {
     contentEditable.emitChange();
     expect(props.onChange).toHaveBeenCalled();
 });
+
