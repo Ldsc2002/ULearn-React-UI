@@ -15,7 +15,7 @@ jest.mock('../src/components/firebase/firebase', () => {
 //test to check if the Pizarron component renders correctly
 test('renders Pizarron', () => {
 
-     const props = {
+    const props = {
         notes: [],
         showTape: true, 
         showTitle: true,
