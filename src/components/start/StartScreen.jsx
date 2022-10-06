@@ -65,6 +65,7 @@ export default class StartScreen extends Component {
         }
 
         let contentElement_elTabContent
+        /*istanbul ignore next*/
         switch (selectedIndex_selector) {
         case 0:
             contentElement_elTabContent = (<Pizarron {...this.props} />)
