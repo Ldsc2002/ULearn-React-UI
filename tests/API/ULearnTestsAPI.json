@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "0a5f8fd8-b71d-4d03-945e-2bd1b8be8ed9",
+		"name": "ULearn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST files",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returns success on GET\", function() {",
+							"    pm.response.to.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response is not error\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"testing\": \"testing\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
+					"protocol": "https",
+					"host": [
+						"ulearn-42d0d-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"test.json"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET files",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returns success on GET\", function() {",
+							"    pm.response.to.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response equals POST\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"",
+							"    const response = pm.response.json();",
+							"    const key = Object.keys(response)[0];",
+							"",
+							"    pm.expect(response[key][\"testing\"]).to.eql(\"testing\")",
+							"",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
+					"protocol": "https",
+					"host": [
+						"ulearn-42d0d-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"test.json"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE file",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returns success on GET\", function() {",
+							"    pm.response.to.status(200)",
+							"})",
+							"",
+							"pm.test(\"Response is successfully deleted\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"    pm.response.to.have.jsonBody(null)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
+					"protocol": "https",
+					"host": [
+						"ulearn-42d0d-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"test.json"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Returns success on GET\", function() {",
+							"    pm.response.to.status(200)",
+							"})",
+							"",
+							"pm.test(\"Deleted file\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody(\"error\");",
+							"    pm.response.to.have.jsonBody(null)",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
+					"protocol": "https",
+					"host": [
+						"ulearn-42d0d-default-rtdb",
+						"firebaseio",
+						"com"
+					],
+					"path": [
+						"test.json"
+					],
+					"query": [
+						{
+							"key": "auth",
+							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
