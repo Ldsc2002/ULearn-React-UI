@@ -171,9 +171,54 @@ test('componentWillReceiveProps', () => {
     expect(componentWillReceiveProps).not.toBeDefined();
 });
 
+// test componentWillReceiveProps
+test('componentWillReceiveProps2', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const componentWillReceiveProps = stickies.componentWillReceiveProps(props);
+    expect(componentWillReceiveProps).not.toBeDefined();
+});
+
 
 //test deleteNote with firebase
 test('deleteNote', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const note= {
+        color: "#E84A64",
+        contentEditable: false,
+        degree:"-1deg", 
+        grid: {i:1, x:0, y:Infinity, w:2, h:2},
+        id: "1",
+        timeStamp:"Aug 6, 2022 11:49 AM", 
+        title: "Sticky 1",
+    }
+
+    db.collection = jest.fn().mockReturnValue({
+        doc: jest.fn().mockReturnValue({
+            collection: jest.fn().mockReturnValue({
+                doc: jest.fn().mockReturnValue({
+                    delete:jest.fn().mockResolvedValueOnce({})
+                })
+            }),
+        }),
+    });
+
+
+    const deleteNote = stickies.deleteNote(note);
+    expect(deleteNote).not.toBeNull();
+});
+
+//test deleteNote with firebase
+test('deleteNote2', () => {
     const props = {
         university: "uvg",
         type: true,
