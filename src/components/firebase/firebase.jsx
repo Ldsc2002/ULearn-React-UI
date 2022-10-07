@@ -15,6 +15,7 @@ const firebaseConfig = {
 
 let app = ''
 
+/* istanbul ignore else */
 if (!firebase.apps.length) {
     app = firebase.initializeApp(firebaseConfig)
 } else {

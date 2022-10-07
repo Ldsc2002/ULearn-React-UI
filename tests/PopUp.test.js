@@ -7,3 +7,14 @@ describe('Pop up tests', () => {
         render(<PopUp />)
     })
 });
+
+//test props.trigger is true
+test('props.trigger is true', () => {
+    const props = {
+        trigger: true
+    }
+
+    let popup = new PopUp(props)
+
+    expect(popup).toBeDefined()
+});

@@ -42,3 +42,31 @@ describe('StartScreen tests', () => {
         )        
     })
 });
+
+//test switch selectedIndex_selector 
+test('switch selectedIndex_selector', () => {
+    let start = new StartScreen()    
+    const {container} = render(<StartScreen />)
+
+    expect(start.contentElement_elTabContent).toBeUndefined()
+});
+
+// test this.context.transitionId.length
+test('this.context.transitionId.length', () => {
+    let start = new StartScreen()    
+    const baseStyle = {}
+
+    start.context = {
+            transitionId : {length: 1},
+            atTopOfScreenStack: true,
+            transitionForward: true,
+    }
+
+    const {container} = render(<StartScreen />)
+
+    if (start.context.transitionId && start.context.transitionId.length > 0 && start.context.atTopOfScreenStack && start.context.transitionForward) {
+        baseStyle.animation = `0.25s ease-in-out ${start.context.transitionId}`
+    }
+
+    expect(baseStyle.animation).toBe("0.25s ease-in-out [object Object]")
+});

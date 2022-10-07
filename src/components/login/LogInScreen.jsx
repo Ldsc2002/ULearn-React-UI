@@ -67,6 +67,7 @@ export default class LogInScreen extends Component {
                 this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
             })
         } catch (error) {
+            /*istanbul ignore else*/
             if(error.code == 'auth/user-not-found') {
                 alert('Usario no existe.\nPor favor cree una cuenta.')
             } else if(error.code == 'auth/wrong-password') {
@@ -83,8 +84,6 @@ export default class LogInScreen extends Component {
                       onPress: () => Linking.openURL('mailto: ara20261@yvg.edu.gt'),
                     },
                   ]);
-            } else if(error.code == 'auth/network-request-failed') {
-                alert('Error de red.\nPor favor intente nuevamente o revise su conexión a internet.')
             } else if(error.code == 'auth/invalid-email') {
                 alert('Correo invalido.\nPor favor revise que haya ingresado un correo valido.')
             } else {
@@ -101,6 +100,7 @@ export default class LogInScreen extends Component {
     render() {
         const layoutFlowStyle = {}
         const baseStyle = {}
+        /* istanbul ignore next */
         if (this.context.transitionId && this.context.transitionId.length > 0 && this.context.atTopOfScreenStack && this.context.transitionForward) {
             baseStyle.animation = `0.25s ease-in-out ${this.context.transitionId}`
         }

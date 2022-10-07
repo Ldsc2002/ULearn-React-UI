@@ -37,16 +37,20 @@ export default class StartScreen extends Component {
     render() {
         const layoutFlowStyle = {}
         const baseStyle = {}
+        /* istanbul ignore next */
         if (this.context.transitionId && this.context.transitionId.length > 0 && this.context.atTopOfScreenStack && this.context.transitionForward) {
             baseStyle.animation = `0.25s ease-in-out ${this.context.transitionId}`
         }
+        /* istanbul ignore next */
         if (!this.context.atTopOfScreenStack) {
             layoutFlowStyle.height = '100vh'
             layoutFlowStyle.overflow = 'hidden'
         }
 
         const selectedIndex_selector = (() => {
+            /* istanbul ignore next */
             let val = (this.context.appActions.dataSlots ? this.context.appActions.dataSlots.ds_SlotSelectedTab : '')
+            /* istanbul ignore next */
             if (val !== undefined) {
                 val = parseInt(val, 10)
                 if (!Number.isNaN(val)) {
@@ -61,6 +65,7 @@ export default class StartScreen extends Component {
         }
 
         let contentElement_elTabContent
+        /*istanbul ignore next*/
         switch (selectedIndex_selector) {
         case 0:
             contentElement_elTabContent = (<Pizarron {...this.props} />)

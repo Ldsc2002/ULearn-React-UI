@@ -72,6 +72,7 @@ class App extends Component {
                 },
             }
             let screen
+            /*istanbul ignore next*/
             switch (screenId) {
             case 'crearCuenta':
                 screen = <CrearCuentaScreen {...baseProps} />
