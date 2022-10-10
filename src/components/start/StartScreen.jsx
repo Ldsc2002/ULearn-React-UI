@@ -27,6 +27,7 @@ export default class StartScreen extends Component {
 
         const auth = getAuth()
         onAuthStateChanged(auth, (user) => {
+            /*istanbul ignore next*/
             if (!user) {
                 this.setState({ loged: false })
                 this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
@@ -57,6 +58,7 @@ export default class StartScreen extends Component {
                     return val
                 }
             }
+            /*istanbul ignore next*/
             return Number.isNaN(this.state.selectedIndex_selector) ? 0 : this.state.selectedIndex_selector
         })()
 
