@@ -166,7 +166,7 @@ test('OpenFile', () => {
     });
     //const [libros, setLibros] = React.useState([]);
     const setLibros = jest.fn();
-    const libros = (useState: any) => [libros, setLibros];
+    const libros = (useState) => [libros, setLibros];
     jest.spyOn(React, 'useState').mockImplementation(libros);
 
     //const booksArray = [];
