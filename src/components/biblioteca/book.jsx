@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Truncate(str, n) {
+function truncate(str, n) {
     console.log(str)
     return (str.length > n) ? `${str.slice(0, n - 1)}...` : str
 }
@@ -8,7 +8,7 @@ function Truncate(str, n) {
 function BookCard(props) {
     const content = props.books.map((post) => (
         <div key={post.id} className="book-item" onClick={() => props.setButton(true, post)}>
-            <h2 className="title_book">{Truncate(post.title, 8)}</h2>
+            <h2 className="title_book">{truncate(post.title, 8)}</h2>
         </div>
     ))
 
@@ -19,4 +19,4 @@ function BookCard(props) {
     )
 }
 
-export default (BookCard, Truncate)
+export default BookCard
