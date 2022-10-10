@@ -35,6 +35,7 @@ function CalendarioComp(props) {
 
         var dateEventTemp = [];
 
+        /* istanbul ignore next */
         db.collection('eventos')
             .get()
             .then((querySnapshot) => {
@@ -88,6 +89,7 @@ function CalendarioComp(props) {
         return (name);
     }
 
+    /* istanbul ignore next */
     const newDateInador = (content1 = content, fechas1 = fechas, title1 = title, userV1 = userV, hoyEs1 = hoyEs) => {
         const fechas = hoyEs1;
 
@@ -106,6 +108,7 @@ function CalendarioComp(props) {
     }
 
     const readInador = (e) => {
+        /* istanbul ignore next */
         if (e.target.name === 'titulo') {
             setTitle(e.target.value)
         } else if (e.target.name === 'contenido') {
@@ -123,6 +126,7 @@ function CalendarioComp(props) {
         db.collection('eventos').doc(id).delete()
     }
 
+    /* istanbul ignore next */
     const dateClickHandler = (date) => {
         
         let foundDate = false;
