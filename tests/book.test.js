@@ -23,6 +23,22 @@ test('renderBookCard', () => {
 
     const b = new BookCard(p);
     expect(b).not.toBe(null);
-
-
 });
+
+
+test('renderBookCard2', () => {
+    const p = {
+        books: [
+            {
+                title: 'Test With long name',
+                id: '1',
+                content: 'Test content',
+                file: 'Test file',
+                code: 'Test code',
+            },
+        ],
+    }
+
+    const b = new BookCard(p);
+    expect(b).not.toBe(null);
+} );

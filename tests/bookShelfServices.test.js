@@ -2,6 +2,7 @@ import {db, auth, storage} from '../src/components/firebase/firebase';
 import { fetch, openFile, noteFirebase, dropBook } from '../src/components/biblioteca/bookShelfService';
 import { getStorage } from 'firebase/storage';
 import React from 'react';
+import {renderHook, act} from '@testing-library/react-hooks';
 
 jest.mock('firebase/auth', () => {
     return {
@@ -105,4 +106,74 @@ test('dropBook', () => {
 
 test('always happy', () => {
     expect(true).toBe(true);
+});
+
+
+test('fetch books', () => {
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('uvg');
+    books.then((data) => {
+        //expect(data).not.toBeNull();
+        expect(data).not.toBe([]);
+    });
+});
+
+
+test('fetch empty books', () => {
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('---');
+    books.then((data) => {
+        expect(data).toBe([]);
+    });
+});
+
+test('fetch books with error', () => { 
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('error');
+    books.then((data) => {
+        expect(data).toBe([]);
+    });
+});
+
+test('OpenFile', () => {
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+    //const [libros, setLibros] = React.useState([]);
+    const setLibros = jest.fn();
+    const libros = (useState: any) => [libros, setLibros];
+    jest.spyOn(React, 'useState').mockImplementation(libros);
+
+    //const booksArray = [];
+    const books = fetch('uvg');
+    books.then((data) => {
+        setLibros(data);
+    });
+    console.log(booksArray);
+    expect(openFile(libros[0][0])).not.toBeNull();
 });

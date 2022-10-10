@@ -31,6 +31,7 @@ function Bookshelf(props) {
 
     const fetchBooksHandler = () => {
         fetch(college).then((res) => {
+            console.log(res)
             setBooks(res)
         })
     }
