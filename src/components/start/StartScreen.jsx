@@ -97,6 +97,7 @@ export default class StartScreen extends Component {
             pointerEvents: 'auto',
         }
 
+        /*istanbul ignore next*/
         return (
             <div className="AppScreen StartScreen" style={baseStyle}>
                 <div className="background">

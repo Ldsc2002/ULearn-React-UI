@@ -1,6 +1,5 @@
 import {db, auth, storage} from '../src/components/firebase/firebase';
 import { fetch, openFile, noteFirebase, dropBook } from '../src/components/biblioteca/bookShelfService';
-import { getStorage } from 'firebase/storage';
 import React from 'react';
 
 jest.mock('firebase/auth', () => {
@@ -105,4 +104,52 @@ test('dropBook', () => {
 
 test('always happy', () => {
     expect(true).toBe(true);
+});
+
+
+test('fetch books', () => {
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('uvg');
+    books.then((data) => {
+        //expect(data).not.toBeNull();
+        expect(data).not.toBe([]);
+    });
+});
+
+
+test('fetch empty books', () => {
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('---');
+    books.then((data) => {
+        expect(data).toBe([]);
+    });
+});
+
+test('fetch books with error', () => { 
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('error');
+    books.then((data) => {
+        expect(data).toBe([]);
+    });
 });

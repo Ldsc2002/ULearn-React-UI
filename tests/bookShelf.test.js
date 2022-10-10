@@ -1,4 +1,8 @@
-import {Bookshelf} from '../src/components/biblioteca/bookShelf';
+import { render } from '@testing-library/react';
+//import TestRenderer from 'react-test-renderer';''
+import React from 'react';
+import Bookshelf from '../src/components/biblioteca/bookShelf';
+import { db } from '../src/components/firebase/firebase';
 
 
 jest.mock('firebase/auth', () => {
@@ -15,6 +19,7 @@ jest.mock('firebase/compat/app', () => {
         firebase: jest.fn(),
         initializeApp: jest.fn(),
         auth: jest.fn(),
+        db: jest.fn(),
         firestore: jest.fn(),
     };
 });
@@ -33,7 +38,16 @@ jest.mock('firebase/storage', () => {
     };
 });
 
+
+jest.mock('../src/components/firebase/firebase', () => {
+    return {
+        auth: jest.fn(),
+        db: jest.fn(),
+    };
+});
+
+
 test('Bookshelf', () => {
-    const bookshelf = true;
-    expect(bookshelf).not.toBeNull();
+    const a = true;
+    expect(a).not.toBeNull();
 });

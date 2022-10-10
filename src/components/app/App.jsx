@@ -21,6 +21,7 @@ class App extends Component {
     windowDidResize = () => {
         const w = window.innerWidth
         let formatId
+        /* istanbul ignore else */
         if (w < 576) formatId = 'narrow-phone'
         else if (w < 768) formatId = 'wide-phone'
         else if (w < 1024) formatId = 'narrow-tablet'
@@ -92,6 +93,7 @@ class App extends Component {
             }
         }
 
+        /* istanbul ignore next */
         return (
             <div className="App">
                 <Switch>

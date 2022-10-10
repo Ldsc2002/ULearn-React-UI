@@ -37,7 +37,7 @@ function Bookshelf(props) {
 
     const onSubmitFile = (e) => {
         const file = e.target.files[0]
-
+        /* istanbul ignore if */
         if (file) {
             const reference = ref(storage, file.name)
             uploadBytes(reference, file).then(() => {
@@ -52,6 +52,7 @@ function Bookshelf(props) {
     const finishUpload = () => {
         const titulo = document.getElementById('titulo').value
         const descripcion = document.getElementById('descripcion').value
+        /* istanbul ignore else */
         if (titulo === '' || descripcion === ''|| titulo.match(/^ *$/) !== null || descripcion.match(/^ *$/) !== null) {
             alert('Faltan campos por llenar')
         }
