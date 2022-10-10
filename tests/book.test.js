@@ -42,3 +42,21 @@ test('renderBookCard2', () => {
     const b = new BookCard(p);
     expect(b).not.toBe(null);
 } );
+
+//test truncate
+test('truncate', () => {
+    const p = {
+        books: [
+            {
+                title: 'afdsfasdfasdfsf',
+                id: '1',
+                content: 'Test content',
+                file: 'Test file',
+                code: 'Test code',
+            },
+        ],
+    }
+
+    const b = new BookCard(p);
+    expect(b).not.toBe(null);
+});

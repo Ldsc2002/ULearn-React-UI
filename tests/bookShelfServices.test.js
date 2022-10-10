@@ -1,8 +1,6 @@
 import {db, auth, storage} from '../src/components/firebase/firebase';
 import { fetch, openFile, noteFirebase, dropBook } from '../src/components/biblioteca/bookShelfService';
-import { getStorage } from 'firebase/storage';
 import React from 'react';
-import {renderHook, act} from '@testing-library/react-hooks';
 
 jest.mock('firebase/auth', () => {
     return {
@@ -154,26 +152,4 @@ test('fetch books with error', () => {
     books.then((data) => {
         expect(data).toBe([]);
     });
-});
-
-test('OpenFile', () => {
-    db.collection = jest.fn().mockReturnValue({
-        get: jest.fn().mockReturnValue({
-            then: jest.fn().mockReturnValue({
-                catch: jest.fn(),
-            }),
-        }),
-    });
-    //const [libros, setLibros] = React.useState([]);
-    const setLibros = jest.fn();
-    const libros = (useState) => [libros, setLibros];
-    jest.spyOn(React, 'useState').mockImplementation(libros);
-
-    //const booksArray = [];
-    const books = fetch('uvg');
-    books.then((data) => {
-        setLibros(data);
-    });
-    console.log(booksArray);
-    expect(openFile(libros[0][0])).not.toBeNull();
 });

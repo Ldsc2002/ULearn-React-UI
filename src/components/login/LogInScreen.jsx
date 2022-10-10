@@ -67,7 +67,7 @@ export default class LogInScreen extends Component {
                 this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
             })
         } catch (error) {
-            /*istanbul ignore else*/
+            /*istanbul ignore next*/
             if(error.code == 'auth/user-not-found') {
                 alert('Usario no existe.\nPor favor cree una cuenta.')
             } else if(error.code == 'auth/wrong-password') {
