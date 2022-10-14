@@ -66,7 +66,7 @@ function CalendarioComp(props) {
                 .toString(16)
                 .substring(1)
         }
-        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`;
+        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
     }
 
     function nameClass(e){
@@ -121,8 +121,6 @@ function CalendarioComp(props) {
         const { id } = event
 
         db.collection('eventos').doc(id).delete()
-
-        return 'borrado';
     }
 
     const dateClickHandler = (date) => {
