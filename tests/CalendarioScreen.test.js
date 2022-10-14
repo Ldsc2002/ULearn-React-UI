@@ -56,45 +56,41 @@ test('calendario_render_test', () => {
 
 });
 
-// //test date click handler
-// test('date_click_handler', () => {
- 
+// //test borraInador
+// test('borraInador', () => {
 //   const props = {
-//     email: 'stefano@uvg.edu.gt'
+//     university: "uvg",
+//     type: true,
 //   }
 //   const calendario = new Calendario(props);
-
-//   date = '4-9-2022';
-//   const dateClickHandler = calendario.dateClickHandler(date);
-//   expect(dateClickHandler).not.toBeNull();
+//   const borrado = calendario.borraInador("id");
+//   console.log("++++++++++++++++",borrado);
+//   expect(borrado).not.toBeNull();
 // });
 
-// // //test readInador
-// test('new_date_inador', () => {
-//   const props = {
-//     email: 'stefano@uvg.edu.gt'
-//   }
-//   const calendario = new Calendario(props);
+//test guidGenerator
+test('guidGenerator', () => {
+  const props = {
+    university: "uvg",
+    type: true,
+  }
+  const calendario = new Calendario(props);
+  const guid = calendario.guidGenerator();
+  expect(guid).not.toBeNull();
+});
 
-//   const content = 'test';
-//   const fecha = '1-9-2022';
-//   const title = 'test';
-//   const user = 'stefano@uvg.edu.gt';
-//   const hoyEs = '1-9-2022';
-
-//   const newDateI = calendario.borrarInador(content, fecha, title, user, hoyEs);
-//   expect(newDateI).not.toBeNull();
-// });
-
-// //test nameClass
-// test('name_class', () => {
-//   const props = {
-//     email: 'stefano@uvg.edu.gt'
-//   }
-//   const calendario = new Calendario(props);
-
-//   const fecha = '1-9-2022';
-
-//   const nameC = calendario.nameClass(fecha);
-//   expect(nameC).not.toBeNull();
-// });
+// test('borrarinador', () => {
+//   const id = 'id';
+//   db.collection = jest.fn().mockReturnValue({
+//     doc: jest.fn().mockReturnValue({
+//       delete: jest.fn().mockReturnValue({
+//         then: jest.fn().mockReturnValue({
+//           catch: jest.fn(),
+//         }),
+//       }),
+//     }),
+//   });
+//   const calendario = new Calendario();
+//   const book = calendario.borrarinador(id);
+//   expect(book).not.toBeNull();
+// }
