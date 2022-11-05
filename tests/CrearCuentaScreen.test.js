@@ -19,6 +19,12 @@ jest.mock('../src/components/firebase/firebase', () => {
     };
 });
 
+jest.mock('react', ()=>({
+  ...jest.requireActual('react'),
+  useState: jest.fn()
+}))
+import { useState } from 'react';
+
 
 // This test is to check if the CrearCuentaScreen component renders correctly
 test('renders CrearCuentaScreen', () => {
@@ -58,3 +64,19 @@ test('onClick_elButtonCopy',  async () => {
   crearCuenta.errorType = 'auth/user-not-found';
   expect(window.alert).toHaveBeenCalledWith("Error desconocido.\nIntente más tarde.");
 });
+
+describe("Test", ()=>{
+  beforeEach(()=>{
+    useState.mockImplementation(jest.requireActual('react').useState);
+    //other preperations
+  })
+  //test textErrorTypeChanged_elField
+  test('textErrorTypeChanged_elField', () => {
+
+    let crearCuenta = new CrearCuentaScreen()
+    crearCuenta.textErrorTypeChanged_elField("auth/user-not-found");
+    expect(crearCuenta.errorType).toBe(undefined);
+
+  });
+})
+

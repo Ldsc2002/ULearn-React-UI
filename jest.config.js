@@ -6,5 +6,6 @@ module.exports = {
     "\\.(css|less)$": "<rootDir>/mocks/fileMock.js",
     
   },
+  "collectCoverageFrom": ["./src/components/biblioteca/**", ],
   testEnvironment: 'jsdom'
 }

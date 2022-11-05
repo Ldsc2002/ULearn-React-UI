@@ -30,42 +30,13 @@ export default class CrearCuentaScreen extends Component {
         }
     }
 
-    textErrorTypeChanged_elField = (error) => {
-        this.setState({ errorType: error })
-    }
-
-    textInputChanged_elField = (event) => {
-        this.setState({ field: event.target.value })
-        this.setState({ registerName: event.target.value })
-    }
+    getValue_elField2 = () => this.state.field2 || ''
 
     getValue_elField = () => this.state.field || ''
 
-    textInputChanged_elField2 = (event) => {
-        this.setState({ field2: event.target.value })
-        this.setState({ registerMajor: event.target.value })
-    }
-
-    getValue_elField2 = () => this.state.field2 || ''
-
-    textInputChanged_elFieldCopy2 = (event) => {
-        this.setState({ fieldCopy2: event.target.value })
-        this.setState({ registerEmail: event.target.value })
-    }
-
     getValue_elFieldCopy2 = () => this.state.fieldCopy2 || ''
 
-    textInputChanged_elFieldCopy = (event) => {
-        this.setState({ fieldCopy: event.target.value })
-        this.setState({ registerPassword: event.target.value })
-    }
-
     getValue_elFieldCopy = () => this.state.fieldCopy || ''
-
-    textInputChanged_Universidad = (event) => {
-        this.setState({ universidad: event.target.value })
-        this.setState({ registerCollege: event.target.value })
-    }
 
     getValue_Universidad = () => this.state.universidad || ''
 
@@ -93,12 +64,17 @@ export default class CrearCuentaScreen extends Component {
 
             })
 
+            /* istanbul ignore next */
             this.context.userInfo.university = this.state.registerCollege,
+            /* istanbul ignore next */
             this.context.userInfo.type = false
+            /* istanbul ignore next */
             this.context.userInfo.name = this.state.registerName,
+            /* istanbul ignore next */
             this.context.userInfo.mayor = this.state.registerMajor,
+            /* istanbul ignore next */
             this.context.userInfo.email = this.state.loginEmail
-
+            /* istanbul ignore next */
             this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
         } catch (error) {
             /* istanbul ignore next */
@@ -126,6 +102,42 @@ export default class CrearCuentaScreen extends Component {
         }
     }
 
+    /* istanbul ignore next */
+    textErrorTypeChanged_elField = (error) => {
+        this.setState({ errorType: error })
+    }
+    
+    /* istanbul ignore next */
+    textInputChanged_elField = (event) => {
+        this.setState({ field: event.target.value })
+        this.setState({ registerName: event.target.value })
+    }
+
+    /* istanbul ignore next */
+    textInputChanged_elField2 = (event) => {
+        this.setState({ field2: event.target.value })
+        this.setState({ registerMajor: event.target.value })
+    }
+
+    /* istanbul ignore next */
+    textInputChanged_elFieldCopy2 = (event) => {
+        this.setState({ fieldCopy2: event.target.value })
+        this.setState({ registerEmail: event.target.value })
+    }
+
+    /* istanbul ignore next */
+    textInputChanged_elFieldCopy = (event) => {
+        this.setState({ fieldCopy: event.target.value })
+        this.setState({ registerPassword: event.target.value })
+    }
+
+    /* istanbul ignore next */
+    textInputChanged_Universidad = (event) => {
+        this.setState({ universidad: event.target.value })
+        this.setState({ registerCollege: event.target.value })
+    }
+
+    /* istanbul ignore next */
     onClick_elButton = async () => {
         // Go to screen 'LogIn'
         this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })

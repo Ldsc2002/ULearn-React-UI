@@ -26,6 +26,7 @@ export default class Usuario extends Component {
         this.setState({ s_major: this.context.userInfo.mayor })
     }
 
+    /* istanbul ignore next */
     onClick_LogOut = async () => {
         auth.signOut()
         this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })

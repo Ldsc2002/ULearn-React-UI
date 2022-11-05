@@ -17,7 +17,9 @@ export default class StartScreen extends Component {
         }
     }
 
+    /*istanbul ignore next*/
     selectorSelectionChanged = (idx, ev) => {
+        
         this.setState({ selectedIndex_selector: idx })
         this.context.appActions.updateDataSlot('ds_SlotSelectedTab', idx.toString())
     }
@@ -26,8 +28,9 @@ export default class StartScreen extends Component {
         this.setState({ loged: true })
 
         const auth = getAuth()
+        /*istanbul ignore next*/
         onAuthStateChanged(auth, (user) => {
-            /*istanbul ignore next*/
+            
             if (!user) {
                 this.setState({ loged: false })
                 this.context.appActions.goToScreen('logIn', this.context.baseScreenId, { transitionId: 'fadeIn' })
