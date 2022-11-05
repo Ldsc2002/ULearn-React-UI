@@ -6,6 +6,6 @@ module.exports = {
     "\\.(css|less)$": "<rootDir>/mocks/fileMock.js",
     
   },
-  "collectCoverageFrom": ["./src/components/biblioteca/**", ],
+  "collectCoverageFrom": ["./mocks/**", "./src/components/app/ScreenContext.jsx", "./src/components/biblioteca/book.jsx", "./src/components/biblioteca/bookShelfService.jsx","./src/components/calendario/Calendario.jsx","./src/components/calendario/CalendarioFuncionalidad.jsx","./src/components/firebase/firebase.jsx", "./src/components/login/**","./src/components/pizarron/**","./src/components/signup/**","./src/components/start/**","./src/components/user/**", "./src/components/navigation/**"],
   testEnvironment: 'jsdom'
 }
