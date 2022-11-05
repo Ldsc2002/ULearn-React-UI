@@ -70,3 +70,4 @@ test('this.context.transitionId.length', () => {
 
     expect(baseStyle.animation).toBe("0.25s ease-in-out [object Object]")
 });
+
