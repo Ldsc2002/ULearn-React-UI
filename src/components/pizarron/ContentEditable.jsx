@@ -11,6 +11,7 @@ export default class extends Component {
         }
     }
 
+    /*istanbul ignore next */
     emitChange() {
         const html = this.editable.innerHTML
         if (this.props.onChange && html !== this.lastHtml) {
