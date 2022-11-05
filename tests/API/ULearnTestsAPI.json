@@ -6,231 +6,605 @@
 	},
 	"item": [
 		{
-			"name": "POST files",
-			"event": [
+			"name": "File Management",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Returns success on GET\", function() {",
-							"    pm.response.to.status(200)",
-							"})",
-							"",
-							"pm.test(\"Response is not error\", function () {",
-							"    pm.response.to.not.be.error;",
-							"    pm.response.to.not.have.jsonBody(\"error\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"testing\": \"testing\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
-					"protocol": "https",
-					"host": [
-						"ulearn-42d0d-default-rtdb",
-						"firebaseio",
-						"com"
-					],
-					"path": [
-						"test.json"
-					],
-					"query": [
+					"name": "POST files",
+					"event": [
 						{
-							"key": "auth",
-							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns success on GET\", function() {",
+									"    pm.response.to.status(200)",
+									"})",
+									"",
+									"pm.test(\"Response is not error\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.not.have.jsonBody(\"error\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"testing\": \"testing\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/test.json?auth={{key}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"test.json"
+							],
+							"query": [
+								{
+									"key": "auth",
+									"value": "{{key}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET files",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns success on GET\", function() {",
+									"    pm.response.to.status(200)",
+									"})",
+									"",
+									"pm.test(\"Response equals POST\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.not.have.jsonBody(\"error\");",
+									"",
+									"    const response = pm.response.json();",
+									"    const key = Object.keys(response)[0];",
+									"",
+									"    pm.expect(response[key][\"testing\"]).to.eql(\"testing\")",
+									"",
+									"    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/test.json?auth={{key}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"test.json"
+							],
+							"query": [
+								{
+									"key": "auth",
+									"value": "{{key}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns success on GET\", function() {",
+									"    pm.response.to.status(200)",
+									"})",
+									"",
+									"pm.test(\"Response is successfully deleted\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.not.have.jsonBody(\"error\");",
+									"    pm.response.to.have.jsonBody(null)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/test.json?auth={{key}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"test.json"
+							],
+							"query": [
+								{
+									"key": "auth",
+									"value": "{{key}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check deletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns success on GET\", function() {",
+									"    pm.response.to.status(200)",
+									"})",
+									"",
+									"pm.test(\"Deleted file\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.not.have.jsonBody(\"error\");",
+									"    pm.response.to.have.jsonBody(null)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/test.json?auth={{key}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"test.json"
+							],
+							"query": [
+								{
+									"key": "auth",
+									"value": "{{key}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "GET files",
-			"event": [
+			"name": "Login",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Returns success on GET\", function() {",
-							"    pm.response.to.status(200)",
-							"})",
-							"",
-							"pm.test(\"Response equals POST\", function () {",
-							"    pm.response.to.not.be.error;",
-							"    pm.response.to.not.have.jsonBody(\"error\");",
-							"",
-							"    const response = pm.response.json();",
-							"    const key = Object.keys(response)[0];",
-							"",
-							"    pm.expect(response[key][\"testing\"]).to.eql(\"testing\")",
-							"",
-							"    ",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
-					"protocol": "https",
-					"host": [
-						"ulearn-42d0d-default-rtdb",
-						"firebaseio",
-						"com"
-					],
-					"path": [
-						"test.json"
-					],
-					"query": [
+					"name": "Invalid email",
+					"event": [
 						{
-							"key": "auth",
-							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns data error on POST\", function() {",
+									"    pm.response.to.status(400)",
+									"})",
+									"",
+									"pm.test(\"Response is invalid email\", function () {",
+									"    pm.response.to.be.error;",
+									"    const responseJson = pm.response.json()",
+									"",
+									"    pm.expect(responseJson.error.message).to.eql(\"INVALID_EMAIL\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnSecureToken\": true,\n    \"email\": \"abc\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{accountsKey}}",
+							"protocol": "https",
+							"host": [
+								"identitytoolkit",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"accounts:signInWithPassword"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{accountsKey}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns data error on POST\", function() {",
+									"    pm.response.to.status(400)",
+									"})",
+									"",
+									"pm.test(\"Response is missing password\", function () {",
+									"    pm.response.to.be.error;",
+									"    const responseJson = pm.response.json()",
+									"",
+									"    pm.expect(responseJson.error.message).to.eql(\"MISSING_PASSWORD\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnSecureToken\": true,\n    \"email\": \"Luis@uvg.edu.gt\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{accountsKey}}",
+							"protocol": "https",
+							"host": [
+								"identitytoolkit",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"accounts:signInWithPassword"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{accountsKey}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Successful login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns success on POST\", function() {",
+									"    pm.response.to.status(200)",
+									"})",
+									"",
+									"pm.test(\"Response is user data\", function () {",
+									"    const responseJson = pm.response.json()",
+									"    pm.expect(responseJson.kind).to.eql(\"identitytoolkit#VerifyPasswordResponse\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnSecureToken\": true,\n    \"email\": \"Luis@uvg.edu.gt\",\n    \"password\": \"Luis123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={{accountsKey}}",
+							"protocol": "https",
+							"host": [
+								"identitytoolkit",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"accounts:signInWithPassword"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{accountsKey}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "DELETE file",
-			"event": [
+			"name": "Signup",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Returns success on GET\", function() {",
-							"    pm.response.to.status(200)",
-							"})",
-							"",
-							"pm.test(\"Response is successfully deleted\", function () {",
-							"    pm.response.to.not.be.error;",
-							"    pm.response.to.not.have.jsonBody(\"error\");",
-							"    pm.response.to.have.jsonBody(null)",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
-					"protocol": "https",
-					"host": [
-						"ulearn-42d0d-default-rtdb",
-						"firebaseio",
-						"com"
-					],
-					"path": [
-						"test.json"
-					],
-					"query": [
+					"name": "Invalid email",
+					"event": [
 						{
-							"key": "auth",
-							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns data error on POST\", function() {",
+									"    pm.response.to.status(400)",
+									"})",
+									"",
+									"pm.test(\"Response is invalid email\", function () {",
+									"    pm.response.to.be.error;",
+									"    const responseJson = pm.response.json()",
+									"",
+									"    pm.expect(responseJson.error.message).to.eql(\"INVALID_EMAIL\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						}
-					]
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnSecureToken\": true,\n    \"email\": \"\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={{accountsKey}}",
+							"protocol": "https",
+							"host": [
+								"identitytoolkit",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"accounts:signUp"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{accountsKey}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Missing password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns data error on POST\", function() {",
+									"    pm.response.to.status(400)",
+									"})",
+									"",
+									"pm.test(\"Response is missing password\", function () {",
+									"    pm.response.to.be.error;",
+									"    const responseJson = pm.response.json()",
+									"",
+									"    pm.expect(responseJson.error.message).to.eql(\"MISSING_PASSWORD\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnSecureToken\": true,\n    \"email\": \"Luis@uvg.edu.gt\",\n    \"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={{accountsKey}}",
+							"protocol": "https",
+							"host": [
+								"identitytoolkit",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"accounts:signUp"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{accountsKey}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Taken email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Returns data error on POST\", function() {",
+									"    pm.response.to.status(400)",
+									"})",
+									"",
+									"pm.test(\"Response is email already in use\", function () {",
+									"    pm.response.to.be.error;",
+									"    const responseJson = pm.response.json()",
+									"",
+									"    pm.expect(responseJson.error.message).to.eql(\"EMAIL_EXISTS\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"returnSecureToken\": true,\n    \"email\": \"Luis@uvg.edu.gt\",\n    \"password\": \"Luis123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={{accountsKey}}",
+							"protocol": "https",
+							"host": [
+								"identitytoolkit",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1",
+								"accounts:signUp"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{accountsKey}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "Check deletion",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Returns success on GET\", function() {",
-							"    pm.response.to.status(200)",
-							"})",
-							"",
-							"pm.test(\"Deleted file\", function () {",
-							"    pm.response.to.not.be.error;",
-							"    pm.response.to.not.have.jsonBody(\"error\");",
-							"    pm.response.to.have.jsonBody(null)",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://ulearn-42d0d-default-rtdb.firebaseio.com/test.json?auth=dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
-					"protocol": "https",
-					"host": [
-						"ulearn-42d0d-default-rtdb",
-						"firebaseio",
-						"com"
-					],
-					"path": [
-						"test.json"
-					],
-					"query": [
-						{
-							"key": "auth",
-							"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy"
-						}
-					]
-				}
-			},
-			"response": []
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "key",
+			"value": "dDoZRHSvligoIqmKhIF1jWgXi6vJZTpnYXVAHWHy",
+			"type": "default"
+		},
+		{
+			"key": "host",
+			"value": "https://ulearn-42d0d-default-rtdb.firebaseio.com",
+			"type": "default"
+		},
+		{
+			"key": "accountsKey",
+			"value": "AIzaSyDtufOv6ScvHdl-SGog3CQmdEhtjl8oX6Q",
+			"type": "default"
 		}
 	]
 }
