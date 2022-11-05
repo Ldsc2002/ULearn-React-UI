@@ -251,7 +251,62 @@ test('deleteNote2', () => {
 });
 
 
+//test fetch from Stickies
+test('fetch', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    db.collection = jest.fn().mockReturnValue({
+        doc: jest.fn().mockReturnValue({
+            collection: jest.fn().mockReturnValue({
+                get: jest.fn().mockResolvedValueOnce({
+                    then: jest.fn().mockResolvedValueOnce({
+                    title: "Sticky 1",
+                    date: "Aug 6, 2022 11:49 AM",
+                    content: "Sticky 1",
+                    
+                })
+            })
+
+            }),
+        }),
+    });
 
 
+    const stickies = new Stickies(props);
+    const fetch = stickies.fetch();
+    expect(fetch).not.toBeNull();
 
 
+});
+
+//test noteFirebase(note)
+test('noteFirebase', () => {
+    const props = {
+        university: "uvg",
+        type: true,
+    }
+
+    const stickies = new Stickies(props);
+    const note= {
+        color: "#E84A64",
+        contentEditable: false,
+        degree:"-1deg", 
+        grid: {i:1, x:0, y:Infinity, w:2, h:2},
+        id: "1",
+        timeStamp:"Aug 6, 2022 11:49 AM", 
+        title: "Sticky 1",
+    }
+
+    db.collection = jest.fn().mockReturnValue({
+        doc: jest.fn().mockReturnValue({
+            collection: jest.fn().mockReturnValue({
+                doc: jest.fn().mockReturnValue({
+                    set:jest.fn().mockResolvedValueOnce({})
+                })
+            }),
+        }),
+    }); 
+});

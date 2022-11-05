@@ -8,10 +8,7 @@ import ScreenContext from '../app/ScreenContext'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-/**
-* @method: guid
-* @desc: Generates unique guid
-* */
+
 function guid() {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -22,10 +19,6 @@ function guid() {
         s4()}-${s4()}${s4()}${s4()}`
 }
 
-/**
-* @method: tranformEditorState
-* @desc: Tranforms the text to editor state
-* */
 function tranformEditorState(notes) {
     const notesData = notes.default || notes
     const data = notesData.map((note) => {
@@ -36,10 +29,7 @@ function tranformEditorState(notes) {
     return data
 }
 
-/**
-* @method: transformContentState
-* @desc: Tranforms editor state to text content
-* */
+/*istanbul ignore next*/
 function transformContentState(notes) {
     const clonedNotes = Object.assign([], notes)
     const data = clonedNotes.map((note) => {
@@ -69,7 +59,8 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        /*istanbul ignore if*/
+        
+        /*istanbul ignore next*/
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
 
@@ -88,6 +79,7 @@ export default class extends Component {
         })
     }
 
+    /*istanbul ignore next*/
     handleTitleChange(html, currentNote) {
         console.log(html, currentNote)
         currentNote.disable = false
@@ -113,6 +105,7 @@ export default class extends Component {
         })
     }
 
+    /*istanbul ignore next*/
     onChange(editorState, currentNote) {
         currentNote.disable = false
 
@@ -125,13 +118,12 @@ export default class extends Component {
             }
         })
         
-        /*istanbul ignore if*/
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(transformContentState(this.state.notes), 'update')
         }
     }
 
-    // return
+    /*istanbul ignore next*/
     noteFirebase(note) {
         const { title } = note
         const { text } = note
@@ -242,11 +234,11 @@ export default class extends Component {
 
     }
 
+    /*istanbul ignore next*/
     onLayoutChange(layout) {
         const { notes } = this.state
         notes.forEach((note) => {
             layout.forEach((grid) => {
-                /*istanbul ignore if*/
                 if (grid.i === note.id) {
                     note.grid = grid
                 }
@@ -255,7 +247,6 @@ export default class extends Component {
         this.setState({
             notes,
         }, () => {
-            /*istanbul ignore if*/
             if (typeof this.props.onChange === 'function') {
                 this.props.onChange(this.state.notes, 'layout')
                 if (typeof this.props.onLayoutChange === 'function') {
@@ -304,8 +295,8 @@ export default class extends Component {
             })
     }
 
+    /*istanbul ignore next*/
     isSuperUser() {
-        /*istanbul ignore if*/
         if (this.type) {
             return false
         }
@@ -329,6 +320,7 @@ export default class extends Component {
         const i = note.grid.i
         const { grid } = note
         grid.y = grid.y 
+        /*istanbul ignore next*/
         return (
             <div key={i} data-grid={grid}>
                 <aside

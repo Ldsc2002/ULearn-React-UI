@@ -30,6 +30,7 @@ export default class extends Component {
         })
     }
 
+    /* istanbul ignore next */
     toggleValue(e) {
         this.setState({
             [e.target.name]: !this.state[e.target.name],
