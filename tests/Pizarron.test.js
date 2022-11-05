@@ -26,4 +26,38 @@ test('renders Pizarron', () => {
     expect(pizarron).not.toBeNull();
 });
 
+//onChange(notes) test
+test('onChange(notes) test', () => {
+    const props = {
+        notes: [],
+        showTape: true, 
+        showTitle: true,
+        output: "hola",
+        colors: ['#FFFFFF'],
+    }
+    const pizarron = new Pizarron(props);
+    pizarron.onChange([]);
+    expect(pizarron.state.notes).toEqual([]);
+});
+
+
+//test render
+test('render test', () => {
+    const props = {
+        notes: [],
+        showTape: true, 
+        showTitle: true,
+        output: "hola",
+        colors: ['#FFFFFF'],
+    }
+    const userInfo = {
+        universidad: "uvg",
+    }
+
+    const pizarron = new Pizarron(props);
+    pizarron.context = {userInfo};
+    pizarron.render();
+    expect(pizarron.state.notes).toEqual([]);
+});
+
 
