@@ -40,6 +40,7 @@ export default class LogInScreen extends Component {
 
     getValue_elFieldCopy = () => this.state.fieldCopy || ''
 
+    /* istanbul ignore next */
     getValue_elCheckbox = () => (this.state.checkbox !== undefined ? this.state.checkbox : 'false')
 
     checkboxChanged_elCheckbox = (event) => {
@@ -55,6 +56,7 @@ export default class LogInScreen extends Component {
                 this.state.loginPassword,
             )
 
+            /* istanbul ignore next */
             setPersistence(auth, browserLocalPersistence).then(() => user)
 
             /* istanbul ignore next */

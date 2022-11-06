@@ -1,7 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import CalendarioComp from '../src/components/calendario/CalendarioComp';
-import Calendario from '../src/components/calendario/Calendario';
+import Calendario from '../src/components/calendario/CalendarioComp';
 import { db } from '../src/components/firebase/firebase';
 
 jest.mock('firebase/auth', () => {
@@ -47,20 +46,12 @@ jest.mock('../src/components/firebase/firebase', () => {
 });
 
 //test to check if the calendario component renders correctly
-test('renders_calendario_screen_test', () => {
-  render(<Calendario />);
+test('calendario_render_test', () => {
+  db.collection = jest.fn().mockReturnValue({
+            get: jest.fn().mockReturnValue({
+                then:jest.fn().mockResolvedValueOnce({})
+            })
 });
+  render (<Calendario/>)
 
-//test getprevmonth
-test('get_prev_month_test', () => {
-  let calendario = new CalendarioComp();
-  calendario.getPrevMonth();
-  expect(calendario.state.month).toBe(11);
-});
-
-//test getnextmonth
-test('get_next_month_test', () => {
-  let calendario = new CalendarioComp();
-  calendario.getNextMonth();
-  expect(calendario.state.month).toBe(1);
 });

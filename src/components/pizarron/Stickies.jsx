@@ -142,19 +142,20 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
+        
         db.collection('notitas').doc(this.university).collection(this.university).doc(id)
             .delete()
 
+        /*istanbul ignore next*/
         notes.forEach((note, index) => {
-            /*istanbul ignore if*/
             if (currentNote.id === note.id) {
                 notes.splice(index, 1)
             }
         })
+        /*istanbul ignore next*/
         this.setState({
             notes,
         }, () => {
-            /*istanbul ignore if*/
             if (typeof this.props.onChange === 'function') {
                 this.props.onChange(this.state.notes, 'delete')
                 if (typeof this.props.onDelete === 'function') {
