@@ -57,6 +57,7 @@ export default class LogInScreen extends Component {
 
             setPersistence(auth, browserLocalPersistence).then(() => user)
 
+            /* istanbul ignore next */
             db.collection('usuarios').doc((auth.currentUser).uid).get().then((docRef) => {
                 this.context.userInfo.university = (docRef.data().universidad)
                 this.context.userInfo.type = (docRef.data().tipo)
@@ -92,6 +93,7 @@ export default class LogInScreen extends Component {
         }
     }
 
+    /* istanbul ignore next */
     onClick_elButtonCopy = async () => {
         // Go to screen 'CrearCuenta'
         this.context.appActions.goToScreen('crearCuenta', this.context.baseScreenId, { transitionId: 'fadeIn' })

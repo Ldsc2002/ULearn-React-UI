@@ -21,6 +21,7 @@ export default class TabBarButton extends Component {
             try {
                 return JSON.stringify(val)
             } catch (e) {
+                /*istanbul ignore next*/
                 return val.toString()
             }
         })(this.props.title)
@@ -51,6 +52,7 @@ export default class TabBarButton extends Component {
             try {
                 return JSON.stringify(val)
             } catch (e) {
+                /*istanbul ignore next*/
                 return val.toString()
             }
         })(this.props.title)
