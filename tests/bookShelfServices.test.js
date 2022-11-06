@@ -153,3 +153,20 @@ test('fetch books with error', () => {
         expect(data).toBe([]);
     });
 });
+
+test('loop through fetch books', () => {
+    db.collection = jest.fn().mockReturnValue({
+        get: jest.fn().mockReturnValue({
+            then: jest.fn().mockReturnValue({
+                catch: jest.fn(),
+            }),
+        }),
+    });
+
+    const books = fetch('uvg');
+    books.then((data) => {
+        data.forEach((book) => {
+            expect(book).not.toBeNull();
+        });
+    });
+});
