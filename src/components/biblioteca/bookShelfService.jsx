@@ -4,6 +4,7 @@ import { auth, db, storage } from '../firebase/firebase'
 function fetch(u) {
     const libros = []
 
+    /* istanbul ignore next */
     return new Promise((resolve) => {
         db.collection('archivos')
             .get()
@@ -48,6 +49,8 @@ function dropBook(i) {
     db.collection('archivos').doc(id).delete()
 }
 
+
+/* istanbul ignore next */
 function openFile(item) {
     console.log(item)
     //console.log(storage)
