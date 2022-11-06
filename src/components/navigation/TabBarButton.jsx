@@ -47,6 +47,7 @@ export default class TabBarButton extends Component {
     renderState1() {
         const value_title = ((val) => {
             // make sure value is in string format
+            /* istanbul ignore next */
             if (val instanceof String || typeof val === 'string') return val
 
             try {
@@ -78,6 +79,7 @@ export default class TabBarButton extends Component {
         )
     }
 
+    /* istanbul ignore next */
     render() {
         switch (parseInt((this.state && this.state.visualStateIndexOverride !== undefined) ? this.state.visualStateIndexOverride : this.props.visualStateIndex, 10)) {
         case 0:
