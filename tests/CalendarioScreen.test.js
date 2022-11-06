@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import Calendario from '../src/components/calendario/CalendarioComp';
+import CalendarioComp from '../src/components/calendario/CalendarioComp';
+import Calendario from '../src/components/calendario/Calendario';
 import { db } from '../src/components/firebase/firebase';
 
 jest.mock('firebase/auth', () => {
@@ -46,14 +47,8 @@ jest.mock('../src/components/firebase/firebase', () => {
 });
 
 //test to check if the calendario component renders correctly
-test('calendario_render_test', () => {
-  db.collection = jest.fn().mockReturnValue({
-            get: jest.fn().mockReturnValue({
-                then:jest.fn().mockResolvedValueOnce({})
-            })
-});
-  render (<Calendario/>)
-
+test('renders_calendario_screen_test', () => {
+  render(<Calendario />);
 });
 
 // //test date click handler
