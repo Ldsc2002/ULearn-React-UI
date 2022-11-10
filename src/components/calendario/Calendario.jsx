@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import CalendarioComp from './CalendarioComp.jsx'
+import CalendarioComp from './CalendarioComp'
 import ScreenContext from '../app/ScreenContext'
 
 export default class calendario extends Component {
     static contextType = ScreenContext
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     render() {
         return (
             <div className="Calendario">

@@ -8,7 +8,6 @@ import ScreenContext from '../app/ScreenContext'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-
 function guid() {
     function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -29,7 +28,7 @@ function tranformEditorState(notes) {
     return data
 }
 
-/*istanbul ignore next*/
+/* istanbul ignore next */
 function transformContentState(notes) {
     const clonedNotes = Object.assign([], notes)
     const data = clonedNotes.map((note) => {
@@ -59,11 +58,9 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
-
         }
     }
 
@@ -79,9 +76,8 @@ export default class extends Component {
         })
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     handleTitleChange(html, currentNote) {
-        console.log(html, currentNote)
         currentNote.disable = false
 
         const { notes } = this.state
@@ -105,7 +101,7 @@ export default class extends Component {
         })
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     onChange(editorState, currentNote) {
         currentNote.disable = false
 
@@ -117,13 +113,13 @@ export default class extends Component {
                 note.timeStamp = moment().format(dateFormat)
             }
         })
-        
+
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(transformContentState(this.state.notes), 'update')
         }
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     noteFirebase(note) {
         const { title } = note
         const { text } = note
@@ -142,17 +138,16 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
-        
         db.collection('notitas').doc(this.university).collection(this.university).doc(id)
             .delete()
 
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         notes.forEach((note, index) => {
             if (currentNote.id === note.id) {
                 notes.splice(index, 1)
             }
         })
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         this.setState({
             notes,
         }, () => {
@@ -192,11 +187,10 @@ export default class extends Component {
             // Increment the counter to ensure key is always unique.
             newCounter: this.state.newCounter + 1,
         })
-        /*istanbul ignore if*/
+        /* istanbul ignore if */
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
-        
     }
 
     createNote(titulo, content, date, id) {
@@ -226,16 +220,15 @@ export default class extends Component {
             // Increment the counter to ensure key is always unique.
             newCounter: this.state.newCounter + 1,
         })
-        /*istanbul ignore if*/
+        /* istanbul ignore if */
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
 
         this.state.notes.concat(note)
-
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     onLayoutChange(layout) {
         const { notes } = this.state
         notes.forEach((note) => {
@@ -266,7 +259,6 @@ export default class extends Component {
         return colors[Math.floor(Math.random() * (colors.length - 1))]
     }
 
-
     fetch() {
         const titles = []
         const contents = []
@@ -275,7 +267,7 @@ export default class extends Component {
 
         const uid = guid()
 
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         db.collection('notitas').doc(this.university).collection(this.university)
             .get()
             .then((querySnapshot) => {
@@ -296,7 +288,7 @@ export default class extends Component {
             })
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     isSuperUser() {
         if (this.type) {
             return false
@@ -318,14 +310,14 @@ export default class extends Component {
         const noteBodyStyle = this.props.noteBodyStyle || {}
         const noteTitleStyle = { display: 'block', ...this.props.noteTitleStyle || {} }
         const noteFooterStyle = { display: 'block', ...this.props.noteFooterStyle || {} }
-        const i = note.grid.i
+        const { i } = note.grid
         const { grid } = note
-        grid.y = grid.y 
-        /*istanbul ignore next*/
+
+        /* istanbul ignore next */
         return (
             <div key={i} data-grid={grid}>
                 <aside
-                    className={`note-wrap note tape`}
+                    className="note-wrap note tape"
                     style={noteStyle}
                 >
 
@@ -338,7 +330,7 @@ export default class extends Component {
 
                     <div className="note-header" style={noteHeaderStyle}>
                         <div
-                            className={`add`}
+                            className="add"
                             onClick={this.createBlankNote}
                             style={addStyle}
                         >
@@ -351,8 +343,7 @@ export default class extends Component {
                             />
                         </div>
                         <div
-
-                            className={`close`}
+                            className="close"
                             style={closeStyle}
                             onClick={() => this.deleteNote(note)}
                         >
@@ -406,5 +397,3 @@ export default class extends Component {
         )
     }
 }
-
-

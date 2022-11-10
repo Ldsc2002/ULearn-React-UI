@@ -21,18 +21,18 @@ function Bookshelf(props) {
     const [popUpContent, setPopUpContent] = useState()
     const [books, setBooks] = useState([])
 
-    useEffect(() => {
-        fetchBooksHandler()
-    }, [])
-
-    const clearURL = () => { 
-        fileDownload = ''
-    }
-
     const fetchBooksHandler = () => {
         fetch(college).then((res) => {
             setBooks(res)
         })
+    }
+
+    useEffect(() => {
+        fetchBooksHandler()
+    }, [])
+
+    const clearURL = () => {
+        fileDownload = ''
     }
 
     const onSubmitFile = (e) => {
@@ -53,14 +53,11 @@ function Bookshelf(props) {
         const titulo = document.getElementById('titulo').value
         const descripcion = document.getElementById('descripcion').value
         /* istanbul ignore else */
-        if (titulo === '' || descripcion === ''|| titulo.match(/^ *$/) !== null || descripcion.match(/^ *$/) !== null) {
+        if (titulo === '' || descripcion === '' || titulo.match(/^ *$/) !== null || descripcion.match(/^ *$/) !== null) {
             alert('Faltan campos por llenar')
-        }
-        else if (fileDownload === '') {
+        } else if (fileDownload === '') {
             alert('No puede subir archivos vacíos a la biblioteca')
-        }
-        else
-        {
+        } else {
             noteFirebase(titulo, descripcion, fileDownload, college)
             fetchBooksHandler()
             setTimeout(() => {
@@ -110,7 +107,7 @@ function Bookshelf(props) {
         <div className="biblioteca">
             <BookCard books={books} setButton={selectedBookHandler} />
 
-            <PopUp id="pop_up" trigger={buttonPopUp} setTrigger={setButton} onClick={() => { clearURL(); props.setButton(false)}}>
+            <PopUp id="pop_up" trigger={buttonPopUp} setTrigger={setButton} onClick={() => { clearURL(); props.setButton(false) }}>
                 {popUpContent}
             </PopUp>
 

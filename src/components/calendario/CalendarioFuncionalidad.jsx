@@ -26,8 +26,8 @@ const CalendarioFuncionalidad = (daysShort = daysShortArr, monthNames = monthNam
     const rows = 6
     const cols = 7
     const calendarRows = {}
-    
-    /*istanbul ignore next*/
+
+    /* istanbul ignore next */
     for (let i = 1; i < rows + 1; i++) {
         for (let j = 1; j < cols + 1; j++) {
             if (!calendarRows[i]) {
@@ -67,12 +67,12 @@ const CalendarioFuncionalidad = (daysShort = daysShortArr, monthNames = monthNam
         }
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     const getPrevMonth = () => {
         setSelectedDate((prevValue) => new Date(prevValue.getFullYear(), prevValue.getMonth() - 1, 1))
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     const getNextMonth = () => {
         setSelectedDate((prevValue) => new Date(prevValue.getFullYear(), prevValue.getMonth() + 1, 1))
     }

@@ -4,7 +4,6 @@ import {
     Stickies,
 } from './indexPizarron'
 
-
 export default class extends Component {
     static contextType = ScreenContext
 
@@ -38,7 +37,7 @@ export default class extends Component {
     }
 
     render() {
-        let wrapperStyle = {}
+        const wrapperStyle = {}
 
         return (
             <div>
