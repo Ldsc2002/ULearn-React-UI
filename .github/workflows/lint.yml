@@ -24,6 +24,3 @@ jobs:
         
       - name: Test API
         run: npm run newman
-        
-      - name: Test components
-        run: npm run test
