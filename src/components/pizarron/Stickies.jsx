@@ -243,7 +243,7 @@ export default class extends Component {
     }
 
     generateRandomColors() {
-        let colors = ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1', '#E84A64']
+        const colors = ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1', '#E84A64']
         return colors[(Math.floor(Math.random() * (colors.length - 1)))]
     }
 
@@ -266,11 +266,10 @@ export default class extends Component {
                     id.push(doc.id)
                 })
 
-                let newNotes = []
+                const newNotes = []
 
                 for (let i = 0; i < titles.length; i++) {
                     newNotes.push(this.createNote(titles[i], contents[i], dates[i], id[i], newNotes.length))
-
                 }
 
                 if (titles.length === 0) {
@@ -279,7 +278,7 @@ export default class extends Component {
 
                 this.setState({
                     // Add a new item. It must have a unique key!
-                    notes: newNotes
+                    notes: newNotes,
                 })
             })
     }
