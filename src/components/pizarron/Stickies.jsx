@@ -193,13 +193,13 @@ export default class extends Component {
         }
     }
 
-    createNote(titulo, content, date, id) {
+    createNote(titulo, content, date, id, length) {
         const grid = this.props.grid || {}
         const uid = guid()
         const note = {
             grid: {
                 i: `${uid}`,
-                x: this.state.notes.length * 2 % (this.state.cols || 12),
+                x: length * 2 % (this.state.cols || 12),
                 y: Infinity, // puts it at the bottom
                 w: grid.w || 2,
                 h: grid.h || 2,
@@ -214,18 +214,13 @@ export default class extends Component {
             contentEditable: false,
             disable: true,
         }
-        this.setState({
-            // Add a new item. It must have a unique key!
-            notes: this.state.notes.concat(note),
-            // Increment the counter to ensure key is always unique.
-            newCounter: this.state.newCounter + 1,
-        })
+
         /* istanbul ignore if */
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
 
-        this.state.notes.concat(note)
+        return note
     }
 
     /* istanbul ignore next */
@@ -278,13 +273,23 @@ export default class extends Component {
                     id.push(doc.id)
                 })
 
+                let newNotes = []
+
                 for (let i = 0; i < titles.length; i++) {
-                    this.createNote(titles[i], contents[i], dates[i], id[i])
+                    newNotes.push(this.createNote(titles[i], contents[i], dates[i], id[i], newNotes.length))
+
                 }
 
                 if (titles.length === 0) {
-                    this.createNote('Hola', 'Esto es un ejemplo', 'Mayo 1, 2022 3:17 PM', uid)
+                    newNotes.push(this.createNote('Hola', 'Esto es un ejemplo', 'Mayo 1, 2022 3:17 PM', uid))
                 }
+
+                debugger
+
+                this.setState({
+                    // Add a new item. It must have a unique key!
+                    notes: newNotes
+                })
             })
     }
 
