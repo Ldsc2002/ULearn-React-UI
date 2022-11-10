@@ -15,8 +15,6 @@ export default class extends Component {
             showTape: true,
             showTitle: true,
             output: '',
-            colors: ['#FFFFFF'],
-
         }
         this.toggleValue = this.toggleValue.bind(this)
         this.onChange = this.onChange.bind(this)
@@ -45,7 +43,6 @@ export default class extends Component {
                     notes={this.state.notes}
                     tape={this.state.showTape}
                     style={{ float: 'left' }}
-                    colors={undefined}
                     title={this.state.showTitle}
                     footer={this.state.showFooter}
                     onChange={this.onChange}
