@@ -65,13 +65,15 @@ export default class CrearCuentaScreen extends Component {
             })
 
             /* istanbul ignore next */
-            this.context.userInfo = {
-                university: this.state.registerCollege,
-                type: false,
-                name: this.state.registerName,
-                mayor: this.state.registerMajor,
-                email: this.state.registerEmail,
-            }
+            this.context.userInfo.university = this.state.registerCollege
+            /* istanbul ignore next */
+            this.context.userInfo.type = false
+            /* istanbul ignore next */
+            this.context.userInfo.name = this.state.registerName
+            /* istanbul ignore next */
+            this.context.userInfo.mayor = this.state.registerMajor
+            /* istanbul ignore next */
+            this.context.userInfo.email = this.state.loginEmail
 
             /* istanbul ignore next */
             this.context.appActions.goToScreen('start', this.context.baseScreenId, { transitionId: 'fadeIn' })
