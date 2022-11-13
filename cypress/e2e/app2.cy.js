@@ -34,7 +34,9 @@ describe('Signup', () => {
     })
 
     it('Sets email', () => {
-        let email = 'stefano1101@uvg.edu.gt'
+        const uuid = () => Cypress._.random(0, 1e6)
+        const id = uuid()
+        const email = `testCypress${id}@uvg.edu.gt`
         cy.get('input[type="email"]')
         .invoke('attr', 'value', email)
         .trigger('change')
