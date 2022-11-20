@@ -1,7 +1,6 @@
 import React from 'react'
 
 export function truncate(str, n) {
-    //console.log(str)
     return (str.length > n) ? `${str.slice(0, n - 1)}...` : str
 }
 /* istanbul ignore next */

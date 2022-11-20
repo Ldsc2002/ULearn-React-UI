@@ -1,17 +1,15 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
+import { setBlockData } from 'draft-js/lib/DraftModifier'
+import { forEach } from 'draft-js/lib/DefaultDraftBlockRenderMap'
 import CalendarioFuncionalidad from './CalendarioFuncionalidad'
 import { db } from '../firebase/firebase'
 import PopUp from '../popup/PopUp'
-import { useEffect } from 'react'
-import { setBlockData } from 'draft-js/lib/DraftModifier'
-import { forEach } from 'draft-js/lib/DefaultDraftBlockRenderMap'
 
 function CalendarioComp(props) {
-
     const {
         calendarRows, selectedDate, todayFormatted, daysShort, monthNames, getNextMonth, getPrevMonth,
-    } = CalendarioFuncionalidad();
-    const [dateEvent, setDataEvent] = useState([]);
+    } = CalendarioFuncionalidad()
+    const [dateEvent, setDataEvent] = useState([])
 
     const [date, setDate] = useState(false)
     const [addDate, setAddDate] = useState(false)
@@ -27,13 +25,13 @@ function CalendarioComp(props) {
     const [hoyEs, setHoyEs] = useState('')
 
     useEffect(() => {
-        var contenido = ""
-        var fecha = ""
-        var titulo = ""
-        var id = ""
-        var user = ""
+        let contenido = ''
+        let fecha = ''
+        let titulo = ''
+        let id = ''
+        let user = ''
 
-        var dateEventTemp = [];
+        const dateEventTemp = []
 
         /* istanbul ignore next */
         db.collection('eventos')
@@ -46,65 +44,47 @@ function CalendarioComp(props) {
                     titulo = (doc.get('titulo'))
                     user = (doc.get('user'))
 
-                    if (user == props.email) {
+                    if (user === props.email) {
                         dateEventTemp.push({
-                            id: id, 
-                            contenido:contenido, 
-                            fecha:fecha,
-                            titulo:titulo, 
-                            user:user
+                            id,
+                            contenido,
+                            fecha,
+                            titulo,
+                            user,
                         })
-                        setDataEvent(dateEventTemp);
+                        setDataEvent(dateEventTemp)
                     }
                 })
             })
+    }, [])
 
-    },[])
+    function nameClass(e) {
+        let name = ''
 
-    function guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1)
+        if (e === todayFormatted) {
+            name = 'today'
         }
-        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
-    }
 
-    function nameClass(e){
-
-        let name = '';
-
-        if(e === todayFormatted){
-            name = "today"
-        }
-            
-        dateEvent.forEach(element => {
-            if(e === element.fecha){
-                name = name+'Event'
-                return(name)
+        dateEvent.forEach((element) => {
+            if (e === element.fecha) {
+                name += 'Event'
+                return (name)
             }
-            
-        });
-        
-        return (name);
+        })
+
+        return (name)
     }
 
     /* istanbul ignore next */
-    const newDateInador = (content1 = content, fechas1 = fechas, title1 = title, userV1 = userV, hoyEs1 = hoyEs) => {
-        const fechas = hoyEs1;
-
-        const id = guid();
-
-        const userV = props.email;
-
-        db.collection('eventos').doc(id).set({
+    const newDateInador = (info, fechas1 = hoyEs, title1 = title, userV1 = props.email, hoyEs1 = hoyEs, content1 = content) => {
+        db.collection('eventos').add({
             contenido: content1,
             fecha: fechas1,
             titulo: title1,
             user: userV1,
 
         })
-        setAddDate(false);
+        setAddDate(false)
     }
 
     const readInador = (e) => {
@@ -127,25 +107,21 @@ function CalendarioComp(props) {
     }
 
     /* istanbul ignore next */
-    const dateClickHandler = (date) => {
-        
-        let foundDate = false;
+    const dateClickHandler = (newDate) => {
+        let foundDate = false
 
-        dateEvent.forEach(element => {
-            if(date === element.fecha){
-
+        dateEvent.forEach((element) => {
+            if (newDate === element.fecha) {
                 foundDate = true
-                setEvent({fecha: element.fecha, titulo: element.titulo, contenido: element.contenido})
+                setEvent({ fecha: element.fecha, titulo: element.titulo, contenido: element.contenido })
                 setDate(true)
-                console.log();
             }
-            
-        });
+        })
 
         if (!foundDate) {
-            setHoyEs(date);
-            setAddDate(true);
-        } else{
+            setHoyEs(newDate)
+            setAddDate(true)
+        } else {
             setDate(true)
         }
     }
@@ -159,8 +135,8 @@ function CalendarioComp(props) {
                 <thead>
                     <tr>
                         {
-                            daysShort.map((day) => (
-                                <th key={day}>{day}</th>
+                            daysShort.map((dayItem) => (
+                                <th key={dayItem}>{dayItem}</th>
                             ))
                         }
                     </tr>
@@ -171,7 +147,7 @@ function CalendarioComp(props) {
                             <tr key={cols[0].date}>
                                 {
                                     cols.map((col) => (
-                                        <td key={col.date} className={`${col.classes} `+ nameClass(col.date)} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
+                                        <td key={col.date} className={`${col.classes} ${nameClass(col.date)}`} onClick={() => dateClickHandler(col.date)}>{col.value}</td>
                                     ))
                                 }
                             </tr>
@@ -188,12 +164,12 @@ function CalendarioComp(props) {
             <PopUp trigger={addDate} setTrigger={setAddDate}>
 
                 <div className="preguntaInador">
-                    <div className='cabeza'>
+                    <div className="cabeza">
                         <h3>{hoyEs}</h3>
                     </div>
                     <div className="fechaInador1">
                         <div className="ingresador">
-                            
+
                             <h3>Título</h3>
                             <input type="text" name="titulo" onChange={readInador} />
                         </div>

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { HashRouter, Router } from 'react-router-dom';
-import App from '../src/components/App/App';
+import App from '../src/components/app/App';
 import { createMemoryHistory } from 'history';
 
 jest.mock('firebase/auth', () => {

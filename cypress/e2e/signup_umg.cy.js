@@ -4,13 +4,39 @@ describe('App loads', () => {
   })
 })
  
-describe('Login', () => {
+describe('Signup', () => {
     afterEach(() => {
         cy.wait(1000) 
     })
 
+    it('Clicks signup', () => {
+        cy.get('button')
+        .contains('Crear cuenta')
+        .click()
+    })
+
+    it('Sets name', () => {
+        let nombre = 'Stefano Aragoni'
+        cy.get('input[type="text"]')
+        .invoke('attr', 'value', nombre)
+        .trigger('change')
+        .should('have.attr', 'value', nombre)
+    })
+
+    it('Sets college', () => {
+        let uni = 'Universidad Mariano Galvez'
+        cy.get('select#uni').select(uni).should('have.value', 'umg')
+    })
+
+    it('Sets major', () => {
+        let carrera = 'Ingeniería Civil'
+        cy.get('select#carrera').select(carrera).should('have.value', carrera)
+    })
+
     it('Sets email', () => {
-        let email = 'Luis@uvg.edu.gt'
+        const uuid = () => Cypress._.random(0, 1e6)
+        const id = uuid()
+        const email = `testCypress${id}@umg.edu.gt`
         cy.get('input[type="email"]')
         .invoke('attr', 'value', email)
         .trigger('change')
@@ -18,20 +44,20 @@ describe('Login', () => {
     })
 
     it('Sets password', () => {
-        let password = 'Luis123'
+        let password = 'Stefano12345'
         cy.get('input[type="password"]')
         .invoke('attr', 'value', password)
         .trigger('change')
         .should('have.attr', 'value', password)
     })
 
-    it('Clicks login', () => {
+    it('Clicks sign up', () => {
         cy.get('button')
-        .contains('Iniciar sesión')
+        .contains('Crear cuenta')
         .click()
     })
 
-    it('Navigates after login', () => {
+    it('Navigates after sign up', () => {
         cy.url().should('include', '/start')
     })
 

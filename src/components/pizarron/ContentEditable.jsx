@@ -11,7 +11,7 @@ export default class extends Component {
         }
     }
 
-    /*istanbul ignore next */
+    /* istanbul ignore next */
     emitChange() {
         const html = this.editable.innerHTML
         if (this.props.onChange && html !== this.lastHtml) {
@@ -27,6 +27,7 @@ export default class extends Component {
     render() {
         return (
             <div
+                className="contentEditableTitle"
                 onInput={this.emitChange.bind(this)}
                 onBlur={this.emitChange.bind(this)}
                 contentEditable

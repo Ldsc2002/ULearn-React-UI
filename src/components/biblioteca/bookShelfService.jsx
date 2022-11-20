@@ -49,11 +49,8 @@ function dropBook(i) {
     db.collection('archivos').doc(id).delete()
 }
 
-
 /* istanbul ignore next */
 function openFile(item) {
-    console.log(item)
-    //console.log(storage)
     const link = ref(storage, item)
 
     getDownloadURL(link).then((url) => {
