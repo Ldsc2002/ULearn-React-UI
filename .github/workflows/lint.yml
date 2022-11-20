@@ -22,8 +22,11 @@ jobs:
       - name: Lint
         run: npm run lint
         
-      - name: Test API
+      - name: Pruebas de Integracion
         run: npm run newman
         
-      - name: Test components
+      - name: Pruebas Unitarias
         run: npm run test
+
+      - name: Pruebas de Sistema
+        run: npm run cypress
