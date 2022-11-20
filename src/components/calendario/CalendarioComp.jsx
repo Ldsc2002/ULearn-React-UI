@@ -58,15 +58,6 @@ function CalendarioComp(props) {
             })
     }, [])
 
-    function guid() {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                .toString(16)
-                .substring(1)
-        }
-        return `${s4() + s4()}-${s4()}-${s4()}-${s4()}-${s4()}${s4()}${s4()}`
-    }
-
     function nameClass(e) {
         let name = ''
 
@@ -85,10 +76,8 @@ function CalendarioComp(props) {
     }
 
     /* istanbul ignore next */
-    const newDateInador = (content1 = content, fechas1 = hoyEs, title1 = title, userV1 = props.email, hoyEs1 = hoyEs) => {
-        const id = guid()
-
-        db.collection('eventos').doc(id).set({
+    const newDateInador = (info, fechas1 = hoyEs, title1 = title, userV1 = props.email, hoyEs1 = hoyEs, content1 = content) => {
+        db.collection('eventos').add({
             contenido: content1,
             fecha: fechas1,
             titulo: title1,
