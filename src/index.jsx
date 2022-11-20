@@ -13,5 +13,5 @@ import './style/palette.css'
 import './style/popUp.css'
 import './style/styles.css'
 
-let root = createRoot(document.getElementById('root'))
+const root = createRoot(document.getElementById('root'))
 root.render(<HashRouter><App /></HashRouter>)

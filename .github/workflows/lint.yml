@@ -1,0 +1,32 @@
+name: Test
+
+on: pull_request
+
+jobs:
+  build:
+    name: Lint & Test API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install --force
+        
+      - name: Lint
+        run: npm run lint
+        
+      - name: Pruebas de Integracion
+        run: npm run newman
+        
+      - name: Pruebas Unitarias
+        run: npm run test
+
+      - name: Pruebas de Sistema
+        run: npm run cypress
