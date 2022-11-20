@@ -217,7 +217,7 @@ export default class CrearCuentaScreen extends Component {
                     </div>
 
                     <div className="elFieldCopy">
-                        <select className="baseFont" style={style_elField} placeholder="Universidad" onChange={this.textInputChanged_Universidad} value={this.getValue_Universidad()}>
+                        <select className="baseFont" id="uni" style={style_elField} placeholder="Universidad" onChange={this.textInputChanged_Universidad} value={this.getValue_Universidad()}>
                             <option disabled value="">
                                 Universidad
                             </option>
@@ -230,7 +230,7 @@ export default class CrearCuentaScreen extends Component {
                     </div>
 
                     <div className="elFieldCopy">
-                        <select className="baseFont" style={style_elField} placeholder="Carrera" onChange={this.textInputChanged_elField2} value={this.getValue_elField2()}>
+                        <select className="baseFont" id="carrera" style={style_elField} placeholder="Carrera" onChange={this.textInputChanged_elField2} value={this.getValue_elField2()}>
                             <option disabled value="">
                                 Carrera
                             </option>
