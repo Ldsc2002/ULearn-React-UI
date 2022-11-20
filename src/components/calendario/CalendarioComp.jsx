@@ -77,7 +77,6 @@ function CalendarioComp(props) {
 
     /* istanbul ignore next */
     const newDateInador = (info, fechas1 = hoyEs, title1 = title, userV1 = props.email, hoyEs1 = hoyEs, content1 = content) => {
-
         db.collection('eventos').add({
             contenido: content1,
             fecha: fechas1,
