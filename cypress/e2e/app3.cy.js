@@ -41,6 +41,7 @@ describe('Login', () => {
 describe('Add Note', () => {
     it('Press add Button', () => {
         cy.get('[class=add]')
+        .first()
         .click()
 
     })
@@ -69,10 +70,10 @@ describe('Add Note', () => {
 
 describe('Delete Note', () => {
     it('Press x Button', () => {
-        cy.get('[class=close]')
-        .first()
-        .click()
-
+        cy.contains('TítuloPrueba')
+        .parent()
+        .siblings('.close')
+        
     })
 
 
