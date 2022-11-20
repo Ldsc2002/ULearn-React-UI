@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import ScreenContext from './ScreenContext'
 import StartScreen from '../start/StartScreen'
-import CrearCuentaScreen from '../signup/CrearCuentaScreen.jsx'
+import CrearCuentaScreen from '../signup/CrearCuentaScreen'
 import LogInScreen from '../login/LogInScreen'
 
 class App extends Component {
@@ -73,7 +73,7 @@ class App extends Component {
                 },
             }
             let screen
-            /*istanbul ignore next*/
+            /* istanbul ignore next */
             switch (screenId) {
             case 'crearCuenta':
                 screen = <CrearCuentaScreen {...baseProps} />

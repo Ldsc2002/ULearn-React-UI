@@ -3,7 +3,7 @@ describe('App loads', () => {
     cy.visit('http://localhost:3000/ULearn-React-UI/#/')
   })
 })
-
+ 
 describe('Login', () => {
     afterEach(() => {
         cy.wait(1000) 

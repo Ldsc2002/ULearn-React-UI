@@ -46,7 +46,8 @@ module.exports = {
       "no-mixed-operators": "off",
       "consistent-return": "off",
       "react/no-unused-class-component-methods": "off",
-      "react/static-property-placement": "off"
+      "react/static-property-placement": "off",
+      "react/prefer-stateless-function": "off",
     }
     ,
   };

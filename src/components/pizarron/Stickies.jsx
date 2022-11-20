@@ -1,13 +1,12 @@
-import React, { Component, useReducer } from 'react'
+import React, { Component } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
 import moment from 'moment'
 import { WidthProvider, Responsive } from 'react-grid-layout'
 import ContentEditable from './ContentEditable'
-import { auth, db } from '../firebase/firebase'
+import { db } from '../firebase/firebase'
 import ScreenContext from '../app/ScreenContext'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
-
 
 function guid() {
     function s4() {
@@ -29,7 +28,7 @@ function tranformEditorState(notes) {
     return data
 }
 
-/*istanbul ignore next*/
+/* istanbul ignore next */
 function transformContentState(notes) {
     const clonedNotes = Object.assign([], notes)
     const data = clonedNotes.map((note) => {
@@ -40,14 +39,10 @@ function transformContentState(notes) {
 }
 
 export default class extends Component {
-    static contextType = ScreenContext
-
     constructor(props) {
         super(props)
         this.state = {
-            newCounter: 0,
             notes: props.notes ? tranformEditorState(props.notes) : [],
-            colors: props.colors || ['#86E3CE', '#CCABD8'],
             dateFormat: props.dateFormat || 'lll',
         }
         this.createBlankNote = this.createBlankNote.bind(this)
@@ -59,11 +54,9 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         if (this.props.notes && !this.props.notes.length) {
             this.fetch()
-
         }
     }
 
@@ -74,14 +67,12 @@ export default class extends Component {
             })
         }
         this.setState({
-            colors: nextProps.colors || ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1', '#E84A64'],
             dateFormat: nextProps.dateFormat || 'lll',
         })
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     handleTitleChange(html, currentNote) {
-        console.log(html, currentNote)
         currentNote.disable = false
 
         const { notes } = this.state
@@ -105,7 +96,7 @@ export default class extends Component {
         })
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     onChange(editorState, currentNote) {
         currentNote.disable = false
 
@@ -117,13 +108,13 @@ export default class extends Component {
                 note.timeStamp = moment().format(dateFormat)
             }
         })
-        
+
         if (typeof this.props.onChange === 'function') {
             this.props.onChange(transformContentState(this.state.notes), 'update')
         }
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     noteFirebase(note) {
         const { title } = note
         const { text } = note
@@ -142,17 +133,16 @@ export default class extends Component {
         const { notes } = this.state
         const { id } = currentNote
 
-        
         db.collection('notitas').doc(this.university).collection(this.university).doc(id)
             .delete()
 
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         notes.forEach((note, index) => {
             if (currentNote.id === note.id) {
                 notes.splice(index, 1)
             }
         })
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         this.setState({
             notes,
         }, () => {
@@ -189,23 +179,20 @@ export default class extends Component {
         this.setState({
             // Add a new item. It must have a unique key!
             notes: this.state.notes.concat(note),
-            // Increment the counter to ensure key is always unique.
-            newCounter: this.state.newCounter + 1,
         })
-        /*istanbul ignore if*/
+        /* istanbul ignore if */
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
-        
     }
 
-    createNote(titulo, content, date, id) {
+    createNote(titulo, content, date, id, length) {
         const grid = this.props.grid || {}
         const uid = guid()
         const note = {
             grid: {
                 i: `${uid}`,
-                x: this.state.notes.length * 2 % (this.state.cols || 12),
+                x: length * 2 % (this.state.cols || 12),
                 y: Infinity, // puts it at the bottom
                 w: grid.w || 2,
                 h: grid.h || 2,
@@ -220,22 +207,16 @@ export default class extends Component {
             contentEditable: false,
             disable: true,
         }
-        this.setState({
-            // Add a new item. It must have a unique key!
-            notes: this.state.notes.concat(note),
-            // Increment the counter to ensure key is always unique.
-            newCounter: this.state.newCounter + 1,
-        })
-        /*istanbul ignore if*/
+
+        /* istanbul ignore if */
         if (typeof this.props.onAdd === 'function') {
             this.props.onAdd(note)
         }
 
-        this.state.notes.concat(note)
-
+        return note
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     onLayoutChange(layout) {
         const { notes } = this.state
         notes.forEach((note) => {
@@ -262,10 +243,9 @@ export default class extends Component {
     }
 
     generateRandomColors() {
-        const { colors } = this.state
-        return colors[Math.floor(Math.random() * (colors.length - 1))]
+        const colors = ['#B32168', '#0487A4', '#F7C536', '#E84A64', '#10B6C1', '#E84A64']
+        return colors[(Math.floor(Math.random() * (colors.length - 1)))]
     }
-
 
     fetch() {
         const titles = []
@@ -275,7 +255,7 @@ export default class extends Component {
 
         const uid = guid()
 
-        /*istanbul ignore next*/
+        /* istanbul ignore next */
         db.collection('notitas').doc(this.university).collection(this.university)
             .get()
             .then((querySnapshot) => {
@@ -286,17 +266,24 @@ export default class extends Component {
                     id.push(doc.id)
                 })
 
+                const newNotes = []
+
                 for (let i = 0; i < titles.length; i++) {
-                    this.createNote(titles[i], contents[i], dates[i], id[i])
+                    newNotes.push(this.createNote(titles[i], contents[i], dates[i], id[i], newNotes.length))
                 }
 
                 if (titles.length === 0) {
-                    this.createNote('Hola', 'Esto es un ejemplo', 'Mayo 1, 2022 3:17 PM', uid)
+                    newNotes.push(this.createNote('Hola', 'Esto es un ejemplo', 'Mayo 1, 2022 3:17 PM', uid))
                 }
+
+                this.setState({
+                    // Add a new item. It must have a unique key!
+                    notes: newNotes,
+                })
             })
     }
 
-    /*istanbul ignore next*/
+    /* istanbul ignore next */
     isSuperUser() {
         if (this.type) {
             return false
@@ -318,14 +305,14 @@ export default class extends Component {
         const noteBodyStyle = this.props.noteBodyStyle || {}
         const noteTitleStyle = { display: 'block', ...this.props.noteTitleStyle || {} }
         const noteFooterStyle = { display: 'block', ...this.props.noteFooterStyle || {} }
-        const i = note.grid.i
+        const { i } = note.grid
         const { grid } = note
-        grid.y = grid.y 
-        /*istanbul ignore next*/
+
+        /* istanbul ignore next */
         return (
             <div key={i} data-grid={grid}>
                 <aside
-                    className={`note-wrap note tape`}
+                    className="note-wrap note tape"
                     style={noteStyle}
                 >
 
@@ -338,7 +325,7 @@ export default class extends Component {
 
                     <div className="note-header" style={noteHeaderStyle}>
                         <div
-                            className={`add`}
+                            className="add"
                             onClick={this.createBlankNote}
                             style={addStyle}
                         >
@@ -351,8 +338,7 @@ export default class extends Component {
                             />
                         </div>
                         <div
-
-                            className={`close`}
+                            className="close"
                             style={closeStyle}
                             onClick={() => this.deleteNote(note)}
                         >
@@ -406,5 +392,3 @@ export default class extends Component {
         )
     }
 }
-
-
