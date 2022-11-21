@@ -79,7 +79,7 @@ function CalendarioComp(props) {
 
     /* istanbul ignore next */
     const newDateInador = (info, fechas1 = hoyEs, title1 = title, userV1 = props.email, hoyEs1 = hoyEs, content1 = content) => {
-        let idTemp = "";
+        let idTemp = ''
         db.collection('eventos').add({
             contenido: content1,
             fecha: fechas1,
@@ -87,13 +87,13 @@ function CalendarioComp(props) {
             user: userV1,
 
         })
-        .then(function(docRef) {
-            idTemp = docRef.id;
-            setIdRe(idTemp)
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
+            .then((docRef) => {
+                idTemp = docRef.id
+                setIdRe(idTemp)
+            })
+            .catch((error) => {
+                console.error('Error adding document: ', error)
+            })
 
         const temp = dateEvent
         temp.push({
@@ -121,7 +121,7 @@ function CalendarioComp(props) {
     }
 
     const borraInador = () => {
-        const id = event.id
+        const { id } = event
         let temp = dateEvent
         db.collection('eventos').doc(id).delete()
         temp = temp.filter((element) => element.id !== id)
@@ -136,10 +136,12 @@ function CalendarioComp(props) {
         dateEvent.forEach((element) => {
             if (newDate === element.fecha) {
                 foundDate = true
-                if(element.id === "") {
+                if (element.id === '') {
                     element.id = idRe
                 }
-                setEvent({ fecha: element.fecha, titulo: element.titulo, contenido: element.contenido, id: element.id })
+                setEvent({
+                    fecha: element.fecha, titulo: element.titulo, contenido: element.contenido, id: element.id,
+                })
                 setDate(true)
             }
         })
