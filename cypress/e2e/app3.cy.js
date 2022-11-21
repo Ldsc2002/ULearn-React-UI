@@ -36,6 +36,15 @@ describe('Login', () => {
         cy.url().should('include', '/start')
     })
 
+    it('Navigates to biblioteca', () => {
+        cy.get('div')
+        .contains('Calendario')
+        .parent()
+        .parent()
+        .parent()
+        .click()
+    })
+
 })
 
 describe('Add Note', () => {
