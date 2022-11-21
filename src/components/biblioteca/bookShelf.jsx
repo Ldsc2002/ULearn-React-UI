@@ -43,7 +43,7 @@ function Bookshelf(props) {
             uploadBytes(reference, file).then(() => {
                 getDownloadURL(reference).then((url) => {
                     fileDownload = url
-                    alert('Upload file')
+                    alert('File uploaded successfully!')
                 })
             })
         }
@@ -96,7 +96,7 @@ function Bookshelf(props) {
             <div className="addPopUp">
                 <input type="text" placeholder="Título" id="titulo" />
                 <input type="text" placeholder="Descripción" id="descripcion" />
-                <input type="file" name="file" onChange={onSubmitFile} />
+                <input type="file" name="file" onChange={onSubmitFile} id="file" />
 
                 <button id="subir_archivo" type="button" className="popUp-btn" onClick={() => finishUpload()}>Subir</button>
             </div>,
