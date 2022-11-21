@@ -80,16 +80,35 @@ describe('Add Book', () => {
 
     it('Clicks add', () => {
         cy.on('window:alert', (str) => {
-            expect(str).to.equal('File uploaded successfully!')
+            //expect(str).to.equal('File uploaded successfully!')
+            //.enter()
             cy.get('button')
             .contains('Subir')
             .click()
+            cy.get('button')
+            .contains('x')
+            .parent('.close')
+            
         })
+
+        //cy.wait(1500)
     })
+
+
+    /*it('Check if book was added', () => {
+        cy.get('[class=book-item]')
+        .within(() => {
+            cy.get('[class=title_book]')
+            .contains('Cypress...')
+            .parent()
+            .click()
+        })
+    })*/
 
     //it('Check if book was added', () => {
 
 })
+
 
 /*describe('Open book', () => {
     it('Press book', () => {
@@ -99,12 +118,29 @@ describe('Add Book', () => {
     })
 })
 
-describe('Delete book', () => {
-    it('Press delete button', () => {
-        cy.get('[class=delete]')
-        .first()
-        .click()
-    })
-})
 
+*/
+
+
+/*
+describe('Delete book', () => {
+    it('Open book', () => {
+        cy.wait('@alert_uploaded')
+        cy.get('[class=book-item]')
+        .within(() => {
+            cy.get('[class=title_book]')
+            .contains('Cypress...')
+            .parent()
+            .click()
+        })
+    })
+
+    it('Delete book', () => {
+        cy.get('[class=delete_btn]')
+        .click()
+        
+    })
+
+
+})
 */
