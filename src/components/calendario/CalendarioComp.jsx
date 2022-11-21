@@ -101,9 +101,10 @@ function CalendarioComp(props) {
     }
 
     const borraInador = () => {
-        const { id } = event
+        const id = event.id
 
         db.collection('eventos').doc(id).delete()
+        setAddDate(false)
     }
 
     /* istanbul ignore next */
@@ -113,7 +114,8 @@ function CalendarioComp(props) {
         dateEvent.forEach((element) => {
             if (newDate === element.fecha) {
                 foundDate = true
-                setEvent({ fecha: element.fecha, titulo: element.titulo, contenido: element.contenido })
+                console.log(element.id)
+                setEvent({ fecha: element.fecha, titulo: element.titulo, contenido: element.contenido, id: element.id })
                 setDate(true)
             }
         })
