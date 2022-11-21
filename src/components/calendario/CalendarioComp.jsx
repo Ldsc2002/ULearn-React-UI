@@ -24,6 +24,8 @@ function CalendarioComp(props) {
 
     const [hoyEs, setHoyEs] = useState('')
 
+    const [idRe, setIdRe] = useState('')
+
     useEffect(() => {
         let contenido = ''
         let fecha = ''
@@ -77,6 +79,7 @@ function CalendarioComp(props) {
 
     /* istanbul ignore next */
     const newDateInador = (info, fechas1 = hoyEs, title1 = title, userV1 = props.email, hoyEs1 = hoyEs, content1 = content) => {
+        let idTemp = ''
         db.collection('eventos').add({
             contenido: content1,
             fecha: fechas1,
@@ -84,6 +87,23 @@ function CalendarioComp(props) {
             user: userV1,
 
         })
+            .then((docRef) => {
+                idTemp = docRef.id
+                setIdRe(idTemp)
+            })
+            .catch((error) => {
+                console.error('Error adding document: ', error)
+            })
+
+        const temp = dateEvent
+        temp.push({
+            contenido: content1,
+            fecha: fechas1,
+            titulo: title1,
+            user: userV1,
+            id: idTemp,
+        })
+        setDataEvent(temp)
         setAddDate(false)
     }
 
@@ -102,8 +122,11 @@ function CalendarioComp(props) {
 
     const borraInador = () => {
         const { id } = event
-
+        let temp = dateEvent
         db.collection('eventos').doc(id).delete()
+        temp = temp.filter((element) => element.id !== id)
+        setDataEvent(temp)
+        setDate(false)
     }
 
     /* istanbul ignore next */
@@ -113,7 +136,12 @@ function CalendarioComp(props) {
         dateEvent.forEach((element) => {
             if (newDate === element.fecha) {
                 foundDate = true
-                setEvent({ fecha: element.fecha, titulo: element.titulo, contenido: element.contenido })
+                if (element.id === '') {
+                    element.id = idRe
+                }
+                setEvent({
+                    fecha: element.fecha, titulo: element.titulo, contenido: element.contenido, id: element.id,
+                })
                 setDate(true)
             }
         })
@@ -202,7 +230,7 @@ function CalendarioComp(props) {
                             {event.contenido}
                         </h2>
                     </div>
-                    <button type="button" className="buttonControl" onClick={borraInador}>BORRAR</button>
+                    <button type="button" className="buttonControlBorrar" onClick={borraInador}>BORRAR</button>
                 </div>
             </PopUp>
         </>
