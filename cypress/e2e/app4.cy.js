@@ -77,8 +77,9 @@ describe('Add Event', () => {
         cy.get('[class=continuaBotoncito]')
         .first()
         .click()
-
+        cy.wait(1000)
     })
+    
 
 })
 
@@ -89,11 +90,25 @@ describe('Delete Event', () => {
             cy.get('td[class="in-this-month todayEvent"]')
             .click()
           })
+        cy.wait(1000)
+    })
+   
+    it('Press close-btn Button', () => {
+        cy.get('[class=close-btn]')
+        .first()
+        .click()
+
+    })
+
+    it('Press in-this-month todayEvent Button', () => {
+        cy.get('table').within(() => {
+            cy.get('td[class="in-this-month todayEvent"]')
+            .click()
+          })
 
     })
 
     it('Press buttonControlBorrar Button', () => {
-        cy.wait(10000)
         cy.get('[class=buttonControlBorrar]')
         .first()
         .click()
