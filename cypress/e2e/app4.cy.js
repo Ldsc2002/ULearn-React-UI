@@ -35,6 +35,15 @@ describe('Login', () => {
     it('Navigates after login', () => {
         cy.url().should('include', '/start')
     })
+    
+    it('Navigates to calendario', () => {
+        cy.get('div')
+        .contains('Calendario')
+        .parent()
+        .parent()
+        .parent()
+        .click()
+    })
 
 })
 
