@@ -136,11 +136,9 @@ function CalendarioComp(props) {
         dateEvent.forEach((element) => {
             if (newDate === element.fecha) {
                 foundDate = true
-                console.log(element)
                 if(element.id === "") {
                     element.id = idRe
                 }
-                console.log(element)
                 setEvent({ fecha: element.fecha, titulo: element.titulo, contenido: element.contenido, id: element.id })
                 setDate(true)
             }

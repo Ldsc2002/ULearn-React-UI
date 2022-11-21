@@ -49,15 +49,16 @@ describe('Login', () => {
 
 describe('Add Event', () => {
     it('Press in-this-month today Button', () => {
-        cy.get('[class=in-this-month today]')
-        .first()
-        .click()
+        cy.get('table').within(() => {
+            cy.get('td[class="in-this-month today"]')
+            .click()
+          })
 
     })
 
     it('Write fechaInador1', () => {
         let titulo = 'pruebatitulo'
-        cy.get('input[class="fechaInador1"]')
+        cy.get('input[name="titulo"]')
         .invoke('attr', 'value', titulo)
         .trigger('change')
         .should('have.attr', 'value', titulo)
@@ -66,7 +67,7 @@ describe('Add Event', () => {
 
     it('Write fechaInador3', () => {
         let contenido = 'pruebacontenido'
-        cy.get('input[class="fechaInador3"]')
+        cy.get('input[name="contenido"]')
         .invoke('attr', 'value', contenido)
         .trigger('change')
         .should('have.attr', 'value', contenido)
@@ -83,18 +84,20 @@ describe('Add Event', () => {
 
 
 describe('Delete Event', () => {
-    it('Press in-this-month today Button', () => {
-        cy.get('[class=in-this-month today]')
-        .first()
-        .click()
+    it('Press in-this-month todayEvent Button', () => {
+        cy.get('table').within(() => {
+            cy.get('td[class="in-this-month todayEvent"]')
+            .click()
+          })
 
     })
 
     it('Press buttonControlBorrar Button', () => {
-        cy.contains('TítuloPrueba')
-        .parent()
-        .siblings('.close')
-        
+        cy.wait(10000)
+        cy.get('[class=buttonControlBorrar]')
+        .first()
+        .click()
+
     })
 
 
